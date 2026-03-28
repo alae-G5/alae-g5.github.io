@@ -1,3 +1,7 @@
+export const config = {
+  runtime: "nodejs"
+};
+
 export default async function handler(req, res) {
   const topic = req.query.topic || "technology";
 
@@ -43,3 +47,4 @@ export default async function handler(req, res) {
     res.status(500).json({ articles: [], error: e.toString() });
   }
 }
+

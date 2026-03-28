@@ -5,15 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AlaeAI — Build. Learn. Create.</title>
 
-<!-- ========================================================= -->
-<!-- ===================== PART 1 / 5 ======================== -->
-<!-- ===================== CORE STYLES ======================= -->
-<!-- ========================================================= -->
-
 <style>
-
 /* ========================================================= */
-/* ===================== 1. ROOT THEME ===================== */
+/* ===================== ROOT THEME ======================== */
 /* ========================================================= */
 
 :root {
@@ -54,7 +48,7 @@
 }
 
 /* ========================================================= */
-/* ===================== 2. GLOBAL RESET =================== */
+/* ===================== GLOBAL RESET ====================== */
 /* ========================================================= */
 
 * {
@@ -101,7 +95,7 @@ body.dark-mode::before {
 }
 
 /* ========================================================= */
-/* ===================== 3. FLOATING BLOBS ================= */
+/* ===================== FLOATING BLOBS ==================== */
 /* ========================================================= */
 
 .blob {
@@ -157,37 +151,18 @@ body.dark-mode::before {
 }
 
 /* ========================================================= */
-/* ===================== 4. UTILITY CLASSES ================ */
+/* ===================== UTILITIES ========================= */
 /* ========================================================= */
 
 .max-width { max-width: 1200px; margin: 0 auto; padding: 0 7%; }
 .flex { display: flex; }
-.flex-center { display: flex; align-items: center; justify-content: center; }
-.flex-between { display: flex; align-items: center; justify-content: space-between; }
-.flex-column { display: flex; flex-direction: column; }
-
-.gap-xs { gap: 6px; }
-.gap-sm { gap: 10px; }
-.gap-md { gap: 16px; }
-.gap-lg { gap: 22px; }
-.gap-xl { gap: 30px; }
-
-.mt-xs { margin-top: 6px; }
-.mt-sm { margin-top: 10px; }
-.mt-md { margin-top: 16px; }
-.mt-lg { margin-top: 24px; }
-.mt-xl { margin-top: 32px; }
-
-.mb-xs { margin-bottom: 6px; }
-.mb-sm { margin-bottom: 10px; }
-.mb-md { margin-bottom: 16px; }
-.mb-lg { margin-bottom: 24px; }
-.mb-xl { margin-bottom: 32px; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.flex-center { display: flex; justify-content: center; align-items: center; }
 
 .text-muted { opacity: 0.8; font-size: 13px; }
 
 /* ========================================================= */
-/* ===================== 5. HEADER ========================= */
+/* ===================== HEADER ============================ */
 /* ========================================================= */
 
 header {
@@ -213,7 +188,7 @@ header {
 }
 
 /* ========================================================= */
-/* ===================== 6. NAVIGATION ===================== */
+/* ===================== NAVIGATION ======================== */
 /* ========================================================= */
 
 nav {
@@ -336,7 +311,7 @@ body.dark-mode #theme-toggle {
 }
 
 /* ========================================================= */
-/* ===================== 7. SECTION SYSTEM ================= */
+/* ===================== SECTION SYSTEM ==================== */
 /* ========================================================= */
 
 .section {
@@ -365,25 +340,61 @@ body.dark-mode #theme-toggle {
     opacity: 0.8;
 }
 
-.section-link {
-    font-size: 12px;
-    opacity: 0.85;
-    text-decoration: none;
-    color: inherit;
-    padding-bottom: 2px;
-    border-bottom: 1px dashed rgba(0,0,0,0.25);
-}
-
-body.dark-mode .section-link {
-    border-bottom-color: rgba(255,255,255,0.45);
-}
-
-.section-link:hover {
-    opacity: 1;
+.section-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 /* ========================================================= */
-/* ===================== 8. SCROLL REVEAL ================== */
+/* ===================== BUTTONS =========================== */
+/* ========================================================= */
+
+.btn-primary {
+    padding: 9px 18px;
+    border-radius: 999px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 12px 26px rgba(197,139,59,0.45);
+    transform: translateY(0);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px rgba(197,139,59,0.55);
+    background: #d79a45;
+}
+
+.btn-ghost {
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.12);
+    background: rgba(255,255,255,0.9);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.btn-ghost:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+    border-color: rgba(0,0,0,0.18);
+}
+
+body.dark-mode .btn-ghost {
+    background: rgba(10,12,18,0.95);
+    border-color: rgba(255,255,255,0.16);
+    color: var(--text-dark);
+}
+
+/* ========================================================= */
+/* ===================== SCROLL REVEAL ===================== */
 /* ========================================================= */
 
 .reveal {
@@ -398,7 +409,7 @@ body.dark-mode .section-link {
 }
 
 /* ========================================================= */
-/* ===================== HERO SECTION CSS ================== */
+/* ===================== HERO SECTION ====================== */
 /* ========================================================= */
 
 .hero {
@@ -427,7 +438,6 @@ body.dark-mode .section-link {
     padding-left: 10px;
 }
 
-/* HERO LEFT CONTENT */
 .hero-pill {
     display: inline-flex;
     align-items: center;
@@ -484,49 +494,6 @@ body.dark-mode .section-link {
     animation: heroActionsIn 0.9s ease forwards 0.34s;
 }
 
-.btn-primary {
-    padding: 9px 18px;
-    border-radius: 999px;
-    border: none;
-    background: var(--primary);
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 12px 26px rgba(197,139,59,0.45);
-    transform: translateY(0);
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 16px 32px rgba(197,139,59,0.55);
-    background: #d79a45;
-}
-
-.btn-ghost {
-    padding: 9px 16px;
-    border-radius: 999px;
-    border: 1px solid rgba(0,0,0,0.12);
-    background: rgba(255,255,255,0.9);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
-}
-
-.btn-ghost:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-    border-color: rgba(0,0,0,0.18);
-}
-
-body.dark-mode .btn-ghost {
-    background: rgba(10,12,18,0.95);
-    border-color: rgba(255,255,255,0.16);
-    color: var(--text-dark);
-}
-
 .hero-meta {
     display: flex;
     flex-wrap: wrap;
@@ -544,7 +511,8 @@ body.dark-mode .btn-ghost {
     gap: 6px;
 }
 
-/* HERO PROGRESS STRIP */
+/* HERO STATS STRIP */
+
 .stats-strip {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -578,6 +546,7 @@ body.dark-mode .stat-card {
 }
 
 /* HERO RIGHT CARD */
+
 .hero-card-wrapper {
     position: relative;
     perspective: 1200px;
@@ -649,6 +618,7 @@ body.dark-mode .hero-card {
     font-size: 12px;
     position: relative;
     overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
 body.dark-mode .hero-mini-card {
@@ -665,7 +635,6 @@ body.dark-mode .hero-mini-card {
     font-weight: 600;
 }
 
-/* HERO ORBIT */
 .hero-orbit {
     position: absolute;
     inset: -10px;
@@ -681,6 +650,7 @@ body.dark-mode .hero-mini-card {
 }
 
 /* HERO IMAGE AREA */
+
 .hero-image-shell {
     margin-top: 14px;
     border-radius: var(--radius-lg);
@@ -690,6 +660,7 @@ body.dark-mode .hero-mini-card {
                 radial-gradient(circle at 80% 100%, rgba(197,139,59,0.35), transparent 60%),
                 #05060a;
     box-shadow: 0 20px 50px rgba(0,0,0,0.65);
+    transition: transform 0.25s ease;
 }
 
 .hero-image-shell-inner {
@@ -704,7 +675,6 @@ body.dark-mode .hero-mini-card {
     box-shadow: 0 18px 40px rgba(0,0,0,0.7);
 }
 
-/* HERO IMAGE OVERLAYS */
 .hero-image-tag {
     position: absolute;
     top: 16px;
@@ -743,6 +713,7 @@ body.dark-mode .hero-mini-card {
 }
 
 /* HERO ANIMATIONS */
+
 @keyframes heroPillIn {
     0% { opacity: 0; transform: translateY(8px); }
     100% { opacity: 1; transform: translateY(0); }
@@ -773,7 +744,6 @@ body.dark-mode .hero-mini-card {
     100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* RESPONSIVE TWEAKS */
 @media (max-width: 720px) {
     .hero-title {
         font-size: 24px;
@@ -785,48 +755,65 @@ body.dark-mode .hero-mini-card {
 }
 
 /* ========================================================= */
-/* ===================== FEATURE GRID CSS ================== */
+/* ===================== CORE FEATURES ===================== */
 /* ========================================================= */
 
 .feature-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+@media (max-width: 880px) {
+    .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .feature-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .feature-card {
-    background: var(--card-light);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-light);
-    padding: 14px 14px 12px;
-    box-shadow: var(--shadow-card);
-    position: relative;
-    overflow: hidden;
+    border-radius: 999px;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(0,0,0,0.06);
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
     transform: translateY(14px);
     opacity: 0;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
 body.dark-mode .feature-card {
-    background: var(--card-dark);
-    border-color: var(--border-dark);
+    background: rgba(10,12,18,0.95);
+    border-color: rgba(255,255,255,0.16);
     box-shadow: 0 16px 40px rgba(0,0,0,0.7);
 }
 
+.feature-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+}
+
 .feature-icon {
-    font-size: 20px;
-    margin-bottom: 6px;
+    font-size: 16px;
 }
 
 .feature-title {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 600;
-    margin-bottom: 4px;
 }
 
 .feature-text {
-    font-size: 13px;
+    font-size: 12px;
     opacity: 0.85;
-    margin-bottom: 8px;
 }
 
 .feature-meta {
@@ -834,22 +821,14 @@ body.dark-mode .feature-card {
     opacity: 0.75;
 }
 
-.feature-highlight {
-    position: absolute;
-    inset: auto 0 0 0;
-    height: 3px;
-    background: linear-gradient(90deg, rgba(197,139,59,0.7), rgba(255,179,71,0.7));
-    opacity: 0.8;
-}
-
 /* ========================================================= */
-/* ===================== PREVIEW SECTIONS ================== */
+/* ===================== PREVIEW CARDS ===================== */
 /* ========================================================= */
 
 .preview-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
 }
 
 .preview-card {
@@ -862,12 +841,27 @@ body.dark-mode .feature-card {
     overflow: hidden;
     transform: translateY(14px);
     opacity: 0;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 body.dark-mode .preview-card {
     background: var(--card-dark);
     border-color: var(--border-dark);
     box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+}
+
+.preview-card::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(197,139,59,0.7), rgba(255,179,71,0.7));
+    opacity: 0.8;
+}
+
+.preview-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.22);
 }
 
 .preview-tag {
@@ -894,36 +888,7 @@ body.dark-mode .preview-card {
 }
 
 /* ========================================================= */
-/* ===================== CTA / FOOTER CSS ================== */
-/* ========================================================= */
-
-.cta {
-    margin-top: 18px;
-    padding: 16px 16px 14px;
-    border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, rgba(197,139,59,0.16), rgba(197,139,59,0.35));
-    box-shadow: var(--shadow-card);
-}
-
-body.dark-mode .cta {
-    background: linear-gradient(135deg, rgba(197,139,59,0.22), rgba(10,12,18,0.9));
-    border-color: rgba(255,255,255,0.18);
-}
-
-.cta-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-    margin: 0 0 6px;
-}
-
-.cta-text {
-    font-size: 12px;
-    opacity: 0.85;
-    margin: 0 0 10px;
-}
-
-/* ========================================================= */
-/* ===================== CTA SECTION (PART 4) ============== */
+/* ===================== CTA / FOOTER ====================== */
 /* ========================================================= */
 
 .cta-section {
@@ -1003,7 +968,6 @@ body.dark-mode .cta-pill {
     box-shadow: 0 0 10px rgba(58,201,122,0.9);
 }
 
-/* CTA RIGHT SIDE */
 .cta-right-card {
     border-radius: var(--radius-lg);
     padding: 18px 18px 16px;
@@ -1061,7 +1025,6 @@ body.dark-mode .cta-progress-bar-shell {
     margin-top: 6px;
 }
 
-/* CTA DECOR */
 .cta-orbit {
     position: absolute;
     inset: -20px;
@@ -1076,7 +1039,6 @@ body.dark-mode .cta-progress-bar-shell {
     to { transform: rotate(360deg); }
 }
 
-/* MINI STATS STRIP */
 .mini-stats-strip {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1108,7 +1070,8 @@ body.dark-mode .mini-stat-card {
     font-weight: 600;
 }
 
-/* FOOTER SECTION */
+/* FOOTER */
+
 footer {
     margin-top: 40px;
     padding: 26px 7% 30px;
@@ -1192,7 +1155,6 @@ body.dark-mode footer {
     opacity: 0.8;
 }
 
-/* EXTRA DECORATION */
 .footer-badge {
     display: inline-flex;
     align-items: center;
@@ -1214,7 +1176,6 @@ body.dark-mode .footer-badge {
     background: var(--primary);
 }
 
-/* FILLER ANIMATIONS */
 @keyframes footerGlow {
     0% { box-shadow: 0 0 0 rgba(197,139,59,0.0); }
     100% { box-shadow: 0 0 18px rgba(197,139,59,0.45); }
@@ -1227,32 +1188,19 @@ body.dark-mode .footer-badge {
 /* ========================================================= */
 /* ===================== END OF CSS ======================== */
 /* ========================================================= */
-
 </style>
 </head>
 <body>
 
-<!-- ===================================================== -->
-<!-- ==================== FLOATING BLOBS ================= -->
-<!-- ===================================================== -->
-
 <div class="blob blob-1"></div>
 <div class="blob blob-2"></div>
 <div class="blob blob-3"></div>
-
-<!-- ===================================================== -->
-<!-- ==================== HEADER + LOGO ================== -->
-<!-- ===================================================== -->
 
 <header class="max-width">
     <img src="assets/logo.png"
          alt="AlaeAI — Build. Learn. Create."
          class="logo-animate">
 </header>
-
-<!-- ===================================================== -->
-<!-- ==================== NAVIGATION BAR ================= -->
-<!-- ===================================================== -->
 
 <nav>
     <div class="nav-left">
@@ -1280,10 +1228,6 @@ body.dark-mode .footer-badge {
     </div>
 </nav>
 
-<!-- ===================================================== -->
-<!-- ==================== HERO SECTION =================== -->
-<!-- ===================================================== -->
-
 <section class="hero">
     <div class="hero-left">
         <div class="hero-pill">
@@ -1302,10 +1246,10 @@ body.dark-mode .footer-badge {
 
         <div class="hero-actions">
             <a href="tutorials.html">
-                <button class="btn-primary">Continue Tutorials</button>
+                <button class="btn-primary">Resume Tutorials</button>
             </a>
             <a href="news.html">
-                <button class="btn-ghost">View Tech &amp; AI News</button>
+                <button class="btn-ghost">View News</button>
             </a>
         </div>
 
@@ -1384,64 +1328,60 @@ body.dark-mode .footer-badge {
     </div>
 </section>
 
-<!-- ===================================================== -->
-<!-- ==================== FEATURE SECTION ================= -->
-<!-- ===================================================== -->
-
 <section class="section">
     <div class="section-header">
         <div>
             <h2 class="section-title">Core Features</h2>
             <p class="section-subtitle">Everything you need to grow as a developer</p>
         </div>
+        <div class="section-actions">
+            <a href="tutorials.html">
+                <button class="btn-ghost">See Tutorials</button>
+            </a>
+            <a href="news.html">
+                <button class="btn-ghost">See News</button>
+            </a>
+        </div>
     </div>
 
     <div class="feature-grid">
         <div class="feature-card reveal">
             <div class="feature-icon">📘</div>
-            <h3 class="feature-title">Structured Tutorials</h3>
-            <p class="feature-text">
-                20 levels designed to take you from beginner to builder with real projects.
-            </p>
+            <div class="feature-title">Structured Tutorials</div>
+            <div class="feature-text">
+                20 levels from beginner to builder with real projects.
+            </div>
             <div class="feature-meta">Progress saved locally</div>
-            <div class="feature-highlight"></div>
         </div>
 
         <div class="feature-card reveal">
             <div class="feature-icon">🛠️</div>
-            <h3 class="feature-title">Developer Tools</h3>
-            <p class="feature-text">
-                A curated set of tools to speed up your workflow and experimentation.
-            </p>
+            <div class="feature-title">Developer Tools</div>
+            <div class="feature-text">
+                Curated tools to speed up your workflow and experimentation.
+            </div>
             <div class="feature-meta">Always expanding</div>
-            <div class="feature-highlight"></div>
         </div>
 
         <div class="feature-card reveal">
             <div class="feature-icon">📰</div>
-            <h3 class="feature-title">Tech & AI News</h3>
-            <p class="feature-text">
+            <div class="feature-title">Tech &amp; AI News</div>
+            <div class="feature-text">
                 Stay updated with the latest in AI, coding, and innovation.
-            </p>
+            </div>
             <div class="feature-meta">Fresh content</div>
-            <div class="feature-highlight"></div>
         </div>
 
         <div class="feature-card reveal">
             <div class="feature-icon">⚙️</div>
-            <h3 class="feature-title">Custom Experiments</h3>
-            <p class="feature-text">
-                Build your own mini‑projects, test ideas, and iterate quickly.
-            </p>
+            <div class="feature-title">Custom Experiments</div>
+            <div class="feature-text">
+                Build mini‑projects, test ideas, and iterate quickly.
+            </div>
             <div class="feature-meta">Made for builders</div>
-            <div class="feature-highlight"></div>
         </div>
     </div>
 </section>
-
-<!-- ===================================================== -->
-<!-- ==================== PREVIEW SECTIONS ================ -->
-<!-- ===================================================== -->
 
 <section class="section">
     <div class="section-header">
@@ -1449,7 +1389,11 @@ body.dark-mode .footer-badge {
             <h2 class="section-title">Tutorial Path</h2>
             <p class="section-subtitle">Start your learning journey</p>
         </div>
-        <a class="section-link" href="tutorials.html">View all tutorials →</a>
+        <div class="section-actions">
+            <a href="tutorials.html">
+                <button class="btn-ghost">View all tutorials</button>
+            </a>
+        </div>
     </div>
 
     <div class="preview-grid">
@@ -1479,16 +1423,20 @@ body.dark-mode .footer-badge {
 <section class="section">
     <div class="section-header">
         <div>
-            <h2 class="section-title">News & Tools</h2>
+            <h2 class="section-title">News &amp; Tools</h2>
             <p class="section-subtitle">Stay sharp and equipped</p>
         </div>
-        <a class="section-link" href="news.html">View news →</a>
+        <div class="section-actions">
+            <a href="news.html">
+                <button class="btn-ghost">View news</button>
+            </a>
+        </div>
     </div>
 
     <div class="preview-grid">
         <div class="preview-card reveal">
             <div class="preview-tag">News</div>
-            <h3 class="preview-title">Latest Tech & AI</h3>
+            <h3 class="preview-title">Latest Tech &amp; AI</h3>
             <p class="preview-text">Curated stories and updates you actually care about.</p>
             <div class="preview-meta">Updated regularly</div>
         </div>
@@ -1508,10 +1456,6 @@ body.dark-mode .footer-badge {
         </div>
     </div>
 </section>
-
-<!-- ===================================================== -->
-<!-- ==================== CTA SECTION ===================== -->
-<!-- ===================================================== -->
 
 <section class="cta-section">
     <div class="cta-wrapper reveal">
@@ -1574,10 +1518,6 @@ body.dark-mode .footer-badge {
     </div>
 </section>
 
-<!-- ===================================================== -->
-<!-- ==================== FOOTER SECTION ================== -->
-<!-- ===================================================== -->
-
 <footer>
     <div class="footer-grid">
         <div class="footer-brand">
@@ -1620,11 +1560,6 @@ body.dark-mode .footer-badge {
         <span>Built with curiosity and persistence.</span>
     </div>
 </footer>
-
-<!-- ===================================================== -->
-<!-- ==================== PART 5 / 5 ====================== -->
-<!-- ==================== FULL JAVASCRIPT ================= -->
-<!-- ===================================================== -->
 
 <script>
 // =========================================================
@@ -2003,7 +1938,7 @@ body.dark-mode .footer-badge {
 })();
 
 // =========================================================
-// ==================== END OF PART 5 ======================
+// ==================== END OF SCRIPT ======================
 // =========================================================
 </script>
 

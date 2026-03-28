@@ -4,13 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlaeAI — Tutorials</title>
+    <title>AlaeAI — Step-by-Step Tutorials</title>
+
+    <!-- SEO -->
+    <meta name="description" content="20-level progressive web development tutorials on AlaeAI, from HTML basics to advanced real-world projects.">
+    <meta http-equiv="Content-Language" content="en, ar">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* GLOBAL THEME */
+        /* ---------------------------------------------------
+           GLOBAL THEME
+        --------------------------------------------------- */
         :root {
             --bg-light: #f5efe6;
             --bg-light-accent: #fff9f0;
@@ -18,7 +24,7 @@
             --card-light: #ffffff;
             --border-light: #e0d4c2;
 
-            --bg-dark: #0b0c10;
+            --bg-dark: #05060a;
             --bg-dark-accent: #151821;
             --text-dark: #f5f5f5;
             --card-dark: #181b24;
@@ -26,10 +32,19 @@
 
             --primary: #c58b3b;
             --primary-soft: rgba(197,139,59,0.12);
+            --danger: #ff4b6a;
+            --success: #3ac97a;
 
             --radius-lg: 18px;
             --radius-md: 12px;
+            --radius-sm: 8px;
+
             --shadow-soft: 0 18px 45px rgba(0,0,0,0.12);
+            --shadow-card: 0 10px 26px rgba(0,0,0,0.08);
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
@@ -45,7 +60,48 @@
             color: var(--text-dark);
         }
 
-        /* NAVIGATION */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,0.8), rgba(245,239,230,0.9)),
+                radial-gradient(circle at 0% 0%, rgba(197,139,59,0.18), transparent 55%),
+                radial-gradient(circle at 100% 100%, rgba(0,0,0,0.06), transparent 55%);
+            z-index: -2;
+        }
+
+        body.dark-mode::before {
+            background:
+                radial-gradient(circle at 0% 0%, rgba(197,139,59,0.22), transparent 55%),
+                radial-gradient(circle at 100% 100%, rgba(80,90,140,0.35), transparent 60%),
+                linear-gradient(145deg, #05060a, #10131c);
+        }
+
+        /* ---------------------------------------------------
+           NAVIGATION + HEADER
+        --------------------------------------------------- */
+        header {
+            text-align: center;
+            padding: 30px 7% 10px;
+        }
+
+        .logo-animate {
+            max-width: 340px;
+            border-radius: 12px;
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: fadeInLogo 1.2s ease forwards;
+            filter: drop-shadow(0 0 18px rgba(197,139,59,0.45));
+        }
+
+        @keyframes fadeInLogo {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         nav {
             position: sticky;
             top: 0;
@@ -53,25 +109,26 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 7%;
+            padding: 14px 7%;
             backdrop-filter: blur(18px);
-            background: rgba(253,247,238,0.85);
+            background: rgba(253,247,238,0.9);
             border-bottom: 1px solid rgba(0,0,0,0.04);
         }
 
         body.dark-mode nav {
-            background: rgba(10,12,18,0.88);
+            background: rgba(10,12,18,0.9);
             border-bottom: 1px solid rgba(255,255,255,0.06);
         }
 
         nav h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
+            letter-spacing: 0.04em;
         }
 
         nav a {
-            margin-left: 22px;
+            margin-left: 18px;
             text-decoration: none;
             font-weight: 500;
             font-size: 14px;
@@ -95,7 +152,7 @@
         }
 
         #theme-toggle {
-            padding: 8px 16px;
+            padding: 7px 14px;
             border-radius: 999px;
             border: 1px solid rgba(0,0,0,0.08);
             background: rgba(255,255,255,0.9);
@@ -110,106 +167,252 @@
             color: var(--text-dark);
         }
 
-        /* HEADER LOGO */
-        header {
-            text-align: center;
-            padding: 30px;
+        /* ---------------------------------------------------
+           PAGE HEADER + FILTERS
+        --------------------------------------------------- */
+        .page-header {
+            max-width: 1100px;
+            margin: 30px auto 10px;
+            padding: 0 7%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: flex-end;
         }
 
-        .logo-animate {
-            max-width: 350px;
-            border-radius: 12px;
-            opacity: 0;
-            transform: translateY(-10px);
-            animation: fadeInLogo 1.2s ease forwards;
-            filter: drop-shadow(0 0 18px rgba(197,139,59,0.45));
+        .page-header-main {
+            max-width: 600px;
         }
 
-        @keyframes fadeInLogo {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* TUTORIALS PAGE */
-        h1 {
-            text-align: center;
+        .page-title {
             font-family: 'Poppins', sans-serif;
-            margin-top: 40px;
+            font-size: 28px;
+            margin: 0 0 6px;
         }
 
-        .subtitle {
-            text-align: center;
-            opacity: 0.8;
-            margin-bottom: 30px;
+        .page-subtitle {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.85;
         }
 
+        .progress-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: var(--primary-soft);
+            font-size: 12px;
+        }
+
+        .progress-bar-wrapper {
+            margin-top: 6px;
+            width: 180px;
+            height: 6px;
+            border-radius: 999px;
+            background: rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .page-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(0,0,0,0.12);
+            min-width: 220px;
+            font-size: 13px;
+            outline: none;
+            background: rgba(255,255,255,0.9);
+        }
+
+        body.dark-mode .search-input {
+            background: rgba(10,12,18,0.95);
+            border-color: rgba(255,255,255,0.16);
+            color: var(--text-dark);
+        }
+
+        .select-input {
+            padding: 7px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(0,0,0,0.12);
+            font-size: 13px;
+            background: rgba(255,255,255,0.9);
+            outline: none;
+        }
+
+        body.dark-mode .select-input {
+            background: rgba(10,12,18,0.95);
+            border-color: rgba(255,255,255,0.16);
+            color: var(--text-dark);
+        }
+
+        /* ---------------------------------------------------
+           TUTORIALS GRID
+        --------------------------------------------------- */
         .tutorials-container {
             max-width: 1100px;
-            margin: auto;
+            margin: 18px auto 40px;
             padding: 0 7%;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 18px;
         }
 
-        .card {
+        .tutorial-card {
             background: var(--card-light);
             border: 1px solid var(--border-light);
             border-radius: var(--radius-md);
-            padding: 18px;
-            box-shadow: 0 10px 26px rgba(0,0,0,0.06);
+            padding: 16px 16px 14px;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
         }
 
-        body.dark-mode .card {
+        body.dark-mode .tutorial-card {
             background: var(--card-dark);
             border-color: var(--border-dark);
+            box-shadow: 0 14px 32px rgba(0,0,0,0.55);
         }
 
-        .card h3 {
+        .tutorial-level {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-bottom: 4px;
+        }
+
+        .tutorial-title {
             margin: 0 0 6px;
             font-size: 16px;
             font-weight: 600;
         }
 
-        .card p {
-            margin: 0;
-            font-size: 14px;
-            opacity: 0.85;
+        .tutorial-meta {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 6px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 8px;
+            border-radius: 999px;
+            font-size: 11px;
+            margin-right: 4px;
+        }
+
+        .badge-easy {
+            background: rgba(58,201,122,0.12);
+            color: #1f8a4a;
+        }
+
+        .badge-medium {
+            background: rgba(255,193,7,0.16);
+            color: #b38300;
+        }
+
+        .badge-hard {
+            background: rgba(255,75,106,0.16);
+            color: #b0203d;
+        }
+
+        .badge-very-hard {
+            background: rgba(155,89,182,0.18);
+            color: #7d3cb0;
+        }
+
+        .tag-list {
+            margin: 6px 0 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .tag {
+            font-size: 11px;
+            padding: 3px 7px;
+            border-radius: 999px;
+            background: rgba(0,0,0,0.04);
+        }
+
+        body.dark-mode .tag {
+            background: rgba(255,255,255,0.06);
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6px;
         }
 
         .open-btn {
-            margin-top: 10px;
-            display: inline-block;
-            padding: 8px 16px;
+            padding: 7px 14px;
             background: var(--primary);
             color: white;
-            border-radius: 8px;
+            border-radius: 999px;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
+            border: none;
+            cursor: pointer;
         }
 
-        /* SIDE PANEL */
+        .completed-pill {
+            font-size: 11px;
+            color: var(--success);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .completed-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        /* ---------------------------------------------------
+           SIDE PANEL
+        --------------------------------------------------- */
         #modal-bg {
             position: fixed;
             inset: 0;
             background: rgba(0,0,0,0.4);
             display: none;
+            z-index: 80;
         }
 
         #side-panel {
             position: fixed;
             top: 0;
-            right: -500px;
-            width: 400px;
+            right: -520px;
+            width: 460px;
+            max-width: 100%;
             height: 100%;
             background: var(--card-light);
             border-left: 1px solid var(--border-light);
-            padding: 20px;
-            transition: 0.3s ease;
+            padding: 20px 22px 26px;
+            transition: right 0.3s ease, width 0.3s ease;
             overflow-y: auto;
+            z-index: 90;
         }
 
         body.dark-mode #side-panel {
@@ -217,27 +420,148 @@
             border-color: var(--border-dark);
         }
 
-        .panel-buttons {
+        .panel-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .panel-title {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+        }
+
+        .panel-buttons {
+            display: flex;
+            gap: 6px;
         }
 
         .panel-btn {
-            padding: 8px 14px;
+            padding: 6px 10px;
+            background: rgba(0,0,0,0.06);
+            border-radius: 999px;
+            border: none;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        body.dark-mode .panel-btn {
+            background: rgba(255,255,255,0.08);
+            color: var(--text-dark);
+        }
+
+        .panel-meta {
+            font-size: 12px;
+            opacity: 0.85;
+            margin-bottom: 8px;
+        }
+
+        .panel-tags {
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .panel-section-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin: 16px 0 6px;
+        }
+
+        .panel-code-block {
+            margin: 8px 0 12px;
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            background: #111317;
+            color: #f5f5f5;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 12px;
+            overflow-x: auto;
+        }
+
+        body.dark-mode .panel-code-block {
+            background: #05060a;
+        }
+
+        .panel-tip {
+            font-size: 12px;
+            padding: 8px 10px;
+            border-radius: var(--radius-sm);
+            background: rgba(197,139,59,0.12);
+            margin: 8px 0 10px;
+        }
+
+        .panel-actions {
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .panel-primary-btn {
+            padding: 7px 14px;
+            border-radius: 999px;
+            border: none;
             background: var(--primary);
             color: white;
-            border: none;
-            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
             cursor: pointer;
+        }
+
+        .panel-secondary-text {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        /* ---------------------------------------------------
+           FOOTER
+        --------------------------------------------------- */
+        footer {
+            margin-top: 40px;
+            padding: 24px 7%;
+            text-align: center;
+            font-size: 12px;
+            background: rgba(253,247,238,0.9);
+            border-top: 1px solid rgba(0,0,0,0.06);
+        }
+
+        body.dark-mode footer {
+            background: rgba(8,10,16,0.95);
+            border-top-color: rgba(255,255,255,0.08);
+        }
+
+        /* ---------------------------------------------------
+           RESPONSIVE
+        --------------------------------------------------- */
+        @media (max-width: 720px) {
+            .page-header {
+                align-items: flex-start;
+            }
+            nav h1 {
+                font-size: 18px;
+            }
+            .page-title {
+                font-size: 22px;
+            }
+            #side-panel {
+                width: 100%;
+            }
         }
     </style>
 </head>
-
 <body>
 
 <header>
-    <img src="assets/logo.png" class="logo-animate" alt="AlaeAI — Build. Learn. Create.">
+    <img src="assets/logo.png"
+         class="logo-animate"
+         alt="AlaeAI — Build. Learn. Create.">
 </header>
 
 <nav>
@@ -253,23 +577,444 @@
     <button id="theme-toggle">🌙 Dark Mode</button>
 </nav>
 
-<h1>Step-by-Step Tutorials (20 Levels)</h1>
-<p class="subtitle">Click the <strong>Open</strong> button on any tutorial to view it in the side panel.</p>
+<!-- PAGE HEADER -->
+<section class="page-header">
+    <div class="page-header-main">
+        <h2 class="page-title">Step-by-Step Tutorials (20 Levels)</h2>
+        <p class="page-subtitle">
+            Start from the basics and climb to advanced, real‑world projects.  
+            Your progress is saved automatically.
+        </p>
 
-<div class="tutorials-container" id="tutorials-grid"></div>
+        <div class="progress-pill">
+            <span id="progress-count">0 / 20 completed</span>
+        </div>
 
-<div id="modal-bg" onclick="closePanel()"></div>
-
-<div id="side-panel">
-    <div class="panel-buttons">
-        <button class="panel-btn" onclick="toggleFullscreen()">Full Screen</button>
-        <button class="panel-btn" onclick="closePanel()">Close</button>
+        <div class="progress-bar-wrapper">
+            <div class="progress-bar-fill" id="progress-bar"></div>
+        </div>
     </div>
-    <div id="tutorial-content"></div>
+
+    <!-- FILTERS -->
+    <div class="page-controls">
+        <input id="search-input" class="search-input" type="text"
+               placeholder="Search tutorials (HTML, API, layout...)">
+
+        <select id="difficulty-filter" class="select-input">
+            <option value="all">All difficulties</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="very-hard">Very Hard</option>
+        </select>
+
+        <select id="category-filter" class="select-input">
+            <option value="all">All categories</option>
+            <option value="fundamentals">Fundamentals</option>
+            <option value="layout">Layout & Responsive</option>
+            <option value="javascript">JavaScript Core</option>
+            <option value="browser-apis">Browser & APIs</option>
+            <option value="projects">Projects</option>
+        </select>
+    </div>
+</section>
+
+<!-- TUTORIALS GRID -->
+<section class="tutorials-container" id="tutorials-grid">
+    <!-- Cards will be injected by JS -->
+</section>
+
+<!-- BACKDROP -->
+<div id="modal-bg"></div>
+
+<!-- SIDE PANEL -->
+<aside id="side-panel">
+
+    <div class="panel-header">
+        <div>
+            <h3 class="panel-title" id="panel-title">Tutorial</h3>
+            <div class="panel-meta" id="panel-meta"></div>
+        </div>
+
+        <div class="panel-buttons">
+            <button class="panel-btn" id="panel-fullscreen-btn">Full Screen</button>
+            <button class="panel-btn" id="panel-close-btn">Close</button>
+        </div>
+    </div>
+
+    <div class="panel-tags" id="panel-tags"></div>
+
+    <div id="panel-content">
+        <!-- Tutorial content injected by JS -->
+    </div>
+
+    <div class="panel-actions">
+        <button class="panel-primary-btn" id="panel-complete-btn">Mark as completed</button>
+        <div class="panel-secondary-text">
+            Tip: Use <strong>Esc</strong> to close, <strong>F</strong> to toggle full screen.
+        </div>
+    </div>
+
+</aside>
+
+<footer>
+    © 2026 AlaeAI — Tutorials Engine v1.0 · Built to grow with you.
+</footer>
+<script>
+/* ---------------------------------------------------
+   TUTORIAL CONTENT (20 LEVELS)
+--------------------------------------------------- */
+
+const tutorialContent = {};
+
+/* ---------------------------------------------------
+   LEVEL 1 — HTML BASICS
+--------------------------------------------------- */
+tutorialContent["level1"] = `
+<h2>Level 1 — HTML Basics</h2>
+<p>Welcome to your first step. In this tutorial, you will learn the essential building blocks of every webpage.</p>
+
+<h3>What You Will Learn</h3>
+<ul>
+    <li>HTML structure</li>
+    <li>Head vs Body</li>
+    <li>Headings, paragraphs, links</li>
+    <li>Images and lists</li>
+</ul>
+
+<h3>Starter Code</h3>
+<div class="panel-code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My First Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello World!&lt;/h1&gt;
+    &lt;p&gt;This is my first webpage.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </div>
 
+<div class="panel-tip">
+Tip: Every HTML page starts with <strong>&lt;!DOCTYPE html&gt;</strong>.
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 2 — CSS BASICS
+--------------------------------------------------- */
+tutorialContent["level2"] = `
+<h2>Level 2 — CSS Basics</h2>
+<p>Now that you know HTML, it's time to style your page.</p>
+
+<h3>What You Will Learn</h3>
+<ul>
+    <li>Colors</li>
+    <li>Fonts</li>
+    <li>Spacing</li>
+    <li>Borders</li>
+</ul>
+
+<h3>Starter Code</h3>
+<div class="panel-code-block">
+body {
+    background: #f5efe6;
+    font-family: Arial;
+}
+
+h1 {
+    color: #c58b3b;
+}
+</div>
+
+<div class="panel-tip">
+Tip: CSS controls how your website <strong>looks</strong>.
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 3 — JAVASCRIPT BASICS
+--------------------------------------------------- */
+tutorialContent["level3"] = `
+<h2>Level 3 — JavaScript Basics</h2>
+<p>JavaScript brings your website to life.</p>
+
+<h3>What You Will Learn</h3>
+<ul>
+    <li>Variables</li>
+    <li>Functions</li>
+    <li>Events</li>
+</ul>
+
+<h3>Starter Code</h3>
+<div class="panel-code-block">
+let name = "Alae";
+function greet() {
+    alert("Hello " + name);
+}
+</div>
+
+<div class="panel-tip">
+Tip: JavaScript controls <strong>behavior</strong>.
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 4 — FLEXBOX LAYOUT
+--------------------------------------------------- */
+tutorialContent["level4"] = `
+<h2>Level 4 — Flexbox Layout</h2>
+<p>Flexbox helps you create responsive layouts easily.</p>
+
+<h3>Starter Code</h3>
+<div class="panel-code-block">
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+.box {
+    background: #c58b3b;
+    padding: 20px;
+    color: white;
+}
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 5 — CSS GRID
+--------------------------------------------------- */
+tutorialContent["level5"] = `
+<h2>Level 5 — CSS Grid</h2>
+<p>Grid is perfect for complex layouts.</p>
+
+<div class="panel-code-block">
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 6 — DOM MANIPULATION
+--------------------------------------------------- */
+tutorialContent["level6"] = `
+<h2>Level 6 — DOM Manipulation</h2>
+<p>Change HTML elements dynamically.</p>
+
+<div class="panel-code-block">
+document.getElementById("title").textContent = "Updated!";
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 7 — EVENT LISTENERS
+--------------------------------------------------- */
+tutorialContent["level7"] = `
+<h2>Level 7 — Event Listeners</h2>
+<p>Make your UI interactive.</p>
+
+<div class="panel-code-block">
+button.addEventListener("click", () => {
+    alert("Clicked!");
+});
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 8 — LOCALSTORAGE
+--------------------------------------------------- */
+tutorialContent["level8"] = `
+<h2>Level 8 — LocalStorage</h2>
+<p>Save data in the browser.</p>
+
+<div class="panel-code-block">
+localStorage.setItem("theme", "dark");
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 9 — RESPONSIVE DESIGN
+--------------------------------------------------- */
+tutorialContent["level9"] = `
+<h2>Level 9 — Responsive Design</h2>
+<p>Make your website look good on all devices.</p>
+
+<div class="panel-code-block">
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+    }
+}
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 10 — FETCH API
+--------------------------------------------------- */
+tutorialContent["level10"] = `
+<h2>Level 10 — Fetch API</h2>
+<p>Load real data from APIs.</p>
+
+<div class="panel-code-block">
+fetch("https://api.example.com/data")
+    .then(res => res.json())
+    .then(data => console.log(data));
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 11 — ASYNC & AWAIT
+--------------------------------------------------- */
+tutorialContent["level11"] = `
+<h2>Level 11 — Async & Await</h2>
+
+<div class="panel-code-block">
+async function load() {
+    const res = await fetch("https://api.example.com");
+    const data = await res.json();
+    console.log(data);
+}
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 12 — JSON HANDLING
+--------------------------------------------------- */
+tutorialContent["level12"] = `
+<h2>Level 12 — JSON Handling</h2>
+
+<div class="panel-code-block">
+const user = {
+    name: "Alae",
+    age: 16
+};
+
+console.log(user.name);
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 13 — BUILDING A CALCULATOR
+--------------------------------------------------- */
+tutorialContent["level13"] = `
+<h2>Level 13 — Calculator Project</h2>
+
+<div class="panel-code-block">
+function add(a, b) {
+    return a + b;
+}
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 14 — TO-DO APP
+--------------------------------------------------- */
+tutorialContent["level14"] = `
+<h2>Level 14 — To-Do App</h2>
+
+<div class="panel-code-block">
+let tasks = [];
+function addTask(t) {
+    tasks.push(t);
+}
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 15 — WEATHER APP (API)
+--------------------------------------------------- */
+tutorialContent["level15"] = `
+<h2>Level 15 — Weather App</h2>
+
+<div class="panel-code-block">
+fetch("https://api.weatherapi.com/...").then(...)
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 16 — LOGIN SYSTEM (FRONTEND)
+--------------------------------------------------- */
+tutorialContent["level16"] = `
+<h2>Level 16 — Login System</h2>
+
+<div class="panel-code-block">
+function login(user, pass) {
+    if(user === "admin" && pass === "1234") {
+        return true;
+    }
+}
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 17 — ADVANCED ANIMATIONS
+--------------------------------------------------- */
+tutorialContent["level17"] = `
+<h2>Level 17 — Advanced Animations</h2>
+
+<div class="panel-code-block">
+@keyframes fadeSlide {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 18 — MINI GAME (JS)
+--------------------------------------------------- */
+tutorialContent["level18"] = `
+<h2>Level 18 — Mini Game</h2>
+
+<div class="panel-code-block">
+let score = 0;
+function hit() {
+    score++;
+}
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 19 — ADVANCED UI PROJECT
+--------------------------------------------------- */
+tutorialContent["level19"] = `
+<h2>Level 19 — Advanced UI Project</h2>
+
+<div class="panel-code-block">
+function createCard(title, desc) {
+    return \`<div class="card"><h3>\${title}</h3><p>\${desc}</p></div>\`;
+}
+</div>
+`;
+
+/* ---------------------------------------------------
+   LEVEL 20 — FINAL PROJECT (VERY HARD)
+--------------------------------------------------- */
+tutorialContent["level20"] = `
+<h2>Level 20 — Final Mega Project</h2>
+<p>This is your final challenge. Build a full web app combining everything you learned.</p>
+
+<div class="panel-code-block">
+async function loadApp() {
+    const user = await fetchUser();
+    const weather = await fetchWeather();
+    renderDashboard(user, weather);
+}
+</div>
+
+<div class="panel-tip">
+This level is designed to push your limits. Take your time.
+</div>
+`;
+</script>
 <script>
-/* DARK MODE */
+/* ---------------------------------------------------
+   DARK MODE SYNC
+--------------------------------------------------- */
 const THEME_KEY = "alaeai-theme";
 
 function applyTheme() {
@@ -291,46 +1036,180 @@ document.getElementById("theme-toggle").addEventListener("click", () => {
     applyTheme();
 });
 
-/* TUTORIALS DATA */
+/* ---------------------------------------------------
+   TUTORIALS DATA (20 LEVELS)
+--------------------------------------------------- */
 const tutorials = [
-    { title: "HTML Basics", level: "Beginner", desc: "Learn how to structure a webpage.", file: "tutorials/html-basics.html" },
-    { title: "CSS Basics", level: "Beginner", desc: "Learn styling and layout.", file: "tutorials/css-basics.html" },
-    { title: "JavaScript Basics", level: "Beginner", desc: "Learn variables and functions.", file: "tutorials/js-basics.html" },
+    { id: "level1", title: "HTML Basics", difficulty: "easy", category: "fundamentals", tags: ["html", "beginner"], time: "10 min" },
+    { id: "level2", title: "CSS Basics", difficulty: "easy", category: "fundamentals", tags: ["css", "styling"], time: "12 min" },
+    { id: "level3", title: "JavaScript Basics", difficulty: "easy", category: "javascript", tags: ["js", "variables"], time: "15 min" },
+    { id: "level4", title: "Flexbox Layout", difficulty: "medium", category: "layout", tags: ["flexbox", "responsive"], time: "18 min" },
+    { id: "level5", title: "CSS Grid", difficulty: "medium", category: "layout", tags: ["grid", "layout"], time: "20 min" },
+    { id: "level6", title: "DOM Manipulation", difficulty: "medium", category: "javascript", tags: ["dom", "elements"], time: "18 min" },
+    { id: "level7", title: "Event Listeners", difficulty: "medium", category: "javascript", tags: ["events", "click"], time: "15 min" },
+    { id: "level8", title: "LocalStorage", difficulty: "medium", category: "browser-apis", tags: ["storage", "save"], time: "14 min" },
+    { id: "level9", title: "Responsive Design", difficulty: "medium", category: "layout", tags: ["responsive", "media queries"], time: "20 min" },
+    { id: "level10", title: "Fetch API", difficulty: "medium", category: "browser-apis", tags: ["fetch", "api"], time: "18 min" },
+    { id: "level11", title: "Async & Await", difficulty: "hard", category: "javascript", tags: ["async", "await"], time: "22 min" },
+    { id: "level12", title: "JSON Handling", difficulty: "hard", category: "javascript", tags: ["json", "data"], time: "20 min" },
+    { id: "level13", title: "Calculator Project", difficulty: "hard", category: "projects", tags: ["project", "calculator"], time: "25 min" },
+    { id: "level14", title: "To‑Do App", difficulty: "hard", category: "projects", tags: ["todo", "project"], time: "30 min" },
+    { id: "level15", title: "Weather App (API)", difficulty: "hard", category: "projects", tags: ["weather", "api"], time: "35 min" },
+    { id: "level16", title: "Login System (Frontend)", difficulty: "hard", category: "projects", tags: ["login", "auth"], time: "30 min" },
+    { id: "level17", title: "Advanced Animations", difficulty: "very-hard", category: "javascript", tags: ["animation", "keyframes"], time: "28 min" },
+    { id: "level18", title: "Mini Game (JS)", difficulty: "very-hard", category: "projects", tags: ["game", "logic"], time: "40 min" },
+    { id: "level19", title: "Advanced UI Project", difficulty: "very-hard", category: "projects", tags: ["ui", "components"], time: "45 min" },
+    { id: "level20", title: "Final Mega Project", difficulty: "very-hard", category: "projects", tags: ["final", "mega"], time: "60+ min" }
 ];
 
-/* RENDER CARDS */
-const grid = document.getElementById("tutorials-grid");
-tutorials.forEach(t => {
-    grid.innerHTML += `
-        <div class="card">
-            <h3>${t.title}</h3>
-            <p>Difficulty: ${t.level}</p>
-            <p>${t.desc}</p>
-            <a class="open-btn" onclick="openPanel('${t.file}')">Open</a>
-        </div>
-    `;
-});
+/* ---------------------------------------------------
+   PROGRESS SYSTEM
+--------------------------------------------------- */
+const PROGRESS_KEY = "tutorial-progress";
+let completed = JSON.parse(localStorage.getItem(PROGRESS_KEY) || "[]");
 
-/* PANEL FUNCTIONS */
-function openPanel(file) {
+function saveProgress() {
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(completed));
+}
+
+function updateProgressUI() {
+    const count = completed.length;
+    document.getElementById("progress-count").textContent = `${count} / 20 completed`;
+    document.getElementById("progress-bar").style.width = `${(count / 20) * 100}%`;
+}
+
+updateProgressUI();
+
+/* ---------------------------------------------------
+   RENDER TUTORIAL CARDS
+--------------------------------------------------- */
+function renderTutorials() {
+    const grid = document.getElementById("tutorials-grid");
+    grid.innerHTML = "";
+
+    const search = document.getElementById("search-input").value.toLowerCase();
+    const diff = document.getElementById("difficulty-filter").value;
+    const cat = document.getElementById("category-filter").value;
+
+    tutorials.forEach(t => {
+        const matchesSearch =
+            t.title.toLowerCase().includes(search) ||
+            t.tags.some(tag => tag.includes(search));
+
+        const matchesDiff = diff === "all" || diff === t.difficulty;
+        const matchesCat = cat === "all" || cat === t.category;
+
+        if (matchesSearch && matchesDiff && matchesCat) {
+            const badgeClass =
+                t.difficulty === "easy" ? "badge-easy" :
+                t.difficulty === "medium" ? "badge-medium" :
+                t.difficulty === "hard" ? "badge-hard" :
+                "badge-very-hard";
+
+            const isCompleted = completed.includes(t.id);
+
+            grid.innerHTML += `
+                <div class="tutorial-card">
+                    <div class="tutorial-level">Level ${t.id.replace("level", "")}</div>
+                    <h3 class="tutorial-title">${t.title}</h3>
+
+                    <div class="tutorial-meta">
+                        <span class="badge ${badgeClass}">${t.difficulty}</span>
+                        · ${t.time}
+                    </div>
+
+                    <div class="tag-list">
+                        ${t.tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
+                    </div>
+
+                    <div class="card-footer">
+                        <button class="open-btn" onclick="openPanel('${t.id}')">Open</button>
+
+                        ${isCompleted ? `
+                            <div class="completed-pill">
+                                <div class="completed-dot"></div> Done
+                            </div>
+                        ` : ""}
+                    </div>
+                </div>
+            `;
+        }
+    });
+}
+
+renderTutorials();
+
+/* ---------------------------------------------------
+   SIDE PANEL SYSTEM
+--------------------------------------------------- */
+let currentTutorial = null;
+
+function openPanel(id) {
+    currentTutorial = id;
+
+    const t = tutorials.find(x => x.id === id);
+
+    document.getElementById("panel-title").textContent = t.title;
+    document.getElementById("panel-meta").textContent =
+        `Level ${id.replace("level", "")} · ${t.time}`;
+
+    document.getElementById("panel-tags").innerHTML =
+        t.tags.map(tag => `<span class="tag">${tag}</span>`).join("");
+
+    document.getElementById("panel-content").innerHTML =
+        tutorialContent[id];
+
     document.getElementById("modal-bg").style.display = "block";
     document.getElementById("side-panel").style.right = "0";
-    fetch(file).then(res => res.text()).then(html => {
-        document.getElementById("tutorial-content").innerHTML = html;
-    });
 }
 
 function closePanel() {
     document.getElementById("modal-bg").style.display = "none";
-    document.getElementById("side-panel").style.right = "-500px";
+    document.getElementById("side-panel").style.right = "-520px";
 }
 
-function toggleFullscreen() {
+document.getElementById("panel-close-btn").onclick = closePanel;
+document.getElementById("modal-bg").onclick = closePanel;
+
+/* ---------------------------------------------------
+   FULLSCREEN MODE
+--------------------------------------------------- */
+let isFullscreen = false;
+
+document.getElementById("panel-fullscreen-btn").onclick = () => {
     const panel = document.getElementById("side-panel");
-    panel.style.width = panel.style.width === "100%" ? "400px" : "100%";
-}
-</script>
+    isFullscreen = !isFullscreen;
+    panel.style.width = isFullscreen ? "100%" : "460px";
+};
 
+/* ---------------------------------------------------
+   MARK AS COMPLETED
+--------------------------------------------------- */
+document.getElementById("panel-complete-btn").onclick = () => {
+    if (!completed.includes(currentTutorial)) {
+        completed.push(currentTutorial);
+        saveProgress();
+        updateProgressUI();
+        renderTutorials();
+    }
+};
+
+/* ---------------------------------------------------
+   FILTERS + SEARCH
+--------------------------------------------------- */
+document.getElementById("search-input").oninput = renderTutorials;
+document.getElementById("difficulty-filter").onchange = renderTutorials;
+document.getElementById("category-filter").onchange = renderTutorials;
+
+/* ---------------------------------------------------
+   KEYBOARD SHORTCUTS
+--------------------------------------------------- */
+document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closePanel();
+    if (e.key.toLowerCase() === "f") {
+        document.getElementById("panel-fullscreen-btn").click();
+    }
+});
+</script>
 </body>
 </html>
-

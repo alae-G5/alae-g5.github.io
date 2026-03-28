@@ -14,33 +14,24 @@
         --------------------------------------------------- */
         :root {
             --bg-light: #f5efe6;
-            --bg-light-2: #fff9f0;
             --text-light: #1a1a1a;
             --card-light: #ffffff;
             --border-light: #e0d4c2;
 
             --bg-dark: #05060a;
-            --bg-dark-2: #0d0f15;
             --text-dark: #f5f5f5;
             --card-dark: #181b24;
             --border-dark: #2b3140;
 
             --primary: #c58b3b;
-            --primary-soft: rgba(197,139,59,0.12);
 
             --radius-lg: 22px;
             --radius-md: 16px;
-            --radius-sm: 10px;
 
-            --shadow-soft: 0 22px 55px rgba(0,0,0,0.16);
             --shadow-card: 0 14px 32px rgba(0,0,0,0.10);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -143,9 +134,7 @@
             transition: width 0.2s ease;
         }
 
-        nav a:hover::after {
-            width: 100%;
-        }
+        nav a:hover::after { width: 100%; }
 
         #theme-toggle {
             padding: 7px 14px;
@@ -164,7 +153,7 @@
         }
 
         /* ---------------------------------------------------
-           HERO SECTION
+           HERO SECTION WITH GLOWING IMAGE
         --------------------------------------------------- */
         .hero {
             padding: 90px 7% 40px;
@@ -185,6 +174,32 @@
             opacity: 0.85;
             max-width: 600px;
             margin: auto;
+            margin-bottom: 30px;
+        }
+
+        .featured-photo-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .featured-photo {
+            width: 100%;
+            max-width: 600px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 0 35px rgba(197,139,59,0.45);
+            animation: glowPulse 4s ease-in-out infinite alternate,
+                       floatFeatured 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatFeatured {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-12px); }
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 25px rgba(197,139,59,0.25); }
+            100% { box-shadow: 0 0 45px rgba(197,139,59,0.55); }
         }
 
         /* ---------------------------------------------------
@@ -221,9 +236,7 @@
             object-fit: cover;
         }
 
-        .news-content {
-            padding: 16px 18px 20px;
-        }
+        .news-content { padding: 16px 18px 20px; }
 
         .news-title {
             font-size: 17px;
@@ -301,12 +314,16 @@
     <button id="theme-toggle">🌙 Dark Mode</button>
 </nav>
 
-<!-- HERO SECTION -->
+<!-- HERO SECTION WITH GLOWING IMAGE -->
 <section class="hero reveal">
     <h2 class="hero-title">Latest Tech & AI News</h2>
     <p class="hero-subtitle">
         Curated by you — hand‑picked articles, stories, and updates you think matter most.
     </p>
+
+    <div class="featured-photo-wrapper">
+        <img src="/attachments/33DvVt6BGrnLwv1ZXCg5r.jpeg" class="featured-photo" alt="AlaeAI Featured Image">
+    </div>
 </section>
 
 <!-- NEWS GRID (YOU CONTROL EVERYTHING HERE) -->
@@ -354,8 +371,6 @@
         </div>
     </div>
 
-    <!-- ⭐ ADD MORE CARDS BY COPYING ONE BLOCK ABOVE ⭐ -->
-
 </div>
 
 <!-- FOOTER -->
@@ -363,26 +378,43 @@
     © 2026 AlaeAI — All rights reserved.
 </footer>
 
-<!-- SIMPLE JS: DARK MODE + REVEAL -->
+<!-- GLOBAL DARK MODE + REVEAL -->
 <script>
-const themeToggle = document.getElementById("theme-toggle");
-const body = document.body;
+// Load saved theme
+if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+}
 
+// Toggle theme
+const themeToggle = document.getElementById("theme-toggle");
 themeToggle.addEventListener("click", () => {
-  body.classList.toggle("dark-mode");
-  themeToggle.textContent = body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
+    document.body.classList.toggle("dark-mode");
+
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+        themeToggle.textContent = "☀️ Light Mode";
+    } else {
+        localStorage.setItem("theme", "light");
+        themeToggle.textContent = "🌙 Dark Mode";
+    }
 });
 
+// Fix button text on load
+if (document.body.classList.contains("dark-mode")) {
+    themeToggle.textContent = "☀️ Light Mode";
+} else {
+    themeToggle.textContent = "🌙 Dark Mode";
+}
+
+// Reveal animation
 function revealOnScroll() {
   const reveals = document.querySelectorAll(".reveal");
   reveals.forEach((el) => {
     el.classList.add("reveal-visible");
   });
 }
-
 revealOnScroll();
 </script>
 
 </body>
 </html>
-

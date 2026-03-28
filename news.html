@@ -10,7 +10,7 @@
 
     <style>
         /* ---------------------------------------------------
-           THEME VARIABLES (MATCH HOME PAGE)
+           THEME VARIABLES
         --------------------------------------------------- */
         :root {
             --bg-light: #f5efe6;
@@ -157,11 +157,17 @@
             font-weight: 600;
         }
 
+        body.dark-mode #theme-toggle {
+            background: rgba(10,12,18,0.95);
+            border-color: rgba(255,255,255,0.16);
+            color: var(--text-dark);
+        }
+
         /* ---------------------------------------------------
            HERO SECTION
         --------------------------------------------------- */
         .hero {
-            padding: 90px 7% 60px;
+            padding: 90px 7% 40px;
             text-align: center;
             max-width: 900px;
             margin: auto;
@@ -299,85 +305,73 @@
 <section class="hero reveal">
     <h2 class="hero-title">Latest Tech & AI News</h2>
     <p class="hero-subtitle">
-        Powered by Gemini AI — real‑time news fetched directly from the internet.
+        Curated by you — hand‑picked articles, stories, and updates you think matter most.
     </p>
 </section>
 
-<!-- NEWS GRID -->
-<div id="news-container" class="news-grid"></div>
+<!-- NEWS GRID (YOU CONTROL EVERYTHING HERE) -->
+<div id="news-container" class="news-grid">
+
+    <!-- ⭐ EXAMPLE NEWS CARD 1 ⭐ -->
+    <div class="news-card reveal">
+        <img class="news-img" src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg" />
+        <div class="news-content">
+            <h3 class="news-title">AI Startups Are Redefining Productivity</h3>
+            <p class="news-desc">
+                A new wave of AI tools is helping developers, designers, and students build faster than ever before.
+            </p>
+            <a href="https://example.com/article-1" target="_blank">
+                <button class="news-btn">Read More</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- ⭐ EXAMPLE NEWS CARD 2 ⭐ -->
+    <div class="news-card reveal">
+        <img class="news-img" src="https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg" />
+        <div class="news-content">
+            <h3 class="news-title">Robotics & AI: The Next Frontier</h3>
+            <p class="news-desc">
+                From autonomous drones to smart factories, robotics powered by AI is transforming real‑world industries.
+            </p>
+            <a href="https://example.com/article-2" target="_blank">
+                <button class="news-btn">Read More</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- ⭐ EXAMPLE NEWS CARD 3 ⭐ -->
+    <div class="news-card reveal">
+        <img class="news-img" src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg" />
+        <div class="news-content">
+            <h3 class="news-title">Learning to Code with AI Assistants</h3>
+            <p class="news-desc">
+                Students are using AI copilots to understand concepts, debug code, and build real projects faster.
+            </p>
+            <a href="https://example.com/article-3" target="_blank">
+                <button class="news-btn">Read More</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- ⭐ ADD MORE CARDS BY COPYING ONE BLOCK ABOVE ⭐ -->
+
+</div>
 
 <!-- FOOTER -->
 <footer>
     © 2026 AlaeAI — All rights reserved.
 </footer>
 
-<!-- GEMINI AI SCRIPT -->
+<!-- SIMPLE JS: DARK MODE + REVEAL -->
 <script>
-async function getNews(topic) {
-  const apiKey ="AIzaSyD5zAYBtUSxVzV3tMtTKbBC-FXDQ2t1m5M";
+const themeToggle = document.getElementById("theme-toggle");
+const body = document.body;
 
-  const response = await fetch(
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + apiKey,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [
-          {
-            role: "user",
-            parts: [
-              {
-                text: `Search the internet for the latest news about "${topic}". 
-Return ONLY JSON in this format:
-
-{
-  "articles": [
-    {
-      "title": "",
-      "summary": "",
-      "url": "",
-      "image": ""
-    }
-  ]
-}`
-              }
-            ]
-          }
-        ]
-      })
-    }
-  );
-
-  const data = await response.json();
-  const text = data.candidates[0].content.parts[0].text;
-
-  return JSON.parse(text);
-}
-
-async function loadNews() {
-  const topic = "technology";
-  const news = await getNews(topic);
-
-  const container = document.getElementById("news-container");
-  container.innerHTML = "";
-
-  news.articles.forEach(article => {
-    container.innerHTML += `
-      <div class="news-card reveal">
-        <img class="news-img" src="${article.image}" />
-        <div class="news-content">
-          <h3 class="news-title">${article.title}</h3>
-          <p class="news-desc">${article.summary}</p>
-          <a href="${article.url}" target="_blank">
-            <button class="news-btn">Read More</button>
-          </a>
-        </div>
-      </div>
-    `;
-  });
-
-  revealOnScroll();
-}
+themeToggle.addEventListener("click", () => {
+  body.classList.toggle("dark-mode");
+  themeToggle.textContent = body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
+});
 
 function revealOnScroll() {
   const reveals = document.querySelectorAll(".reveal");
@@ -386,7 +380,7 @@ function revealOnScroll() {
   });
 }
 
-loadNews();
+revealOnScroll();
 </script>
 
 </body>

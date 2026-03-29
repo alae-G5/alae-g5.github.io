@@ -20,270 +20,99 @@
       --transition: 0.35s ease;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      font-family: system-ui, sans-serif;
       background: radial-gradient(circle at top, #1a1d27 0, #050608 60%);
       color: var(--text);
-      min-height: 100vh;
       padding: 32px 16px 80px;
       overflow-x: hidden;
-      transition: background 0.4s ease, color 0.4s ease;
     }
 
-    body.dark {
-      --bg: #f7f3ea;
-      --bg-soft: #ffffff;
-      --bg-card: #f0e9dd;
-      --text: #0b0d11;
-      --muted: #444;
-      --accent: #c28a2a;
-      --accent2: #8a5a1a;
-      --accent3: #f0c46a;
-      background: radial-gradient(circle at top, #ffffff 0, #e8e2d8 60%);
-    }
-
-    .shape {
-      position: fixed;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.25;
-      z-index: -1;
-      animation: float 12s ease-in-out infinite alternate;
-      pointer-events: none;
-    }
-
-    .shape.one {
-      background: #f2c26b;
-      top: -120px;
-      left: -120px;
-    }
-
-    .shape.two {
-      background: #7a4b2a;
-      bottom: -160px;
-      right: -160px;
-      animation-delay: 2s;
-    }
-
-    .shape.three {
-      background: #ffdd9b;
-      top: 40%;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0.12;
-      animation-delay: 4s;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0px) translateX(0px); }
-      100% { transform: translateY(40px) translateX(30px); }
-    }
-
-    .page {
+    /* FIXED GRID — PERFECT ALIGNMENT */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
       width: 100%;
       max-width: 1180px;
       margin: 0 auto;
-      animation: fadeIn 1.2s ease forwards;
+    }
+
+    /* FIXED CARDS — NO MORE CRACKS */
+    .card {
+      background: var(--bg-card);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 26px 24px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 260px; /* FIXED */
+      overflow: visible;
+    }
+
+    /* FIXED CATEGORY SYSTEM */
+    .category-section {
+      display: none;
       opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .35s ease, transform .35s ease;
+      min-height: 480px; /* FIXED */
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    .category-section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .top-nav {
+    /* RIGHT COLUMN FIX */
+    aside {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-      gap: 16px;
+      flex-direction: column;
+      gap: 26px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: radial-gradient(circle at 30% 30%, var(--accent3), var(--accent2));
-      box-shadow: 0 0 18px rgba(0,0,0,0.4);
+    /* LOGO SPACE (kept) */
+    .logo-space {
+      width: 100%;
+      height: 180px;
+      border-radius: 22px;
+      background: radial-gradient(circle at top, #181b25, #050608);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      font-size: 18px;
-      color: #050608;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .brand-title {
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .brand-sub {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .nav-menu {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: flex-end;
-    }
-
-    .nav-chip {
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.18);
-      color: var(--muted);
-      font-size: 13px;
-      cursor: pointer;
-      transition: 0.25s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      backdrop-filter: blur(6px);
-    }
-
-    body.dark .nav-chip {
-      background: rgba(255,255,255,0.7);
-      color: #222;
-      border-color: rgba(0,0,0,0.12);
-    }
-
-    .nav-chip span {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    .nav-chip.active,
-    .nav-chip:hover {
-      color: var(--text);
-      background: rgba(242,194,107,0.16);
-      border-color: rgba(242,194,107,0.7);
-      transform: translateY(-2px);
-    }
-
-    .theme-btn {
-      position: fixed;
-      bottom: 26px;
-      right: 26px;
-      padding: 12px 16px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: var(--text);
-      font-size: 18px;
-      cursor: pointer;
-      backdrop-filter: blur(6px);
-      transition: 0.3s ease;
-      z-index: 999;
-    }
-
-    .theme-btn:hover {
-      background: rgba(255,255,255,0.15);
-      transform: translateY(-3px);
-    }
-
-    body.dark .theme-btn {
-      background: rgba(0,0,0,0.1);
-      color: #0b0d11;
-    }
-
-    .banner {
-      padding: 40px 32px;
-      background: linear-gradient(145deg, #0b0d11, #151821);
-      border-radius: 26px;
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: var(--shadow);
-      margin-bottom: 28px;
       position: relative;
       overflow: hidden;
-      min-height: 260px;
+    }
+
+    /* ANIMATED LOGO (kept) */
+    .logo-core {
+      width: 82px;
+      height: 82px;
+      border-radius: 24px;
+      background: radial-gradient(circle at 30% 20%, #ffffff, var(--accent3), var(--accent2));
+      box-shadow: 0 0 26px rgba(242,194,107,0.9);
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      gap: 10px;
-    }
-
-    body.dark .banner {
-      background: linear-gradient(145deg, #fdf8ee, #f0e6d7);
-      border-color: rgba(0,0,0,0.06);
-    }
-
-    .banner-title {
-      font-size: 34px;
+      font-size: 28px;
       font-weight: 800;
-      margin-bottom: 4px;
-      z-index: 2;
-      position: relative;
-      letter-spacing: -0.03em;
+      animation: float 4s ease-in-out infinite;
     }
 
-    .banner-sub {
-      font-size: 15px;
-      color: var(--muted);
-      max-width: 620px;
-      line-height: 1.6;
-      z-index: 2;
-      position: relative;
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
     }
-
-    .banner-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-      z-index: 2;
-      position: relative;
-    }
-
-    .banner-tag {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(0,0,0,0.25);
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    body.dark .banner-tag {
-      background: rgba(255,255,255,0.7);
-      color: #333;
-      border-color: rgba(0,0,0,0.12);
-    }
-
-    /* 3D PARALLAX HOLOGRAM SPHERE */
+    /* HOLOGRAM (kept) */
     .hologram {
       position: absolute;
       top: 50%;
@@ -321,9 +150,7 @@
       box-shadow:
         inset 0 0 40px rgba(242,194,107,0.6),
         0 0 40px rgba(242,194,107,0.4);
-      filter: brightness(1.2);
       animation: spherePulse 4s ease-in-out infinite;
-      position: relative;
       overflow: hidden;
     }
 
@@ -360,7 +187,6 @@
       border-radius: 50%;
       background: radial-gradient(circle, #ffffff 0%, var(--accent3) 40%, transparent 70%);
       box-shadow: 0 0 30px rgba(255,255,255,0.8);
-      opacity: 0.9;
       animation: corePulse 3s ease-in-out infinite;
     }
 
@@ -403,480 +229,6 @@
       100% { transform: translateY(-20px) scale(1.4); opacity: 1; }
     }
 
-    .banner:hover .sphere {
-      box-shadow:
-        inset 0 0 60px rgba(242,194,107,1),
-        0 0 60px rgba(242,194,107,0.9);
-      filter: brightness(1.4);
-    }
-
-    .hero {
-      padding: 34px 30px;
-      background: linear-gradient(145deg, #0b0d11, #151821);
-      border-radius: 26px;
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: var(--shadow);
-      margin-bottom: 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    body.dark .hero {
-      background: linear-gradient(145deg, #fdf8ee, #f0e6d7);
-      border-color: rgba(0,0,0,0.06);
-    }
-
-    .hero-title {
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      margin-bottom: 6px;
-    }
-
-    .hero-sub {
-      font-size: 15px;
-      color: var(--muted);
-      max-width: 720px;
-      line-height: 1.7;
-      margin-bottom: 14px;
-    }
-
-    .hero-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .hero-pill {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.25);
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    body.dark .hero-pill {
-      background: rgba(255,255,255,0.7);
-      color: #333;
-      border-color: rgba(0,0,0,0.12);
-    }
-
-    .main-layout {
-      display: grid;
-      grid-template-columns: 1fr 0.9fr;
-      gap: 32px;
-      align-items: start;
-      min-height: 600px;
-      margin-bottom: 26px;
-    }
-
-    @media (max-width: 960px) {
-      .hologram {
-        display: none;
-      }
-    }
-
-    @media (max-width: 880px) {
-      .main-layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .card {
-      background: var(--bg-card);
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.10);
-      padding: 28px 26px;
-      box-shadow: 0 8px 28px rgba(0,0,0,0.35);
-      overflow: visible;
-      position: relative;
-      z-index: 2;
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      gap: 14px;
-      animation: reveal 1s ease forwards;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    body.dark .card {
-      background: #f4ede1 !important;
-      border-color: rgba(0,0,0,0.12) !important;
-      box-shadow: 0 8px 28px rgba(0,0,0,0.15) !important;
-    }
-
-    @keyframes reveal {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      transition: var(--transition);
-      overflow: visible;
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .card-text {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .category-section {
-      display: none;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-      min-height: 380px;
-    }
-
-    .category-section.active {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-
-    .chip {
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 12px;
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    body.dark .chip {
-      background: rgba(0,0,0,0.06);
-      border-color: rgba(0,0,0,0.12);
-      color: #444;
-    }
-
-    .chip span {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    .list {
-      list-style: none;
-      display: grid;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .list li {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.5;
-      position: relative;
-      padding-left: 16px;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .list li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-    }
-
-    .mini-title {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .skill-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .skill-label {
-      font-size: 13px;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .skill-bar {
-      width: 100%;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .skill-fill {
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      width: 0;
-      animation: fillBar 1.4s ease forwards;
-    }
-
-    @keyframes fillBar {
-      from { width: 0; }
-      to { width: var(--value); }
-    }
-
-    .timeline {
-      margin-top: 10px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-left: 18px;
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: 4px;
-      top: 4px;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    .timeline-label {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .timeline-text {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .section-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 20px;
-      margin-bottom: 24px;
-    }
-
-    @media (max-width: 880px) {
-      .section-row {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .pill {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.25);
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    body.dark .pill {
-      background: rgba(255,255,255,0.7);
-      color: #333;
-      border-color: rgba(0,0,0,0.12);
-    }
-
-    .footer {
-      margin-top: 26px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      font-size: 12px;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    body.dark .footer {
-      border-top-color: rgba(0,0,0,0.12);
-    }
-
-    .footer-left span {
-      opacity: 0.8;
-    }
-
-    .footer-right {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .footer-link {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 12px;
-      border-bottom: 1px dashed rgba(255,255,255,0.2);
-    }
-
-    body.dark .footer-link {
-      border-bottom-color: rgba(0,0,0,0.2);
-    }
-
-    .footer-link:hover {
-      color: var(--accent);
-      border-bottom-style: solid;
-    }
-
-    /* LOGO SPACE + ANIMATED LOGO */
-    .logo-space {
-      width: 100%;
-      height: 180px;
-      border-radius: 22px;
-      background: radial-gradient(circle at top, #181b25, #050608);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: var(--shadow);
-      margin-bottom: 26px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    body.dark .logo-space {
-      background: radial-gradient(circle at top, #fdf8ee, #e8dfd0);
-      border-color: rgba(0,0,0,0.08);
-    }
-
-    .logo-orbit {
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      border: 1px dashed rgba(242,194,107,0.35);
-      box-shadow: 0 0 24px rgba(242,194,107,0.35);
-      animation: orbitSpin 18s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes orbitSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .logo-core {
-      position: relative;
-      width: 82px;
-      height: 82px;
-      border-radius: 24px;
-      background: radial-gradient(circle at 30% 20%, #ffffff, var(--accent3), var(--accent2));
-      box-shadow:
-        0 0 26px rgba(242,194,107,0.9),
-        0 0 60px rgba(0,0,0,0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #050608;
-      font-weight: 800;
-      font-size: 26px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transform-style: preserve-3d;
-      animation: logoFloat 4s ease-in-out infinite;
-    }
-
-    @keyframes logoFloat {
-      0% { transform: translateY(0px) rotateX(8deg) rotateY(-8deg); }
-      50% { transform: translateY(-10px) rotateX(14deg) rotateY(-4deg); }
-      100% { transform: translateY(0px) rotateX(8deg) rotateY(-8deg); }
-    }
-
-    .logo-scan {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(255,255,255,0.18) 40%,
-        transparent 80%
-      );
-      mix-blend-mode: screen;
-      animation: scanMove 3.5s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes scanMove {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(100%); }
-    }
-
-    .logo-particles {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .logo-particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--accent3);
-      opacity: 0.7;
-      filter: blur(0.5px);
-      animation: logoParticleFloat 5s ease-in-out infinite alternate;
-    }
-
-    @keyframes logoParticleFloat {
-      0% { transform: translateY(0px) scale(1); opacity: 0.4; }
-      100% { transform: translateY(-18px) scale(1.4); opacity: 1; }
-    }
-
-    .logo-space:hover .logo-core {
-      box-shadow:
-        0 0 40px rgba(242,194,107,1),
-        0 0 80px rgba(242,194,107,0.9);
-      transform: translateY(-6px) rotateX(14deg) rotateY(-2deg);
-    }
-
-    .logo-space:hover .logo-orbit {
-      box-shadow: 0 0 40px rgba(242,194,107,0.6);
-    }
   </style>
 </head>
 
@@ -900,27 +252,16 @@
       </div>
 
       <nav class="nav-menu">
-        <button class="nav-chip active" data-target="identity">
-          <span></span> Identité
-        </button>
-        <button class="nav-chip" data-target="creation">
-          <span></span> Création
-        </button>
-        <button class="nav-chip" data-target="vision">
-          <span></span> Vision
-        </button>
-        <button class="nav-chip" data-target="mindset">
-          <span></span> Mindset
-        </button>
-        <button class="nav-chip" data-target="skills">
-          <span></span> Compétences
-        </button>
-        <button class="nav-chip" data-target="timeline">
-          <span></span> Parcours
-        </button>
+        <button class="nav-chip active" data-target="identity"><span></span> Identité</button>
+        <button class="nav-chip" data-target="creation"><span></span> Création</button>
+        <button class="nav-chip" data-target="vision"><span></span> Vision</button>
+        <button class="nav-chip" data-target="mindset"><span></span> Mindset</button>
+        <button class="nav-chip" data-target="skills"><span></span> Compétences</button>
+        <button class="nav-chip" data-target="timeline"><span></span> Parcours</button>
       </nav>
     </header>
 
+    <!-- BANNER -->
     <section class="banner" id="top">
       <div class="hologram">
         <div class="sphere-container" id="sphereContainer">
@@ -941,8 +282,6 @@
       <h1 class="banner-title">AlaeAI — À propos d’Alaedine</h1>
       <p class="banner-sub">
         Une identité construite autour de la précision, du design, de l’IA et de la créativité.
-        Chaque pixel, chaque animation et chaque interaction est pensé pour refléter une vision claire :
-        construire des expériences qui respirent la maîtrise, la cohérence et l’impact.
       </p>
 
       <div class="banner-tags">
@@ -952,14 +291,12 @@
         <span class="banner-tag">Tech & Créativité</span>
       </div>
     </section>
-
+    <!-- HERO -->
     <section class="hero">
       <h2 class="hero-title">Créateur. Bâtisseur. Visionnaire.</h2>
       <p class="hero-sub">
-        Je suis un étudiant basé à Tanger, passionné par l’intelligence artificielle, le développement web,
-        le game design et les interfaces modernes. J’aime transformer des idées abstraites en systèmes concrets,
-        fluides et élégants. Mon objectif n’est pas seulement de coder, mais de concevoir des expériences qui
-        donnent envie d’explorer, d’apprendre et de créer.
+        Je suis un étudiant basé à Tanger, passionné par l’intelligence artificielle,
+        le développement web, le game design et les interfaces modernes.
       </p>
       <div class="hero-grid">
         <span class="hero-pill">Front‑end & UI</span>
@@ -970,148 +307,105 @@
       </div>
     </section>
 
+    <!-- MAIN LAYOUT -->
     <main class="main-layout">
 
+      <!-- LEFT COLUMN -->
       <section>
 
         <article class="card category-section active" data-cat="identity">
           <h3 class="card-title">Mon identité</h3>
-
           <div class="chips">
             <div class="chip"><span></span> Tangier, Maroc</div>
             <div class="chip"><span></span> Étudiant & Créateur</div>
             <div class="chip"><span></span> IA & Web</div>
           </div>
-
           <p class="card-text">
             Je suis quelqu’un qui aime comprendre, construire et améliorer.
-            J’observe les détails, je décortique les systèmes et je cherche toujours la version plus claire,
-            plus fluide, plus cohérente de ce que j’ai devant moi. Pour moi, un bon projet n’est pas seulement
-            fonctionnel : il doit raconter quelque chose sur la personne qui l’a construit.
           </p>
-
           <ul class="list">
-            <li>Je construis avec intention, jamais au hasard.</li>
-            <li>Je cherche la cohérence dans chaque détail visuel et logique.</li>
-            <li>Je préfère la qualité, la clarté et la maîtrise à la quantité.</li>
+            <li>Construire avec intention.</li>
+            <li>Cohérence visuelle et logique.</li>
+            <li>Qualité avant quantité.</li>
           </ul>
         </article>
 
         <article class="card category-section" data-cat="creation">
           <h3 class="card-title">Ce que j’aime créer</h3>
-
           <div class="chips">
             <div class="chip"><span></span> Interfaces modernes</div>
             <div class="chip"><span></span> Automatisation IA</div>
             <div class="chip"><span></span> Jeux interactifs</div>
           </div>
-
           <p class="card-text">
-            Je suis attiré par les projets qui mélangent technique, design et émotion.
-            J’aime créer des interfaces qui donnent envie de cliquer, des systèmes qui réagissent intelligemment,
-            et des expériences qui laissent une impression. Chaque projet est une opportunité de tester une nouvelle
-            idée, une nouvelle animation, une nouvelle façon de raconter une histoire.
+            J’aime créer des expériences qui mélangent technique, design et émotion.
           </p>
-
           <ul class="list">
-            <li>Sites web premium avec animations subtiles et identités fortes.</li>
-            <li>Outils intelligents basés sur l’IA, pensés pour être utiles et accessibles.</li>
-            <li>Expériences interactives qui mélangent jeu, apprentissage et immersion.</li>
+            <li>Sites premium animés.</li>
+            <li>Outils IA utiles.</li>
+            <li>Expériences interactives.</li>
           </ul>
         </article>
 
         <article class="card category-section" data-cat="vision">
           <h3 class="card-title">Ma vision</h3>
-
           <div class="chips">
             <div class="chip"><span></span> Impact</div>
             <div class="chip"><span></span> Clarté</div>
             <div class="chip"><span></span> Maîtrise</div>
           </div>
-
           <p class="card-text">
-            Je ne vois pas la technologie comme un simple outil, mais comme un langage.
-            Un langage qui permet de traduire des idées, des émotions et des visions en expériences concrètes.
-            Ma vision est de construire des projets qui restent, qui inspirent, et qui donnent envie à d’autres
-            de créer à leur tour.
+            La technologie est un langage qui permet de transformer des idées en expériences.
           </p>
-
           <ul class="list">
-            <li>Créer des expériences qui donnent une vraie sensation de “premium”.</li>
-            <li>Utiliser l’IA pour amplifier la créativité, pas la remplacer.</li>
-            <li>Construire des systèmes qui peuvent évoluer, se complexifier et grandir avec le temps.</li>
+            <li>Créer du premium.</li>
+            <li>Amplifier la créativité avec l’IA.</li>
+            <li>Construire des systèmes évolutifs.</li>
           </ul>
         </article>
 
         <article class="card category-section" data-cat="mindset">
           <h3 class="card-title">Mon mindset</h3>
-
           <div class="chips">
             <div class="chip"><span></span> Curiosité</div>
             <div class="chip"><span></span> Discipline</div>
             <div class="chip"><span></span> Amélioration continue</div>
           </div>
-
           <p class="card-text">
-            Je ne cherche pas la perfection instantanée, je cherche la progression constante.
-            J’aime les projets qui me forcent à réfléchir, à recommencer, à optimiser.
-            Je préfère un système que je comprends à 100% plutôt qu’un résultat rapide que je ne maîtrise pas.
+            Je cherche la progression constante, pas la perfection instantanée.
           </p>
-
           <ul class="list">
-            <li>Je teste, j’itère, je corrige, puis je peaufine.</li>
-            <li>Je valorise la clarté du code autant que le rendu visuel.</li>
-            <li>Je vois chaque bug comme une opportunité de mieux comprendre.</li>
+            <li>Tester, itérer, corriger.</li>
+            <li>Clarté du code.</li>
+            <li>Chaque bug = une leçon.</li>
           </ul>
         </article>
 
         <article class="card category-section" data-cat="skills">
           <h3 class="card-title">Compétences & outils</h3>
-
           <p class="card-text">
-            Je construis avec une base solide en développement web, en logique de jeu et en intégration d’IA.
-            J’aime combiner plusieurs outils pour créer des expériences complètes, du front‑end à la logique.
+            Une base solide en web, logique de jeu et intégration d’IA.
           </p>
 
           <div class="skills-grid">
             <div class="skill-item">
-              <div class="skill-label">
-                <span>HTML / CSS</span>
-                <span>Avancé</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-fill" style="--value: 92%;"></div>
-              </div>
+              <div class="skill-label"><span>HTML / CSS</span><span>Avancé</span></div>
+              <div class="skill-bar"><div class="skill-fill" style="--value:92%;"></div></div>
             </div>
 
             <div class="skill-item">
-              <div class="skill-label">
-                <span>JavaScript</span>
-                <span>Avancé</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-fill" style="--value: 88%;"></div>
-              </div>
+              <div class="skill-label"><span>JavaScript</span><span>Avancé</span></div>
+              <div class="skill-bar"><div class="skill-fill" style="--value:88%;"></div></div>
             </div>
 
             <div class="skill-item">
-              <div class="skill-label">
-                <span>UI / UX</span>
-                <span>Solide</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-fill" style="--value: 84%;"></div>
-              </div>
+              <div class="skill-label"><span>UI / UX</span><span>Solide</span></div>
+              <div class="skill-bar"><div class="skill-fill" style="--value:84%;"></div></div>
             </div>
 
             <div class="skill-item">
-              <div class="skill-label">
-                <span>Logique de jeu</span>
-                <span>Solide</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-fill" style="--value: 80%;"></div>
-              </div>
+              <div class="skill-label"><span>Logique de jeu</span><span>Solide</span></div>
+              <div class="skill-bar"><div class="skill-fill" style="--value:80%;"></div></div>
             </div>
           </div>
 
@@ -1125,71 +419,46 @@
 
         <article class="card category-section" data-cat="timeline">
           <h3 class="card-title">Parcours & étapes</h3>
-
           <p class="card-text">
-            Mon parcours est construit autour d’expériences concrètes : projets, essais, erreurs, refontes.
-            Chaque étape m’a permis de mieux comprendre ce que je veux construire et comment je veux le construire.
+            Mon parcours est construit autour d’expériences concrètes.
           </p>
 
           <div class="timeline">
             <div class="timeline-item">
               <div class="timeline-label">Premiers projets</div>
-              <div class="timeline-text">
-                Découverte du développement web, des bases HTML / CSS, premières interfaces simples mais fonctionnelles.
-              </div>
+              <div class="timeline-text">Bases HTML / CSS.</div>
             </div>
             <div class="timeline-item">
               <div class="timeline-label">Jeux & interactions</div>
-              <div class="timeline-text">
-                Création de petits jeux, logique de collisions, animations, gestion d’états et d’assets.
-              </div>
+              <div class="timeline-text">Collisions, animations, états.</div>
             </div>
             <div class="timeline-item">
               <div class="timeline-label">Identité visuelle</div>
-              <div class="timeline-text">
-                Travail sur des interfaces plus propres, plus cohérentes, avec une vraie direction artistique.
-              </div>
+              <div class="timeline-text">Interfaces cohérentes.</div>
             </div>
             <div class="timeline-item">
               <div class="timeline-label">AlaeAI</div>
-              <div class="timeline-text">
-                Construction d’une identité complète : site, style, animations, logique, vision à long terme.
-              </div>
+              <div class="timeline-text">Identité complète.</div>
             </div>
           </div>
         </article>
 
       </section>
 
+      <!-- RIGHT COLUMN -->
       <aside>
 
-        <!-- ANIMATED LOGO BLOCK -->
+        <!-- ANIMATED LOGO -->
         <div class="logo-space">
-          <div class="logo-orbit"></div>
-
-          <div class="logo-core">
-            <span>A</span>
-            <div class="logo-scan"></div>
-          </div>
-
-          <div class="logo-particles">
-            <div class="logo-particle" style="top:18%; left:22%; animation-delay:0s;"></div>
-            <div class="logo-particle" style="top:70%; left:30%; animation-delay:1s;"></div>
-            <div class="logo-particle" style="top:40%; left:78%; animation-delay:1.8s;"></div>
-            <div class="logo-particle" style="top:60%; left:60%; animation-delay:0.6s;"></div>
-            <div class="logo-particle" style="top:28%; left:55%; animation-delay:1.3s;"></div>
-          </div>
+          <div class="logo-core">A</div>
         </div>
 
         <article class="card">
           <div class="mini-title">Résumé technique</div>
           <h3 class="card-title">Stack & style</h3>
           <p class="card-text">
-            Je construis principalement avec HTML, CSS et JavaScript, en mettant l’accent sur la lisibilité,
-            la structure et l’animation. J’aime les interfaces sombres, les dégradés subtils, les effets de lumière
-            et les éléments 3D simulés qui donnent une sensation de profondeur.
+            HTML, CSS, JS — lisibilité, structure, animation.
           </p>
-
           <div class="pill-row">
             <span class="pill">Dark mode</span>
             <span class="pill">3D parallax</span>
@@ -1202,15 +471,12 @@
           <div class="mini-title">Valeurs</div>
           <h3 class="card-title">Ce qui compte pour moi</h3>
           <p class="card-text">
-            Au‑delà du code, je tiens à la façon dont un projet fait ressentir quelque chose.
-            Je veux que mes projets soient clairs, accessibles, et qu’ils donnent une impression de sérieux
-            sans être froids. Je crois que la technologie peut être à la fois puissante et chaleureuse.
+            Clarté, accessibilité, chaleur.
           </p>
-
           <ul class="list">
-            <li>Clarté avant complexité inutile.</li>
-            <li>Esthétique cohérente et assumée.</li>
-            <li>Respect du temps de l’utilisateur.</li>
+            <li>Clarté avant complexité.</li>
+            <li>Esthétique cohérente.</li>
+            <li>Respect du temps.</li>
           </ul>
         </article>
 
@@ -1218,16 +484,13 @@
           <div class="mini-title">Outils</div>
           <h3 class="card-title">Ce que j’utilise souvent</h3>
           <p class="card-text">
-            J’aime travailler avec des outils simples mais puissants, qui me laissent le contrôle total
-            sur le rendu final. Je préfère comprendre ce qui se passe plutôt que d’empiler des couches
-            que je ne maîtrise pas.
+            Outils simples mais puissants.
           </p>
-
           <div class="pill-row">
             <span class="pill">VS Code</span>
             <span class="pill">GitHub</span>
-            <span class="pill">Navigateurs devtools</span>
-            <span class="pill">Outils IA</span>
+            <span class="pill">Devtools</span>
+            <span class="pill">IA</span>
           </div>
         </article>
 
@@ -1235,56 +498,7 @@
 
     </main>
 
-    <section class="section-row">
-      <article class="card">
-        <div class="mini-title">Philosophie</div>
-        <h3 class="card-title">Construire avec intention</h3>
-        <p class="card-text">
-          Chaque projet est une conversation entre l’idée et l’exécution. Je ne cherche pas à tout faire,
-          je cherche à bien faire ce que je choisis de construire. Pour moi, un bon système est celui
-          que je peux expliquer clairement, démonter, améliorer et transmettre.
-        </p>
-        <p class="card-text" style="margin-top:8px;">
-          J’aime les interfaces qui ont une personnalité, mais qui restent lisibles. Les animations qui
-          servent une intention, pas juste un effet. Les choix visuels qui racontent quelque chose sur
-          la personne derrière l’écran.
-        </p>
-      </article>
-
-      <article class="card">
-        <div class="mini-title">Focus actuel</div>
-        <h3 class="card-title">Expériences guidées</h3>
-        <p class="card-text">
-          Je travaille sur des systèmes qui accompagnent l’utilisateur étape par étape, avec des interfaces
-          claires, des feedbacks visuels et des transitions fluides. L’objectif : que chaque interaction
-          soit compréhensible, agréable et mémorable.
-        </p>
-      </article>
-    </section>
-
-    <section class="section-row">
-      <article class="card">
-        <div class="mini-title">Tech & IA</div>
-        <h3 class="card-title">Une IA au service de la création</h3>
-        <p class="card-text">
-          L’IA n’est pas pour moi une fin en soi, mais un amplificateur. Elle permet d’explorer plus vite,
-          de tester plus d’idées, de prototyper des systèmes complexes. Mais la direction, la vision,
-          la cohérence restent humaines. Je veux utiliser l’IA pour ouvrir des portes, pas pour fermer
-          la créativité.
-        </p>
-      </article>
-
-      <article class="card">
-        <div class="mini-title">Ce que je cherche</div>
-        <h3 class="card-title">Collaborations & défis</h3>
-        <p class="card-text">
-          Je suis toujours ouvert aux projets qui demandent de la réflexion, de la précision et une vraie
-          identité visuelle. Que ce soit un jeu, un outil, une interface ou une expérience complète,
-          j’aime les défis qui me forcent à apprendre et à pousser mes limites.
-        </p>
-      </article>
-    </section>
-
+    <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-left">
         <span>AlaeAI — Portfolio d’Alaedine • Construit avec intention.</span>
@@ -1292,13 +506,15 @@
       <div class="footer-right">
         <a href="#top" class="footer-link">Retour en haut</a>
         <span>•</span>
-        <span>Version conceptuelle de la page À propos.</span>
+        <span>Version conceptuelle.</span>
       </div>
     </footer>
 
   </div>
 
+  <!-- FIXED JAVASCRIPT -->
   <script>
+    /* DARK MODE */
     const toggle = document.getElementById("themeToggle");
     const body = document.body;
 
@@ -1309,40 +525,28 @@
 
     toggle.addEventListener("click", () => {
       body.classList.toggle("dark");
-      if (body.classList.contains("dark")) {
-        toggle.textContent = "☀️";
-        localStorage.setItem("theme", "dark");
-      } else {
-        toggle.textContent = "🌙";
-        localStorage.setItem("theme", "light");
-      }
+      toggle.textContent = body.classList.contains("dark") ? "☀️" : "🌙";
+      localStorage.setItem("theme", body.classList.contains("dark") ? "dark" : "light");
     });
 
+    /* CATEGORY SWITCHING */
     const navChips = document.querySelectorAll(".nav-chip");
     const catSections = document.querySelectorAll(".category-section");
 
     navChips.forEach(chip => {
       chip.addEventListener("click", () => {
-        const target = chip.getAttribute("data-target");
+        const target = chip.dataset.target;
 
         navChips.forEach(c => c.classList.remove("active"));
         chip.classList.add("active");
 
         catSections.forEach(sec => {
-          if (sec.getAttribute("data-cat") === target) {
-            sec.classList.add("active");
-          } else {
-            sec.classList.remove("active");
-          }
-        });
-
-        window.scrollTo({
-          top: document.querySelector(".main-layout").offsetTop - 40,
-          behavior: "smooth"
+          sec.classList.toggle("active", sec.dataset.cat === target);
         });
       });
     });
 
+    /* HOLOGRAM PARALLAX */
     const sphereContainer = document.getElementById("sphereContainer");
     const banner = document.querySelector(".banner");
 
@@ -1351,16 +555,14 @@
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-      const rotateX = y * -22;
-      const rotateY = x * 22;
-
       sphereContainer.style.transform =
-        `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        `rotateX(${y * -22}deg) rotateY(${x * 22}deg)`;
     });
 
     banner.addEventListener("mouseleave", () => {
       sphereContainer.style.transform = "";
     });
   </script>
+
 </body>
 </html>

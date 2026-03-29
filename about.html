@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>AlaeAI — À propos</title>
+  <title>AlaeAI — À propos d’Alaedine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet" />
@@ -61,18 +61,27 @@
       position: relative;
       overflow: hidden;
       margin-bottom: 20px;
+      animation: fadeIn 1.2s ease forwards;
+      opacity: 0;
     }
 
     .top-banner img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transform: scale(1.15);
+      animation: bannerZoom 3s ease forwards;
+    }
+
+    @keyframes bannerZoom {
+      to { transform: scale(1); }
     }
 
     .top-banner-overlay {
       position: absolute;
       inset: 0;
       background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(2px);
     }
 
     .top-banner-content {
@@ -82,6 +91,8 @@
       transform: translate(-50%, -50%);
       text-align: center;
       color: white;
+      animation: fadeUp 1.4s ease forwards;
+      opacity: 0;
     }
 
     .top-banner-content h1 {
@@ -113,6 +124,8 @@
       top: 14px;
       z-index: 20;
       backdrop-filter: blur(14px);
+      animation: fadeDown 1s ease forwards;
+      opacity: 0;
     }
 
     body.dark .nav {
@@ -138,6 +151,12 @@
       font-weight: 800;
       color: white;
       font-size: 18px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
     }
 
     .nav-links {
@@ -151,17 +170,19 @@
       padding: 6px 12px;
       border-radius: 999px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: 0.25s ease;
     }
 
     .nav-link:hover {
       background: rgba(0,0,0,0.05);
+      transform: translateY(-2px);
     }
 
     .nav-link.active {
       background: rgba(242,194,107,0.25);
       border: 1px solid rgba(242,194,107,0.6);
       color: var(--text);
+      box-shadow: 0 0 12px rgba(242,194,107,0.6);
     }
 
     /* ABOUT SECTION */
@@ -174,14 +195,30 @@
       gap: 24px;
     }
 
-    .about-card {
+    .about-card, .info-card {
       background: var(--card);
       border-radius: var(--radius-lg);
       padding: 26px;
       border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-soft);
-      animation: fadeInUp 0.8s ease forwards;
+      animation: fadeUp 1.2s ease forwards;
       opacity: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-card::before, .info-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top left, var(--accent-soft), transparent 60%);
+      opacity: 0;
+      transition: 0.4s ease;
+    }
+
+    .about-card:hover::before,
+    .info-card:hover::before {
+      opacity: 1;
     }
 
     .about-title {
@@ -195,16 +232,6 @@
       font-size: 15px;
       line-height: 1.6;
       color: var(--subtext);
-    }
-
-    .info-card {
-      background: var(--card);
-      border-radius: var(--radius-lg);
-      padding: 26px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      animation: fadeInUp 1s ease forwards;
-      opacity: 0;
     }
 
     .info-title {
@@ -227,9 +254,20 @@
       color: var(--text);
     }
 
-    @keyframes fadeInUp {
+    /* ANIMATIONS */
+    @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     footer {
@@ -237,6 +275,8 @@
       padding: 20px;
       font-size: 12px;
       color: var(--subtext);
+      animation: fadeUp 1.4s ease forwards;
+      opacity: 0;
     }
   </style>
 </head>
@@ -248,8 +288,8 @@
     <img src="assets/logo.png" alt="">
     <div class="top-banner-overlay"></div>
     <div class="top-banner-content">
-      <h1>À propos d’Alae</h1>
-      <p>Une créatrice passionnée par l’IA, le web et les expériences élégantes.</p>
+      <h1>À propos d’Alaedine</h1>
+      <p>Créateur passionné par l’IA, le web et les expériences élégantes.</p>
     </div>
   </section>
 
@@ -273,9 +313,9 @@
   <section class="about-wrapper">
 
     <div class="about-card">
-      <div class="about-title">Bonjour, moi c’est Alae 👋</div>
+      <div class="about-title">Bonjour, moi c’est Alaedine 👋</div>
       <p class="about-text">
-        Je suis une jeune créatrice du web qui aime transformer des idées en expériences élégantes.
+        Je suis un créateur du web qui aime transformer des idées en expériences élégantes.
         J’adore l’IA, le design moderne, les interfaces qui respirent… et tout ce qui mélange logique et créativité.
         <br><br>
         Je passe mes journées à apprendre, construire, casser, réparer, améliorer — bref, à créer des choses qui ont une âme ✨
@@ -291,10 +331,10 @@
     <div class="info-card">
       <div class="info-title">À propos de moi</div>
       <div class="info-list">
-        <div class="info-item"><span>Nom :</span> Alae Mghirbi</div>
+        <div class="info-item"><span>Nom :</span> Alaedine</div>
         <div class="info-item"><span>Passions :</span> IA, Web Design, JavaScript, UI/UX, Animations</div>
         <div class="info-item"><span>Style :</span> Minimaliste, géométrique, moderne</div>
-        <div class="info-item"><span>Objectif :</span> Devenir une créatrice reconnue</div>
+        <div class="info-item"><span>Objectif :</span> Devenir un créateur reconnu</div>
         <div class="info-item"><span>Projet actuel :</span> Construire AlaeAI — une plateforme d’outils, de news et de tutoriels</div>
       </div>
     </div>
@@ -304,6 +344,14 @@
   <footer>
     © 2026 ALAEAI — Warm Portfolio • Build. Learn. Create.
   </footer>
+
+  <script>
+    const toggle = document.getElementById("darkToggle");
+
+    if (localStorage.getItem("mode") === "dark") {
+      document.body.classList.add("dark");
+    }
+  </script>
 
 </body>
 </html>

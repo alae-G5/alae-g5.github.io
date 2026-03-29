@@ -40,7 +40,6 @@
       transition: background 0.4s ease, color 0.4s ease;
     }
 
-    /* DARK THEME VARIATION */
     body.dark {
       --bg: #f7f3ea;
       --bg-soft: #ffffff;
@@ -53,7 +52,6 @@
       background: radial-gradient(circle at top, #ffffff 0, #e8e2d8 60%);
     }
 
-    /* FLOATING BACKGROUND SHAPES */
     .shape {
       position: fixed;
       width: 420px;
@@ -93,7 +91,6 @@
       100% { transform: translateY(40px) translateX(30px); }
     }
 
-    /* PAGE WRAPPER */
     .page {
       width: 100%;
       max-width: 1180px;
@@ -106,7 +103,6 @@
       to { opacity: 1; }
     }
 
-    /* TOP NAV / CATEGORY MENU */
     .top-nav {
       display: flex;
       align-items: center;
@@ -196,7 +192,6 @@
       transform: translateY(-2px);
     }
 
-    /* THEME BUTTON */
     .theme-btn {
       position: fixed;
       bottom: 26px;
@@ -223,7 +218,6 @@
       color: #0b0d11;
     }
 
-    /* BANNER */
     .banner {
       padding: 40px 32px;
       background: linear-gradient(145deg, #0b0d11, #151821);
@@ -233,7 +227,7 @@
       margin-bottom: 28px;
       position: relative;
       overflow: hidden;
-      min-height: 240px;
+      min-height: 260px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -297,7 +291,7 @@
       transform: translateY(-50%);
       width: 260px;
       height: 260px;
-      perspective: 900px;
+      perspective: 1200px;
       pointer-events: none;
     }
 
@@ -306,20 +300,20 @@
       height: 100%;
       position: relative;
       transform-style: preserve-3d;
-      animation: rotateSphere 14s linear infinite;
+      animation: rotateSphere 16s linear infinite;
     }
 
     @keyframes rotateSphere {
-      0% { transform: rotateX(0deg) rotateY(0deg); }
-      100% { transform: rotateX(360deg) rotateY(360deg); }
+      0% { transform: rotateX(10deg) rotateY(0deg); }
+      100% { transform: rotateX(10deg) rotateY(360deg); }
     }
 
     .sphere {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 130px;
-      height: 130px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       background:
         radial-gradient(circle at 30% 30%, #ffffff 0%, var(--accent3) 18%, var(--accent) 35%, var(--accent2) 70%, #000 100%);
@@ -328,6 +322,8 @@
         0 0 40px rgba(242,194,107,0.4);
       filter: brightness(1.2);
       animation: spherePulse 4s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
     }
 
     @keyframes spherePulse {
@@ -336,12 +332,49 @@
       100% { transform: translate(-50%, -50%) scale(1); }
     }
 
+    .sphere-grid {
+      position: absolute;
+      inset: -20%;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 18px 18px, 22px 22px, 22px 22px;
+      mix-blend-mode: screen;
+      opacity: 0.45;
+      animation: gridMove 10s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translate3d(0,0,0); }
+      100% { transform: translate3d(-20px,-20px,0); }
+    }
+
+    .sphere-core {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffffff 0%, var(--accent3) 40%, transparent 70%);
+      box-shadow: 0 0 30px rgba(255,255,255,0.8);
+      opacity: 0.9;
+      animation: corePulse 3s ease-in-out infinite;
+    }
+
+    @keyframes corePulse {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    }
+
     .sphere-glow {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 210px;
-      height: 210px;
+      width: 220px;
+      height: 220px;
       border-radius: 50%;
       border: 2px solid rgba(242,194,107,0.25);
       box-shadow: 0 0 40px rgba(242,194,107,0.3);
@@ -376,7 +409,6 @@
       filter: brightness(1.4);
     }
 
-    /* HERO SECTION */
     .hero {
       padding: 34px 30px;
       background: linear-gradient(145deg, #0b0d11, #151821);
@@ -430,11 +462,11 @@
       border-color: rgba(0,0,0,0.12);
     }
 
-    /* MAIN GRID LAYOUT */
     .main-layout {
       display: grid;
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 20px;
+      gap: 26px;
+      align-items: start;
       margin-bottom: 26px;
     }
 
@@ -450,23 +482,24 @@
       }
     }
 
-    /* CARD BASE */
     .card {
       background: var(--bg-card);
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 22px 20px;
-      box-shadow: var(--shadow);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 26px 24px !important;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+      overflow: visible !important;
       position: relative;
-      overflow: hidden;
+      z-index: 2;
       animation: reveal 1s ease forwards;
       opacity: 0;
       transform: translateY(20px);
     }
 
     body.dark .card {
-      background: #f0e9dd;
-      border-color: rgba(0,0,0,0.06);
+      background: #f4ede1 !important;
+      border-color: rgba(0,0,0,0.12) !important;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.15) !important;
     }
 
     @keyframes reveal {
@@ -476,6 +509,7 @@
     .card:hover {
       transform: translateY(-4px);
       transition: var(--transition);
+      overflow: visible !important;
     }
 
     .card-title {
@@ -488,21 +522,22 @@
       font-size: 14px;
       color: var(--muted);
       line-height: 1.6;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
-    /* CATEGORY SECTIONS (LEFT COLUMN) */
     .category-section {
+      min-height: 320px;
       display: none;
-      animation: fadeInSection 0.4s ease;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
     }
 
     .category-section.active {
       display: block;
-    }
-
-    @keyframes fadeInSection {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .chips {
@@ -550,6 +585,8 @@
       line-height: 1.5;
       position: relative;
       padding-left: 16px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     .list li::before {
@@ -559,7 +596,6 @@
       color: var(--accent);
     }
 
-    /* RIGHT COLUMN EXTRA CARDS */
     .mini-title {
       font-size: 13px;
       text-transform: uppercase;
@@ -642,7 +678,6 @@
       color: var(--muted);
     }
 
-    /* FULL-WIDTH SECTIONS */
     .section-row {
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
@@ -678,7 +713,6 @@
       border-color: rgba(0,0,0,0.12);
     }
 
-    /* FOOTER */
     .footer {
       margin-top: 26px;
       padding-top: 18px;
@@ -725,17 +759,14 @@
 
 <body>
 
-  <!-- THEME TOGGLE -->
   <button id="themeToggle" class="theme-btn">🌙</button>
 
-  <!-- FLOATING SHAPES -->
   <div class="shape one"></div>
   <div class="shape two"></div>
   <div class="shape three"></div>
 
   <div class="page">
 
-    <!-- TOP NAV / CATEGORY MENU -->
     <header class="top-nav">
       <div class="brand">
         <div class="brand-logo">A</div>
@@ -767,14 +798,15 @@
       </nav>
     </header>
 
-    <!-- BANNER -->
     <section class="banner" id="top">
       <div class="hologram">
         <div class="sphere-container" id="sphereContainer">
-          <div class="sphere"></div>
+          <div class="sphere">
+            <div class="sphere-grid"></div>
+            <div class="sphere-core"></div>
+          </div>
           <div class="sphere-glow"></div>
 
-          <!-- Particles -->
           <div class="particle" style="top:10%; left:20%; animation-delay:0s;"></div>
           <div class="particle" style="top:70%; left:80%; animation-delay:1s;"></div>
           <div class="particle" style="top:40%; left:60%; animation-delay:2s;"></div>
@@ -798,7 +830,6 @@
       </div>
     </section>
 
-    <!-- HERO -->
     <section class="hero">
       <h2 class="hero-title">Créateur. Bâtisseur. Visionnaire.</h2>
       <p class="hero-sub">
@@ -816,13 +847,10 @@
       </div>
     </section>
 
-    <!-- MAIN LAYOUT -->
     <main class="main-layout">
 
-      <!-- LEFT COLUMN: CATEGORY SECTIONS -->
       <section>
 
-        <!-- IDENTITY -->
         <article class="card category-section active" data-cat="identity">
           <h3 class="card-title">Mon identité</h3>
 
@@ -846,7 +874,6 @@
           </ul>
         </article>
 
-        <!-- CREATION -->
         <article class="card category-section" data-cat="creation">
           <h3 class="card-title">Ce que j’aime créer</h3>
 
@@ -870,7 +897,6 @@
           </ul>
         </article>
 
-        <!-- VISION -->
         <article class="card category-section" data-cat="vision">
           <h3 class="card-title">Ma vision</h3>
 
@@ -894,7 +920,6 @@
           </ul>
         </article>
 
-        <!-- MINDSET -->
         <article class="card category-section" data-cat="mindset">
           <h3 class="card-title">Mon mindset</h3>
 
@@ -917,7 +942,6 @@
           </ul>
         </article>
 
-        <!-- SKILLS (LEFT VERSION) -->
         <article class="card category-section" data-cat="skills">
           <h3 class="card-title">Compétences & outils</h3>
 
@@ -976,7 +1000,6 @@
           </div>
         </article>
 
-        <!-- TIMELINE (LEFT VERSION) -->
         <article class="card category-section" data-cat="timeline">
           <h3 class="card-title">Parcours & étapes</h3>
 
@@ -1015,10 +1038,8 @@
 
       </section>
 
-      <!-- RIGHT COLUMN: EXTRA CONTENT -->
       <aside>
 
-        <!-- CARD: SKILLS SUMMARY -->
         <article class="card">
           <div class="mini-title">Résumé technique</div>
           <h3 class="card-title">Stack & style</h3>
@@ -1036,7 +1057,6 @@
           </div>
         </article>
 
-        <!-- CARD: VALUES -->
         <article class="card">
           <div class="mini-title">Valeurs</div>
           <h3 class="card-title">Ce qui compte pour moi</h3>
@@ -1053,7 +1073,6 @@
           </ul>
         </article>
 
-        <!-- CARD: TOOLS -->
         <article class="card">
           <div class="mini-title">Outils</div>
           <h3 class="card-title">Ce que j’utilise souvent</h3>
@@ -1075,7 +1094,6 @@
 
     </main>
 
-    <!-- EXTRA ROWS TO EXPLOIT SPACE -->
     <section class="section-row">
       <article class="card">
         <div class="mini-title">Philosophie</div>
@@ -1126,7 +1144,6 @@
       </article>
     </section>
 
-    <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-left">
         <span>AlaeAI — Portfolio d’Alaedine • Construit avec intention.</span>
@@ -1141,7 +1158,6 @@
   </div>
 
   <script>
-    // THEME TOGGLE
     const toggle = document.getElementById("themeToggle");
     const body = document.body;
 
@@ -1161,7 +1177,6 @@
       }
     });
 
-    // CATEGORY MENU (TOP NAV)
     const navChips = document.querySelectorAll(".nav-chip");
     const catSections = document.querySelectorAll(".category-section");
 
@@ -1187,7 +1202,6 @@
       });
     });
 
-    // 3D PARALLAX HOLOGRAM FOLLOWING MOUSE
     const sphereContainer = document.getElementById("sphereContainer");
     const banner = document.querySelector(".banner");
 
@@ -1199,8 +1213,8 @@
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateY = ((x - centerX) / centerX) * 12;
-      const rotateX = -((y - centerY) / centerY) * 12;
+      const rotateY = ((x - centerX) / centerX) * 16;
+      const rotateX = -((y - centerY) / centerY) * 16;
 
       sphereContainer.style.transform =
         `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;

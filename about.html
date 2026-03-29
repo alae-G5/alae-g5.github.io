@@ -5,40 +5,69 @@
   <title>AlaeAI — À propos d’Alaedine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
       --bg: #f5efe6;
       --bg-soft: #f9f3ea;
+      --bg-deep: #f0e4d4;
       --text: #1f130b;
       --subtext: #7a6250;
+      --muted: #a48b76;
       --card: #ffffff;
       --accent: #f2c26b;
+      --accent-soft: rgba(242,194,107,0.18);
+      --accent-strong: rgba(242,194,107,0.55);
       --border: rgba(0,0,0,0.08);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,0.16);
+      --shadow-subtle: 0 10px 25px rgba(0,0,0,0.08);
       --glow: 0 0 22px rgba(242,194,107,0.55);
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.28s ease-out;
     }
 
     body.dark {
-      --bg: #0b0908;
-      --bg-soft: #15100d;
+      --bg: #050304;
+      --bg-soft: #0d0907;
+      --bg-deep: #15100d;
       --text: #f7f2ec;
       --subtext: #b9a89a;
+      --muted: #8f7c6c;
       --card: #15100d;
+      --accent: #f2c26b;
+      --accent-soft: rgba(242,194,107,0.22);
+      --accent-strong: rgba(242,194,107,0.75);
       --border: rgba(255,255,255,0.12);
-      --glow: 0 0 26px rgba(242,194,107,0.75);
+      --shadow-soft: 0 24px 60px rgba(0,0,0,0.85);
+      --shadow-subtle: 0 14px 30px rgba(0,0,0,0.7);
+      --glow: 0 0 26px rgba(242,194,107,0.85);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: "Rubik", sans-serif;
-      background: var(--bg);
+      background: radial-gradient(circle at top, var(--bg-soft), var(--bg-deep));
       color: var(--text);
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
-    /* BANNER */
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* BANNER (IMAGE ONLY) */
     .top-banner {
       width: 100%;
       height: 260px;
@@ -52,13 +81,18 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.45);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
     }
 
     /* TITLE BELOW BANNER */
+    .page-title-wrapper {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 22px 18px 10px;
+    }
+
     .page-title {
       text-align: center;
-      margin-top: 26px;
       animation: fadeUp 1s ease forwards;
       opacity: 0;
     }
@@ -77,20 +111,36 @@
       margin-top: 6px;
     }
 
+    .breadcrumb {
+      margin-top: 10px;
+      font-size: 11px;
+      text-align: center;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
     /* NAVBAR */
     .nav {
       max-width: 1240px;
       margin: 0 auto;
-      padding: 12px 18px;
+      padding: 10px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: var(--card);
-      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.92);
+      border-radius: 999px;
+      box-shadow: var(--shadow-subtle);
       position: sticky;
-      top: 0;
+      top: 10px;
       z-index: 20;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
+      animation: fadeDown 0.9s ease forwards;
+      opacity: 0;
+    }
+
+    body.dark .nav {
+      background: rgba(12,8,6,0.96);
     }
 
     .nav-left {
@@ -102,7 +152,7 @@
     .nav-logo {
       width: 40px;
       height: 40px;
-      border-radius: 12px;
+      border-radius: 14px;
       background: radial-gradient(circle at 20% 0%, #f2c26b, #b8863b, #3a2614);
       display: flex;
       align-items: center;
@@ -115,91 +165,143 @@
       box-shadow: var(--glow);
     }
 
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
+    .nav-brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .nav-brand-title {
+      font-family: "Poppins";
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-brand-sub {
+      font-size: 11px;
+      color: var(--subtext);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .nav-links {
       display: flex;
-      gap: 12px;
+      gap: 8px;
+      font-size: 12px;
     }
 
     .nav-link {
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-size: 13px;
-      color: var(--subtext);
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
       border: 1px solid transparent;
-      transition: 0.2s;
+      color: var(--subtext);
+      background: transparent;
+      transition: var(--transition-fast);
+      font-weight: 500;
     }
 
     .nav-link:hover {
-      background: rgba(242,194,107,0.15);
-      border-color: var(--accent);
+      background: rgba(0,0,0,0.03);
+      border-color: rgba(0,0,0,0.06);
+      transform: translateY(-1px);
     }
 
     .nav-link.active {
-      background: rgba(242,194,107,0.25);
-      border-color: var(--accent);
+      background: rgba(242,194,107,0.22);
+      border-color: rgba(242,194,107,0.8);
       color: var(--text);
       box-shadow: var(--glow);
     }
 
     .mode-toggle {
-      padding: 8px 16px;
-      border-radius: 10px;
+      padding: 7px 14px;
+      border-radius: 999px;
       border: 1px solid var(--accent);
-      background: rgba(242,194,107,0.18);
-      cursor: pointer;
-      font-size: 12px;
+      background: rgba(242,194,107,0.16);
+      color: var(--text);
+      font-size: 11px;
       font-weight: 600;
-      transition: 0.2s;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-fast);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+
+    .mode-toggle span {
+      font-size: 13px;
     }
 
     .mode-toggle:hover {
       background: rgba(242,194,107,0.28);
-      box-shadow: var(--glow);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.16);
     }
 
-    /* ABOUT SECTION */
+    /* MAIN LAYOUT */
     .about-wrapper {
       max-width: 1240px;
-      margin: 40px auto;
+      margin: 26px auto 40px;
       padding: 0 18px;
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
+      grid-template-columns: 1.5fr 1.1fr;
       gap: 24px;
     }
 
     .card {
       background: var(--card);
+      border-radius: var(--radius-lg);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 24px;
-      animation: fadeUp 1s ease forwards;
-      opacity: 0;
+      box-shadow: var(--shadow-subtle);
+      padding: 24px 22px;
       position: relative;
       overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: var(--transition-med);
     }
 
     .card::before {
       content: "";
       position: absolute;
       inset: -40%;
-      background: radial-gradient(circle at top left, rgba(242,194,107,0.25), transparent 60%);
+      background: radial-gradient(circle at top left, var(--accent-soft), transparent 60%);
       opacity: 0;
       transition: 0.4s ease;
+      pointer-events: none;
     }
 
     .card:hover::before {
       opacity: 1;
     }
 
+    .card.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* LEFT COLUMN: INTRO + STATS */
     .about-title {
       font-family: "Poppins";
       font-size: 22px;
       font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .about-sub {
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
       margin-bottom: 12px;
     }
 
@@ -209,9 +311,15 @@
       color: var(--subtext);
     }
 
+    .about-text strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+
     /* VOICE BUTTON */
     .voice-btn {
-      margin-top: 12px;
+      margin-top: 14px;
+      margin-bottom: 10px;
       padding: 10px 18px;
       border-radius: 12px;
       border: 1px solid var(--accent);
@@ -222,6 +330,13 @@
       cursor: pointer;
       transition: 0.25s ease;
       box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .voice-btn span {
+      font-size: 16px;
     }
 
     .voice-btn:hover {
@@ -230,7 +345,6 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.12);
     }
 
-    /* Glow while speaking */
     .speaking {
       animation: glowPulse 1.4s ease-in-out infinite;
     }
@@ -241,16 +355,258 @@
       100% { box-shadow: 0 0 10px rgba(242,194,107,0.4); }
     }
 
+    /* STATS ROW */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .stat-pill {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 12px;
+    }
+
+    body.dark .stat-pill {
+      background: linear-gradient(135deg, rgba(21,16,12,0.95), rgba(12,8,6,0.9));
+    }
+
+    .stat-label {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 10px;
+    }
+
+    .stat-value {
+      font-family: "Poppins";
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    /* RIGHT COLUMN: PROFILE + CATEGORIES */
+    .info-title {
+      font-family: "Poppins";
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .info-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--subtext);
+      margin-bottom: 16px;
+    }
+
+    .info-item span {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.06);
+      font-size: 11px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.7);
+    }
+
+    body.dark .tag {
+      background: rgba(20,15,10,0.9);
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    /* CATEGORIES CARD */
+    .categories-card {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .categories-title {
+      font-family: "Poppins";
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .categories-title span {
+      font-size: 16px;
+    }
+
+    .categories-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .category-btn {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(242,194,107,0.45);
+      background: rgba(255,255,255,0.7);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: 0.25s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    body.dark .category-btn {
+      background: rgba(20,15,10,0.8);
+      color: var(--text);
+    }
+
+    .category-btn:hover {
+      background: rgba(242,194,107,0.18);
+      border-color: rgba(242,194,107,0.8);
+      transform: translateY(-2px);
+    }
+
+    .category-btn.active {
+      background: rgba(242,194,107,0.28);
+      border-color: rgba(242,194,107,1);
+      color: var(--text);
+      box-shadow: var(--glow);
+    }
+
+    /* SECOND ROW: SKILLS + TIMELINE */
+    .about-grid-bottom {
+      max-width: 1240px;
+      margin: 0 auto 40px;
+      padding: 0 18px;
+      display: grid;
+      grid-template-columns: 1.2fr 1.2fr;
+      gap: 24px;
+    }
+
+    .section-title {
+      font-family: "Poppins";
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+    }
+
+    .skill-pill {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.9);
+    }
+
+    body.dark .skill-pill {
+      background: rgba(20,15,10,0.95);
+    }
+
+    .skill-name {
+      color: var(--subtext);
+    }
+
+    .skill-level {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .timeline {
+      border-left: 1px solid var(--border);
+      padding-left: 16px;
+      margin-top: 4px;
+    }
+
+    .timeline-item {
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -9px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: var(--glow);
+    }
+
+    .timeline-year {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+    }
+
+    .timeline-text {
+      font-size: 14px;
+      color: var(--subtext);
+    }
+
+    /* FOOTER */
     footer {
       text-align: center;
       padding: 20px;
       font-size: 12px;
       color: var(--subtext);
-      margin-top: 40px;
+      margin-top: 10px;
     }
 
+    /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -259,9 +615,24 @@
       to { opacity: 1; }
     }
 
-    @media (max-width: 900px) {
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px) {
       .about-wrapper {
         grid-template-columns: 1fr;
+      }
+      .about-grid-bottom {
+        grid-template-columns: 1fr;
+      }
+      .nav {
+        border-radius: 18px;
+      }
+      .nav-links {
+        display: none;
       }
     }
   </style>
@@ -269,42 +640,55 @@
 
 <body>
 
-  <!-- BANNER -->
+  <!-- BANNER (IMAGE ONLY) -->
   <section class="top-banner"></section>
 
   <!-- TITLE BELOW BANNER -->
-  <div class="page-title">
-    <h1>À propos d’Alaedine</h1>
-    <p>Créateur passionné par l’IA et le web.</p>
+  <div class="page-title-wrapper">
+    <div class="page-title">
+      <h1>À propos d’Alaedine</h1>
+      <p>Créateur passionné par l’IA, le web et les expériences élégantes.</p>
+    </div>
+    <div class="breadcrumb">
+      HOME • ABOUT • ALAEAI PORTFOLIO
+    </div>
   </div>
 
   <!-- NAV -->
   <header class="nav">
     <div class="nav-left">
       <div class="nav-logo">A</div>
-      <div style="font-family:Poppins;font-weight:700;">ALAEAI</div>
+      <div class="nav-brand">
+        <div class="nav-brand-title">ALAEAI</div>
+        <div class="nav-brand-sub">Warm Portfolio • Build. Learn. Create.</div>
+      </div>
     </div>
 
-    <nav class="nav-links">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="news.html" class="nav-link">News</a>
-      <a href="tutorials.html" class="nav-link">Tutorials</a>
-      <a href="tools.html" class="nav-link">Tools</a>
-      <a href="about.html" class="nav-link active">About</a>
-    </nav>
-
-    <button id="darkToggle" class="mode-toggle">☾ Mode</button>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="news.html" class="nav-link">News</a>
+        <a href="tutorials.html" class="nav-link">Tutorials</a>
+        <a href="tools.html" class="nav-link">Tools</a>
+        <a href="about.html" class="nav-link active">About</a>
+      </nav>
+      <button id="darkToggle" class="mode-toggle">
+        <span>☾</span> MODE
+      </button>
+    </div>
   </header>
 
-  <!-- ABOUT SECTION -->
+  <!-- MAIN GRID -->
   <section class="about-wrapper">
 
-    <div class="card">
-      <div class="about-title">Bonjour, moi c’est Alaedine 👋</div>
+    <!-- LEFT: INTRO + VOICE + STATS -->
+    <article class="card reveal" id="introCard">
+      <div class="about-sub">PRÉSENTATION</div>
+      <h2 class="about-title">Bonjour, moi c’est Alaedine 👋</h2>
 
       <!-- VOICE BUTTON -->
-      <button class="voice-btn" onclick="readAboutSection()">
-        🔊 Écouter la présentation
+      <button class="voice-btn" id="voiceBtn">
+        <span>🔊</span> Écouter la présentation
       </button>
 
       <p class="about-text" id="aboutText">
@@ -318,19 +702,110 @@
         <strong>concevoir des outils, des interfaces et des projets qui donnent envie d’explorer, d’apprendre et de rêver un peu.</strong>
         <br><br>
         AlaeAI est mon terrain de jeu, mon laboratoire, mon espace d’expression.
+        Chaque page, chaque animation, chaque détail est pensé pour être chaleureux, calme et vivant.
       </p>
-    </div>
 
-    <div class="card">
-      <div class="info-title">À propos de moi</div>
+      <div class="stats-row">
+        <div class="stat-pill">
+          <div class="stat-label">Projets</div>
+          <div class="stat-value">+12</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Focus</div>
+          <div class="stat-value">IA & Web</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-label">Mood</div>
+          <div class="stat-value">Créatif</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- RIGHT: PRO PROFILE + CATEGORIES CARD -->
+    <aside class="card reveal" id="profileCard">
+      <h2 class="info-title">À propos de moi</h2>
+      <p class="info-sub">Une vue rapide sur qui je suis, ce que j’aime construire et où je veux aller.</p>
+
       <div class="info-list">
         <div class="info-item"><span>Nom :</span> Alaedine</div>
+        <div class="info-item"><span>Rôle :</span> Jeune créateur web & explorateur d’IA</div>
         <div class="info-item"><span>Passions :</span> IA, Web Design, JavaScript, UI/UX, Animations</div>
         <div class="info-item"><span>Style :</span> Minimaliste, géométrique, moderne</div>
-        <div class="info-item"><span>Objectif :</span> Devenir un créateur reconnu</div>
+        <div class="info-item"><span>Objectif :</span> Devenir un créateur reconnu et utile</div>
         <div class="info-item"><span>Projet actuel :</span> Construire AlaeAI — une plateforme d’outils, de news et de tutoriels</div>
       </div>
-    </div>
+
+      <div class="tag-row">
+        <div class="tag">Front‑end</div>
+        <div class="tag">IA créative</div>
+        <div class="tag">Animations UI</div>
+        <div class="tag">Design système</div>
+      </div>
+
+      <!-- CATEGORIES INSIDE CARD -->
+      <div class="categories-card">
+        <div class="categories-title">
+          <span>📂</span> Catégories que j’explore
+        </div>
+        <div class="categories-row">
+          <button class="category-btn active">Tous</button>
+          <button class="category-btn">IA & ML</button>
+          <button class="category-btn">Web Apps</button>
+          <button class="category-btn">UI / UX</button>
+          <button class="category-btn">Animations</button>
+          <button class="category-btn">Outils</button>
+        </div>
+      </div>
+    </aside>
+
+  </section>
+
+  <!-- SECOND ROW: SKILLS + TIMELINE -->
+  <section class="about-grid-bottom">
+
+    <article class="card reveal">
+      <h3 class="section-title">Compétences clés</h3>
+      <p class="section-sub">Ce que j’utilise pour donner vie à mes idées.</p>
+
+      <div class="skills-grid">
+        <div class="skill-pill">
+          <span class="skill-name">HTML • CSS • JS</span>
+          <span class="skill-level">Core</span>
+        </div>
+        <div class="skill-pill">
+          <span class="skill-name">UI / UX</span>
+          <span class="skill-level">Design</span>
+        </div>
+        <div class="skill-pill">
+          <span class="skill-name">Animations web</span>
+          <span class="skill-level">Motion</span>
+        </div>
+        <div class="skill-pill">
+          <span class="skill-name">IA & outils</span>
+          <span class="skill-level">Exploration</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal">
+      <h3 class="section-title">Parcours & vision</h3>
+      <p class="section-sub">Un chemin qui commence petit, mais qui vise loin.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2024</div>
+          <div class="timeline-text">Je commence à construire AlaeAI, un espace pour apprendre, créer et partager.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025+</div>
+          <div class="timeline-text">Je veux publier des outils, des tutoriels et des expériences interactives utiles pour d’autres créateurs.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">Vision</div>
+          <div class="timeline-text">Devenir un créateur reconnu, capable de mélanger IA, design et code pour inspirer les autres.</div>
+        </div>
+      </div>
+    </article>
 
   </section>
 
@@ -346,10 +821,10 @@
       const mode = localStorage.getItem("mode");
       if (mode === "dark") {
         document.body.classList.add("dark");
-        toggle.textContent = "☀ Mode";
+        toggle.innerHTML = "<span>☀</span> MODE";
       } else {
         document.body.classList.remove("dark");
-        toggle.textContent = "☾ Mode";
+        toggle.innerHTML = "<span>☾</span> MODE";
       }
     }
 
@@ -361,25 +836,59 @@
       applyMode();
     });
 
-    /* VOICE READING */
+    /* VOICE READING (FULL INTRO SECTION) */
+    const voiceBtn = document.getElementById("voiceBtn");
+    const aboutTextEl = document.getElementById("aboutText");
+
     function readAboutSection() {
-      const button = document.querySelector(".voice-btn");
-      const text = document.getElementById("aboutText").innerText;
+      if (!("speechSynthesis" in window)) {
+        alert("La synthèse vocale n’est pas supportée sur ce navigateur.");
+        return;
+      }
+
+      const text = aboutTextEl.innerText.trim();
+      if (!text) return;
 
       const speech = new SpeechSynthesisUtterance(text);
       speech.lang = "fr-FR";
       speech.rate = 1;
       speech.pitch = 1.05;
 
-      button.classList.add("speaking");
+      // Stop any previous speech
+      window.speechSynthesis.cancel();
+
+      // Glow on
+      voiceBtn.classList.add("speaking");
 
       speech.onend = () => {
-        button.classList.remove("speaking");
+        voiceBtn.classList.remove("speaking");
       };
 
-      window.speechSynthesis.cancel();
+      speech.onerror = () => {
+        voiceBtn.classList.remove("speaking");
+      };
+
       window.speechSynthesis.speak(speech);
     }
+
+    voiceBtn.addEventListener("click", readAboutSection);
+
+    /* SCROLL REVEAL ANIMATIONS */
+    const revealCards = document.querySelectorAll(".card");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    revealCards.forEach((card) => observer.observe(card));
   </script>
 
 </body>

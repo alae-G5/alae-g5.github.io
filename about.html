@@ -43,7 +43,7 @@
       max-width: 1120px;
     }
 
-    /* Top banner */
+    /* Banner */
 
     .banner {
       position: relative;
@@ -226,7 +226,7 @@
       line-height: 1.6;
     }
 
-    /* Intro card specific */
+    /* Intro card */
 
     .intro-card {
       padding: 22px 20px 20px;
@@ -264,7 +264,7 @@
 
     .intro-text {
       flex: 1;
-      padding-right: 120px; /* space for floating button */
+      padding-right: 120px;
     }
 
     .intro-eyebrow {
@@ -347,20 +347,12 @@
       100% { box-shadow: 0 0 8px rgba(242,194,107,0.35); }
     }
 
-    /* Right column cards */
+    /* Right column */
 
     .stack {
       display: flex;
       flex-direction: column;
       gap: 14px;
-    }
-
-    .stack-title {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-      margin-bottom: 6px;
     }
 
     .category-row {
@@ -377,7 +369,6 @@
       background: rgba(5,6,8,0.9);
       font-size: 11px;
       color: var(--muted);
-      cursor: default;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -404,7 +395,7 @@
       margin-right: 6px;
     }
 
-    /* Subtle scroll reveal */
+    /* Reveal */
 
     .reveal {
       opacity: 0;
@@ -416,45 +407,9 @@
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* Responsive tweaks */
-
-    @media (max-width: 720px) {
-      body {
-        padding: 20px 12px 32px;
-      }
-
-      .banner {
-        padding: 18px 16px 16px;
-      }
-
-      .banner-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .banner-right {
-        align-items: flex-start;
-      }
-
-      .intro-text {
-        padding-right: 0;
-      }
-
-      .voice-btn-floating {
-        position: relative;
-        top: 0;
-        right: 0;
-        margin-left: auto;
-        margin-bottom: 8px;
-      }
-
-      .intro-top {
-        flex-direction: column;
-      }
-    }
   </style>
 </head>
+
 <body>
   <div class="page">
 
@@ -467,9 +422,10 @@
           </div>
           <h1 class="banner-title">À propos d’Alaedine</h1>
           <p class="banner-sub">
-            Créateur curieux, passionné par l’IA, le code, le design et les expériences interactives qui ont un vrai impact.
+            Créateur curieux, passionné par l’IA, le code, le design et les expériences interactives.
           </p>
         </div>
+
         <div class="banner-right">
           <div style="display:flex;align-items:center;gap:6px;">
             <div class="banner-dot"></div>
@@ -480,15 +436,16 @@
           </div>
         </div>
       </div>
+
       <p class="banner-bottom-text">
-        Cette page est plus qu’une bio — c’est une vision. Elle évolue avec chaque projet, chaque idée, chaque ligne de code.
+        Cette page évolue avec chaque projet, chaque idée, chaque ligne de code.
       </p>
     </header>
 
     <!-- Main grid -->
     <main class="grid">
 
-      <!-- Left: Intro + About -->
+      <!-- Intro card -->
       <section class="intro-card card reveal">
         <div class="intro-top">
           <div class="avatar"></div>
@@ -496,21 +453,23 @@
           <div class="intro-text">
             <div class="intro-eyebrow">À propos</div>
             <div class="intro-name">Alaedine</div>
-            <div class="intro-role">Étudiant, développeur en devenir & explorateur d’IA</div>
+            <div class="intro-role">Étudiant, développeur & explorateur d’IA</div>
+
             <p class="intro-desc">
-              Je construis des expériences numériques qui mélangent logique, créativité et émotion.  
-              J’aime transformer des idées abstraites en interfaces concrètes, propres, animées et accessibles à tous.
+              Je construis des expériences numériques qui mélangent logique, créativité et émotion.
+              J’aime transformer des idées abstraites en interfaces concrètes, propres, animées et accessibles.
             </p>
 
             <div class="intro-meta">
               <div class="intro-chip">Tangier, Maroc</div>
-              <div class="intro-chip">Focus : IA, web, jeux, systèmes interactifs</div>
-              <div class="intro-chip">Langues : Français, Arabe, Anglais</div>
+              <div class="intro-chip">IA, Web, Jeux, Interactif</div>
+              <div class="intro-chip">Français • Arabe • Anglais</div>
             </div>
           </div>
 
-          <!-- Floating audio button + audio element -->
-          <audio id="introAudio" src="https://raw.githubusercontent.com/alae-G5/alae-G5.github.io/refs/heads/main/assets/intro.mp3"></audio>
+          <!-- FIXED AUDIO -->
+          <audio id="introAudio" src="https://raw.githubusercontent.com/alae-G5/alae-G5.github.io/main/assets/intro.mp3"></audio>
+
           <button id="voiceBtn" class="voice-btn-floating">
             🔊 <span>Écouter</span>
           </button>
@@ -519,37 +478,35 @@
         <div style="margin-top:18px;border-top:1px solid rgba(255,255,255,0.06);padding-top:14px;">
           <p class="card-body">
             Cette présentation audio utilise ma vraie voix.  
-            Si tu cliques sur le bouton, tu entends non seulement ce que je fais, mais aussi comment je pense, comment je parle, comment je veux connecter avec les autres.
+            Clique pour écouter une introduction personnelle.
           </p>
         </div>
       </section>
 
-      <!-- Right: Cards column -->
+      <!-- Right column -->
       <section class="stack">
 
-        <!-- Skills / Focus -->
+        <!-- Skills -->
         <article class="card reveal">
           <div class="card-header">
             <div>
-              <div class="card-tag">Axes principaux</div>
+              <div class="card-tag">Axes</div>
               <div class="card-title">Ce que j’aime construire</div>
             </div>
-            <div class="card-pill">
-              <span></span> En évolution
-            </div>
+            <div class="card-pill"><span></span> En évolution</div>
           </div>
 
           <div class="card-body">
             <div class="category-row">
-              <div class="category-btn"><span></span> Interfaces web modernes</div>
-              <div class="category-btn"><span></span> IA & automatisation</div>
-              <div class="category-btn"><span></span> Jeux & expériences interactives</div>
+              <div class="category-btn"><span></span> Web moderne</div>
+              <div class="category-btn"><span></span> IA & Automatisation</div>
+              <div class="category-btn"><span></span> Jeux interactifs</div>
             </div>
 
             <ul class="list">
-              <li>Pages propres, animées, avec une vraie intention derrière chaque détail.</li>
-              <li>Systèmes qui apprennent, s’adaptent et simplifient la vie des utilisateurs.</li>
-              <li>Projets qui mélangent technique, storytelling et design minimaliste.</li>
+              <li>Interfaces propres, animées, cohérentes.</li>
+              <li>Systèmes intelligents qui simplifient la vie.</li>
+              <li>Projets qui mélangent technique et storytelling.</li>
             </ul>
           </div>
         </article>
@@ -561,9 +518,7 @@
               <div class="card-tag">Mindset</div>
               <div class="card-title">Comment je travaille</div>
             </div>
-            <div class="card-pill">
-              <span></span> Deep focus
-            </div>
+            <div class="card-pill"><span></span> Deep focus</div>
           </div>
 
           <div class="card-body">
@@ -574,9 +529,9 @@
             </div>
 
             <ul class="list">
-              <li>Je préfère un projet bien fini plutôt que dix idées à moitié faites.</li>
-              <li>Je construis par étapes : version 1, version 2, version 3… toujours plus propre.</li>
-              <li>Je cherche la cohérence : code, design, texte, tout doit raconter la même histoire.</li>
+              <li>Un projet bien fini > dix idées incomplètes.</li>
+              <li>Je construis par versions successives.</li>
+              <li>Chaque détail doit raconter la même histoire.</li>
             </ul>
           </div>
         </article>
@@ -588,9 +543,7 @@
               <div class="card-tag">Vision</div>
               <div class="card-title">Ce que je vise</div>
             </div>
-            <div class="card-pill">
-              <span></span> Long terme
-            </div>
+            <div class="card-pill"><span></span> Long terme</div>
           </div>
 
           <div class="card-body">
@@ -600,55 +553,4 @@
               <div class="category-btn"><span></span> Apprentissage continu</div>
             </div>
 
-            <ul class="list">
-              <li>Créer des outils et des expériences qui peuvent servir au‑delà de mon environnement immédiat.</li>
-              <li>Rendre la technologie plus compréhensible, plus humaine, plus accessible.</li>
-              <li>Ne jamais arrêter d’apprendre : chaque projet est une excuse pour monter de niveau.</li>
-            </ul>
-          </div>
-        </article>
-
-      </section>
-    </main>
-  </div>
-
-  <script>
-    // Audio toggle system
-    const audio = document.getElementById("introAudio");
-    const btn = document.getElementById("voiceBtn");
-
-    if (audio && btn) {
-      btn.addEventListener("click", () => {
-        if (audio.paused) {
-          audio.play();
-          btn.classList.add("speaking");
-          btn.innerHTML = "⏸ <span>Pause</span>";
-        } else {
-          audio.pause();
-          btn.classList.remove("speaking");
-          btn.innerHTML = "🔊 <span>Écouter</span>";
-        }
-      });
-
-      audio.onended = () => {
-        btn.classList.remove("speaking");
-        btn.innerHTML = "🔊 <span>Écouter</span>";
-      };
-    }
-
-    // Simple scroll reveal
-    const reveals = document.querySelectorAll(".reveal");
-    const onScroll = () => {
-      const trigger = window.innerHeight * 0.9;
-      reveals.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < trigger) {
-          el.classList.add("visible");
-        }
-      });
-    };
-    window.addEventListener("scroll", onScroll);
-    window.addEventListener("load", onScroll);
-  </script>
-</body>
-</html>
+            <ul class="list

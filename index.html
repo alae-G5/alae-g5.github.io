@@ -18,41 +18,51 @@
 :root{
   --accent:#f2c26b;
   --accent-soft:rgba(242,194,107,0.4);
+  --accent-strong:#ffb45c;
   --text:#fff7ea;
   --sub:#c9b7a0;
-  --bg:#0b0705;
+  --bg:#050304;
+  --bg-soft:#0b0705;
   --card:#140c09;
+  --card-soft:#1a0f0b;
   --border:rgba(255,255,255,0.08);
-  --shadow:0 22px 60px rgba(0,0,0,0.85);
+  --border-soft:rgba(255,255,255,0.04);
+  --shadow:0 22px 60px rgba(0,0,0,0.9);
 }
 
 /* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
 body{
-  background:#0b0705;
+  background:var(--bg);
   color:var(--text);
-  font-family:'Aharoni', sans-serif;
+  font-family:'Aharoni',sans-serif;
   overflow-x:hidden;
 }
 
-/* TOP CINEMATIC BANNER */
+/* GLOBAL UTILS */
+.max-width{
+  max-width:1120px;
+  margin:0 auto;
+  padding:0 20px;
+}
+
+/* =========================
+   CINEMATIC BANNER (TOP)
+   ========================= */
 .banner{
-  width:100%;
-  height:520px;
-  background:
-    radial-gradient(circle at top left, rgba(242,194,107,0.25), transparent 60%),
-    radial-gradient(circle at top right, rgba(255,140,90,0.25), transparent 60%),
-    radial-gradient(circle at bottom, rgba(80,120,255,0.25), transparent 60%),
-    #0b0705;
   position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding-top:40px;
+  width:100%;
+  min-height:520px;
+  background:
+    radial-gradient(circle at top left,rgba(242,194,107,0.25),transparent 60%),
+    radial-gradient(circle at top right,rgba(255,140,90,0.25),transparent 60%),
+    radial-gradient(circle at bottom,rgba(80,120,255,0.25),transparent 60%),
+    #050304;
   overflow:hidden;
 }
 
-/* NOISE */
+/* NOISE OVERLAY */
 .banner::after{
   content:"";
   position:absolute;
@@ -60,113 +70,205 @@ body{
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
   mix-blend-mode:soft-light;
   opacity:0.6;
+  pointer-events:none;
 }
 
-/* CENTER CONTENT */
-.banner-content{
+/* BACKGROUND ORBS */
+.banner-orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(40px);
+  opacity:0.7;
+  mix-blend-mode:screen;
+}
+.banner-orb.orb-1{
+  width:260px;height:260px;
+  background:rgba(242,194,107,0.7);
+  top:-40px;left:-40px;
+  animation:floatOrb1 18s infinite alternate ease-in-out;
+}
+.banner-orb.orb-2{
+  width:220px;height:220px;
+  background:rgba(255,140,90,0.7);
+  top:40px;right:-60px;
+  animation:floatOrb2 22s infinite alternate ease-in-out;
+}
+.banner-orb.orb-3{
+  width:260px;height:260px;
+  background:rgba(80,120,255,0.7);
+  bottom:-80px;left:50%;
+  transform:translateX(-50%);
+  animation:floatOrb3 26s infinite alternate ease-in-out;
+}
+
+@keyframes floatOrb1{
+  0%{transform:translate(0,0);}
+  100%{transform:translate(40px,40px);}
+}
+@keyframes floatOrb2{
+  0%{transform:translate(0,0);}
+  100%{transform:translate(-40px,30px);}
+}
+@keyframes floatOrb3{
+  0%{transform:translate(-50%,0);}
+  100%{transform:translate(-50%,-40px);}
+}
+
+/* BANNER CONTENT LAYOUT */
+.banner-inner{
   position:relative;
   z-index:3;
-  text-align:center;
-  max-width:700px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+  padding:40px 20px 40px;
+}
+.banner-left{
+  max-width:520px;
 }
 
 /* TITLE — APTOS BLACK */
+.banner-kicker{
+  font-family:'Aharoni',sans-serif;
+  font-size:11px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--sub);
+  margin-bottom:10px;
+}
 .banner-title{
-  font-family:'Aptos Black', sans-serif;
-  font-size:48px;
+  font-family:'Aptos Black',sans-serif;
+  font-size:40px;
+  line-height:1.15;
   letter-spacing:0.03em;
   text-transform:uppercase;
   margin-bottom:10px;
   color:#fff7ea;
 }
-
-/* ACCENT */
 .banner-title span{
   background:linear-gradient(120deg,#ffd27f,#f2c26b,#ff9f6b);
   -webkit-background-clip:text;
   color:transparent;
 }
-
-/* SUBTITLE — AHARONI */
 .banner-sub{
-  font-family:'Aharoni', sans-serif;
-  font-size:18px;
+  font-family:'Aharoni',sans-serif;
+  font-size:15px;
   color:var(--sub);
-  line-height:1.6;
-  margin-bottom:20px;
+  line-height:1.7;
+  margin-bottom:18px;
 }
 
-/* BUTTONS */
+/* BANNER TAGS */
+.banner-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:18px;
+}
+.banner-tag{
+  font-family:'Aharoni',sans-serif;
+  font-size:11px;
+  padding:4px 10px;
+  border-radius:999px;
+  background:rgba(12,7,5,0.9);
+  border:1px solid rgba(255,255,255,0.12);
+  color:var(--sub);
+}
+
+/* BANNER BUTTONS */
 .banner-actions{
   display:flex;
-  justify-content:center;
-  gap:12px;
-  margin-top:10px;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:16px;
 }
-
 .btn-main{
-  padding:10px 20px;
+  padding:10px 22px;
   border-radius:999px;
   background:linear-gradient(135deg,#f2c26b,#ff9f6b);
   color:#120b07;
-  font-family:'Aptos Black', sans-serif;
+  font-family:'Aptos Black',sans-serif;
   font-size:14px;
   cursor:pointer;
-  box-shadow:0 16px 40px rgba(0,0,0,0.8);
-  transition:0.2s;
+  box-shadow:0 18px 50px rgba(0,0,0,0.9);
+  border:none;
+  transition:transform 0.18s ease,box-shadow 0.18s ease,filter 0.18s ease;
 }
 .btn-main:hover{
-  transform:translateY(-2px);
-  box-shadow:0 22px 60px rgba(0,0,0,0.95);
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:0 24px 60px rgba(0,0,0,0.95);
+  filter:brightness(1.05);
 }
-
 .btn-ghost{
   padding:10px 20px;
   border-radius:999px;
   border:1px solid var(--accent);
-  background:rgba(12,7,5,0.7);
+  background:rgba(12,7,5,0.8);
   color:var(--accent);
-  font-family:'Aptos Black', sans-serif;
-  font-size:14px;
+  font-family:'Aptos Black',sans-serif;
+  font-size:13px;
   cursor:pointer;
-  transition:0.2s;
+  transition:0.18s;
 }
 .btn-ghost:hover{
   background:rgba(242,194,107,0.12);
   transform:translateY(-2px);
 }
 
-/* ANIMATED LOGO ORBIT */
-.logo-orbit{
-  position:absolute;
-  top:40px;
-  left:50%;
-  transform:translateX(-50%);
-  width:260px;
-  height:260px;
+/* BANNER META */
+.banner-meta{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  font-family:'Aharoni',sans-serif;
+  font-size:12px;
+  color:var(--sub);
+}
+.banner-meta-item{
+  display:flex;
+  gap:8px;
+}
+.banner-meta-dot{
+  width:6px;height:6px;
   border-radius:50%;
-  background:radial-gradient(circle at 30% 0%, rgba(242,194,107,0.4), transparent 60%);
+  background:var(--accent);
+  margin-top:5px;
+  box-shadow:0 0 10px rgba(242,194,107,0.9);
+}
+
+/* ANIMATED LOGO + ULTIMATE CARD (RIGHT) */
+.banner-right{
+  position:relative;
+  flex:1;
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:4;
-  animation:pulse 3s infinite ease-in-out;
+  min-height:320px;
+}
+
+/* LOGO ORBIT BEHIND CARD */
+.logo-orbit{
+  position:absolute;
+  width:260px;height:260px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 0%,rgba(242,194,107,0.4),transparent 60%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1;
+  animation:pulseOrbit 3.2s infinite ease-in-out;
   box-shadow:0 0 40px rgba(242,194,107,0.9);
 }
-
-/* ORBIT RING */
 .logo-ring{
   position:absolute;
-  inset:-20px;
+  inset:-22px;
   border-radius:50%;
   border:1px dashed rgba(242,194,107,0.4);
-  animation:spin 18s linear infinite;
+  animation:spinRing 18s linear infinite;
 }
-
-/* LOGO IMAGE */
 .logo-img{
-  width:70%;
-  height:70%;
+  width:70%;height:70%;
   border-radius:20%;
   overflow:hidden;
   background:#120b07;
@@ -176,32 +278,156 @@ body{
   box-shadow:0 0 26px rgba(0,0,0,0.8);
 }
 .logo-img img{
-  width:100%;
-  height:100%;
+  width:100%;height:100%;
   object-fit:contain;
 }
 
-/* ANIMATIONS */
-@keyframes spin{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(360deg);}
+/* ULTIMATE FOLLOW-CURSOR CARD */
+.banner-card-wrapper{
+  position:relative;
+  z-index:2;
+  perspective:1200px;
 }
-@keyframes pulse{
-  0%{transform:translateX(-50%) scale(1);}
-  50%{transform:translateX(-50%) scale(1.05);}
-  100%{transform:translateX(-50%) scale(1);}
+.banner-card{
+  width:320px;
+  max-width:90vw;
+  border-radius:22px;
+  padding:16px 16px 18px;
+  background:linear-gradient(135deg,rgba(20,12,9,0.96),rgba(10,6,4,0.96));
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:0 26px 70px rgba(0,0,0,0.95);
+  backdrop-filter:blur(18px);
+  position:relative;
+  overflow:hidden;
+  transform-style:preserve-3d;
+  transition:transform 0.12s ease-out,box-shadow 0.12s ease-out,border-color 0.12s ease-out;
 }
 
-/* AD SLOT */
+/* GLOW BORDER */
+.banner-card::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:22px;
+  background:conic-gradient(from 0deg,rgba(242,194,107,0.0),rgba(242,194,107,0.7),rgba(255,159,107,0.0),rgba(80,120,255,0.7),rgba(242,194,107,0.0));
+  opacity:0;
+  transition:opacity 0.25s ease-out;
+  pointer-events:none;
+}
+.banner-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:22px;
+  background:radial-gradient(circle at top,rgba(242,194,107,0.22),transparent 60%);
+  opacity:0.4;
+  pointer-events:none;
+}
+
+/* PARTICLE DOTS */
+.banner-card-particles{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+.banner-card-dot{
+  position:absolute;
+  width:6px;height:6px;
+  border-radius:50%;
+  background:rgba(242,194,107,0.9);
+  box-shadow:0 0 12px rgba(242,194,107,0.9);
+  opacity:0.0;
+  animation:particleBlink 3.2s infinite ease-in-out;
+}
+.banner-card-dot.dot-1{top:18%;left:16%;animation-delay:0.2s;}
+.banner-card-dot.dot-2{top:32%;right:14%;animation-delay:0.8s;}
+.banner-card-dot.dot-3{bottom:22%;left:24%;animation-delay:1.4s;}
+.banner-card-dot.dot-4{bottom:16%;right:20%;animation-delay:2.0s;}
+
+@keyframes particleBlink{
+  0%,100%{opacity:0;}
+  40%{opacity:1;}
+}
+
+/* CARD CONTENT */
+.banner-card-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+.banner-card-pill{
+  font-family:'Aharoni',sans-serif;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:0.16em;
+  color:var(--sub);
+}
+.banner-card-status{
+  font-family:'Aptos Black',sans-serif;
+  font-size:11px;
+  padding:4px 9px;
+  border-radius:999px;
+  background:rgba(242,194,107,0.16);
+  border:1px solid var(--accent);
+  color:var(--text);
+}
+.banner-card-title{
+  font-family:'Aptos Black',sans-serif;
+  font-size:16px;
+  margin-bottom:4px;
+}
+.banner-card-sub{
+  font-family:'Aharoni',sans-serif;
+  font-size:12px;
+  color:var(--sub);
+  margin-bottom:10px;
+}
+.banner-card-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:10px;
+}
+.banner-card-metrics{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  font-family:'Aharoni',sans-serif;
+  font-size:11px;
+  color:var(--sub);
+}
+.banner-card-metric strong{
+  color:var(--accent-strong);
+}
+.banner-card-chip{
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.96);
+  border:1px solid rgba(0,0,0,0.06);
+  font-family:'Aharoni',sans-serif;
+  font-size:11px;
+  color:#140c09;
+  box-shadow:0 10px 26px rgba(0,0,0,0.7);
+}
+
+/* HOVER / ACTIVE STATE */
+.banner-card.hovered{
+  box-shadow:0 32px 80px rgba(0,0,0,1);
+  border-color:rgba(242,194,107,0.9);
+}
+.banner-card.hovered::before{
+  opacity:1;
+}
+
+/* BANNER AD UNDER LEFT TEXT */
 .banner-ad{
-  margin-top:20px;
+  margin-top:18px;
   padding:10px;
   border-radius:14px;
-  background:rgba(12,7,5,0.85);
+  background:rgba(12,7,5,0.9);
   border:1px dashed rgba(242,194,107,0.4);
   max-width:360px;
-  margin-left:auto;
-  margin-right:auto;
 }
 .banner-ad-label{
   font-size:10px;
@@ -215,67 +441,30 @@ body{
   border-radius:10px;
   padding:4px;
 }
-</style>
-</head>
 
-<body>
-
-<!-- CINEMATIC BANNER -->
-<section class="banner">
-
-  <!-- ANIMATED LOGO -->
-  <div class="logo-orbit">
-    <div class="logo-ring"></div>
-    <div class="logo-img">
-      <img src="assets/logo.png">
-    </div>
-  </div>
-
-  <!-- TEXT -->
-  <div class="banner-content">
-    <h1 class="banner-title">ALAEAI — <span>Build. Learn. Create.</span></h1>
-    <p class="banner-sub">
-      A warm cinematic AI portfolio — tutorials, tools, news, and projects in one calm, premium environment.
-    </p>
-
-    <div class="banner-actions">
-      <button class="btn-main">Explore Homepage</button>
-      <button class="btn-ghost">Start Tutorials</button>
-    </div>
-
-    <div class="banner-ad">
-      <div class="banner-ad-label">Sponsored • Banner</div>
-      <div class="banner-ad-inner">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-6065282700750014"
-             data-ad-slot="1234567890"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-      </div>
-    </div>
-
-  </div>
-</section>
-<!-- NAVBAR + MAIN CONTENT WRAPPER -->
-<style>
-.page-shell{
-  max-width:1120px;
-  margin:0 auto;
-  padding:20px 20px 40px;
+/* ORBIT ANIMATIONS */
+@keyframes spinRing{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+@keyframes pulseOrbit{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.06);}
+  100%{transform:scale(1);}
 }
 
-/* NAVBAR */
+/* =========================
+   NAVBAR (BELOW BANNER)
+   ========================= */
+.nav-shell{
+  background:var(--bg-soft);
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
 .nav{
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:14px 0 10px;
-  position:sticky;
-  top:0;
-  background:linear-gradient(to bottom,rgba(11,7,5,0.96),rgba(11,7,5,0.85),transparent);
-  backdrop-filter:blur(18px);
-  z-index:20;
 }
 .nav-left{
   display:flex;
@@ -283,8 +472,7 @@ body{
   gap:10px;
 }
 .nav-logo{
-  width:32px;
-  height:32px;
+  width:32px;height:32px;
   border-radius:12px;
   background:radial-gradient(circle at 30% 0%,#f2c26b,#c88b3a 40%,#120b07 100%);
   display:flex;
@@ -386,11 +574,18 @@ body{
   color:var(--accent);
 }
 
-/* HERO SECTION */
+/* =========================
+   MAIN LAYOUT
+   ========================= */
+.main-shell{
+  background:var(--bg-soft);
+  padding:24px 0 40px;
+}
+
+/* HERO SECTION (AFTER BANNER) */
 .hero{
-  margin-top:18px;
   display:grid;
-  grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
+  grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
   gap:24px;
 }
 .hero-main{
@@ -418,15 +613,14 @@ body{
   margin-bottom:10px;
 }
 .hero-pill-dot{
-  width:7px;
-  height:7px;
+  width:7px;height:7px;
   border-radius:50%;
   background:var(--accent);
   box-shadow:0 0 12px rgba(242,194,107,0.9);
 }
 .hero-title{
   font-family:'Aptos Black',sans-serif;
-  font-size:30px;
+  font-size:28px;
   line-height:1.25;
   margin-bottom:10px;
 }
@@ -476,8 +670,7 @@ body{
   gap:8px;
 }
 .hero-meta-dot{
-  width:6px;
-  height:6px;
+  width:6px;height:6px;
   border-radius:50%;
   background:var(--accent);
   margin-top:5px;
@@ -524,11 +717,24 @@ body{
   padding:10px 10px 11px;
   cursor:pointer;
   transition:0.2s;
+  position:relative;
+  overflow:hidden;
+}
+.preview-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top,rgba(242,194,107,0.18),transparent 60%);
+  opacity:0;
+  transition:0.2s;
 }
 .preview-card:hover{
-  transform:translateY(-3px);
+  transform:translateY(-3px) scale(1.01);
   box-shadow:0 18px 40px rgba(0,0,0,0.9);
   border-color:var(--accent);
+}
+.preview-card:hover::after{
+  opacity:1;
 }
 .preview-tag{
   font-family:'Aharoni',sans-serif;
@@ -647,6 +853,25 @@ body{
   border:1px solid var(--border);
   box-shadow:var(--shadow);
   padding:14px 14px 16px;
+  position:relative;
+  overflow:hidden;
+  transition:0.2s;
+}
+.portfolio-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top,rgba(242,194,107,0.18),transparent 60%);
+  opacity:0;
+  transition:0.2s;
+}
+.portfolio-card:hover{
+  transform:translateY(-4px) scale(1.01);
+  box-shadow:0 26px 70px rgba(0,0,0,1);
+  border-color:var(--accent);
+}
+.portfolio-card:hover::before{
+  opacity:1;
 }
 .portfolio-tag-row{
   display:flex;
@@ -784,6 +1009,25 @@ body{
   font-family:'Aharoni',sans-serif;
   font-size:12px;
   color:var(--sub);
+  position:relative;
+  overflow:hidden;
+  transition:0.2s;
+}
+.feature-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top,rgba(242,194,107,0.18),transparent 60%);
+  opacity:0;
+  transition:0.2s;
+}
+.feature-card:hover{
+  transform:translateY(-3px) scale(1.01);
+  box-shadow:0 22px 60px rgba(0,0,0,1);
+  border-color:var(--accent);
+}
+.feature-card:hover::before{
+  opacity:1;
 }
 .feature-pill{
   font-size:10px;
@@ -938,25 +1182,143 @@ footer span.accent{
 
 /* RESPONSIVE */
 @media(max-width:980px){
-  .hero{grid-template-columns:minmax(0,1fr);}
-  .portfolio-grid{grid-template-columns:minmax(0,1fr);}
-  .roadmap{grid-template-columns:minmax(0,1fr);}
+  .banner-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .banner-right{
+    align-self:center;
+  }
+  .hero{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .portfolio-grid{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .roadmap{
+    grid-template-columns:minmax(0,1fr);
+  }
 }
 @media(max-width:760px){
   .nav-links{display:none;}
-  .portfolio-main-grid{grid-template-columns:minmax(0,1fr);}
-  .feature-strip{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .portfolio-main-grid{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .feature-strip{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
 }
 @media(max-width:520px){
-  .feature-strip{grid-template-columns:minmax(0,1fr);}
-  .hero-grid-preview{grid-template-columns:minmax(0,1fr);}
+  .feature-strip{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .hero-grid-preview{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .banner-title{
+    font-size:32px;
+  }
 }
 </style>
+</head>
 
-<div class="page-shell">
+<body>
 
-  <!-- NAV -->
-  <header class="nav">
+<!-- BANNER AT VERY TOP -->
+<section class="banner">
+  <div class="banner-orb orb-1"></div>
+  <div class="banner-orb orb-2"></div>
+  <div class="banner-orb orb-3"></div>
+
+  <div class="banner-inner max-width">
+    <div class="banner-left">
+      <div class="banner-kicker">Warm AI Portfolio • ALAEAI</div>
+      <h1 class="banner-title">ALAEAI — <span>Build. Learn. Create.</span></h1>
+      <p class="banner-sub">
+        A cinematic, warm AI portfolio — tutorials, tools, news, and projects in one calm, premium environment.
+        Every section is designed to feel focused, intentional, and alive.
+      </p>
+
+      <div class="banner-tags">
+        <span class="banner-tag">Guided AI tutorials</span>
+        <span class="banner-tag">Real projects &amp; experiments</span>
+        <span class="banner-tag">News &amp; tools in one place</span>
+      </div>
+
+      <div class="banner-actions">
+        <button class="btn-main" onclick="scrollToId('hero')">Start Journey</button>
+        <button class="btn-ghost" onclick="scrollToId('portfolio')">View Portfolio</button>
+      </div>
+
+      <div class="banner-meta">
+        <div class="banner-meta-item">
+          <span class="banner-meta-dot"></span>
+          <span>Warm, minimal, and focused on real progress.</span>
+        </div>
+        <div class="banner-meta-item">
+          <span class="banner-meta-dot"></span>
+          <span>Built to grow into a full workspace over time.</span>
+        </div>
+      </div>
+
+      <div class="banner-ad">
+        <div class="banner-ad-label">Sponsored • Banner</div>
+        <div class="banner-ad-inner">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-6065282700750014"
+               data-ad-slot="1234567890"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+        </div>
+      </div>
+    </div>
+
+    <div class="banner-right">
+      <!-- LOGO ORBIT -->
+      <div class="logo-orbit">
+        <div class="logo-ring"></div>
+        <div class="logo-img">
+          <img src="assets/logo.png" alt="ALAEAI Logo">
+        </div>
+      </div>
+
+      <!-- ULTIMATE FOLLOW-CURSOR CARD -->
+      <div class="banner-card-wrapper">
+        <div class="banner-card" id="bannerCard">
+          <div class="banner-card-particles">
+            <div class="banner-card-dot dot-1"></div>
+            <div class="banner-card-dot dot-2"></div>
+            <div class="banner-card-dot dot-3"></div>
+            <div class="banner-card-dot dot-4"></div>
+          </div>
+
+          <div class="banner-card-header">
+            <div class="banner-card-pill">Live Workspace Preview</div>
+            <div class="banner-card-status">Active • v1.0</div>
+          </div>
+          <div class="banner-card-title">ALAEAI Warm Dashboard</div>
+          <div class="banner-card-sub">
+            Tutorials, tools, and news flowing into one integrated system — calm, focused, and ready to grow.
+          </div>
+
+          <div class="banner-card-row">
+            <div class="banner-card-metrics">
+              <div class="banner-card-metric"><strong>3</strong> core pillars — Tutorials, News, Tools</div>
+              <div class="banner-card-metric"><strong>20+</strong> levels planned for guided learning</div>
+              <div class="banner-card-metric"><strong>24/7</strong> ready to extend with APIs</div>
+            </div>
+            <div class="banner-card-chip">Follow the cursor • Live</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NAVBAR BELOW BANNER -->
+<div class="nav-shell">
+  <div class="nav max-width">
     <div class="nav-left">
       <div class="nav-logo">A</div>
       <div class="nav-title-block">
@@ -974,364 +1336,370 @@ footer span.accent{
       <button class="nav-cta" onclick="scrollToId('hero')">Start Journey</button>
       <button class="nav-toggle" id="darkToggle">Dark Mode</button>
     </div>
-  </header>
+  </div>
+</div>
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero-main">
-      <div class="hero-pill">
-        <span class="hero-pill-dot"></span>
-        <span>Warm AI Portfolio • ALAEAI</span>
-      </div>
-      <h2 class="hero-title">
-        A warm space to<br>
-        <span>build, learn, and show</span> your work.
-      </h2>
-      <p class="hero-sub">
-        ALAEAI is your personal warm portfolio and workspace — tutorials, tools, and projects in one calm,
-        premium environment. Every section is designed to feel intentional, focused, and alive.
-      </p>
-      <div class="hero-pills-row">
-        <div class="hero-pill-tag">Guided AI tutorials</div>
-        <div class="hero-pill-tag">Real projects &amp; experiments</div>
-        <div class="hero-pill-tag">News &amp; tools in one place</div>
-      </div>
-      <div class="hero-actions">
-        <button class="btn-main" onclick="scrollToId('portfolio')">View Portfolio</button>
-        <button class="btn-ghost" onclick="scrollToId('features')">See Features</button>
-      </div>
-      <div class="hero-meta">
-        <div class="hero-meta-item">
-          <span class="hero-meta-dot"></span>
-          <span>Warm, minimal, and focused on real progress.</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="hero-meta-dot"></span>
-          <span>Built to grow into a full workspace over time.</span>
-        </div>
-      </div>
-    </div>
+<!-- MAIN CONTENT -->
+<main class="main-shell">
+  <div class="max-width">
 
-    <aside class="hero-side">
-      <div class="hero-side-label">Portfolio Snapshot</div>
-      <div class="hero-side-title">A calm grid of what you build.</div>
-      <div class="hero-side-sub">
-        Projects, experiments, and learning paths — all presented in a warm, inviting layout.
-      </div>
-
-      <div class="hero-grid-preview">
-        <div class="preview-card" onclick="scrollToId('portfolio')">
-          <div class="preview-tag">Tutorials</div>
-          <div class="preview-title">Level-based AI learning</div>
-          <div class="preview-meta">Foundations, builder mode, and advanced deep dives.</div>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-main">
+        <div class="hero-pill">
+          <span class="hero-pill-dot"></span>
+          <span>Warm AI Portfolio • ALAEAI</span>
         </div>
-        <div class="preview-card" onclick="scrollToId('features')">
-          <div class="preview-tag">News &amp; Tools</div>
-          <div class="preview-title">Real-time tech awareness</div>
-          <div class="preview-meta">Curated updates and utilities that support your builds.</div>
+        <h2 class="hero-title">
+          A warm space to<br>
+          <span>build, learn, and show</span> your work.
+        </h2>
+        <p class="hero-sub">
+          ALAEAI is your personal warm portfolio and workspace — tutorials, tools, and projects in one calm,
+          premium environment. Every section is designed to feel intentional, focused, and alive.
+        </p>
+        <div class="hero-pills-row">
+          <div class="hero-pill-tag">Guided AI tutorials</div>
+          <div class="hero-pill-tag">Real projects &amp; experiments</div>
+          <div class="hero-pill-tag">News &amp; tools in one place</div>
         </div>
-        <div class="preview-card" onclick="scrollToId('portfolio')">
-          <div class="preview-tag">Projects</div>
-          <div class="preview-title">Small, complete builds</div>
-          <div class="preview-meta">From spam detectors to dashboards and more.</div>
+        <div class="hero-actions">
+          <button class="btn-main" onclick="scrollToId('portfolio')">View Portfolio</button>
+          <button class="btn-ghost" onclick="scrollToId('features')">See Features</button>
         </div>
-        <div class="preview-card" onclick="scrollToId('roadmap')">
-          <div class="preview-tag">Roadmap</div>
-          <div class="preview-title">A path that grows with you</div>
-          <div class="preview-meta">From core homepage to full workspace.</div>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span>Warm, minimal, and focused on real progress.</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-dot"></span>
+            <span>Built to grow into a full workspace over time.</span>
+          </div>
         </div>
       </div>
 
-      <div class="hero-side-footer">
-        <div>Tutorials • News • Tools • Portfolio</div>
-        <div style="color:var(--accent);">Live • Active</div>
-      </div>
-
-      <div class="hero-side-ad">
-        <div class="hero-side-ad-label">Sponsored • Sidebar</div>
-        <div class="hero-side-ad-inner">
-          <ins class="adsbygoogle"
-               style="display:block"
-               data-ad-client="ca-pub-6065282700750014"
-               data-ad-slot="2345678901"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
+      <aside class="hero-side">
+        <div class="hero-side-label">Portfolio Snapshot</div>
+        <div class="hero-side-title">A calm grid of what you build.</div>
+        <div class="hero-side-sub">
+          Projects, experiments, and learning paths — all presented in a warm, inviting layout.
         </div>
-      </div>
-    </aside>
-  </section>
 
-  <!-- PORTFOLIO -->
-  <section class="section" id="portfolio">
-    <div class="section-header">
-      <div class="section-title-block">
-        <div class="section-kicker">Portfolio</div>
-        <div class="section-title">A warm grid of what ALAEAI can do.</div>
-        <div class="section-sub">
-          Each card represents a direction: tutorials, tools, experiments, and future workspace ideas.
-        </div>
-      </div>
-      <button class="section-cta-inline" onclick="scrollToId('features')">
-        Open Features
-        <span>↗</span>
-      </button>
-    </div>
-
-    <div class="portfolio-grid">
-      <div class="portfolio-main-grid">
-        <article class="portfolio-card">
-          <div class="portfolio-tag-row">
-            <div class="portfolio-tag">Tutorials • Level 1–3</div>
-            <div class="portfolio-pill">Learning Path</div>
+        <div class="hero-grid-preview">
+          <div class="preview-card" onclick="scrollToId('portfolio')">
+            <div class="preview-tag">Tutorials</div>
+            <div class="preview-title">Level-based AI learning</div>
+            <div class="preview-meta">Foundations, builder mode, and advanced deep dives.</div>
           </div>
-          <div class="portfolio-title">Structured AI Tutorials</div>
-          <div class="portfolio-desc">
-            A clear, level-based path from foundations to advanced topics. Designed to feel like a calm,
-            guided journey — not a chaotic course list.
+          <div class="preview-card" onclick="scrollToId('features')">
+            <div class="preview-tag">News &amp; Tools</div>
+            <div class="preview-title">Real-time tech awareness</div>
+            <div class="preview-meta">Curated updates and utilities that support your builds.</div>
           </div>
-          <div class="portfolio-meta-row">
-            <div class="portfolio-meta-pill">20+ levels planned</div>
-            <div>Foundations • Builder • Advanced</div>
+          <div class="preview-card" onclick="scrollToId('portfolio')">
+            <div class="preview-tag">Projects</div>
+            <div class="preview-title">Small, complete builds</div>
+            <div class="preview-meta">From spam detectors to dashboards and more.</div>
           </div>
-        </article>
-
-        <article class="portfolio-card">
-          <div class="portfolio-tag-row">
-            <div class="portfolio-tag">Projects • Builder Mode</div>
-            <div class="portfolio-pill">Hands-on</div>
-          </div>
-          <div class="portfolio-title">Mini AI Projects</div>
-          <div class="portfolio-desc">
-            Spam detectors, recommendation systems, simple chatbots, and more — each project small enough to finish,
-            but real enough to be proud of.
-          </div>
-          <div class="portfolio-meta-row">
-            <div class="portfolio-meta-pill">Real code examples</div>
-            <div>Python • JS • APIs</div>
-          </div>
-        </article>
-
-        <article class="portfolio-card">
-          <div class="portfolio-tag-row">
-            <div class="portfolio-tag">News &amp; Tools</div>
-            <div class="portfolio-pill">Live</div>
-          </div>
-          <div class="portfolio-title">Curated Tech News &amp; Utilities</div>
-          <div class="portfolio-desc">
-            A calm feed of meaningful updates and tools — no noise, no clickbait. Just what helps you think and build better.
-          </div>
-          <div class="portfolio-meta-row">
-            <div class="portfolio-meta-pill">24/7 ready to extend</div>
-            <div>News • Calculators • Generators</div>
-          </div>
-        </article>
-
-        <article class="portfolio-card">
-          <div class="portfolio-tag-row">
-            <div class="portfolio-tag">Workspace Vision</div>
-            <div class="portfolio-pill">Future</div>
-          </div>
-          <div class="portfolio-title">Full ALAEAI Workspace</div>
-          <div class="portfolio-desc">
-            A complete environment with dashboards, stats, and personalized flows — where tutorials, tools, and news
-            feel like one integrated system.
-          </div>
-          <div class="portfolio-meta-row">
-            <div class="portfolio-meta-pill">Roadmap-driven</div>
-            <div>Calm • Focused • Powerful</div>
-          </div>
-        </article>
-      </div>
-
-      <aside class="portfolio-side">
-        <div class="portfolio-side-title">How this portfolio is structured</div>
-        <div class="portfolio-side-sub">
-          Instead of random sections, everything is grouped into clear pillars that match how you actually learn and build.
-        </div>
-        <div class="portfolio-side-list">
-          <div class="portfolio-side-item" onclick="scrollToId('hero')">
-            <span>Homepage • Warm first impression</span>
-            <span class="badge">Top</span>
-          </div>
-          <div class="portfolio-side-item" onclick="scrollToId('portfolio')">
-            <span>Tutorials • Learn step by step</span>
-            <span class="badge">Start</span>
-          </div>
-          <div class="portfolio-side-item" onclick="scrollToId('features')">
-            <span>News &amp; Tools • Stay aware</span>
-            <span class="badge">Explore</span>
-          </div>
-          <div class="portfolio-side-item" onclick="scrollToId('roadmap')">
-            <span>Roadmap • See the future</span>
-            <span class="badge">View</span>
+          <div class="preview-card" onclick="scrollToId('roadmap')">
+            <div class="preview-tag">Roadmap</div>
+            <div class="preview-title">A path that grows with you</div>
+            <div class="preview-meta">From core homepage to full workspace.</div>
           </div>
         </div>
 
-        <div class="portfolio-side-ad">
-          <div class="portfolio-side-ad-label">Sponsored • Portfolio</div>
-          <div class="portfolio-side-ad-inner">
+        <div class="hero-side-footer">
+          <div>Tutorials • News • Tools • Portfolio</div>
+          <div style="color:var(--accent);">Live • Active</div>
+        </div>
+
+        <div class="hero-side-ad">
+          <div class="hero-side-ad-label">Sponsored • Sidebar</div>
+          <div class="hero-side-ad-inner">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-6065282700750014"
-                 data-ad-slot="3456789012"
+                 data-ad-slot="2345678901"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
           </div>
         </div>
       </aside>
-    </div>
-  </section>
+    </section>
 
-  <!-- FEATURES -->
-  <section class="section" id="features">
-    <div class="section-header">
-      <div class="section-title-block">
-        <div class="section-kicker">Core Pillars</div>
-        <div class="section-title">What lives inside ALAEAI.</div>
-        <div class="section-sub">
-          Tutorials, news, tools, and a calm about section — all tuned for a warm, focused experience.
-        </div>
-      </div>
-    </div>
-
-    <div class="feature-strip">
-      <article class="feature-card">
-        <div class="feature-pill">Interactive Tutorials</div>
-        <div class="feature-title">Step-by-step learning paths</div>
-        <p>
-          Follow structured, level-based tutorials that help you actually understand and apply what you learn.
-        </p>
-        <div class="feature-ad">
-          <div class="feature-ad-label">Sponsored • Tutorials</div>
-          <div class="feature-ad-inner">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-6065282700750014"
-                 data-ad-slot="4567890123"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
+    <!-- PORTFOLIO -->
+    <section class="section" id="portfolio">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-kicker">Portfolio</div>
+          <div class="section-title">A warm grid of what ALAEAI can do.</div>
+          <div class="section-sub">
+            Each card represents a direction: tutorials, tools, experiments, and future workspace ideas.
           </div>
         </div>
-      </article>
-
-      <article class="feature-card">
-        <div class="feature-pill">Real-Time News</div>
-        <div class="feature-title">Meaningful tech updates</div>
-        <p>
-          Stay updated with curated, focused news about AI, science, and innovation — not random noise.
-        </p>
-      </article>
-
-      <article class="feature-card">
-        <div class="feature-pill">Smart Tools</div>
-        <div class="feature-title">Utilities that support building</div>
-        <p>
-          Calculators, generators, and helpers that make it easier to test ideas and ship projects faster.
-        </p>
-      </article>
-
-      <article class="feature-card">
-        <div class="feature-pill">About ALAEAI</div>
-        <div class="feature-title">A calm, powerful workspace</div>
-        <p>
-          Built as a warm environment where every section has a purpose — no clutter, just progress.
-        </p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ROADMAP -->
-  <section class="section" id="roadmap">
-    <div class="roadmap">
-      <div>
-        <div class="roadmap-title">Roadmap</div>
-        <div class="roadmap-sub">
-          A clear path for how ALAEAI can grow with you over time — from this warm homepage to a full workspace.
-        </div>
-        <div class="roadmap-phases">
-          <div class="roadmap-phase">
-            <div class="roadmap-phase-label">Phase 1 • Now</div>
-            <div class="roadmap-phase-title">Core Warm Homepage</div>
-            <div>
-              A premium landing experience with portfolio, tutorials, news, and tools in one place.
-            </div>
-          </div>
-          <div class="roadmap-phase">
-            <div class="roadmap-phase-label">Phase 2 • Soon</div>
-            <div class="roadmap-phase-title">Dedicated Tutorials Hub</div>
-            <div>
-              A full tutorials page with levels, progress tracking, and interactive exercises.
-            </div>
-          </div>
-          <div class="roadmap-phase">
-            <div class="roadmap-phase-label">Phase 3 • Next</div>
-            <div class="roadmap-phase-title">Live News Integration</div>
-            <div>
-              Real-time news feeds connected to your backend or APIs, filtered by topics you care about.
-            </div>
-          </div>
-          <div class="roadmap-phase">
-            <div class="roadmap-phase-label">Phase 4 • Future</div>
-            <div class="roadmap-phase-title">Full ALAEAI Workspace</div>
-            <div>
-              A complete learning and building environment with dashboards, stats, and personalized flows.
-            </div>
-          </div>
-        </div>
+        <button class="section-cta-inline" onclick="scrollToId('features')">
+          Open Features
+          <span>↗</span>
+        </button>
       </div>
 
-      <div>
-        <div class="roadmap-title">Workspace Snapshot</div>
-        <div class="roadmap-sub">
-          A quick look at what this warm portfolio is already ready to support.
-        </div>
-        <div class="roadmap-metrics">
-          <div class="roadmap-metric">
-            <strong>3</strong> core pillars — Tutorials, News, Tools
-          </div>
-          <div class="roadmap-metric">
-            <strong>20+</strong> tutorial levels planned
-          </div>
-          <div class="roadmap-metric">
-            <strong>24/7</strong> news &amp; tools ready to extend
-          </div>
-          <div class="roadmap-metric">
-            <strong>1</strong> warm portfolio homepage to welcome everyone
-          </div>
+      <div class="portfolio-grid">
+        <div class="portfolio-main-grid">
+          <article class="portfolio-card">
+            <div class="portfolio-tag-row">
+              <div class="portfolio-tag">Tutorials • Level 1–3</div>
+              <div class="portfolio-pill">Learning Path</div>
+            </div>
+            <div class="portfolio-title">Structured AI Tutorials</div>
+            <div class="portfolio-desc">
+              A clear, level-based path from foundations to advanced topics. Designed to feel like a calm,
+              guided journey — not a chaotic course list.
+            </div>
+            <div class="portfolio-meta-row">
+              <div class="portfolio-meta-pill">20+ levels planned</div>
+              <div>Foundations • Builder • Advanced</div>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-tag-row">
+              <div class="portfolio-tag">Projects • Builder Mode</div>
+              <div class="portfolio-pill">Hands-on</div>
+            </div>
+            <div class="portfolio-title">Mini AI Projects</div>
+            <div class="portfolio-desc">
+              Spam detectors, recommendation systems, simple chatbots, and more — each project small enough to finish,
+              but real enough to be proud of.
+            </div>
+            <div class="portfolio-meta-row">
+              <div class="portfolio-meta-pill">Real code examples</div>
+              <div>Python • JS • APIs</div>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-tag-row">
+              <div class="portfolio-tag">News &amp; Tools</div>
+              <div class="portfolio-pill">Live</div>
+            </div>
+            <div class="portfolio-title">Curated Tech News &amp; Utilities</div>
+            <div class="portfolio-desc">
+              A calm feed of meaningful updates and tools — no noise, no clickbait. Just what helps you think and build better.
+            </div>
+            <div class="portfolio-meta-row">
+              <div class="portfolio-meta-pill">24/7 ready to extend</div>
+              <div>News • Calculators • Generators</div>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-tag-row">
+              <div class="portfolio-tag">Workspace Vision</div>
+              <div class="portfolio-pill">Future</div>
+            </div>
+            <div class="portfolio-title">Full ALAEAI Workspace</div>
+            <div class="portfolio-desc">
+              A complete environment with dashboards, stats, and personalized flows — where tutorials, tools, and news
+              feel like one integrated system.
+            </div>
+            <div class="portfolio-meta-row">
+              <div class="portfolio-meta-pill">Roadmap-driven</div>
+              <div>Calm • Focused • Powerful</div>
+            </div>
+          </article>
         </div>
 
-        <div class="roadmap-ad">
-          <div class="roadmap-ad-label">Sponsored • Roadmap</div>
-          <div class="roadmap-ad-inner">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-6065282700750014"
-                 data-ad-slot="5678901234"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
+        <aside class="portfolio-side">
+          <div class="portfolio-side-title">How this portfolio is structured</div>
+          <div class="portfolio-side-sub">
+            Instead of random sections, everything is grouped into clear pillars that match how you actually learn and build.
+          </div>
+          <div class="portfolio-side-list">
+            <div class="portfolio-side-item" onclick="scrollToId('hero')">
+              <span>Homepage • Warm first impression</span>
+              <span class="badge">Top</span>
+            </div>
+            <div class="portfolio-side-item" onclick="scrollToId('portfolio')">
+              <span>Tutorials • Learn step by step</span>
+              <span class="badge">Start</span>
+            </div>
+            <div class="portfolio-side-item" onclick="scrollToId('features')">
+              <span>News &amp; Tools • Stay aware</span>
+              <span class="badge">Explore</span>
+            </div>
+            <div class="portfolio-side-item" onclick="scrollToId('roadmap')">
+              <span>Roadmap • See the future</span>
+              <span class="badge">View</span>
+            </div>
+          </div>
+
+          <div class="portfolio-side-ad">
+            <div class="portfolio-side-ad-label">Sponsored • Portfolio</div>
+            <div class="portfolio-side-ad-inner">
+              <ins class="adsbygoogle"
+                   style="display:block"
+                   data-ad-client="ca-pub-6065282700750014"
+                   data-ad-slot="3456789012"
+                   data-ad-format="auto"
+                   data-full-width-responsive="true"></ins>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+      <div class="section-header">
+        <div class="section-title-block">
+          <div class="section-kicker">Core Pillars</div>
+          <div class="section-title">What lives inside ALAEAI.</div>
+          <div class="section-sub">
+            Tutorials, news, tools, and a calm about section — all tuned for a warm, focused experience.
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer>
-    © 2026 <span class="accent">ALAEAI</span> — Warm Portfolio • Build. Learn. Create.
-    <div class="footer-ad">
-      <div class="footer-ad-label">Sponsored • Footer</div>
-      <div class="footer-ad-inner">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-6065282700750014"
-             data-ad-slot="6789012345"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
+      <div class="feature-strip">
+        <article class="feature-card">
+          <div class="feature-pill">Interactive Tutorials</div>
+          <div class="feature-title">Step-by-step learning paths</div>
+          <p>
+            Follow structured, level-based tutorials that help you actually understand and apply what you learn.
+          </p>
+          <div class="feature-ad">
+            <div class="feature-ad-label">Sponsored • Tutorials</div>
+            <div class="feature-ad-inner">
+              <ins class="adsbygoogle"
+                   style="display:block"
+                   data-ad-client="ca-pub-6065282700750014"
+                   data-ad-slot="4567890123"
+                   data-ad-format="auto"
+                   data-full-width-responsive="true"></ins>
+            </div>
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-pill">Real-Time News</div>
+          <div class="feature-title">Meaningful tech updates</div>
+          <p>
+            Stay updated with curated, focused news about AI, science, and innovation — not random noise.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-pill">Smart Tools</div>
+          <div class="feature-title">Utilities that support building</div>
+          <p>
+            Calculators, generators, and helpers that make it easier to test ideas and ship projects faster.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-pill">About ALAEAI</div>
+          <div class="feature-title">A calm, powerful workspace</div>
+          <p>
+            Built as a warm environment where every section has a purpose — no clutter, just progress.
+          </p>
+        </article>
       </div>
-    </div>
-  </footer>
+    </section>
 
-</div>
+    <!-- ROADMAP -->
+    <section class="section" id="roadmap">
+      <div class="roadmap">
+        <div>
+          <div class="roadmap-title">Roadmap</div>
+          <div class="roadmap-sub">
+            A clear path for how ALAEAI can grow with you over time — from this warm homepage to a full workspace.
+          </div>
+          <div class="roadmap-phases">
+            <div class="roadmap-phase">
+              <div class="roadmap-phase-label">Phase 1 • Now</div>
+              <div class="roadmap-phase-title">Core Warm Homepage</div>
+              <div>
+                A premium landing experience with portfolio, tutorials, news, and tools in one place.
+              </div>
+            </div>
+            <div class="roadmap-phase">
+              <div class="roadmap-phase-label">Phase 2 • Soon</div>
+              <div class="roadmap-phase-title">Dedicated Tutorials Hub</div>
+              <div>
+                A full tutorials page with levels, progress tracking, and interactive exercises.
+              </div>
+            </div>
+            <div class="roadmap-phase">
+              <div class="roadmap-phase-label">Phase 3 • Next</div>
+              <div class="roadmap-phase-title">Live News Integration</div>
+              <div>
+                Real-time news feeds connected to your backend or APIs, filtered by topics you care about.
+              </div>
+            </div>
+            <div class="roadmap-phase">
+              <div class="roadmap-phase-label">Phase 4 • Future</div>
+              <div class="roadmap-phase-title">Full ALAEAI Workspace</div>
+              <div>
+                A complete learning and building environment with dashboards, stats, and personalized flows.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="roadmap-title">Workspace Snapshot</div>
+          <div class="roadmap-sub">
+            A quick look at what this warm portfolio is already ready to support.
+          </div>
+          <div class="roadmap-metrics">
+            <div class="roadmap-metric">
+              <strong>3</strong> core pillars — Tutorials, News, Tools
+            </div>
+            <div class="roadmap-metric">
+              <strong>20+</strong> tutorial levels planned
+            </div>
+            <div class="roadmap-metric">
+              <strong>24/7</strong> news &amp; tools ready to extend
+            </div>
+            <div class="roadmap-metric">
+              <strong>1</strong> warm portfolio homepage to welcome everyone
+            </div>
+          </div>
+
+          <div class="roadmap-ad">
+            <div class="roadmap-ad-label">Sponsored • Roadmap</div>
+            <div class="roadmap-ad-inner">
+              <ins class="adsbygoogle"
+                   style="display:block"
+                   data-ad-client="ca-pub-6065282700750014"
+                   data-ad-slot="5678901234"
+                   data-ad-format="auto"
+                   data-full-width-responsive="true"></ins>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      © 2026 <span class="accent">ALAEAI</span> — Warm Portfolio • Build. Learn. Create.
+      <div class="footer-ad">
+        <div class="footer-ad-label">Sponsored • Footer</div>
+        <div class="footer-ad-inner">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-6065282700750014"
+               data-ad-slot="6789012345"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</main>
 
 <script>
 function scrollToId(id){
@@ -1339,16 +1707,44 @@ function scrollToId(id){
   if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
+/* Dark toggle */
 const toggle=document.getElementById("darkToggle");
 let dark=false;
 if(toggle){
   toggle.addEventListener("click",()=>{
     dark=!dark;
-    document.body.style.background=dark?"#050304":"#0b0705";
+    document.body.style.background=dark?"#020102":"#050304";
     toggle.textContent=dark?"Light Mode":"Dark Mode";
   });
 }
 
+/* Ultimate follow-cursor card */
+const bannerCard=document.getElementById("bannerCard");
+if(bannerCard){
+  const maxRotate=12; // degrees
+  const maxTranslate=18; // px
+
+  bannerCard.addEventListener("mousemove",(e)=>{
+    const rect=bannerCard.getBoundingClientRect();
+    const x=(e.clientX-rect.left)/rect.width;  // 0..1
+    const y=(e.clientY-rect.top)/rect.height; // 0..1
+    const rotateY=(x-0.5)*maxRotate*2;
+    const rotateX=(0.5-y)*maxRotate*2;
+    const translateX=(x-0.5)*maxTranslate*2;
+    const translateY=(y-0.5)*maxTranslate*2;
+
+    bannerCard.style.transform=
+      `translate3d(${translateX}px,${translateY}px,0) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    bannerCard.classList.add("hovered");
+  });
+
+  bannerCard.addEventListener("mouseleave",()=>{
+    bannerCard.style.transform="translate3d(0,0,0) rotateX(0deg) rotateY(0deg)";
+    bannerCard.classList.remove("hovered");
+  });
+}
+
+/* Ads init (multiple slots) */
 try{
   (adsbygoogle=window.adsbygoogle||[]).push({});
   (adsbygoogle=window.adsbygoogle||[]).push({});
@@ -1361,3 +1757,4 @@ try{
 
 </body>
 </html>
+

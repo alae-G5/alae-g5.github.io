@@ -112,6 +112,108 @@
       left: 60%;
     }
 
+    /* TOP BANNER */
+    .top-banner {
+      width: 100%;
+      height: 420px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 18px;
+      animation: bannerFadeIn 1.2s ease forwards;
+    }
+
+    .top-banner-img-wrap {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      perspective: 1000px;
+    }
+
+    .top-banner-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.15);
+      transform-origin: center;
+      animation: bannerZoomIn 2.6s ease forwards;
+      will-change: transform;
+    }
+
+    .top-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.55),
+        rgba(0, 0, 0, 0.35)
+      );
+      mix-blend-mode: multiply;
+      animation: bannerGlowPulse 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .top-banner-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #ffffff;
+      padding: 0 18px;
+      animation: bannerContentIn 1.4s ease forwards;
+    }
+
+    .top-banner-title {
+      font-family: "Poppins", system-ui;
+      font-weight: 800;
+      font-size: 34px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .top-banner-sub {
+      font-size: 15px;
+      max-width: 620px;
+      opacity: 0.9;
+      margin-bottom: 18px;
+    }
+
+    .top-banner-btn {
+      padding: 11px 24px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(242, 194, 107, 0.9);
+      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.8), rgba(242, 194, 107, 0.25));
+      color: #2b1a0d;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 0 22px rgba(242, 194, 107, 0.9);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .top-banner-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 0 28px rgba(242, 194, 107, 1);
+      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.95), rgba(242, 194, 107, 0.3));
+    }
+
+    @media (max-width: 720px) {
+      .top-banner {
+        height: 340px;
+      }
+      .top-banner-title {
+        font-size: 26px;
+      }
+      .top-banner-sub {
+        font-size: 14px;
+      }
+    }
+
     /* NAVBAR */
     .nav {
       display: flex;
@@ -791,7 +893,7 @@
       color: var(--text);
     }
 
-    /* FEATURE STRIP (TUTORIALS / NEWS / TOOLS / ABOUT) */
+    /* FEATURE STRIP */
     .feature-strip {
       margin-top: 40px;
       display: grid;
@@ -1012,6 +1114,27 @@
       from { opacity: 0; transform: translateY(26px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    @keyframes bannerFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bannerZoomIn {
+      from { transform: scale(1.15); }
+      to { transform: scale(1.02); }
+    }
+
+    @keyframes bannerGlowPulse {
+      0% { opacity: 0.45; }
+      50% { opacity: 0.75; }
+      100% { opacity: 0.45; }
+    }
+
+    @keyframes bannerContentIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -1019,6 +1142,21 @@
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
   <div class="bg-orb orb-3"></div>
+
+  <!-- TOP BANNER -->
+  <section class="top-banner">
+    <div class="top-banner-img-wrap">
+      <img src="assets/logo.png" alt="AlaeAI Banner" id="bannerImage">
+      <div class="top-banner-overlay"></div>
+    </div>
+    <div class="top-banner-content">
+      <div class="top-banner-title">AlaeAI — Build. Learn. Create.</div>
+      <div class="top-banner-sub">
+        A warm, premium portfolio for your AI journey — tutorials, tools, news, and projects in one calm space.
+      </div>
+      <button class="top-banner-btn" onclick="scrollToId('hero')">Explore the Homepage</button>
+    </div>
+  </section>
 
   <div class="page-shell">
     <!-- NAVBAR -->
@@ -1374,8 +1512,10 @@
       };
     }
 
-    // Subtle orb movement on mouse move
+    // Subtle orb + banner movement on mouse move
     const orbs = document.querySelectorAll(".bg-orb");
+    const bannerImg = document.getElementById("bannerImage");
+
     window.addEventListener("mousemove", (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 20;
       const y = (e.clientY / window.innerHeight - 0.5) * 20;
@@ -1383,7 +1523,11 @@
         const factor = (i + 1) * 0.4;
         orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
       });
+      if (bannerImg) {
+        bannerImg.style.transform = `scale(1.08) translate(${x * 0.6}px, ${y * 0.6}px)`;
+      }
     });
   </script>
 </body>
 </html>
+

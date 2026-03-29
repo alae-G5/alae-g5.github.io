@@ -4,74 +4,82 @@
   <meta charset="UTF-8" />
   <title>ALAEAI — Build. Learn. Create.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ALAEAI — A warm, premium AI portfolio and workspace with tutorials, tools, news, and projects in one calm environment." />
+  <meta name="theme-color" content="#120b07" />
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6065282700750014" crossorigin="anonymous"></script>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
   <style>
     :root {
-      --bg: #0b0908;
-      --bg-soft: #15100d;
-      --bg-soft-2: #1c130f;
-      --bg-deep: #050304;
-      --bg-elevated: #18100c;
-      --text: #f7f2ec;
-      --text-soft: #d7c9bc;
-      --subtext: #b9a89a;
-      --muted: #8f7c6b;
-      --card: #15100d;
-      --card-soft: #1b130e;
-      --accent: #f2c26b;
-      --accent-soft: rgba(242, 194, 107, 0.18);
-      --accent-strong: rgba(242, 194, 107, 0.55);
-      --accent-glow: rgba(242, 194, 107, 0.9);
+      --bg: #0c0705;
+      --bg-elevated: #120b07;
+      --bg-soft: #1a100b;
+      --card: #18100b;
+      --card-soft: #1f140d;
       --border-subtle: rgba(255, 255, 255, 0.06);
       --border-strong: rgba(242, 194, 107, 0.7);
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.75);
-      --shadow-strong: 0 30px 80px rgba(0, 0, 0, 0.9);
-      --shadow-glow: 0 0 40px rgba(242, 194, 107, 0.8);
-      --radius-lg: 26px;
-      --radius-md: 18px;
-      --radius-sm: 12px;
-      --radius-pill: 999px;
+      --text: #fdf7ef;
+      --subtext: #c9b7a0;
+      --muted: #9a8570;
+      --accent: #f2c26b;
+      --accent-soft: rgba(242, 194, 107, 0.4);
+      --accent-strong: #ffd27f;
+      --accent-deep: #c88b3a;
+      --danger: #ff6b6b;
+      --success: #4cd964;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --shadow-strong: 0 26px 70px rgba(0, 0, 0, 0.85);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+      --radius-xl: 28px;
       --transition-fast: 0.18s ease-out;
       --transition-med: 0.28s ease-out;
       --transition-slow: 0.45s ease-out;
-      --glass-light: rgba(255, 255, 255, 0.04);
-      --glass-strong: rgba(255, 255, 255, 0.08);
-      --danger: #ff6b6b;
-      --success: #3cff8f;
-      --info: #5bc0ff;
+      --nav-height: 70px;
+      --orb-size: 420px;
+      --glow-soft: 0 0 18px rgba(242, 194, 107, 0.6);
+      --glow-strong: 0 0 40px rgba(242, 194, 107, 0.9);
+    }
+
+    body.dark {
+      --bg: #050304;
+      --bg-elevated: #080506;
+      --bg-soft: #0c0708;
+      --card: #0f0909;
+      --card-soft: #140c0c;
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --text: #f9f4ec;
+      --subtext: #c1b0a0;
+      --muted: #9a8570;
+      --accent: #f2c26b;
+      --accent-soft: rgba(242, 194, 107, 0.45);
+      --accent-strong: #ffd27f;
+      --accent-deep: #c88b3a;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.75);
+      --shadow-strong: 0 26px 80px rgba(0, 0, 0, 0.95);
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     html, body {
+      height: 100%;
       scroll-behavior: smooth;
     }
 
     body {
-      font-family: "Rubik", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(242, 194, 107, 0.12), transparent 55%),
-        radial-gradient(circle at bottom, rgba(242, 194, 107, 0.08), transparent 60%),
-        linear-gradient(135deg, var(--bg-deep), var(--bg));
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1a100b 0, #050304 50%, #020102 100%);
       color: var(--text);
-      min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      position: relative;
       overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
     }
 
     img {
@@ -79,435 +87,433 @@
       display: block;
     }
 
+    button {
+      font-family: inherit;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      background: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     .page-shell {
-      max-width: 1240px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 20px 18px 80px;
+      padding: 0 20px 40px;
       position: relative;
+      z-index: 2;
     }
 
     .bg-orb {
       position: fixed;
+      width: var(--orb-size);
+      height: var(--orb-size);
       border-radius: 50%;
-      filter: blur(40px);
-      opacity: 0.7;
+      filter: blur(60px);
+      opacity: 0.22;
       pointer-events: none;
-      z-index: -1;
-      transition: transform var(--transition-slow), opacity var(--transition-slow);
+      z-index: 0;
+      mix-blend-mode: screen;
+      transition: transform 0.4s ease-out;
     }
 
-    .bg-orb.orb-1 {
-      width: 260px;
-      height: 260px;
-      background: radial-gradient(circle, rgba(242, 194, 107, 0.7), transparent 70%);
-      top: -60px;
-      left: -40px;
+    .orb-1 {
+      background: radial-gradient(circle at center, rgba(242, 194, 107, 0.9), transparent 60%);
+      top: -120px;
+      left: -120px;
     }
 
-    .bg-orb.orb-2 {
-      width: 320px;
-      height: 320px;
-      background: radial-gradient(circle, rgba(242, 194, 107, 0.4), transparent 70%);
-      bottom: -80px;
-      right: -40px;
-    }
-
-    .bg-orb.orb-3 {
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.25), transparent 70%);
+    .orb-2 {
+      background: radial-gradient(circle at center, rgba(255, 120, 80, 0.8), transparent 60%);
       top: 40%;
-      left: 60%;
+      right: -160px;
     }
 
-    .ad-container {
-      margin: 26px 0;
-      text-align: center;
+    .orb-3 {
+      background: radial-gradient(circle at center, rgba(120, 180, 255, 0.7), transparent 60%);
+      bottom: -160px;
+      left: 10%;
     }
 
     .top-banner {
-      width: 100%;
-      height: 420px;
       position: relative;
-      overflow: hidden;
-      margin-bottom: 18px;
-      border-radius: 0 0 32px 32px;
-      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.9);
-      background: radial-gradient(circle at top, #1b130f, #050304);
-    }
-
-    .top-banner-img-wrap {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-    }
-
-    .top-banner-img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.08);
-      filter: saturate(1.1) contrast(1.05) brightness(0.9);
-    }
-
-    .top-banner-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top, rgba(242, 194, 107, 0.35), transparent 60%),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.9));
-      mix-blend-mode: multiply;
+      min-height: 420px;
+      max-height: 520px;
+      overflow: hidden;
+      border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.9);
+      margin-bottom: 26px;
+      background: radial-gradient(circle at top left, #3a2412 0, #120b07 40%, #050304 100%);
+      isolation: isolate;
     }
 
     .top-banner-gradient {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 10% 0%, rgba(242, 194, 107, 0.4), transparent 55%),
-        radial-gradient(circle at 90% 0%, rgba(242, 194, 107, 0.25), transparent 60%);
-      opacity: 0.7;
+        radial-gradient(circle at 10% 0%, rgba(242, 194, 107, 0.35), transparent 60%),
+        radial-gradient(circle at 80% 0%, rgba(255, 140, 90, 0.3), transparent 60%),
+        radial-gradient(circle at 50% 100%, rgba(80, 120, 255, 0.25), transparent 60%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      pointer-events: none;
     }
 
-    .top-banner-content {
+    .top-banner-noise {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='noStitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .top-banner-inner {
       position: relative;
       z-index: 2;
-      height: 100%;
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 32px;
+      padding: 26px 26px 30px;
       align-items: center;
-      padding: 0 40px;
-      color: #ffffff;
+      height: 100%;
     }
 
     .top-banner-left {
       display: flex;
       flex-direction: column;
       gap: 14px;
-      transform: translateY(18px);
+      animation: heroIn 0.9s 0.05s forwards;
       opacity: 0;
-      animation: heroIn 0.9s var(--transition-med) forwards;
+      transform: translateY(26px);
     }
 
-    .top-banner-logo-row {
-      display: flex;
+    .top-banner-pill {
+      display: inline-flex;
       align-items: center;
-      gap: 14px;
-    }
-
-    .top-banner-logo-wrap {
-      width: 60px;
-      height: 60px;
-      border-radius: 18px;
-      background: radial-gradient(circle at 20% 0%, #f2c26b 0, #b8863b 40%, #3a2614 100%);
-      box-shadow: 0 0 26px rgba(242, 194, 107, 0.95);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-    }
-
-    .top-banner-logo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .top-banner-logo-text {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .top-banner-logo-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 800;
-      font-size: 22px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .top-banner-logo-sub {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.78);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .top-banner-kicker {
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(12, 7, 5, 0.8);
+      border: 1px solid rgba(242, 194, 107, 0.5);
+      box-shadow: 0 0 18px rgba(242, 194, 107, 0.4);
       font-size: 11px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--accent-strong);
+    }
+
+    .top-banner-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(242, 194, 107, 0.9);
     }
 
     .top-banner-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 800;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
       font-size: 32px;
-      line-height: 1.1;
-      letter-spacing: 0.06em;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
-      text-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+      color: #fff7ea;
+      text-shadow: 0 0 22px rgba(0, 0, 0, 0.9);
     }
 
     .top-banner-title span.accent {
-      background: linear-gradient(120deg, #f2c26b, #ffe3b0);
+      background: linear-gradient(120deg, #ffd27f, #f2c26b, #ff9f6b);
       -webkit-background-clip: text;
+      background-clip: text;
       color: transparent;
+      text-shadow: 0 0 18px rgba(242, 194, 107, 0.7);
     }
 
     .top-banner-sub {
       font-size: 14px;
+      color: var(--subtext);
       max-width: 520px;
-      color: rgba(255, 255, 255, 0.86);
+      line-height: 1.6;
     }
 
     .top-banner-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 10px;
+      margin-top: 6px;
     }
 
-    .btn-primary {
-      padding: 11px 24px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(242, 194, 107, 0.9);
-      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.8), rgba(242, 194, 107, 0.2));
-      color: #2b1a0d;
-      font-size: 12px;
+    .btn-banner-primary {
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f2c26b, #ff9f6b);
+      color: #120b07;
+      font-size: 13px;
       font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      box-shadow: 0 0 26px rgba(242, 194, 107, 0.95);
-      cursor: pointer;
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 0 32px rgba(242, 194, 107, 1);
-      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.95), rgba(242, 194, 107, 0.3));
-      color: #1b1008;
+    .btn-banner-primary span.icon {
+      font-size: 16px;
+      transform: translateY(1px);
     }
 
-    .btn-ghost {
-      padding: 11px 20px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      background: rgba(0, 0, 0, 0.35);
-      color: rgba(255, 255, 255, 0.86);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
-    }
-
-    .btn-ghost:hover {
+    .btn-banner-primary:hover {
       transform: translateY(-2px);
-      background: rgba(0, 0, 0, 0.6);
-      border-color: rgba(242, 194, 107, 0.7);
-      color: #ffffff;
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.9);
+      filter: brightness(1.05);
+    }
+
+    .btn-banner-ghost {
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 194, 107, 0.6);
+      background: rgba(12, 7, 5, 0.7);
+      color: var(--accent-strong);
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .btn-banner-ghost:hover {
+      background: rgba(242, 194, 107, 0.12);
+      transform: translateY(-1px);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
     }
 
     .top-banner-meta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
       margin-top: 10px;
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.78);
+      color: var(--muted);
     }
 
-    .top-banner-meta-item {
+    .top-banner-meta-pill {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(12, 7, 5, 0.8);
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.16);
     }
 
-    .top-banner-meta-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #3cff8f;
-      box-shadow: 0 0 10px rgba(60, 255, 143, 0.9);
+    .top-banner-meta-pill span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(242, 194, 107, 0.9);
     }
 
     .top-banner-right {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      transform: translateY(24px);
+      animation: heroSideIn 0.9s 0.15s forwards;
       opacity: 0;
-      animation: heroSideIn 1s var(--transition-med) forwards;
+      transform: translateY(30px) translateX(12px);
     }
 
     .top-banner-orbit {
+      position: relative;
       width: 260px;
       height: 260px;
       border-radius: 50%;
-      border: 1px solid rgba(242, 194, 107, 0.4);
-      box-shadow: 0 0 40px rgba(242, 194, 107, 0.6);
-      position: relative;
+      background: radial-gradient(circle at 30% 0%, rgba(242, 194, 107, 0.4), transparent 60%), radial-gradient(circle at 70% 100%, rgba(255, 140, 90, 0.4), transparent 60%);
+      box-shadow: 0 0 40px rgba(242, 194, 107, 0.6), 0 0 120px rgba(0, 0, 0, 0.9);
       display: flex;
       align-items: center;
       justify-content: center;
-      background:
-        radial-gradient(circle at 30% 0%, rgba(242, 194, 107, 0.3), transparent 60%),
-        radial-gradient(circle at 70% 100%, rgba(242, 194, 107, 0.2), transparent 60%),
-        radial-gradient(circle at center, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 1));
-      overflow: hidden;
-    }
-
-    .top-banner-orbit-inner {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 1px solid rgba(242, 194, 107, 0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.9);
-    }
-
-    .top-banner-orbit-core {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 30% 0%, rgba(242, 194, 107, 0.9), rgba(242, 194, 107, 0.2)),
-        radial-gradient(circle at 70% 100%, rgba(242, 194, 107, 0.6), rgba(0, 0, 0, 1));
-      box-shadow: 0 0 40px rgba(242, 194, 107, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #1b1008;
-      font-family: "Poppins", system-ui;
-      font-weight: 800;
-      font-size: 18px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      overflow: visible;
     }
 
     .top-banner-orbit-ring {
       position: absolute;
-      width: 210px;
-      height: 210px;
+      inset: -18px;
       border-radius: 50%;
       border: 1px dashed rgba(242, 194, 107, 0.4);
+      box-shadow: 0 0 30px rgba(242, 194, 107, 0.4);
       animation: orbitSpin 18s linear infinite;
+      pointer-events: none;
     }
 
-    .top-banner-orbit-pill {
+    .top-banner-orbit-ring::before,
+    .top-banner-orbit-ring::after {
+      content: "";
       position: absolute;
-      top: 10px;
-      right: 18px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(242, 194, 107, 0.9);
+    }
+
+    .top-banner-orbit-ring::before {
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .top-banner-orbit-ring::after {
+      bottom: -5px;
+      right: 18%;
+    }
+
+    .top-banner-logo-wrap {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 0%, #fff7ea, #f2c26b 40%, #120b07 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 40px rgba(242, 194, 107, 0.9), 0 0 80px rgba(0, 0, 0, 0.9);
+      animation: logoPulse 3.2s ease-in-out infinite;
+      overflow: hidden;
+    }
+
+    .top-banner-logo-inner-glow {
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 0%, rgba(255, 255, 255, 0.9), rgba(242, 194, 107, 0.7), rgba(18, 11, 7, 0.9));
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .top-banner-logo-img {
+      position: relative;
+      width: 72%;
+      height: 72%;
+      border-radius: 22%;
+      overflow: hidden;
+      box-shadow: 0 0 26px rgba(0, 0, 0, 0.8);
+      background: #120b07;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .top-banner-logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .top-banner-logo-badge {
+      position: absolute;
+      bottom: -4px;
+      right: 12px;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(12, 7, 5, 0.9);
       border: 1px solid rgba(242, 194, 107, 0.7);
-      color: rgba(242, 194, 107, 0.95);
       font-size: 10px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
+      color: var(--accent-strong);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
     }
 
-    .top-banner-orbit-pill.bottom {
-      top: auto;
-      bottom: 10px;
-      left: 18px;
+    .top-banner-floating-label {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(12, 7, 5, 0.9);
+      border: 1px solid rgba(242, 194, 107, 0.7);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
     }
 
-    @media (max-width: 980px) {
-      .top-banner {
-        height: auto;
-        min-height: 420px;
-      }
-      .top-banner-content {
-        grid-template-columns: minmax(0, 1fr);
-        padding: 24px 18px 30px;
-        row-gap: 24px;
-      }
-      .top-banner-right {
-        order: -1;
-      }
-      .top-banner-orbit {
-        width: 220px;
-        height: 220px;
-      }
-      .top-banner-orbit-inner {
-        width: 160px;
-        height: 160px;
-      }
-      .top-banner-orbit-core {
-        width: 100px;
-        height: 100px;
-      }
+    .top-banner-floating-label span.dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(242, 194, 107, 0.9);
+      margin-right: 6px;
     }
 
-    @media (max-width: 720px) {
-      .top-banner-logo-title {
-        font-size: 18px;
-      }
-      .top-banner-title {
-        font-size: 26px;
-      }
-      .top-banner-content {
-        padding-inline: 16px;
-      }
+    .top-banner-ad-slot {
+      margin-top: 12px;
+      width: 100%;
+      max-width: 360px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: rgba(12, 7, 5, 0.85);
+      border: 1px dashed rgba(242, 194, 107, 0.4);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.8);
     }
 
-    .nav-shell {
-      position: relative;
-      z-index: 10;
-      margin-top: -26px;
+    .top-banner-ad-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .top-banner-ad-inner {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      padding: 4px;
     }
 
     .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(18, 12, 8, 0.96), rgba(10, 6, 4, 0.96));
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
-      position: sticky;
-      top: 14px;
-      z-index: 40;
+      padding: 10px 0 12px;
       backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(5, 3, 4, 0.92), rgba(5, 3, 4, 0.7), transparent);
     }
 
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .nav-logo-wrap {
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       border-radius: 12px;
-      background: radial-gradient(circle at 20% 0%, #f2c26b 0, #b8863b 40%, #3a2614 100%);
-      box-shadow: 0 0 18px rgba(242, 194, 107, 0.9);
+      background: radial-gradient(circle at 30% 0%, #f2c26b, #c88b3a 40%, #120b07 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      font-family: "Poppins", system-ui;
+      color: #120b07;
       font-weight: 800;
-      font-size: 16px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-size: 18px;
+      box-shadow: 0 0 22px rgba(242, 194, 107, 0.9);
     }
 
     .nav-title-block {
@@ -517,46 +523,58 @@
     }
 
     .nav-title-main {
-      font-family: "Poppins", system-ui;
-      font-weight: 800;
-      font-size: 18px;
-      letter-spacing: 0.08em;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #f7f2ec;
     }
 
     .nav-title-sub {
       font-size: 11px;
-      color: var(--subtext);
+      color: var(--muted);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 14px;
-      font-size: 13px;
+      gap: 16px;
+      font-size: 12px;
       color: var(--subtext);
     }
 
     .nav-link {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid transparent;
+      position: relative;
       cursor: pointer;
-      transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+      padding: 4px 0;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f2c26b, #ff9f6b);
+      transition: width var(--transition-fast);
     }
 
     .nav-link:hover {
-      background: rgba(242, 194, 107, 0.08);
-      border-color: rgba(242, 194, 107, 0.4);
-      transform: translateY(-1px);
-      color: #f7f2ec;
+      color: var(--accent-strong);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
     }
 
     .nav-link.active {
-      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.4), rgba(242, 194, 107, 0.08));
-      border-color: rgba(242, 194, 107, 0.7);
-      color: #f7f2ec;
+      color: var(--accent-strong);
+    }
+
+    .nav-link.active::after {
+      width: 100%;
     }
 
     .nav-right {
@@ -566,211 +584,122 @@
     }
 
     .nav-cta {
-      padding: 7px 16px;
+      padding: 7px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(242, 194, 107, 0.9);
-      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.6), rgba(242, 194, 107, 0.16));
-      color: #2b1a0d;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      box-shadow: 0 0 20px rgba(242, 194, 107, 0.9);
-      cursor: pointer;
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+      background: rgba(242, 194, 107, 0.12);
+      border: 1px solid rgba(242, 194, 107, 0.7);
+      color: var(--accent-strong);
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
     }
 
     .nav-cta:hover {
-      transform: translateY(-1px) scale(1.03);
-      box-shadow: 0 0 26px rgba(242, 194, 107, 1);
-      background: radial-gradient(circle at 0 0, rgba(242, 194, 107, 0.75), rgba(242, 194, 107, 0.2));
+      background: rgba(242, 194, 107, 0.2);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
     }
 
     .nav-toggle {
-      padding: 7px 12px;
+      padding: 6px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: rgba(10, 6, 4, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(12, 7, 5, 0.9);
       color: var(--subtext);
       font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      cursor: pointer;
       transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
     }
 
     .nav-toggle:hover {
+      background: rgba(242, 194, 107, 0.12);
+      color: var(--accent-strong);
+      border-color: rgba(242, 194, 107, 0.7);
       transform: translateY(-1px);
-      background: rgba(242, 194, 107, 0.12);
-      border-color: rgba(242, 194, 107, 0.6);
-      color: #f7f2ec;
-    }
-
-    .nav-menu-toggle {
-      display: none;
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(0, 0, 0, 0.6);
-      color: #f7f2ec;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    @media (max-width: 860px) {
-      .nav-links {
-        display: none;
-      }
-      .nav-menu-toggle {
-        display: flex;
-      }
-    }
-
-    .nav-mobile {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(18px);
-      z-index: 50;
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .nav-mobile.open {
-      display: flex;
-    }
-
-    .nav-mobile-link {
-      font-size: 18px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #f7f2ec;
-      padding: 8px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(242, 194, 107, 0.6);
-      background: rgba(0, 0, 0, 0.6);
-      cursor: pointer;
-      transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
-    }
-
-    .nav-mobile-link:hover {
-      transform: translateY(-2px);
-      background: rgba(242, 194, 107, 0.12);
-      border-color: rgba(242, 194, 107, 0.9);
-    }
-
-    .nav-mobile-close {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(0, 0, 0, 0.6);
-      color: #f7f2ec;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
     }
 
     .hero {
-      margin-top: 40px;
+      margin-top: 10px;
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 26px;
-      align-items: stretch;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: flex-start;
     }
 
     .hero-main {
-      background: radial-gradient(circle at top left, rgba(242, 194, 107, 0.18), rgba(18, 12, 8, 0.98));
+      padding: 18px 18px 20px;
       border-radius: var(--radius-lg);
-      padding: 24px 24px 26px;
+      background: radial-gradient(circle at top left, rgba(242, 194, 107, 0.12), transparent 60%), radial-gradient(circle at bottom right, rgba(80, 120, 255, 0.12), transparent 60%), rgba(12, 7, 5, 0.96);
       border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-      transform: translateY(18px);
+      animation: heroIn 0.7s 0.1s forwards;
       opacity: 0;
-      animation: heroIn 0.9s var(--transition-med) forwards;
-    }
-
-    .hero-main::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at top left, rgba(242, 194, 107, 0.18), transparent 55%);
-      opacity: 0.7;
-      pointer-events: none;
-      mix-blend-mode: screen;
+      transform: translateY(26px);
     }
 
     .hero-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      background: rgba(10, 6, 4, 0.96);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: var(--subtext);
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(12, 7, 5, 0.9);
+      border: 1px solid rgba(242, 194, 107, 0.6);
       font-size: 11px;
-      margin-bottom: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+      margin-bottom: 10px;
     }
 
     .hero-pill-dot {
       width: 7px;
       height: 7px;
-      border-radius: 999px;
-      background: #3cff8f;
-      box-shadow: 0 0 10px rgba(60, 255, 143, 0.9);
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(242, 194, 107, 0.9);
     }
 
     .hero-title {
       font-family: "Poppins", system-ui;
-      font-weight: 800;
-      font-size: 32px;
-      line-height: 1.1;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 1.25;
       margin-bottom: 10px;
     }
 
     .hero-title span.accent {
-      background: linear-gradient(120deg, #f2c26b, #ffe3b0);
+      background: linear-gradient(120deg, #ffd27f, #f2c26b, #ff9f6b);
       -webkit-background-clip: text;
+      background-clip: text;
       color: transparent;
+      text-shadow: 0 0 18px rgba(242, 194, 107, 0.7);
     }
 
     .hero-sub {
       font-size: 14px;
       color: var(--subtext);
-      max-width: 520px;
-      margin-bottom: 18px;
+      line-height: 1.7;
+      margin-bottom: 14px;
     }
 
     .hero-pills-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
     .hero-pill-tag {
       font-size: 11px;
-      padding: 5px 11px;
-      border-radius: var(--radius-pill);
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(12, 7, 5, 0.9);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(10, 6, 4, 0.96);
       color: var(--subtext);
     }
 
@@ -778,114 +707,151 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
+    }
+
+    .btn-primary {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f2c26b, #ff9f6b);
+      color: #120b07;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.95);
+      filter: brightness(1.05);
+    }
+
+    .btn-ghost {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 194, 107, 0.7);
+      background: transparent;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 500;
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(242, 194, 107, 0.12);
+      transform: translateY(-1px);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.8);
     }
 
     .hero-meta {
       display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      font-size: 11px;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
       color: var(--subtext);
+      margin-top: 4px;
     }
 
     .hero-meta-item {
       display: flex;
-      align-items: center;
-      gap: 6px;
+      align-items: flex-start;
+      gap: 8px;
     }
 
     .hero-meta-dot {
       width: 6px;
       height: 6px;
-      border-radius: 999px;
-      background: rgba(242, 194, 107, 0.9);
+      border-radius: 50%;
+      background: rgba(242, 194, 107, 0.8);
+      margin-top: 5px;
       box-shadow: 0 0 10px rgba(242, 194, 107, 0.9);
     }
 
     .hero-side {
-      background: radial-gradient(circle at top, rgba(242, 194, 107, 0.22), rgba(18, 12, 8, 0.98));
+      padding: 16px 16px 18px;
       border-radius: var(--radius-lg);
-      padding: 18px 18px 20px;
+      background: rgba(12, 7, 5, 0.96);
       border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-strong);
+      box-shadow: var(--shadow-soft);
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      position: relative;
-      overflow: hidden;
-      transform: translateY(24px) translateX(12px);
+      gap: 10px;
+      animation: heroSideIn 0.7s 0.2s forwards;
       opacity: 0;
-      animation: heroSideIn 1s var(--transition-med) forwards;
-    }
-
-    .hero-side::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at top, rgba(242, 194, 107, 0.18), transparent 60%);
-      opacity: 0.7;
-      pointer-events: none;
-      mix-blend-mode: screen;
+      transform: translateY(30px) translateX(12px);
     }
 
     .hero-side-label {
       font-size: 11px;
-      text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--subtext);
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
     .hero-side-title {
       font-family: "Poppins", system-ui;
-      font-weight: 700;
-      font-size: 16px;
-      margin-bottom: 4px;
+      font-weight: 600;
+      font-size: 15px;
     }
 
     .hero-side-sub {
       font-size: 12px;
       color: var(--subtext);
-      margin-bottom: 8px;
     }
 
     .hero-grid-preview {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
+      margin-top: 4px;
     }
 
     .preview-card {
-      border-radius: 16px;
-      padding: 10px 10px 12px;
-      background: rgba(18, 12, 8, 0.98);
+      padding: 10px 10px 11px;
+      border-radius: 14px;
+      background: rgba(18, 11, 7, 0.96);
       border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.7);
       cursor: pointer;
-      transform: translateY(0) translateZ(0);
-      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .preview-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top left, rgba(242, 194, 107, 0.2), transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      pointer-events: none;
+    }
+
+    .preview-card:hover::before {
+      opacity: 1;
     }
 
     .preview-card:hover {
-      transform: translateY(-6px) translateZ(0) rotate3d(1, -1, 0, 4deg);
-      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
       border-color: rgba(242, 194, 107, 0.7);
-      background: rgba(22, 14, 9, 1);
+      background: rgba(18, 11, 7, 0.98);
     }
 
     .preview-tag {
       font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--subtext);
+      color: var(--muted);
+      margin-bottom: 4px;
     }
 
     .preview-title {
       font-size: 13px;
       font-weight: 600;
+      margin-bottom: 2px;
     }
 
     .preview-meta {
@@ -895,29 +861,49 @@
 
     .hero-side-footer {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      font-size: 11px;
-      color: var(--subtext);
+      justify-content: space-between;
       margin-top: 6px;
+      font-size: 11px;
     }
 
     .hero-side-tag {
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(10, 6, 4, 0.96);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .hero-side-ad {
+      margin-top: 6px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(12, 7, 5, 0.96);
+      border: 1px dashed rgba(242, 194, 107, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero-side-ad-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .hero-side-ad-inner {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      padding: 4px;
     }
 
     .section {
-      margin-top: 40px;
+      margin-top: 34px;
     }
 
     .section-header {
       display: flex;
-      justify-content: space-between;
       align-items: flex-end;
-      gap: 10px;
+      justify-content: space-between;
+      gap: 16px;
       margin-bottom: 16px;
     }
 
@@ -929,53 +915,58 @@
 
     .section-kicker {
       font-size: 11px;
-      text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--subtext);
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
     .section-title {
       font-family: "Poppins", system-ui;
-      font-weight: 700;
-      font-size: 20px;
+      font-weight: 600;
+      font-size: 18px;
     }
 
     .section-sub {
       font-size: 13px;
       color: var(--subtext);
+      max-width: 520px;
     }
 
     .section-cta-inline {
-      font-size: 11px;
-      color: var(--accent);
-      cursor: pointer;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(242, 194, 107, 0.7);
+      background: transparent;
+      color: var(--accent-strong);
+      font-size: 12px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(242, 194, 107, 0.5);
-      background: rgba(10, 6, 4, 0.96);
-      transition: background var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .section-cta-inline span {
+      font-size: 14px;
+      transform: translateY(1px);
     }
 
     .section-cta-inline:hover {
       background: rgba(242, 194, 107, 0.12);
       transform: translateY(-1px);
-      border-color: rgba(242, 194, 107, 0.7);
-      color: #f7f2ec;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
     }
 
     .portfolio-grid {
       display: grid;
-      grid-template-columns: 1.4fr 1.1fr;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
       gap: 18px;
+      align-items: flex-start;
     }
 
     .portfolio-main-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+      gap: 14px;
     }
 
     .portfolio-card {
@@ -989,8 +980,7 @@
       gap: 8px;
       position: relative;
       overflow: hidden;
-      cursor: pointer;
-      transform: translateY(18px);
+      transform: translateY(24px);
       opacity: 0;
     }
 
@@ -1037,9 +1027,14 @@
       font-size: 11px;
       padding: 3px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(10, 6, 4, 0.96);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.9);
       color: var(--subtext);
+    }
+
+    body.dark .portfolio-pill {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(255, 255, 255, 0.12);
     }
 
     .portfolio-title {
@@ -1109,10 +1104,15 @@
       align-items: center;
       padding: 6px 8px;
       border-radius: 10px;
-      background: rgba(18, 12, 8, 0.98);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.04);
       cursor: pointer;
       transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    body.dark .portfolio-side-item {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(255, 255, 255, 0.06);
     }
 
     .portfolio-side-item:hover {
@@ -1128,6 +1128,29 @@
       background: rgba(242, 194, 107, 0.12);
       border: 1px solid rgba(242, 194, 107, 0.6);
       color: var(--text);
+    }
+
+    .portfolio-side-ad {
+      margin-top: 6px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(12, 7, 5, 0.96);
+      border: 1px dashed rgba(242, 194, 107, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .portfolio-side-ad-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .portfolio-side-ad-inner {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      padding: 4px;
     }
 
     .feature-strip {
@@ -1174,6 +1197,12 @@
       opacity: 1;
     }
 
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-strong);
+      border-color: rgba(242, 194, 107, 0.7);
+    }
+
     .feature-title {
       font-family: "Poppins", system-ui;
       font-weight: 600;
@@ -1188,26 +1217,27 @@
       color: var(--subtext);
     }
 
-    .feature-meta {
-      font-size: 11px;
-      color: var(--muted);
+    .feature-ad {
+      margin-top: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(12, 7, 5, 0.96);
+      border: 1px dashed rgba(242, 194, 107, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
     }
 
-    .feature-footer {
-      margin-top: 4px;
-      font-size: 11px;
-      color: var(--subtext);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .feature-footer-pill {
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(242, 194, 107, 0.6);
-      background: rgba(242, 194, 107, 0.12);
+    .feature-ad-label {
       font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .feature-ad-inner {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      padding: 4px;
     }
 
     .roadmap {
@@ -1249,9 +1279,14 @@
     .roadmap-phase {
       padding: 8px 10px;
       border-radius: 14px;
-      background: rgba(18, 12, 8, 0.98);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.04);
       transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    body.dark .roadmap-phase {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(255, 255, 255, 0.06);
     }
 
     .roadmap-phase:hover {
@@ -1285,420 +1320,36 @@
     .roadmap-metric {
       padding: 6px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(18, 12, 8, 0.98);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.9);
     }
 
-    .roadmap-metric strong {
-      color: var(--accent);
-      margin-right: 4px;
+    body.dark .roadmap-metric {
+      background: rgba(10, 6, 4, 0.96);
+      border-color: rgba(255, 255, 255, 0.08);
     }
 
-    .about-grid {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
-      gap: 20px;
-    }
-
-    .about-card {
-      background: var(--card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 18px 18px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .about-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 700;
-      font-size: 18px;
-    }
-
-    .about-sub {
-      font-size: 13px;
-      color: var(--subtext);
-    }
-
-    .about-list {
-      margin-top: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--subtext);
-    }
-
-    .about-list-item {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-    }
-
-    .about-list-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-      margin-top: 5px;
-    }
-
-    .about-pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .about-pill {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(242, 194, 107, 0.6);
-      background: rgba(242, 194, 107, 0.12);
-      color: var(--text);
-    }
-
-    .about-metrics {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+    .roadmap-ad {
       margin-top: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(12, 7, 5, 0.96);
+      border: 1px dashed rgba(242, 194, 107, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
     }
 
-    .about-metric-card {
-      background: rgba(18, 12, 8, 0.98);
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 10px;
-      font-size: 12px;
-      color: var(--subtext);
-    }
-
-    .about-metric-card strong {
-      display: block;
-      font-size: 16px;
-      color: var(--accent);
+    .roadmap-ad-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
       margin-bottom: 4px;
     }
 
-    .levels-grid {
-      margin-top: 40px;
-      background: var(--card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 18px 18px 20px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
-      gap: 18px;
-    }
-
-    .levels-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 700;
-      font-size: 18px;
-      margin-bottom: 6px;
-    }
-
-    .levels-sub {
-      font-size: 13px;
-      color: var(--subtext);
-      margin-bottom: 10px;
-    }
-
-    .levels-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--subtext);
-    }
-
-    .levels-item {
-      padding: 8px 10px;
-      border-radius: 14px;
-      background: rgba(18, 12, 8, 0.98);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .levels-item-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--subtext);
-    }
-
-    .levels-item-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .levels-item-meta {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .levels-progress {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--subtext);
-    }
-
-    .levels-progress-bar {
-      width: 100%;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .levels-progress-fill {
-      position: absolute;
-      inset: 0;
-      width: 60%;
-      background: linear-gradient(90deg, rgba(242, 194, 107, 0.2), rgba(242, 194, 107, 0.9));
-      border-radius: 999px;
-      box-shadow: 0 0 18px rgba(242, 194, 107, 0.8);
-    }
-
-    .levels-progress-label {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .tools-grid {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .tool-card {
-      background: var(--card);
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 14px 14px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--subtext);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .tool-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at top, rgba(242, 194, 107, 0.16), transparent 60%);
-      opacity: 0;
-      transition: opacity var(--transition-med);
-      pointer-events: none;
-    }
-
-    .tool-card:hover::before {
-      opacity: 1;
-    }
-
-    .tool-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--text);
-    }
-
-    .tool-pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--subtext);
-    }
-
-    .tool-pill {
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(18, 12, 8, 0.98);
-    }
-
-    .tool-meta {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .tool-footer {
-      margin-top: 4px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--subtext);
-    }
-
-    .tool-footer-pill {
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(242, 194, 107, 0.6);
-      background: rgba(242, 194, 107, 0.12);
-      font-size: 10px;
-    }
-
-    .news-grid {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-      gap: 18px;
-    }
-
-    .news-main {
-      background: var(--card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 16px 16px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .news-main-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .news-main-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 700;
-      font-size: 16px;
-    }
-
-    .news-main-sub {
-      font-size: 12px;
-      color: var(--subtext);
-    }
-
-    .news-list {
-      margin-top: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--subtext);
-    }
-
-    .news-item {
-      padding: 8px 10px;
-      border-radius: 14px;
-      background: rgba(18, 12, 8, 0.98);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      cursor: pointer;
-      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
-    }
-
-    .news-item:hover {
-      background: rgba(242, 194, 107, 0.12);
-      border-color: rgba(242, 194, 107, 0.6);
-      transform: translateY(-2px);
-    }
-
-    .news-item-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .news-item-meta {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .news-side {
-      background: var(--card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 16px 16px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 12px;
-      color: var(--subtext);
-    }
-
-    .news-side-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    .news-side-pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 11px;
-    }
-
-    .news-side-pill {
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(18, 12, 8, 0.98);
-    }
-
-    .cta-banner {
-      margin-top: 40px;
-      background: radial-gradient(circle at top left, rgba(242, 194, 107, 0.22), rgba(18, 12, 8, 0.98));
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 18px 18px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: flex-start;
-    }
-
-    .cta-banner-title {
-      font-family: "Poppins", system-ui;
-      font-weight: 700;
-      font-size: 18px;
-    }
-
-    .cta-banner-sub {
-      font-size: 13px;
-      color: var(--subtext);
-      max-width: 520px;
-    }
-
-    .cta-banner-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 8px;
+    .roadmap-ad-inner {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      padding: 4px;
     }
 
     footer {
@@ -1714,7 +1365,44 @@
       font-weight: 500;
     }
 
+    .footer-ad {
+      margin: 14px auto 0;
+      max-width: 728px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: rgba(12, 7, 5, 0.96);
+      border: 1px dashed rgba(242, 194, 107, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .footer-ad-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .footer-ad-inner {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      padding: 4px;
+    }
+
+    @media (max-width: 1120px) {
+      .top-banner-inner {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      }
+    }
+
     @media (max-width: 980px) {
+      .top-banner-inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+      }
+      .top-banner-right {
+        justify-content: flex-start;
+      }
       .hero {
         grid-template-columns: minmax(0, 1fr);
       }
@@ -1727,20 +1415,14 @@
       .roadmap {
         grid-template-columns: minmax(0, 1fr);
       }
-      .about-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .levels-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .news-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
     }
 
     @media (max-width: 760px) {
       .nav {
         padding-inline: 12px;
+      }
+      .nav-links {
+        display: none;
       }
       .hero-title {
         font-size: 26px;
@@ -1754,8 +1436,11 @@
       .page-shell {
         padding-inline: 14px;
       }
-      .tools-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .top-banner-inner {
+        padding: 20px 18px 22px;
+      }
+      .top-banner-title {
+        font-size: 26px;
       }
     }
 
@@ -1763,11 +1448,16 @@
       .feature-strip {
         grid-template-columns: minmax(0, 1fr);
       }
-      .tools-grid {
+      .hero-grid-preview {
         grid-template-columns: minmax(0, 1fr);
       }
-      .about-metrics {
-        grid-template-columns: minmax(0, 1fr);
+      .top-banner-orbit {
+        width: 220px;
+        height: 220px;
+      }
+      .top-banner-logo-wrap {
+        width: 140px;
+        height: 140px;
       }
     }
 
@@ -1786,6 +1476,12 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes logoPulse {
+      0% { transform: scale(1); box-shadow: 0 0 40px rgba(242, 194, 107, 0.9), 0 0 80px rgba(0, 0, 0, 0.9); }
+      50% { transform: scale(1.04); box-shadow: 0 0 60px rgba(242, 194, 107, 1), 0 0 110px rgba(0, 0, 0, 1); }
+      100% { transform: scale(1); box-shadow: 0 0 40px rgba(242, 194, 107, 0.9), 0 0 80px rgba(0, 0, 0, 0.9); }
+    }
+
     @keyframes orbitSpin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
@@ -1798,54 +1494,66 @@
   <div class="bg-orb orb-3"></div>
 
   <section class="top-banner">
-    <div class="top-banner-img-wrap">
-      <img src="assets/logo.png" alt="AlaeAI Banner" class="top-banner-img">
-    </div>
-    <div class="top-banner-overlay"></div>
     <div class="top-banner-gradient"></div>
-    <div class="top-banner-content">
+    <div class="top-banner-noise"></div>
+    <div class="top-banner-inner">
       <div class="top-banner-left">
-        <div class="top-banner-logo-row">
-          <div class="top-banner-logo-wrap">
-            <img src="assets/logo.png" alt="ALAEAI Logo">
-          </div>
-          <div class="top-banner-logo-text">
-            <div class="top-banner-logo-title">ALAEAI</div>
-            <div class="top-banner-logo-sub">Build • Learn • Create</div>
-          </div>
+        <div class="top-banner-pill">
+          <span class="top-banner-pill-dot"></span>
+          <span>Warm AI Portfolio • ALAEAI</span>
         </div>
-        <div class="top-banner-kicker">Warm AI Portfolio • ALAEAI</div>
         <h1 class="top-banner-title">
-          A warm space to<br>
-          <span class="accent">build, learn, and show</span>
-          your work.
+          ALAEAI — <span class="accent">Build. Learn. Create.</span>
         </h1>
         <p class="top-banner-sub">
-          ALAEAI is your personal, warm portfolio and workspace — tutorials, tools, news, and projects in one calm,
-          premium environment. Every section is designed to feel intentional, focused, and alive.
+          A warm, cinematic portfolio and workspace for your AI journey — tutorials, tools, news, and projects in one calm,
+          premium environment. Designed to feel intentional, focused, and alive.
         </p>
         <div class="top-banner-actions">
-          <button class="btn-primary" onclick="scrollToId('hero')">Explore the Homepage</button>
-          <button class="btn-ghost" onclick="scrollToId('portfolio')">View Portfolio Grid</button>
+          <button class="btn-banner-primary" onclick="scrollToId('hero')">
+            Explore the Homepage
+            <span class="icon">↘</span>
+          </button>
+          <button class="btn-banner-ghost" onclick="location.href='tutorials.html'">
+            Start Tutorials
+          </button>
         </div>
         <div class="top-banner-meta-row">
-          <div class="top-banner-meta-item">
-            <span class="top-banner-meta-dot"></span>
-            <span>Warm, minimal, and focused on real progress.</span>
+          <div class="top-banner-meta-pill">
+            <span class="dot"></span>
+            <span>Guided AI tutorials • Level-based learning</span>
           </div>
-          <div class="top-banner-meta-item">
-            <span class="top-banner-meta-dot"></span>
-            <span>Built to grow into a full workspace over time.</span>
+          <div class="top-banner-meta-pill">
+            <span class="dot"></span>
+            <span>News, tools, and projects in one place</span>
+          </div>
+        </div>
+        <div class="top-banner-ad-slot">
+          <div class="top-banner-ad-label">Sponsored • Banner</div>
+          <div class="top-banner-ad-inner">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-6065282700750014"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
           </div>
         </div>
       </div>
       <div class="top-banner-right">
         <div class="top-banner-orbit">
           <div class="top-banner-orbit-ring"></div>
-          <div class="top-banner-orbit-inner">
-            <div class="top-banner-orbit-core">AI</div>
-            <div class="top-banner-orbit-pill">Tutorials • Tools</div>
-            <div class="top-banner-orbit-pill bottom">News • Portfolio</div>
+          <div class="top-banner-logo-wrap">
+            <div class="top-banner-logo-inner-glow"></div>
+            <div class="top-banner-logo-img">
+              <img src="assets/logo.png" alt="AlaeAI Logo">
+            </div>
+            <div class="top-banner-floating-label">
+              <span class="dot"></span> LIVE PORTFOLIO
+            </div>
+            <div class="top-banner-logo-badge">
+              ALAEAI • WARM WORKSPACE
+            </div>
           </div>
         </div>
       </div>
@@ -1853,53 +1561,25 @@
   </section>
 
   <div class="page-shell">
-    <div class="nav-shell">
-      <header class="nav">
-        <div class="nav-left">
-          <div class="nav-logo-wrap">A</div>
-          <div class="nav-title-block">
-            <div class="nav-title-main">ALAEAI</div>
-            <div class="nav-title-sub">Warm Portfolio • Build. Learn. Create.</div>
-          </div>
+    <header class="nav">
+      <div class="nav-left">
+        <div class="nav-logo-wrap">A</div>
+        <div class="nav-title-block">
+          <div class="nav-title-main">ALAEAI</div>
+          <div class="nav-title-sub">Warm Portfolio • Build. Learn. Create.</div>
         </div>
-        <nav class="nav-links">
-          <span class="nav-link active" onclick="scrollToId('hero')">Home</span>
-          <span class="nav-link" onclick="scrollToId('portfolio')">Portfolio</span>
-          <span class="nav-link" onclick="scrollToId('features')">Features</span>
-          <span class="nav-link" onclick="scrollToId('roadmap')">Roadmap</span>
-          <span class="nav-link" onclick="scrollToId('about')">About</span>
-          <span class="nav-link" onclick="scrollToId('tools')">Tools</span>
-          <span class="nav-link" onclick="scrollToId('news')">News</span>
-        </nav>
-        <div class="nav-right">
-          <button class="nav-cta" onclick="location.href='tutorials.html'">Start Tutorials</button>
-          <button class="nav-toggle" id="darkToggle">Dark Mode</button>
-          <button class="nav-menu-toggle" id="navMenuToggle">☰</button>
-        </div>
-      </header>
-    </div>
-
-    <div class="nav-mobile" id="navMobile">
-      <button class="nav-mobile-close" id="navMobileClose">✕</button>
-      <button class="nav-mobile-link" onclick="scrollToId('hero'); closeMobileNav();">Home</button>
-      <button class="nav-mobile-link" onclick="scrollToId('portfolio'); closeMobileNav();">Portfolio</button>
-      <button class="nav-mobile-link" onclick="scrollToId('features'); closeMobileNav();">Features</button>
-      <button class="nav-mobile-link" onclick="scrollToId('roadmap'); closeMobileNav();">Roadmap</button>
-      <button class="nav-mobile-link" onclick="scrollToId('about'); closeMobileNav();">About</button>
-      <button class="nav-mobile-link" onclick="scrollToId('tools'); closeMobileNav();">Tools</button>
-      <button class="nav-mobile-link" onclick="scrollToId('news'); closeMobileNav();">News</button>
-      <button class="nav-mobile-link" onclick="location.href='tutorials.html'">Start Tutorials</button>
-    </div>
-
-    <div class="ad-container">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-6065282700750014"
-           data-ad-slot="6794664785"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
+      </div>
+      <nav class="nav-links">
+        <span class="nav-link active" onclick="scrollToId('hero')">Home</span>
+        <span class="nav-link" onclick="scrollToId('portfolio')">Portfolio</span>
+        <span class="nav-link" onclick="scrollToId('features')">Features</span>
+        <span class="nav-link" onclick="scrollToId('roadmap')">Roadmap</span>
+      </nav>
+      <div class="nav-right">
+        <button class="nav-cta" onclick="location.href='tutorials.html'">Start Tutorials</button>
+        <button class="nav-toggle" id="darkToggle">Dark Mode</button>
+      </div>
+    </header>
 
     <section class="hero" id="hero">
       <div class="hero-main">
@@ -1920,7 +1600,6 @@
           <div class="hero-pill-tag">Guided AI tutorials</div>
           <div class="hero-pill-tag">Real projects &amp; experiments</div>
           <div class="hero-pill-tag">News &amp; tools in one place</div>
-          <div class="hero-pill-tag">Calm, focused design</div>
         </div>
         <div class="hero-actions">
           <button class="btn-primary" onclick="location.href='tutorials.html'">Resume Tutorials</button>
@@ -1971,6 +1650,18 @@
         <div class="hero-side-footer">
           <div class="hero-side-tag">Tutorials • News • Tools • Portfolio</div>
           <div style="font-size:11px;color:var(--accent);">Live • Active</div>
+        </div>
+
+        <div class="hero-side-ad">
+          <div class="hero-side-ad-label">Sponsored • Sidebar</div>
+          <div class="hero-side-ad-inner">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-6065282700750014"
+                 data-ad-slot="2345678901"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
         </div>
       </aside>
     </section>
@@ -2061,17 +1752,6 @@
           <div class="portfolio-side-sub">
             Instead of random sections, everything is grouped into clear pillars that match how you actually learn and build.
           </div>
-
-          <div class="ad-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-6065282700750014"
-                 data-ad-slot="4826976992"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-          </div>
-
           <div class="portfolio-side-list">
             <div class="portfolio-side-item" onclick="location.href='tutorials.html'">
               <span>Tutorials • Learn step by step</span>
@@ -2088,6 +1768,18 @@
             <div class="portfolio-side-item" onclick="scrollToId('hero')">
               <span>Homepage • Warm first impression</span>
               <span class="badge">Top</span>
+            </div>
+          </div>
+
+          <div class="portfolio-side-ad">
+            <div class="portfolio-side-ad-label">Sponsored • Portfolio</div>
+            <div class="portfolio-side-ad-inner">
+              <ins class="adsbygoogle"
+                   style="display:block"
+                   data-ad-client="ca-pub-6065282700750014"
+                   data-ad-slot="3456789012"
+                   data-ad-format="auto"
+                   data-full-width-responsive="true"></ins>
             </div>
           </div>
         </aside>
@@ -2112,10 +1804,16 @@
           <p>
             Follow structured, level-based tutorials that help you actually understand and apply what you learn.
           </p>
-          <div class="feature-meta">From foundations to advanced design — always calm, never chaotic.</div>
-          <div class="feature-footer">
-            <span class="feature-footer-pill">20+ levels planned</span>
-            <span>Foundations • Builder • Advanced</span>
+          <div class="feature-ad">
+            <div class="feature-ad-label">Sponsored • Tutorials</div>
+            <div class="feature-ad-inner">
+              <ins class="adsbygoogle"
+                   style="display:block"
+                   data-ad-client="ca-pub-6065282700750014"
+                   data-ad-slot="4567890123"
+                   data-ad-format="auto"
+                   data-full-width-responsive="true"></ins>
+            </div>
           </div>
         </article>
 
@@ -2125,11 +1823,6 @@
           <p>
             Stay updated with curated, focused news about AI, science, and innovation — not random noise.
           </p>
-          <div class="feature-meta">Designed to keep you aware without overwhelming you.</div>
-          <div class="feature-footer">
-            <span class="feature-footer-pill">Curated feed</span>
-            <span>AI • Science • Tools</span>
-          </div>
         </article>
 
         <article class="feature-card">
@@ -2138,11 +1831,6 @@
           <p>
             Calculators, generators, and helpers that make it easier to test ideas and ship projects faster.
           </p>
-          <div class="feature-meta">No overload — just what helps you think and build better.</div>
-          <div class="feature-footer">
-            <span class="feature-footer-pill">Builder mode</span>
-            <span>Dashboards • Helpers</span>
-          </div>
         </article>
 
         <article class="feature-card">
@@ -2151,24 +1839,9 @@
           <p>
             Built as a warm environment where every section has a purpose — no clutter, just progress.
           </p>
-          <div class="feature-meta">A portfolio that feels like a workspace, not just a gallery.</div>
-          <div class="feature-footer">
-            <span class="feature-footer-pill">Warm design</span>
-            <span>Intentional • Focused</span>
-          </div>
         </article>
       </div>
     </section>
-
-    <div class="ad-container">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-6065282700750014"
-           data-ad-slot="4678697983"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
 
     <section class="section" id="roadmap">
       <div class="roadmap">
@@ -2228,272 +1901,35 @@
               <strong>1</strong> warm portfolio homepage to welcome everyone
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="section" id="about">
-      <div class="section-header">
-        <div class="section-title-block">
-          <div class="section-kicker">About</div>
-          <div class="section-title">A calm, personal AI workspace.</div>
-          <div class="section-sub">
-            ALAEAI is built to feel like a warm studio — not a noisy dashboard.
-          </div>
-        </div>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-card">
-          <div class="about-title">Why this portfolio exists</div>
-          <div class="about-sub">
-            To give you a single, calm place where learning, building, and showing your work feel connected.
-          </div>
-          <div class="about-list">
-            <div class="about-list-item">
-              <div class="about-list-dot"></div>
-              <div>One home for tutorials, tools, news, and projects — not scattered tabs.</div>
-            </div>
-            <div class="about-list-item">
-              <div class="about-list-dot"></div>
-              <div>Designed to feel warm and focused, not cold or overloaded.</div>
-            </div>
-            <div class="about-list-item">
-              <div class="about-list-dot"></div>
-              <div>Built to grow with you — from first tutorial to full workspace.</div>
+          <div class="roadmap-ad">
+            <div class="roadmap-ad-label">Sponsored • Roadmap</div>
+            <div class="roadmap-ad-inner">
+              <ins class="adsbygoogle"
+                   style="display:block"
+                   data-ad-client="ca-pub-6065282700750014"
+                   data-ad-slot="5678901234"
+                   data-ad-format="auto"
+                   data-full-width-responsive="true"></ins>
             </div>
           </div>
-          <div class="about-pill-row">
-            <div class="about-pill">Warm design</div>
-            <div class="about-pill">Real projects</div>
-            <div class="about-pill">Calm learning</div>
-            <div class="about-pill">Future-ready</div>
-          </div>
-        </div>
-
-        <div class="about-card">
-          <div class="about-title">What you can do here</div>
-          <div class="about-sub">
-            Learn, build, and present — all inside one consistent, premium environment.
-          </div>
-          <div class="about-metrics">
-            <div class="about-metric-card">
-              <strong>Learn</strong>
-              Level-based tutorials, guided exercises, and structured paths.
-            </div>
-            <div class="about-metric-card">
-              <strong>Build</strong>
-              Mini projects, tools, and experiments that feel real.
-            </div>
-            <div class="about-metric-card">
-              <strong>Show</strong>
-              A portfolio that feels like a story, not just a list.
-            </div>
-            <div class="about-metric-card">
-              <strong>Grow</strong>
-              A roadmap that turns this into a full workspace.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="levels">
-      <div class="section-header">
-        <div class="section-title-block">
-          <div class="section-kicker">Tutorial Levels</div>
-          <div class="section-title">A path that grows with you.</div>
-          <div class="section-sub">
-            From foundations to advanced systems — each level is small enough to finish, big enough to matter.
-          </div>
-        </div>
-        <button class="section-cta-inline" onclick="location.href='tutorials.html'">
-          View All Levels
-          <span>↗</span>
-        </button>
-      </div>
-
-      <div class="levels-grid">
-        <div>
-          <div class="levels-title">Level-based learning</div>
-          <div class="levels-sub">
-            Each level is designed to feel like a calm, guided step — not a chaotic jump.
-          </div>
-          <div class="levels-list">
-            <div class="levels-item">
-              <div class="levels-item-header">
-                <span>Level 1–3</span>
-                <span>Foundations</span>
-              </div>
-              <div class="levels-item-title">Core AI &amp; logic</div>
-              <div class="levels-item-meta">Concepts, intuition, and simple hands-on tasks.</div>
-            </div>
-            <div class="levels-item">
-              <div class="levels-item-header">
-                <span>Level 4–8</span>
-                <span>Builder Mode</span>
-              </div>
-              <div class="levels-item-title">Projects &amp; tools</div>
-              <div class="levels-item-meta">Spam detectors, dashboards, and small systems.</div>
-            </div>
-            <div class="levels-item">
-              <div class="levels-item-header">
-                <span>Level 9–12</span>
-                <span>Advanced</span>
-              </div>
-              <div class="levels-item-title">Deeper systems</div>
-              <div class="levels-item-meta">APIs, integrations, and more complex flows.</div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="levels-title">Progress snapshot</div>
-          <div class="levels-sub">
-            A quick look at how far this portfolio is ready to go.
-          </div>
-          <div class="levels-progress">
-            <div class="levels-progress-bar">
-              <div class="levels-progress-fill"></div>
-            </div>
-            <div class="levels-progress-label">
-              Current focus: Foundations &amp; Builder Mode — advanced levels ready to unlock.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="tools">
-      <div class="section-header">
-        <div class="section-title-block">
-          <div class="section-kicker">Tools</div>
-          <div class="section-title">Utilities that support building.</div>
-          <div class="section-sub">
-            Calculators, generators, and helpers that make it easier to test ideas and ship projects faster.
-          </div>
-        </div>
-      </div>
-
-      <div class="tools-grid">
-        <article class="tool-card">
-          <div class="tool-title">Prompt Playground</div>
-          <div class="tool-pill-row">
-            <div class="tool-pill">Text</div>
-            <div class="tool-pill">Ideas</div>
-          </div>
-          <p>
-            A calm space to test prompts, compare outputs, and refine your thinking without noise.
-          </p>
-          <div class="tool-meta">Designed for experimentation, not perfection.</div>
-          <div class="tool-footer">
-            <span class="tool-footer-pill">Experiment</span>
-            <span>Prompt • Compare</span>
-          </div>
-        </article>
-
-        <article class="tool-card">
-          <div class="tool-title">Model Notes</div>
-          <div class="tool-pill-row">
-            <div class="tool-pill">Docs</div>
-            <div class="tool-pill">Memory</div>
-          </div>
-          <p>
-            A structured way to keep track of what each model does, how it behaves, and what it needs.
-          </p>
-          <div class="tool-meta">Because good memory beats guessing.</div>
-          <div class="tool-footer">
-            <span class="tool-footer-pill">Document</span>
-            <span>Models • Behavior</span>
-          </div>
-        </article>
-
-        <article class="tool-card">
-          <div class="tool-title">Dataset Sketchpad</div>
-          <div class="tool-pill-row">
-            <div class="tool-pill">Data</div>
-            <div class="tool-pill">Planning</div>
-          </div>
-          <p>
-            A place to sketch dataset ideas, columns, and examples before you ever open a spreadsheet.
-          </p>
-          <div class="tool-meta">From vague idea to clear structure.</div>
-          <div class="tool-footer">
-            <span class="tool-footer-pill">Plan</span>
-            <span>Columns • Samples</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="news">
-      <div class="section-header">
-        <div class="section-title-block">
-          <div class="section-kicker">News &amp; Awareness</div>
-          <div class="section-title">Stay aware without getting overwhelmed.</div>
-          <div class="section-sub">
-            A calm feed of meaningful updates and tools — no noise, no clickbait.
-          </div>
-        </div>
-      </div>
-
-      <div class="news-grid">
-        <div class="news-main">
-          <div class="news-main-header">
-            <div>
-              <div class="news-main-title">Curated AI &amp; Tech News</div>
-              <div class="news-main-sub">
-                A small, focused stream of updates that actually matter for building and learning.
-              </div>
-            </div>
-          </div>
-          <div class="news-list">
-            <div class="news-item">
-              <div class="news-item-title">New model architectures for smaller devices</div>
-              <div class="news-item-meta">Edge AI • Efficiency • Real-world deployment</div>
-            </div>
-            <div class="news-item">
-              <div class="news-item-title">Tools that make dataset cleaning less painful</div>
-              <div class="news-item-meta">Data prep • Automation • Quality</div>
-            </div>
-            <div class="news-item">
-              <div class="news-item-title">How teams are using AI to prototype faster</div>
-              <div class="news-item-meta">Workflows • Prototyping • Collaboration</div>
-            </div>
-          </div>
-        </div>
-
-        <aside class="news-side">
-          <div class="news-side-title">Topics you can track</div>
-          <div class="news-side-pill-row">
-            <div class="news-side-pill">Model updates</div>
-            <div class="news-side-pill">Tools &amp; platforms</div>
-            <div class="news-side-pill">Data &amp; ethics</div>
-            <div class="news-side-pill">Science &amp; research</div>
-          </div>
-          <p>
-            The goal is not to chase every headline — it’s to stay aware of the things that actually shape how you build.
-          </p>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="cta-banner">
-        <div class="cta-banner-title">Ready to keep building?</div>
-        <div class="cta-banner-sub">
-          ALAEAI is designed to grow with you — from your first tutorial to your most complex project.
-          When you’re ready, the next step is always clear, calm, and within reach.
-        </div>
-        <div class="cta-banner-row">
-          <button class="btn-primary" onclick="location.href='tutorials.html'">Continue Tutorials</button>
-          <button class="btn-ghost" onclick="scrollToId('portfolio')">Review Portfolio</button>
         </div>
       </div>
     </section>
 
     <footer>
       © 2026 <span class="accent">ALAEAI</span> — Warm Portfolio • Build. Learn. Create.
+      <div class="footer-ad">
+        <div class="footer-ad-label">Sponsored • Footer</div>
+        <div class="footer-ad-inner">
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-6065282700750014"
+               data-ad-slot="6789012345"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+        </div>
+      </div>
     </footer>
   </div>
 
@@ -2536,33 +1972,15 @@
       });
     });
 
-    const navMenuToggle = document.getElementById("navMenuToggle");
-    const navMobile = document.getElementById("navMobile");
-    const navMobileClose = document.getElementById("navMobileClose");
-
-    function openMobileNav() {
-      if (navMobile) navMobile.classList.add("open");
-    }
-
-    function closeMobileNav() {
-      if (navMobile) navMobile.classList.remove("open");
-    }
-
-    if (navMenuToggle) {
-      navMenuToggle.onclick = () => {
-        if (navMobile && navMobile.classList.contains("open")) {
-          closeMobileNav();
-        } else {
-          openMobileNav();
-        }
-      };
-    }
-
-    if (navMobileClose) {
-      navMobileClose.onclick = () => {
-        closeMobileNav();
-      };
-    }
+    try {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {}
   </script>
 </body>
 </html>
+

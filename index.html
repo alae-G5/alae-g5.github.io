@@ -2,2389 +2,1059 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ALAEAI — Build. Learn. Create.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALAEAI — Build. Learn. Create.</title>
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6065282700750014" crossorigin="anonymous"></script>
-
+  <!-- Base styles -->
   <style>
     :root {
-      --bg: #f7f1e8;
-      --bg-soft: #f0e4d4;
-      --bg-softer: #f9f3ea;
-      --card-bg: #ffffff;
-      --card-bg-soft: #fdf8f1;
-      --text: #2b2116;
-      --text-soft: #6b5a45;
-      --accent: #c89a4b;
-      --accent-soft: rgba(200, 154, 75, 0.16);
-      --accent-strong: #b27f2f;
-      --border-subtle: rgba(0, 0, 0, 0.06);
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.08);
-      --shadow-subtle: 0 10px 30px rgba(0, 0, 0, 0.06);
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --radius-pill: 999px;
+      --bg: #f5f5f5;
+      --bg-alt: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --accent: #111111;
+      --accent-soft: #222222;
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
       --transition-fast: 0.18s ease-out;
       --transition-med: 0.25s ease-out;
-      --blur-soft: 18px;
-      --nav-height: 76px;
-      --content-max-width: 1180px;
-      --gold-gradient: linear-gradient(135deg, #f7e0b8, #f0c777, #e0a94f);
-      --gold-glow: 0 0 0 1px rgba(255, 255, 255, 0.3), 0 18px 40px rgba(191, 140, 60, 0.55);
-    }
-
-    body.dark {
-      --bg: #0f0c09;
-      --bg-soft: #17110b;
-      --bg-softer: #1d150d;
-      --card-bg: #18110a;
-      --card-bg-soft: #21160b;
-      --text: #f7eee2;
-      --text-soft: #b9a48a;
-      --accent: #e0b15f;
-      --accent-soft: rgba(224, 177, 95, 0.18);
-      --accent-strong: #f0c777;
-      --border-subtle: rgba(255, 255, 255, 0.06);
-      --shadow-soft: 0 22px 55px rgba(0, 0, 0, 0.85);
-      --shadow-subtle: 0 14px 40px rgba(0, 0, 0, 0.75);
-      --gold-gradient: linear-gradient(135deg, #f0c777, #e0b15f, #f7e0b8);
-      --gold-glow: 0 0 0 1px rgba(255, 255, 255, 0.18), 0 20px 50px rgba(0, 0, 0, 0.9);
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    body {
       margin: 0;
-      padding: 0;
-    }
-
-    html,
-    body {
-      height: 100%;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.25), transparent 55%),
-                  radial-gradient(circle at bottom right, rgba(200, 154, 75, 0.12), transparent 55%),
-                  var(--bg);
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-      transition: background 0.35s ease-out, color 0.35s ease-out;
+      animation: bodyFade 0.6s ease-out;
     }
 
-    main {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 18px 14px 40px;
-    }
-
-    .shell {
-      width: 100%;
-      max-width: var(--content-max-width);
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    /* Top banner / hero + top ad */
-    .top-row {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(260px, 1.4fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    @media (max-width: 960px) {
-      .top-row {
-        grid-template-columns: minmax(0, 1fr);
+    @keyframes bodyFade {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    .hero {
-      position: relative;
-      border-radius: 26px;
-      padding: 20px 22px 18px;
-      background:
-        radial-gradient(circle at top left, rgba(255, 255, 255, 0.45), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(200, 154, 75, 0.18), transparent 55%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(247, 236, 219, 0.95));
-      box-shadow: var(--shadow-soft);
-      overflow: hidden;
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Layout */
+    .page {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      gap: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.6);
     }
 
-    body.dark .hero {
-      background:
-        radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(200, 154, 75, 0.16), transparent 55%),
-        linear-gradient(135deg, rgba(24, 17, 10, 0.98), rgba(18, 11, 6, 0.98));
-      border-color: rgba(255, 255, 255, 0.08);
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(135deg, #111111, #222222);
+      color: #ffffff;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      padding: 18px 24px;
     }
 
-    .hero-glow {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.55), transparent 55%),
-        radial-gradient(circle at 90% 100%, rgba(200, 154, 75, 0.35), transparent 55%);
-      mix-blend-mode: soft-light;
-      opacity: 0.9;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .hero-header {
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 18px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-    }
-
-    .brand-logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 18px;
-      background: radial-gradient(circle at 30% 0%, #fff7e6, #f0c777 45%, #b27f2f 100%);
-      box-shadow: var(--gold-glow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #3b2a12;
-      font-weight: 800;
-      font-size: 20px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .brand-title {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--text);
-    }
-
-    .brand-subtitle {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--text-soft);
-    }
-
-    .hero-controls {
-      display: flex;
-      align-items: center;
       gap: 10px;
     }
 
-    .pill {
-      border-radius: var(--radius-pill);
-      padding: 6px 12px;
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(255, 255, 255, 0.85);
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      backdrop-filter: blur(12px);
-    }
-
-    body.dark .pill {
-      background: rgba(24, 17, 10, 0.9);
-      border-color: rgba(255, 255, 255, 0.06);
-    }
-
-    .pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #2ecc71;
-      box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.25);
-    }
-
-    .dark-toggle {
-      position: relative;
-      border-radius: 999px;
-      padding: 4px;
-      width: 70px;
-      height: 32px;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      background: rgba(255, 255, 255, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 4px;
-      cursor: pointer;
-      backdrop-filter: blur(14px);
-      transition: background var(--transition-med), border-color var(--transition-med), box-shadow var(--transition-med), transform var(--transition-fast);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    }
-
-    body.dark .dark-toggle {
-      background: rgba(18, 11, 6, 0.96);
-      border-color: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.85);
-    }
-
-    .dark-toggle:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
-    }
-
-    .dark-toggle-label {
-      flex: 1;
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 20% 20%, #f5f5f5, #555555);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+      transform: translateY(0);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .brand-logo:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+    }
+
+    .brand-text-main {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+    }
+
+    .brand-text-sub {
       font-size: 11px;
+      opacity: 0.8;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-soft);
-      opacity: 0.7;
-      transition: opacity var(--transition-med), color var(--transition-med);
-      z-index: 1;
+      letter-spacing: 1.4px;
     }
 
-    .dark-toggle-thumb {
-      position: absolute;
-      top: 3px;
-      bottom: 3px;
-      width: 32px;
-      border-radius: 999px;
-      background: var(--gold-gradient);
-      box-shadow: var(--gold-glow);
-      transition: transform var(--transition-med);
-    }
-
-    body:not(.dark) .dark-toggle-thumb {
-      transform: translateX(3px);
-    }
-
-    body.dark .dark-toggle-thumb {
-      transform: translateX(35px);
-    }
-
-    body:not(.dark) .dark-toggle-label.light-label {
-      opacity: 1;
-      color: var(--text);
-    }
-
-    body.dark .dark-toggle-label.dark-label {
-      opacity: 1;
-      color: var(--text);
-    }
-
-    .hero-main {
-      display: grid;
-      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.6fr);
-      gap: 18px;
+    .header-right {
+      display: flex;
       align-items: center;
+      gap: 14px;
     }
 
-    @media (max-width: 880px) {
-      .hero-main {
+    .pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .cta-small {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      background: #f5f5f5;
+      color: #111111;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+      transform: translateY(0);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .cta-small:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+      background: #ffffff;
+    }
+
+    main {
+      flex: 1;
+      padding: 26px 18px 40px;
+    }
+
+    .main-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 26px;
+      align-items: center;
+      margin-bottom: 34px;
+    }
+
+    @media (max-width: 840px) {
+      .hero {
         grid-template-columns: minmax(0, 1fr);
       }
     }
 
-    .hero-copy {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .hero-left {
+      padding: 22px 22px 24px;
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-eyebrow {
+    .hero-left::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 0% 0%, rgba(0, 0, 0, 0.08), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-kicker {
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: var(--text-soft);
+      letter-spacing: 1.6px;
+      color: var(--muted);
+      margin-bottom: 8px;
     }
 
     .hero-title {
-      font-size: clamp(26px, 3vw, 30px);
-      line-height: 1.15;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      color: var(--text);
+      font-size: 30px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      font-weight: 700;
     }
 
-    .hero-title span {
-      background: var(--gold-gradient);
+    .hero-highlight {
+      background: linear-gradient(120deg, #111111, #555555);
       -webkit-background-clip: text;
-      background-clip: text;
       color: transparent;
     }
 
-    .hero-subtitle {
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--text-soft);
+    .hero-sub {
+      font-size: 14px;
+      color: var(--muted);
       max-width: 420px;
+      margin-bottom: 18px;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 6px;
+      margin-bottom: 16px;
     }
 
-    .hero-btn-primary {
-      border-radius: var(--radius-pill);
-      padding: 9px 18px;
-      font-size: 12px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+    .hero-cta-main {
+      padding: 11px 22px;
+      border-radius: 999px;
       border: none;
-      background: var(--gold-gradient);
-      color: #3b2a12;
-      font-weight: 700;
+      background: #111111;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+      transform: translateY(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med), background var(--transition-med);
+    }
+
+    .hero-cta-main:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+      background: #000000;
+    }
+
+    .hero-cta-ghost {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.7);
+      color: #111111;
+      font-size: 13px;
+      font-weight: 500;
       cursor: pointer;
-      box-shadow: var(--gold-glow);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
-    }
-
-    .hero-btn-primary:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.03);
-      box-shadow: 0 22px 55px rgba(191, 140, 60, 0.75);
-    }
-
-    .hero-btn-secondary {
-      border-radius: var(--radius-pill);
-      padding: 9px 16px;
-      font-size: 12px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--text-soft);
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      backdrop-filter: blur(12px);
-      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+      gap: 6px;
+      backdrop-filter: blur(6px);
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
     }
 
-    body.dark .hero-btn-secondary {
-      background: rgba(24, 17, 10, 0.96);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-btn-secondary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
-      background: rgba(255, 255, 255, 0.98);
-    }
-
-    body.dark .hero-btn-secondary:hover {
-      background: rgba(18, 11, 6, 0.98);
+    .hero-cta-ghost:hover {
+      background: #ffffff;
+      border-color: rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
     }
 
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 4px;
-    }
-
-    .hero-meta-item {
-      border-radius: var(--radius-pill);
-      padding: 6px 10px;
       font-size: 11px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      backdrop-filter: blur(12px);
+      color: var(--muted);
+      margin-top: 6px;
     }
 
-    body.dark .hero-meta-item {
-      background: rgba(24, 17, 10, 0.96);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-meta-dot {
-      width: 7px;
-      height: 7px;
+    .hero-meta span {
+      padding: 4px 10px;
       border-radius: 999px;
-      background: var(--accent);
+      background: #f0f0f0;
     }
 
-    .hero-visual {
+    .hero-right {
+      padding: 20px 18px 22px;
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--card-shadow);
       position: relative;
-      border-radius: 22px;
-      padding: 14px;
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.55), transparent 60%),
-                  radial-gradient(circle at bottom right, rgba(200, 154, 75, 0.25), transparent 60%),
-                  linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(247, 236, 219, 0.98));
-      box-shadow: var(--shadow-subtle);
-      border: 1px solid rgba(255, 255, 255, 0.7);
       overflow: hidden;
-      min-height: 150px;
     }
 
-    body.dark .hero-visual {
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 60%),
-                  radial-gradient(circle at bottom right, rgba(200, 154, 75, 0.22), transparent 60%),
-                  linear-gradient(145deg, rgba(24, 17, 10, 0.98), rgba(18, 11, 6, 0.98));
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-orbit {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.7;
-    }
-
-    .hero-orbit::before,
-    .hero-orbit::after {
+    .hero-right::before {
       content: "";
       position: absolute;
-      border-radius: 999px;
-      border: 1px dashed rgba(0, 0, 0, 0.08);
+      inset: -30%;
+      background: radial-gradient(circle at 100% 0%, rgba(0, 0, 0, 0.08), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
     }
 
-    .hero-orbit::before {
-      inset: 18px 10px;
+    .hero-right-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
     }
 
-    .hero-orbit::after {
-      inset: 32px 40px;
+    .hero-right-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 16px;
     }
 
-    body.dark .hero-orbit::before,
-    body.dark .hero-orbit::after {
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-floating-card {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      border-radius: 18px;
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), rgba(247, 236, 219, 0.98));
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      overflow: hidden;
-      transform-style: preserve-3d;
-      transform: perspective(900px) rotateX(10deg) rotateY(-12deg);
-      transition: transform 0.35s ease-out, box-shadow 0.35s ease-out;
-    }
-
-    body.dark .hero-floating-card {
-      background: radial-gradient(circle at top left, rgba(24, 17, 10, 0.98), rgba(18, 11, 6, 0.98));
-      border-color: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.9);
-    }
-
-    .hero-floating-inner {
-      position: relative;
-      padding: 14px 16px;
+    .stat-row {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       gap: 10px;
+      margin-bottom: 14px;
     }
 
-    .hero-floating-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .hero-floating-title {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-soft);
-    }
-
-    .hero-floating-badge {
-      border-radius: var(--radius-pill);
-      padding: 4px 10px;
+    .stat-pill {
+      flex: 1 1 120px;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      background: #f7f7f7;
       font-size: 11px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      backdrop-filter: blur(10px);
-    }
-
-    body.dark .hero-floating-badge {
-      background: rgba(24, 17, 10, 0.96);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-floating-badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .hero-floating-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    @media (max-width: 480px) {
-      .hero-floating-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .hero-floating-column {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .hero-mini-card {
-      border-radius: 14px;
-      padding: 8px 10px;
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
 
-    body.dark .hero-mini-card {
-      background: rgba(24, 17, 10, 0.98);
-      border-color: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.85);
+    .stat-label {
+      color: var(--muted);
     }
 
-    .hero-mini-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-soft);
-    }
-
-    .hero-mini-value {
-      font-size: 12px;
+    .stat-value {
       font-weight: 600;
-      color: var(--text);
+      font-size: 13px;
     }
 
-    .hero-mini-progress {
-      position: relative;
-      height: 4px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.06);
-      overflow: hidden;
-    }
-
-    body.dark .hero-mini-progress {
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .hero-mini-progress-fill {
-      position: absolute;
-      inset: 0;
-      width: 72%;
-      border-radius: 999px;
-      background: var(--gold-gradient);
-    }
-
-    .hero-mini-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 2px;
-    }
-
-    .hero-mini-tag {
-      border-radius: 999px;
-      padding: 3px 8px;
-      font-size: 10px;
-      background: rgba(0, 0, 0, 0.03);
-      color: var(--text-soft);
-    }
-
-    body.dark .hero-mini-tag {
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .hero-floating-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+    .hero-mini-note {
+      font-size: 11px;
+      color: var(--muted);
       margin-top: 4px;
     }
 
-    .hero-floating-avatars {
-      display: flex;
-      align-items: center;
-    }
-
-    .hero-avatar {
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      border: 2px solid rgba(255, 255, 255, 0.9);
-      background: var(--gold-gradient);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
-      margin-left: -7px;
-    }
-
-    .hero-avatar:first-child {
-      margin-left: 0;
-    }
-
-    body.dark .hero-avatar {
-      border-color: rgba(24, 17, 10, 0.98);
-    }
-
-    .hero-floating-caption {
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .hero-floating-pill {
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-size: 11px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    body.dark .hero-floating-pill {
-      background: rgba(24, 17, 10, 0.96);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-floating-pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #2ecc71;
-    }
-
-    /* Top ad card (banner) */
-    .top-ad-card {
-      border-radius: 22px;
-      padding: 14px 14px 10px;
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), rgba(247, 236, 219, 0.98));
-      box-shadow: var(--shadow-subtle);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      min-height: 150px;
-    }
-
-    body.dark .top-ad-card {
-      background: radial-gradient(circle at top left, rgba(24, 17, 10, 0.98), rgba(18, 11, 6, 0.98));
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .top-ad-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .top-ad-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .top-ad-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .top-ad-pill {
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-size: 10px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    body.dark .top-ad-pill {
-      background: rgba(24, 17, 10, 0.96);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .top-ad-body {
-      border-radius: 16px;
-      padding: 8px;
-      background: rgba(0, 0, 0, 0.02);
-      border: 1px dashed rgba(0, 0, 0, 0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 90px;
-    }
-
-    body.dark .top-ad-body {
-      background: rgba(255, 255, 255, 0.02);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .top-ad-body ins.adsbygoogle {
-      display: block;
-      width: 100%;
-      height: 90px;
-    }
-
-    /* Category bar */
-    .category-bar {
-      margin-top: 4px;
-      border-radius: 20px;
-      padding: 10px 12px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.06);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      backdrop-filter: blur(18px);
-      position: sticky;
-      top: 10px;
-      z-index: 20;
-    }
-
-    body.dark .category-bar {
-      background: rgba(18, 11, 6, 0.96);
-      border-color: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
-    }
-
-    .category-buttons {
+    /* Categories bar */
+    .categories-bar {
+      margin-top: 10px;
+      margin-bottom: 24px;
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
     }
 
-    .category-btn {
-      position: relative;
+    .cat-btn {
+      padding: 10px 18px;
       border-radius: 999px;
-      padding: 7px 14px;
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      border: none;
+      background: #ffffff;
+      color: #111111;
+      font-size: 13px;
+      font-weight: 600;
       cursor: pointer;
-      overflow: hidden;
-      transition: color var(--transition-med), border-color var(--transition-med), box-shadow var(--transition-med), background var(--transition-med), transform var(--transition-fast);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transform: translateY(0);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
     }
 
-    body.dark .category-btn {
-      background: rgba(24, 17, 10, 0.96);
-      border-color: rgba(255, 255, 255, 0.06);
+    .cat-btn span.icon {
+      font-size: 15px;
     }
 
-    .category-btn span.dot {
-      width: 7px;
-      height: 7px;
+    .cat-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
+      background: #111111;
+      color: #ffffff;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .section-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .section-link {
+      font-size: 12px;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
       border-radius: 999px;
-      background: rgba(0, 0, 0, 0.12);
-      transition: background var(--transition-med);
+      background: #eeeeee;
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
     }
 
-    body.dark .category-btn span.dot {
-      background: rgba(255, 255, 255, 0.18);
-    }
-
-    .category-btn::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--gold-gradient);
-      opacity: 0;
-      transition: opacity var(--transition-med);
-      z-index: 0;
-    }
-
-    .category-btn span.label {
-      position: relative;
-      z-index: 1;
-    }
-
-    .category-btn.active {
-      color: #3b2a12;
-      border-color: transparent;
-      box-shadow: var(--gold-glow);
+    .section-link:hover {
+      background: #111111;
+      color: #ffffff;
       transform: translateY(-1px);
     }
 
-    .category-btn.active::before {
-      opacity: 1;
-    }
-
-    .category-btn.active span.dot {
-      background: #3b2a12;
-    }
-
-    .category-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .category-meta-pill {
-      border-radius: 999px;
-      padding: 4px 10px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(255, 255, 255, 0.9);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    body.dark .category-meta-pill {
-      background: rgba(24, 17, 10, 0.96);
-      border-color: rgba(255, 255, 255, 0.06);
-    }
-
-    .category-meta-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    @media (max-width: 720px) {
-      .category-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .category-meta {
-        justify-content: space-between;
-      }
-    }
-
-    /* Layout: content + side ad */
-    .content-row {
-      margin-top: 16px;
+    /* Featured tools grid */
+    .tools-grid {
       display: grid;
-      grid-template-columns: minmax(0, 3.1fr) minmax(260px, 1.3fr);
-      gap: 18px;
-      align-items: flex-start;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
     }
 
-    @media (max-width: 1024px) {
-      .content-row {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    .tool-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-md);
+      padding: 14px 14px 16px;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med);
     }
 
-    /* Cards grid */
-    .cards-panel {
-      border-radius: 22px;
-      padding: 16px 14px 14px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.06);
-      backdrop-filter: blur(18px);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+    .tool-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 0% 0%, rgba(0, 0, 0, 0.06), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
     }
 
-    body.dark .cards-panel {
-      background: rgba(18, 11, 6, 0.96);
-      border-color: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.9);
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.25);
     }
 
-    .cards-header {
+    .tool-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .tool-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .tool-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .tool-meta-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .tool-pill {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #f2f2f2;
+    }
+
+    .tool-link {
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Tutorials list */
+    .tutorials-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .tutorial-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-md);
+      padding: 12px 14px 14px;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med);
+    }
+
+    .tutorial-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 100% 0%, rgba(0, 0, 0, 0.06), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .tutorial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.25);
+    }
+
+    .tutorial-level {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .tutorial-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .tutorial-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .tutorial-meta {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* News cards */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .news-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-md);
+      padding: 12px 14px 14px;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med);
+    }
+
+    .news-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 0% 0%, rgba(0, 0, 0, 0.06), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .news-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.25);
+    }
+
+    .news-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .news-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .news-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .news-meta {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* CTA section */
+    .cta-section {
+      margin-top: 26px;
+      padding: 18px 18px 20px;
+      background: #111111;
+      color: #ffffff;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cta-main-text {
+      max-width: 420px;
+    }
+
+    .cta-main-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .cta-main-sub {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
       gap: 10px;
     }
 
-    .cards-title {
+    .cta-btn-light {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      background: #f5f5f5;
+      color: #111111;
       font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--text-soft);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .cards-title-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .cards-filters {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .cards-filters-pill {
-      border-radius: 999px;
-      padding: 4px 10px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+      transform: translateY(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med), background var(--transition-med), color var(--transition-med);
     }
 
-    body.dark .cards-filters-pill {
-      background: rgba(24, 17, 10, 0.96);
-      border-color: rgba(255, 255, 255, 0.06);
+    .cta-btn-light:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
+      background: #ffffff;
     }
 
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
+    .cta-btn-ghost {
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: transparent;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
     }
 
-    @media (max-width: 980px) {
-      .cards-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+    .cta-btn-ghost:hover {
+      background: #ffffff;
+      color: #111111;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      padding: 18px 18px 22px;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer span {
+      opacity: 0.9;
     }
 
     @media (max-width: 640px) {
-      .cards-grid {
-        grid-template-columns: minmax(0, 1fr);
+      header {
+        padding: 14px 16px;
       }
-    }
-
-    .card {
-      position: relative;
-      border-radius: 18px;
-      padding: 12px 12px 11px;
-      background: var(--card-bg);
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.06);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      overflow: hidden;
-      cursor: pointer;
-      transform-origin: center;
-      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med), opacity 0.25s ease-out, filter 0.25s ease-out;
-    }
-
-    body.dark .card {
-      background: var(--card-bg);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.35), transparent 55%);
-      opacity: 0;
-      transition: opacity var(--transition-med);
-      pointer-events: none;
-    }
-
-    .card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
-      border-color: rgba(0, 0, 0, 0.08);
-    }
-
-    body.dark .card:hover {
-      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.95);
-      border-color: rgba(255, 255, 255, 0.12);
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .card-tag {
-      border-radius: 999px;
-      padding: 4px 9px;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      background: var(--accent-soft);
-      color: var(--accent-strong);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .card-tag-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .card-level {
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .card-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .card-description {
-      font-size: 11px;
-      line-height: 1.5;
-      color: var(--text-soft);
-    }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-top: 2px;
-    }
-
-    .card-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .card-meta-pill {
-      border-radius: 999px;
-      padding: 3px 8px;
-      background: rgba(0, 0, 0, 0.03);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    body.dark .card-meta-pill {
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .card-meta-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .card-cta {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent-strong);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .card-cta-arrow {
-      width: 14px;
-      height: 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-    }
-
-    body.dark .card-cta-arrow {
-      border-color: rgba(255, 255, 255, 0.18);
-    }
-
-    .card-progress {
-      position: relative;
-      height: 3px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.04);
-      overflow: hidden;
-      margin-top: 4px;
-    }
-
-    body.dark .card-progress {
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .card-progress-fill {
-      position: absolute;
-      inset: 0;
-      width: 0;
-      border-radius: 999px;
-      background: var(--gold-gradient);
-      transition: width 0.6s ease-out;
-    }
-
-    .card.visible .card-progress-fill {
-      width: var(--progress, 70%);
-    }
-
-    .card.hidden-by-category {
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(8px) scale(0.98);
-      filter: blur(1px);
-    }
-
-    /* Inline ad between cards */
-    .inline-ad-card {
-      grid-column: 1 / -1;
-      border-radius: 18px;
-      padding: 10px 10px 8px;
-      background: var(--card-bg-soft);
-      border: 1px dashed var(--border-subtle);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      align-items: stretch;
-      justify-content: center;
-    }
-
-    .inline-ad-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-soft);
-    }
-
-    .inline-ad-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .inline-ad-body {
-      border-radius: 14px;
-      padding: 6px;
-      background: rgba(0, 0, 0, 0.02);
-      border: 1px dashed rgba(0, 0, 0, 0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 70px;
-    }
-
-    body.dark .inline-ad-body {
-      background: rgba(255, 255, 255, 0.02);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .inline-ad-body ins.adsbygoogle {
-      display: block;
-      width: 100%;
-      height: 70px;
-    }
-
-    /* Side ad panel */
-    .side-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .side-ad-card {
-      border-radius: 22px;
-      padding: 14px 14px 10px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.06);
-      backdrop-filter: blur(18px);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    body.dark .side-ad-card {
-      background: rgba(18, 11, 6, 0.96);
-      border-color: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.9);
-    }
-
-    .side-ad-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--text-soft);
-    }
-
-    .side-ad-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .side-ad-body {
-      border-radius: 16px;
-      padding: 8px;
-      background: rgba(0, 0, 0, 0.02);
-      border: 1px dashed rgba(0, 0, 0, 0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 250px;
-    }
-
-    body.dark .side-ad-body {
-      background: rgba(255, 255, 255, 0.02);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .side-ad-body ins.adsbygoogle {
-      display: block;
-      width: 100%;
-      height: 250px;
-    }
-
-    .side-meta-card {
-      border-radius: 18px;
-      padding: 10px 11px;
-      background: var(--card-bg-soft);
-      border: 1px solid var(--border-subtle);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .side-meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .side-meta-pill {
-      border-radius: 999px;
-      padding: 4px 9px;
-      background: rgba(0, 0, 0, 0.03);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    body.dark .side-meta-pill {
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .side-meta-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 18px;
-      border-radius: 20px;
-      padding: 10px 12px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.04);
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.06);
-      backdrop-filter: blur(18px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    body.dark footer {
-      background: rgba(18, 11, 6, 0.96);
-      border-color: rgba(255, 255, 255, 0.06);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
-    }
-
-    .footer-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .footer-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .footer-link {
-      border-radius: 999px;
-      padding: 4px 9px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      background: rgba(255, 255, 255, 0.9);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
-
-    body.dark .footer-link {
-      background: rgba(24, 17, 10, 0.96);
-      border-color: rgba(255, 255, 255, 0.06);
-    }
-
-    @media (max-width: 720px) {
-      footer {
+      .header-inner {
         flex-direction: column;
         align-items: flex-start;
       }
-    }
-
-    /* Simple fade-in animation */
-    .fade-in-up {
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-    }
-
-    .fade-in-up.visible {
-      opacity: 1;
-      transform: translateY(0);
+      .hero-left,
+      .hero-right {
+        padding: 18px 16px 18px;
+      }
+      .cta-section {
+        padding: 16px 14px 18px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <main>
-    <div class="shell">
-      <!-- HERO + TOP AD -->
-      <section class="top-row fade-in-up">
-        <div class="hero">
-          <div class="hero-glow"></div>
-          <div class="hero-inner">
-            <div class="hero-header">
-              <div class="brand">
-                <div class="brand-logo">A</div>
-                <div class="brand-text">
-                  <div class="brand-title">ALAEAI</div>
-                  <div class="brand-subtitle">Build • Learn • Create</div>
-                </div>
-              </div>
-              <div class="hero-controls">
-                <div class="pill">
-                  <span class="pill-dot"></span>
-                  Live Studio
-                </div>
-                <button class="dark-toggle" id="darkToggle" type="button" aria-label="Toggle dark mode">
-                  <div class="dark-toggle-thumb"></div>
-                  <div class="dark-toggle-label light-label">Light</div>
-                  <div class="dark-toggle-label dark-label">Dark</div>
-                </button>
-              </div>
-            </div>
-
-            <div class="hero-main">
-              <div class="hero-copy">
-                <div class="hero-eyebrow">Premium learning space</div>
-                <h1 class="hero-title">
-                  A bright, clean studio for <span>tutorials, tools, and news</span> that actually feel pro.
-                </h1>
-                <p class="hero-subtitle">
-                  Curated cards, smooth animations, and a layout that stays organized—no matter which category you explore.
-                </p>
-                <div class="hero-actions">
-                  <button class="hero-btn-primary" type="button" data-category-target="tutorials">
-                    Explore Tutorials
-                    <span>↗</span>
-                  </button>
-                  <button class="hero-btn-secondary" type="button" data-category-target="tools">
-                    Browse Tools
-                  </button>
-                </div>
-                <div class="hero-meta">
-                  <div class="hero-meta-item">
-                    <span class="hero-meta-dot"></span>
-                    <span>20+ curated cards</span>
-                  </div>
-                  <div class="hero-meta-item">
-                    <span class="hero-meta-dot"></span>
-                    <span>Dark mode that remembers</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="hero-visual">
-                <div class="hero-orbit"></div>
-                <div class="hero-floating-card" id="followCard">
-                  <div class="hero-floating-inner">
-                    <div class="hero-floating-header">
-                      <div class="hero-floating-title">AlaeAI Studio</div>
-                      <div class="hero-floating-badge">
-                        <span class="hero-floating-badge-dot"></span>
-                        Clean • Bright • Focused
-                      </div>
-                    </div>
-                    <div class="hero-floating-grid">
-                      <div class="hero-floating-column">
-                        <div class="hero-mini-card">
-                          <div class="hero-mini-label">Active category</div>
-                          <div class="hero-mini-value" id="activeCategoryLabel">All content</div>
-                          <div class="hero-mini-progress">
-                            <div class="hero-mini-progress-fill"></div>
-                          </div>
-                        </div>
-                        <div class="hero-mini-card">
-                          <div class="hero-mini-label">Dark mode</div>
-                          <div class="hero-mini-value" id="darkModeLabel">Auto</div>
-                          <div class="hero-mini-tags">
-                            <span class="hero-mini-tag">Remembers</span>
-                            <span class="hero-mini-tag">Smooth</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="hero-floating-column">
-                        <div class="hero-mini-card">
-                          <div class="hero-mini-label">Today’s focus</div>
-                          <div class="hero-mini-value">Build. Learn. Create.</div>
-                          <div class="hero-mini-tags">
-                            <span class="hero-mini-tag">Tutorials</span>
-                            <span class="hero-mini-tag">News</span>
-                            <span class="hero-mini-tag">Tools</span>
-                          </div>
-                        </div>
-                        <div class="hero-mini-card">
-                          <div class="hero-mini-label">Layout quality</div>
-                          <div class="hero-mini-value">Premium & organized</div>
-                          <div class="hero-mini-progress">
-                            <div class="hero-mini-progress-fill" style="width: 88%;"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="hero-floating-footer">
-                      <div class="hero-floating-avatars">
-                        <div class="hero-avatar"></div>
-                        <div class="hero-avatar"></div>
-                        <div class="hero-avatar"></div>
-                      </div>
-                      <div class="hero-floating-caption">
-                        Cards stay aligned, ads stay subtle, and everything feels intentional.
-                      </div>
-                      <div class="hero-floating-pill">
-                        <span class="hero-floating-pill-dot"></span>
-                        Studio ready
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div class="page">
+    <header>
+      <div class="header-inner">
+        <div class="brand">
+          <div class="brand-logo">A</div>
+          <div>
+            <div class="brand-text-main">ALAEAI</div>
+            <div class="brand-text-sub">Build · Learn · Create</div>
           </div>
         </div>
-
-        <!-- TOP BANNER AD (ID: 4678697983) -->
-        <aside class="top-ad-card">
-          <div class="top-ad-header">
-            <div class="top-ad-label">
-              <span class="top-ad-dot"></span>
-              Sponsored banner
-            </div>
-            <div class="top-ad-pill">
-              <span>Ad • Subtle placement</span>
-            </div>
-          </div>
-          <div class="top-ad-body">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-6065282700750014"
-                 data-ad-slot="4678697983"
-                 data-ad-format="horizontal"
-                 data-full-width-responsive="true"></ins>
-          </div>
-        </aside>
-      </section>
-
-      <!-- CATEGORY BAR -->
-      <section class="category-bar fade-in-up">
-        <div class="category-buttons">
-          <button class="category-btn active" data-category="all" type="button">
-            <span class="dot"></span>
-            <span class="label">All</span>
-          </button>
-          <button class="category-btn" data-category="tutorials" type="button">
-            <span class="dot"></span>
-            <span class="label">Tutorials</span>
-          </button>
-          <button class="category-btn" data-category="news" type="button">
-            <span class="dot"></span>
-            <span class="label">News</span>
-          </button>
-          <button class="category-btn" data-category="tools" type="button">
-            <span class="dot"></span>
-            <span class="label">Tools</span>
-          </button>
-          <button class="category-btn" data-category="about" type="button">
-            <span class="dot"></span>
-            <span class="label">About</span>
-          </button>
-          <button class="category-btn" data-category="contact" type="button">
-            <span class="dot"></span>
-            <span class="label">Contact</span>
+        <div class="header-right">
+          <div class="pill">AI · Tools · Tutorials</div>
+          <button class="cta-small" onclick="window.location.href='contact.html'">
+            Contact
+            <span>↗</span>
           </button>
         </div>
-        <div class="category-meta">
-          <div class="category-meta-pill">
-            <span class="category-meta-dot"></span>
-            <span id="categoryCountLabel">All cards visible</span>
+      </div>
+    </header>
+
+    <main>
+      <div class="main-inner">
+        <!-- HERO -->
+        <section class="hero">
+          <div class="hero-left">
+            <div class="hero-kicker">Welcome to your lab</div>
+            <div class="hero-title">
+              ALAEAI is your space to
+              <span class="hero-highlight">build, learn, and create</span>
+              smarter tools.
+            </div>
+            <div class="hero-sub">
+              Explore tutorials, tools, and news — all crafted to help you grow your skills and ship real projects.
+            </div>
+
+            <div class="hero-actions">
+              <button class="hero-cta-main" onclick="window.location.href='tutorials.html'">
+                Start learning
+                <span>→</span>
+              </button>
+              <button class="hero-cta-ghost" onclick="window.location.href='tools.html'">
+                Explore tools
+                <span>⚙</span>
+              </button>
+            </div>
+
+            <div class="hero-meta">
+              <span>Fast, clean, and focused</span>
+              <span>Made by Alae</span>
+            </div>
           </div>
-        </div>
-      </section>
 
-      <!-- MAIN CONTENT + SIDE ADS -->
-      <section class="content-row fade-in-up">
-        <!-- CARDS PANEL -->
-        <section class="cards-panel">
-          <header class="cards-header">
-            <div class="cards-title">
-              <span class="cards-title-dot"></span>
-              Curated cards
+          <div class="hero-right">
+            <div class="hero-right-title">Today’s snapshot</div>
+            <div class="hero-right-sub">
+              A quick overview of what you can do inside ALAEAI right now.
             </div>
-            <div class="cards-filters">
-              <div class="cards-filters-pill">
-                <span>Organized • Animated • Clean</span>
+
+            <div class="stat-row">
+              <div class="stat-pill">
+                <div class="stat-label">Tutorial levels</div>
+                <div class="stat-value">20+ structured steps</div>
+              </div>
+              <div class="stat-pill">
+                <div class="stat-label">Tools</div>
+                <div class="stat-value">AI · Dev · Utility</div>
               </div>
             </div>
-          </header>
 
-          <div class="cards-grid" id="cardsGrid">
-            <!-- TUTORIALS -->
-            <article class="card" data-category="tutorials" style="--progress: 82%;">
-              <div class="card-header">
-                <div class="card-tag">
-                  <span class="card-tag-dot"></span>
-                  Tutorial
-                </div>
-                <div class="card-level">Level 01 • HTML</div>
+            <div class="stat-row">
+              <div class="stat-pill">
+                <div class="stat-label">News</div>
+                <div class="stat-value">Fresh tech updates</div>
               </div>
-              <h2 class="card-title">Build a clean landing page with golden highlights</h2>
-              <p class="card-description">
-                Learn how to structure a bright, minimal layout with cards, spacing, and a premium hero section.
-              </p>
-              <div class="card-footer">
-                <div class="card-meta">
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>15 min</span>
-                  </div>
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Beginner</span>
-                  </div>
-                </div>
-                <div class="card-cta">
-                  Start
-                  <span class="card-cta-arrow">↗</span>
-                </div>
+              <div class="stat-pill">
+                <div class="stat-label">Focus</div>
+                <div class="stat-value">No noise, just value</div>
               </div>
-              <div class="card-progress">
-                <div class="card-progress-fill"></div>
-              </div>
-            </article>
+            </div>
 
-            <article class="card" data-category="tutorials" style="--progress: 64%;">
-              <div class="card-header">
-                <div class="card-tag">
-                  <span class="card-tag-dot"></span>
-                  Tutorial
-                </div>
-                <div class="card-level">Level 02 • CSS</div>
-              </div>
-              <h2 class="card-title">Smooth hover animations without breaking layout</h2>
-              <p class="card-description">
-                Add subtle motion to cards and buttons using transforms, shadows, and transitions that stay professional.
-              </p>
-              <div class="card-footer">
-                <div class="card-meta">
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>18 min</span>
-                  </div>
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Intermediate</span>
-                  </div>
-                </div>
-                <div class="card-cta">
-                  Learn
-                  <span class="card-cta-arrow">↗</span>
-                </div>
-              </div>
-              <div class="card-progress">
-                <div class="card-progress-fill"></div>
-              </div>
-            </article>
+            <div class="hero-mini-note">
+              Use the categories below to jump directly into what you need.
+            </div>
+          </div>
+        </section>
 
-            <article class="card" data-category="tutorials" style="--progress: 76%;">
-              <div class="card-header">
-                <div class="card-tag">
-                  <span class="card-tag-dot"></span>
-                  Tutorial
-                </div>
-                <div class="card-level">Level 03 • JS</div>
-              </div>
-              <h2 class="card-title">Category filters with zero layout jumps</h2>
-              <p class="card-description">
-                Implement category buttons that filter cards smoothly, keeping the grid aligned and transitions clean.
-              </p>
-              <div class="card-footer">
-                <div class="card-meta">
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>20 min</span>
-                  </div>
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Intermediate</span>
-                  </div>
-                </div>
-                <div class="card-cta">
-                  Code
-                  <span class="card-cta-arrow">↗</span>
-                </div>
-              </div>
-              <div class="card-progress">
-                <div class="card-progress-fill"></div>
-              </div>
-            </article>
+        <!-- CATEGORY BUTTONS (link to other pages) -->
+        <section class="section">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Categories</div>
+              <div class="section-sub">Each button opens a dedicated page.</div>
+            </div>
+          </div>
 
-            <!-- INLINE AD (ID: 4826976992) -->
-            <aside class="inline-ad-card">
-              <div class="inline-ad-header">
-                <div>
-                  <span class="inline-ad-dot"></span>
-                  <span>Sponsored • Inline</span>
-                </div>
-                <span>Placed between cards to keep the grid balanced</span>
-              </div>
-              <div class="inline-ad-body">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-6065282700750014"
-                     data-ad-slot="4826976992"
-                     data-ad-format="horizontal"
-                     data-full-width-responsive="true"></ins>
-              </div>
-            </aside>
+          <div class="categories-bar">
+            <button class="cat-btn" onclick="window.location.href='tutorials.html'">
+              <span class="icon">📘</span>
+              <span>Tutorials</span>
+            </button>
 
-            <!-- NEWS -->
-            <article class="card" data-category="news" style="--progress: 58%;">
-              <div class="card-header">
-                <div class="card-tag">
-                  <span class="card-tag-dot"></span>
-                  News
-                </div>
-                <div class="card-level">Update • UI</div>
-              </div>
-              <h2 class="card-title">New layout presets for bright portfolios</h2>
-              <p class="card-description">
-                Discover fresh layout ideas that keep your portfolio simple, golden, and visually consistent across sections.
-              </p>
-              <div class="card-footer">
-                <div class="card-meta">
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Design</span>
-                  </div>
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Today</span>
-                  </div>
-                </div>
-                <div class="card-cta">
-                  Read
-                  <span class="card-cta-arrow">↗</span>
-                </div>
-              </div>
-              <div class="card-progress">
-                <div class="card-progress-fill"></div>
-              </div>
-            </article>
+            <button class="cat-btn" onclick="window.location.href='news.html'">
+              <span class="icon">📰</span>
+              <span>News</span>
+            </button>
 
-            <article class="card" data-category="news" style="--progress: 72%;">
-              <div class="card-header">
-                <div class="card-tag">
-                  <span class="card-tag-dot"></span>
-                  News
-                </div>
-                <div class="card-level">Update • Performance</div>
-              </div>
-              <h2 class="card-title">Faster animations with minimal JavaScript</h2>
-              <p class="card-description">
-                A new approach to micro-animations that keeps your page smooth, even with many cards on screen.
-              </p>
-              <div class="card-footer">
-                <div class="card-meta">
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Performance</span>
-                  </div>
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>This week</span>
-                  </div>
-                </div>
-                <div class="card-cta">
-                  View
-                  <span class="card-cta-arrow">↗</span>
-                </div>
-              </div>
-              <div class="card-progress">
-                <div class="card-progress-fill"></div>
-              </div>
-            </article>
+            <button class="cat-btn" onclick="window.location.href='tools.html'">
+              <span class="icon">🛠</span>
+              <span>Tools</span>
+            </button>
 
-            <article class="card" data-category="news" style="--progress: 66%;">
-              <div class="card-header">
-                <div class="card-tag">
-                  <span class="card-tag-dot"></span>
-                  News
-                </div>
-                <div class="card-level">Update • Dark mode</div>
-              </div>
-              <h2 class="card-title">Dark mode that remembers your choice</h2>
-              <p class="card-description">
-                The theme toggle now persists across sessions and category changes, keeping your preferred mood locked in.
-              </p>
-              <div class="card-footer">
-                <div class="card-meta">
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>UX</span>
-                  </div>
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Stable</span>
-                  </div>
-                </div>
-                <div class="card-cta">
-                  Details
-                  <span class="card-cta-arrow">↗</span>
-                </div>
-              </div>
-              <div class="card-progress">
-                <div class="card-progress-fill"></div>
-              </div>
-            </article>
+            <button class="cat-btn" onclick="window.location.href='about.html'">
+              <span class="icon">👤</span>
+              <span>About</span>
+            </button>
 
-            <!-- TOOLS -->
-            <article class="card" data-category="tools" style="--progress: 78%;">
-              <div class="card-header">
-                <div class="card-tag">
-                  <span class="card-tag-dot"></span>
-                  Tool
-                </div>
-                <div class="card-level">Utility • Layout</div>
+            <button class="cat-btn" onclick="window.location.href='contact.html'">
+              <span class="icon">✉️</span>
+              <span>Contact</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- FEATURED TOOLS -->
+        <section class="section">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Featured tools</div>
+              <div class="section-sub">Quick access to your most useful utilities.</div>
+            </div>
+            <div class="section-link" onclick="window.location.href='tools.html'">
+              View all tools
+              <span>→</span>
+            </div>
+          </div>
+
+          <div class="tools-grid">
+            <article class="tool-card">
+              <div class="tool-tag">AI · Helper</div>
+              <div class="tool-title">Prompt Builder</div>
+              <div class="tool-desc">
+                Design, test, and refine prompts for your AI projects with a clean, focused interface.
               </div>
-              <h2 class="card-title">Card spacing & alignment helper</h2>
-              <p class="card-description">
-                A small utility that keeps card heights visually balanced, even when descriptions have different lengths.
-              </p>
-              <div class="card-footer">
-                <div class="card-meta">
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Grid</span>
-                  </div>
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Auto</span>
-                  </div>
-                </div>
-                <div class="card-cta">
+              <div class="tool-meta-row">
+                <div class="tool-pill">Beginner friendly</div>
+                <div class="tool-link" onclick="window.location.href='tools.html'">
                   Open
-                  <span class="card-cta-arrow">↗</span>
+                  <span>↗</span>
                 </div>
-              </div>
-              <div class="card-progress">
-                <div class="card-progress-fill"></div>
               </div>
             </article>
 
-            <article class="card" data-category="tools" style="--progress: 61%;">
-              <div class="card-header">
-                <div class="card-tag">
-                  <span class="card-tag-dot"></span>
-                  Tool
-                </div>
-                <div class="card-level">Utility • Theme</div>
+            <article class="tool-card">
+              <div class="tool-tag">Dev · Utility</div>
+              <div class="tool-title">Code Snippet Vault</div>
+              <div class="tool-desc">
+                Store and reuse your favorite HTML, CSS, and JS snippets for faster building.
               </div>
-              <h2 class="card-title">Theme memory inspector</h2>
-              <p class="card-description">
-                Quickly check which theme is stored in localStorage and how it syncs with the UI state.
-              </p>
-              <div class="card-footer">
-                <div class="card-meta">
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Theme</span>
-                  </div>
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Debug</span>
-                  </div>
+              <div class="tool-meta-row">
+                <div class="tool-pill">For builders</div>
+                <div class="tool-link" onclick="window.location.href='tools.html'">
+                  Open
+                  <span>↗</span>
                 </div>
-                <div class="card-cta">
-                  Inspect
-                  <span class="card-cta-arrow">↗</span>
-                </div>
-              </div>
-              <div class="card-progress">
-                <div class="card-progress-fill"></div>
               </div>
             </article>
 
-            <article class="card" data-category="tools" style="--progress: 69%;">
-              <div class="card-header">
-                <div class="card-tag">
-                  <span class="card-tag-dot"></span>
-                  Tool
-                </div>
-                <div class="card-level">Utility • Ads</div>
+            <article class="tool-card">
+              <div class="tool-tag">Productivity</div>
+              <div class="tool-title">Focus Timer</div>
+              <div class="tool-desc">
+                A simple, distraction-free timer to keep you in deep work while you learn or build.
               </div>
-              <h2 class="card-title">Ad placement visual checker</h2>
-              <p class="card-description">
-                Preview how ads sit inside your layout to keep them subtle, aligned, and non-intrusive.
-              </p>
-              <div class="card-footer">
-                <div class="card-meta">
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Ads</span>
-                  </div>
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Preview</span>
-                  </div>
+              <div class="tool-meta-row">
+                <div class="tool-pill">Stay sharp</div>
+                <div class="tool-link" onclick="window.location.href='tools.html'">
+                  Open
+                  <span>↗</span>
                 </div>
-                <div class="card-cta">
-                  Preview
-                  <span class="card-cta-arrow">↗</span>
-                </div>
-              </div>
-              <div class="card-progress">
-                <div class="card-progress-fill"></div>
-              </div>
-            </article>
-
-            <!-- ABOUT -->
-            <article class="card" data-category="about" style="--progress: 90%;">
-              <div class="card-header">
-                <div class="card-tag">
-                  <span class="card-tag-dot"></span>
-                  About
-                </div>
-                <div class="card-level">Studio • Identity</div>
-              </div>
-              <h2 class="card-title">AlaeAI — a bright, focused learning space</h2>
-              <p class="card-description">
-                A portfolio that feels like a studio: clean, golden, and built to grow with every new idea.
-              </p>
-              <div class="card-footer">
-                <div class="card-meta">
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Creator</span>
-                  </div>
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Vision</span>
-                  </div>
-                </div>
-                <div class="card-cta">
-                  Story
-                  <span class="card-cta-arrow">↗</span>
-                </div>
-              </div>
-              <div class="card-progress">
-                <div class="card-progress-fill"></div>
-              </div>
-            </article>
-
-            <article class="card" data-category="about" style="--progress: 74%;">
-              <div class="card-header">
-                <div class="card-tag">
-                  <span class="card-tag-dot"></span>
-                  About
-                </div>
-                <div class="card-level">Studio • Style</div>
-              </div>
-              <h2 class="card-title">Why the golden bright theme works</h2>
-              <p class="card-description">
-                A breakdown of the color system, spacing, and typography that keeps this page clean and premium.
-              </p>
-              <div class="card-footer">
-                <div class="card-meta">
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Design</span>
-                  </div>
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>System</span>
-                  </div>
-                </div>
-                <div class="card-cta">
-                  Explore
-                  <span class="card-cta-arrow">↗</span>
-                </div>
-              </div>
-              <div class="card-progress">
-                <div class="card-progress-fill"></div>
-              </div>
-            </article>
-
-            <!-- CONTACT -->
-            <article class="card" data-category="contact" style="--progress: 52%;">
-              <div class="card-header">
-                <div class="card-tag">
-                  <span class="card-tag-dot"></span>
-                  Contact
-                </div>
-                <div class="card-level">Reach • Email</div>
-              </div>
-              <h2 class="card-title">Get in touch for collaborations</h2>
-              <p class="card-description">
-                A simple, focused contact flow for people who want to build, learn, or create something together.
-              </p>
-              <div class="card-footer">
-                <div class="card-meta">
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Reply within 24h</span>
-                  </div>
-                </div>
-                <div class="card-cta">
-                  Contact
-                  <span class="card-cta-arrow">↗</span>
-                </div>
-              </div>
-              <div class="card-progress">
-                <div class="card-progress-fill"></div>
-              </div>
-            </article>
-
-            <article class="card" data-category="contact" style="--progress: 60%;">
-              <div class="card-header">
-                <div class="card-tag">
-                  <span class="card-tag-dot"></span>
-                  Contact
-                </div>
-                <div class="card-level">Reach • Social</div>
-              </div>
-              <h2 class="card-title">Follow the build in real time</h2>
-              <p class="card-description">
-                Stay updated on new tutorials, tools, and experiments as the studio evolves.
-              </p>
-              <div class="card-footer">
-                <div class="card-meta">
-                  <div class="card-meta-pill">
-                    <span class="card-meta-dot"></span>
-                    <span>Social</span>
-                  </div>
-                </div>
-                <div class="card-cta">
-                  Follow
-                  <span class="card-cta-arrow">↗</span>
-                </div>
-              </div>
-              <div class="card-progress">
-                <div class="card-progress-fill"></div>
               </div>
             </article>
           </div>
         </section>
 
-        <!-- SIDE PANEL WITH AD (ID: 6794664785) -->
-        <aside class="side-panel">
-          <section class="side-ad-card">
-            <header class="side-ad-header">
-              <div>
-                <span class="side-ad-dot"></span>
-                <span>Sponsored • Side</span>
+        <!-- TUTORIALS PREVIEW -->
+        <section class="section">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Tutorials preview</div>
+              <div class="section-sub">A structured path from basics to advanced.</div>
+            </div>
+            <div class="section-link" onclick="window.location.href='tutorials.html'">
+              View all levels
+              <span>→</span>
+            </div>
+          </div>
+
+          <div class="tutorials-list">
+            <article class="tutorial-card">
+              <div class="tutorial-level">Level 1 · Start</div>
+              <div class="tutorial-title">HTML & CSS foundations</div>
+              <div class="tutorial-desc">
+                Learn how to structure pages and style them cleanly — the base of every project.
               </div>
-              <span>Subtle, right-aligned placement</span>
-            </header>
-            <div class="side-ad-body">
-              <ins class="adsbygoogle"
-                   style="display:block"
-                   data-ad-client="ca-pub-6065282700750014"
-                   data-ad-slot="6794664785"
-                   data-ad-format="vertical"
-                   data-full-width-responsive="true"></ins>
-            </div>
-          </section>
-
-          <section class="side-meta-card">
-            <div class="side-meta-row">
-              <span>Layout status</span>
-              <div class="side-meta-pill">
-                <span class="side-meta-dot"></span>
-                <span>Stable</span>
+              <div class="tutorial-meta">
+                <span>Estimated: 30 min</span>
+                <span>Beginner</span>
               </div>
+            </article>
+
+            <article class="tutorial-card">
+              <div class="tutorial-level">Level 5 · Logic</div>
+              <div class="tutorial-title">JavaScript interactions</div>
+              <div class="tutorial-desc">
+                Add dynamic behavior, handle events, and make your UI feel alive.
+              </div>
+              <div class="tutorial-meta">
+                <span>Estimated: 45 min</span>
+                <span>Intermediate</span>
+              </div>
+            </article>
+
+            <article class="tutorial-card">
+              <div class="tutorial-level">Level 10 · Power</div>
+              <div class="tutorial-title">Building your own tools</div>
+              <div class="tutorial-desc">
+                Combine everything to create real, useful tools that you can ship and share.
+              </div>
+              <div class="tutorial-meta">
+                <span>Estimated: 60 min</span>
+                <span>Advanced</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- NEWS PREVIEW -->
+        <section class="section">
+          <div class="section-header">
+            <div>
+              <div class="section-title">News snapshot</div>
+              <div class="section-sub">Stay in touch with what matters in tech.</div>
             </div>
-            <div class="side-meta-row">
-              <span>Cards visible</span>
-              <span id="sideCardCount">All</span>
+            <div class="section-link" onclick="window.location.href='news.html'">
+              View all news
+              <span>→</span>
             </div>
-            <div class="side-meta-row">
-              <span>Theme</span>
-              <span id="sideThemeLabel">Auto</span>
+          </div>
+
+          <div class="news-grid">
+            <article class="news-card">
+              <div class="news-tag">AI · Update</div>
+              <div class="news-title">New model tools for creators</div>
+              <div class="news-desc">
+                Explore how new AI tools are changing the way we build, design, and learn.
+              </div>
+              <div class="news-meta">
+                <span>Today</span>
+                <span>3 min read</span>
+              </div>
+            </article>
+
+            <article class="news-card">
+              <div class="news-tag">Web · Dev</div>
+              <div class="news-title">Modern front-end patterns</div>
+              <div class="news-desc">
+                A quick look at clean, minimal UI patterns that keep your projects sharp.
+              </div>
+              <div class="news-meta">
+                <span>This week</span>
+                <span>4 min read</span>
+              </div>
+            </article>
+
+            <article class="news-card">
+              <div class="news-tag">Productivity</div>
+              <div class="news-title">Staying focused while learning</div>
+              <div class="news-desc">
+                Simple strategies to keep your energy and attention on what actually matters.
+              </div>
+              <div class="news-meta">
+                <span>This month</span>
+                <span>5 min read</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- CTA SECTION -->
+        <section class="cta-section">
+          <div class="cta-main-text">
+            <div class="cta-main-title">Ready to push your next idea?</div>
+            <div class="cta-main-sub">
+              Jump into tutorials, test tools, or just explore. ALAEAI is built to grow with you — one project at a time.
             </div>
-          </section>
-        </aside>
-      </section>
+          </div>
+          <div class="cta-actions">
+            <button class="cta-btn-light" onclick="window.location.href='tutorials.html'">
+              Start with tutorials
+              <span>→</span>
+            </button>
+            <button class="cta-btn-ghost" onclick="window.location.href='about.html'">
+              Learn more about ALAEAI
+              <span>↗</span>
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
 
-      <!-- FOOTER -->
-      <footer class="fade-in-up">
-        <div class="footer-left">
-          <span class="footer-dot"></span>
-          <span>ALAEAI Studio • Built for clarity, focus, and growth.</span>
-        </div>
-        <div class="footer-links">
-          <button class="footer-link" type="button" data-category-target="tutorials">
-            <span>Go to Tutorials</span>
-          </button>
-          <button class="footer-link" type="button" data-category-target="news">
-            <span>Latest News</span>
-          </button>
-          <button class="footer-link" type="button" data-category-target="tools">
-            <span>Explore Tools</span>
-          </button>
-        </div>
-      </footer>
-    </div>
-  </main>
-
-  <script>
-    (function () {
-      const STORAGE_THEME_KEY = "alaeai-theme";
-      const STORAGE_CATEGORY_KEY = "alaeai-category";
-
-      const body = document.body;
-      const darkToggle = document.getElementById("darkToggle");
-      const activeCategoryLabel = document.getElementById("activeCategoryLabel");
-      const darkModeLabel = document.getElementById("darkModeLabel");
-      const sideThemeLabel = document.getElementById("sideThemeLabel");
-      const categoryCountLabel = document.getElementById("categoryCountLabel");
-      const sideCardCount = document.getElementById("sideCardCount");
-      const cardsGrid = document.getElementById("cardsGrid");
-      const categoryButtons = Array.from(document.querySelectorAll(".category-btn"));
-      const footerLinks = Array.from(document.querySelectorAll("[data-category-target]"));
-      const cards = Array.from(document.querySelectorAll(".card"));
-      const fadeInSections = Array.from(document.querySelectorAll(".fade-in-up"));
-      const followCard = document.getElementById("followCard");
-
-      /* THEME HANDLING */
-      function applyTheme(theme) {
-        if (theme === "dark") {
-          body.classList.add("dark");
-          darkModeLabel.textContent = "Dark mode";
-          sideThemeLabel.textContent = "Dark";
-        } else {
-          body.classList.remove("dark");
-          darkModeLabel.textContent = "Light mode";
-          sideThemeLabel.textContent = "Light";
-        }
-      }
-
-      function loadTheme() {
-        const stored = localStorage.getItem(STORAGE_THEME_KEY);
-        if (stored === "dark" || stored === "light") {
-          applyTheme(stored);
-        } else {
-          applyTheme("light");
-        }
-      }
-
-      function toggleTheme() {
-        const isDark = body.classList.contains("dark");
-        const next = isDark ? "light" : "dark";
-        applyTheme(next);
-        localStorage.setItem(STORAGE_THEME_KEY, next);
-      }
-
-      /* CATEGORY HANDLING */
-      function updateCategoryUI(category) {
-        categoryButtons.forEach((btn) => {
-          const btnCategory = btn.getAttribute("data-category");
-          btn.classList.toggle("active", btnCategory === category);
-        });
-
-        let visibleCount = 0;
-        cards.forEach((card) => {
-          const cardCategory = card.getAttribute("data-category");
-          const shouldShow = category === "all" || cardCategory === category;
-          if (shouldShow) {
-            card.classList.remove("hidden-by-category");
-            visibleCount++;
-          } else {
-            card.classList.add("hidden-by-category");
-          }
-        });
-
-        const labelMap = {
-          all: "All content",
-          tutorials: "Tutorials",
-          news: "News",
-          tools: "Tools",
-          about: "About",
-          contact: "Contact"
-        };
-
-        activeCategoryLabel.textContent = labelMap[category] || "All content";
-
-        if (category === "all") {
-          categoryCountLabel.textContent = "All cards visible";
-          sideCardCount.textContent = "All";
-        } else {
-          categoryCountLabel.textContent = visibleCount + " card" + (visibleCount === 1 ? "" : "s") + " visible";
-          sideCardCount.textContent = visibleCount;
-        }
-      }
-
-      function setCategory(category) {
-        updateCategoryUI(category);
-        localStorage.setItem(STORAGE_CATEGORY_KEY, category);
-      }
-
-      function loadCategory() {
-        const stored = localStorage.getItem(STORAGE_CATEGORY_KEY);
-        const valid = ["all", "tutorials", "news", "tools", "about", "contact"];
-        const category = valid.includes(stored) ? stored : "all";
-        updateCategoryUI(category);
-      }
-
-      /* FOLLOW CARD PARALLAX */
-      function setupFollowCard() {
-        if (!followCard) return;
-        let rect = followCard.getBoundingClientRect();
-
-        function updateRect() {
-          rect = followCard.getBoundingClientRect();
-        }
-
-        window.addEventListener("resize", updateRect);
-
-        followCard.addEventListener("mousemove", (e) => {
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const rotateX = ((y - centerY) / centerY) * -6;
-          const rotateY = ((x - centerX) / centerX) * 6;
-          followCard.style.transform =
-            "perspective(900px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
-        });
-
-        followCard.addEventListener("mouseleave", () => {
-          followCard.style.transform = "perspective(900px) rotateX(10deg) rotateY(-12deg)";
-        });
-      }
-
-      /* INTERSECTION OBSERVER FOR FADE-IN + PROGRESS */
-      function setupIntersection() {
-        if (!("IntersectionObserver" in window)) {
-          fadeInSections.forEach((el) => el.classList.add("visible"));
-          cards.forEach((card) => card.classList.add("visible"));
-          return;
-        }
-
-        const sectionObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                sectionObserver.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.15 }
-        );
-
-        fadeInSections.forEach((el) => sectionObserver.observe(el));
-
-        const cardObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                cardObserver.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.25 }
-        );
-
-        cards.forEach((card) => cardObserver.observe(card));
-      }
-
-      /* EVENT BINDINGS */
-      function bindEvents() {
-        if (darkToggle) {
-          darkToggle.addEventListener("click", toggleTheme);
-        }
-
-        categoryButtons.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const category = btn.getAttribute("data-category") || "all";
-            setCategory(category);
-          });
-        });
-
-        footerLinks.forEach((link) => {
-          link.addEventListener("click", () => {
-            const category = link.getAttribute("data-category-target") || "all";
-            setCategory(category);
-            window.scrollTo({
-              top: cardsGrid.getBoundingClientRect().top + window.scrollY - 80,
-              behavior: "smooth"
-            });
-          });
-        });
-
-        const heroButtons = Array.from(document.querySelectorAll(".hero-btn-primary, .hero-btn-secondary"));
-        heroButtons.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const target = btn.getAttribute("data-category-target");
-            if (target) {
-              setCategory(target);
-              window.scrollTo({
-                top: cardsGrid.getBoundingClientRect().top + window.scrollY - 80,
-                behavior: "smooth"
-              });
-            }
-          });
-        });
-      }
-
-      /* ADS INIT */
-      function initAds() {
-        try {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-          (adsbygoogle = window.adsbygoogle || []).push({});
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-          // Fail silently if ads are blocked
-        }
-      }
-
-      /* INIT */
-      function init() {
-        loadTheme();
-        loadCategory();
-        setupFollowCard();
-        setupIntersection();
-        bindEvents();
-        initAds();
-      }
-
-      document.addEventListener("DOMContentLoaded", init);
-    })();
-  </script>
+    <footer>
+      <span>© 2026 ALAEAI — Built by Alae. All rights reserved.</span>
+    </footer>
+  </div>
 </body>
 </html>

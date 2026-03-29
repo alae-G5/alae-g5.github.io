@@ -11,7 +11,7 @@
       --bg-soft: #0b0d11;
       --bg-card: #11141b;
       --accent: #f2c26b;
-      --accent-soft: rgba(242,194,107,0.18);
+      --accent2: #7a4b2a;
       --text: #f7f3ea;
       --muted: #a7a4a0;
       --radius: 20px;
@@ -65,35 +65,38 @@
       100% { transform: translateY(40px) translateX(30px); }
     }
 
-    /* Solar system object */
-    .solar-system {
+    /* Spellix-style animated object */
+    .spellix {
       position: absolute;
-      top: -40px;
-      right: -40px;
-      width: 180px;
-      height: 180px;
+      top: 50%;
+      right: 50px;
+      transform: translateY(-50%);
+      width: 260px;
+      height: 260px;
+      background: conic-gradient(
+        from 0deg,
+        var(--accent),
+        var(--accent2),
+        #d9a15a,
+        var(--accent),
+        var(--accent2)
+      );
       border-radius: 50%;
-      border: 2px solid rgba(242,194,107,0.25);
-      animation: rotate 18s linear infinite;
+      filter: blur(0.6px) brightness(1.2);
+      animation: spin 6s linear infinite, morph 8s ease-in-out infinite alternate;
+      opacity: 0.9;
       pointer-events: none;
     }
 
-    .solar-system::before {
-      content: "";
-      position: absolute;
-      width: 22px;
-      height: 22px;
-      background: var(--accent);
-      border-radius: 50%;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      box-shadow: 0 0 18px rgba(242,194,107,0.8);
+    @keyframes spin {
+      from { transform: translateY(-50%) rotate(0deg); }
+      to { transform: translateY(-50%) rotate(360deg); }
     }
 
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    @keyframes morph {
+      0% { border-radius: 50%; }
+      50% { border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; }
+      100% { border-radius: 60% 40% 45% 55% / 45% 55% 40% 60%; }
     }
 
     /* Page container */
@@ -111,7 +114,7 @@
 
     /* Banner */
     .banner {
-      padding: 26px 32px;
+      padding: 40px 32px;
       background: linear-gradient(145deg, #0b0d11, #151821);
       border-radius: 26px;
       border: 1px solid rgba(255,255,255,0.06);
@@ -119,19 +122,27 @@
       margin-bottom: 28px;
       position: relative;
       overflow: hidden;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .banner-title {
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 800;
       margin-bottom: 6px;
+      z-index: 2;
+      position: relative;
     }
 
     .banner-sub {
-      font-size: 15px;
+      font-size: 16px;
       color: var(--muted);
       max-width: 620px;
       line-height: 1.6;
+      z-index: 2;
+      position: relative;
     }
 
     /* Hero */
@@ -151,9 +162,6 @@
       font-weight: 800;
       letter-spacing: -0.5px;
       margin-bottom: 8px;
-      animation: slideDown 0.8s ease forwards;
-      opacity: 0;
-      transform: translateY(-20px);
     }
 
     .hero-sub {
@@ -161,18 +169,6 @@
       color: var(--muted);
       max-width: 620px;
       line-height: 1.6;
-      animation: slideUp 0.8s ease forwards;
-      opacity: 0;
-      transform: translateY(20px);
-      animation-delay: 0.2s;
-    }
-
-    @keyframes slideDown {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideUp {
-      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Grid layout */
@@ -185,6 +181,9 @@
     @media (max-width: 880px) {
       .grid {
         grid-template-columns: 1fr;
+      }
+      .spellix {
+        display: none;
       }
     }
 
@@ -285,7 +284,7 @@
 
     <!-- BANNER -->
     <section class="banner">
-      <div class="solar-system"></div>
+      <div class="spellix"></div>
 
       <h1 class="banner-title">AlaeAI — À propos d’Alaedine</h1>
       <p class="banner-sub">

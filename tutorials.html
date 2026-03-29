@@ -1307,25 +1307,1085 @@ code1: `
 </html>
 `,
 
-  code2: "/* Level 2 code will be added later */",
-  code3: "/* Level 3 code will be added later */",
-  code4: "/* Level 4 code will be added later */",
-  code5: "/* Level 5 code will be added later */",
-  code6: "/* Level 6 code will be added later */",
-  code7: "/* Level 7 code will be added later */",
-  code8: "/* Level 8 code will be added later */",
-  code9: "/* Level 9 code will be added later */",
-  code10: "/* Level 10 code will be added later */",
-  code11: "/* Level 11 code will be added later */",
-  code12: "/* Level 12 code will be added later */",
-  code13: "/* Level 13 code will be added later */",
-  code14: "/* Level 14 code will be added later */",
-  code15: "/* Level 15 code will be added later */",
-  code16: "/* Level 16 code will be added later */",
-  code17: "/* Level 17 code will be added later */",
-  code18: "/* Level 18 code will be added later */",
-  code19: "/* Level 19 code will be added later */",
-  code20: "/* Level 20 code will be added later */"
+  
+code2: `
+:root {
+  --tb-bg: #f5f5f5;
+  --tb-text: #111827;
+  --tb-card-bg: #ffffff;
+  --tb-accent: #facc15;
+  --tb-radius: 14px;
+  --tb-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Poppins", sans-serif;
+  background: var(--tb-bg);
+  color: var(--tb-text);
+}
+
+/* Layout */
+.tb-header,
+.tb-footer {
+  padding: 16px 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+.tb-main {
+  min-height: calc(100vh - 120px);
+  padding: 24px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Tool card */
+.tb-tool-card {
+  background: var(--tb-card-bg);
+  border-radius: var(--tb-radius);
+  box-shadow: var(--tb-shadow);
+  padding: 20px 18px;
+  max-width: 720px;
+  width: 100%;
+}
+
+.tb-tool-header h2 {
+  margin: 0 0 10px;
+}
+
+.tb-tool-body {
+  margin-bottom: 16px;
+}
+
+/* Buttons */
+.tb-btn-primary,
+.tb-btn-secondary {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.tb-btn-primary {
+  background: var(--tb-accent);
+  color: #111827;
+  margin-right: 8px;
+}
+
+.tb-btn-secondary {
+  background: transparent;
+  border: 1px solid var(--tb-accent);
+  color: #111827;
+}
+
+/* Simple theme toggle button */
+#themeToggle {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  cursor: pointer;
+}
+`,
+
+code3: `
+<script>
+  const body = document.body;
+  const toggleBtn = document.getElementById('themeToggle');
+
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      body.classList.add('dark');
+      toggleBtn.textContent = 'Light mode';
+    } else {
+      body.classList.remove('dark');
+      toggleBtn.textContent = 'Dark mode';
+    }
+  }
+
+  const savedTheme = localStorage.getItem('tb-theme') || 'light';
+  applyTheme(savedTheme);
+
+  toggleBtn.addEventListener('click', () => {
+    const current = body.classList.contains('dark') ? 'dark' : 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('tb-theme', next);
+    applyTheme(next);
+  });
+</script>
+`,
+
+code4: `
+/* Global transitions */
+:root {
+  --tb-transition-fast: 0.18s ease-out;
+  --tb-transition-med: 0.28s ease-out;
+}
+
+/* Card fade-in animation */
+.tb-tool-card {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: tbFadeIn 0.45s var(--tb-transition-med) forwards;
+}
+
+@keyframes tbFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Button hover micro-interactions */
+.tb-btn-primary:hover,
+.tb-btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+  transition: transform var(--tb-transition-fast), box-shadow var(--tb-transition-fast);
+}
+
+/* Theme toggle animation */
+#themeToggle {
+  transition: background var(--tb-transition-fast), color var(--tb-transition-fast);
+}
+
+#themeToggle:active {
+  transform: scale(0.95);
+}
+`,
+
+code5: `
+<div class="pb-container">
+  <label>Topic</label>
+  <input id="pbTopic" type="text" placeholder="Enter a topic">
+
+  <label>Tone</label>
+  <select id="pbTone">
+    <option>Professional</option>
+    <option>Friendly</option>
+    <option>Creative</option>
+  </select>
+
+  <button id="pbGenerate" class="tb-btn-primary">Generate Prompt</button>
+
+  <label>Output</label>
+  <textarea id="pbOutput" readonly></textarea>
+</div>
+
+<script>
+  const topic = document.getElementById('pbTopic');
+  const tone = document.getElementById('pbTone');
+  const output = document.getElementById('pbOutput');
+  const generate = document.getElementById('pbGenerate');
+
+  generate.addEventListener('click', () => {
+    const t = topic.value.trim();
+    const style = tone.value;
+
+    if (!t) {
+      output.value = "Please enter a topic.";
+      return;
+    }
+
+    output.value = \`Write a \${style.toLowerCase()} explanation about: "\${t}".\`;
+  });
+</script>
+`,
+
+code6: `
+<div class="cp-container">
+  <button id="cpGenerate" class="tb-btn-primary">Generate Palette</button>
+  <div id="cpColors" class="cp-grid"></div>
+</div>
+
+<style>
+  .cp-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .cp-swatch {
+    height: 80px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: 12px;
+    padding-bottom: 6px;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+</style>
+
+<script>
+  const cpBtn = document.getElementById('cpGenerate');
+  const cpGrid = document.getElementById('cpColors');
+
+  function randomColor() {
+    return '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+  }
+
+  cpBtn.addEventListener('click', () => {
+    cpGrid.innerHTML = '';
+    for (let i = 0; i < 5; i++) {
+      const c = randomColor();
+      const div = document.createElement('div');
+      div.className = 'cp-swatch';
+      div.style.background = c;
+      div.textContent = c;
+      div.addEventListener('click', () => navigator.clipboard.writeText(c));
+      cpGrid.appendChild(div);
+    }
+  });
+</script>
+`,
+
+code7: `
+<div class="gg-container">
+  <label>Color 1</label>
+  <input type="color" id="ggC1" value="#ff7f50">
+
+  <label>Color 2</label>
+  <input type="color" id="ggC2" value="#1e90ff">
+
+  <label>Angle</label>
+  <input type="range" id="ggAngle" min="0" max="360" value="90">
+
+  <div id="ggPreview" class="gg-preview"></div>
+
+  <label>CSS Output</label>
+  <textarea id="ggOutput" readonly></textarea>
+</div>
+
+<style>
+  .gg-preview {
+    height: 120px;
+    border-radius: 12px;
+    margin: 14px 0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  }
+</style>
+
+<script>
+  const c1 = document.getElementById('ggC1');
+  const c2 = document.getElementById('ggC2');
+  const angle = document.getElementById('ggAngle');
+  const preview = document.getElementById('ggPreview');
+  const output = document.getElementById('ggOutput');
+
+  function updateGradient() {
+    const css = \`linear-gradient(\${angle.value}deg, \${c1.value}, \${c2.value})\`;
+    preview.style.background = css;
+    output.value = css + ';';
+  }
+
+  c1.addEventListener('input', updateGradient);
+  c2.addEventListener('input', updateGradient);
+  angle.addEventListener('input', updateGradient);
+
+  updateGradient();
+</script>
+`,
+
+code8: `
+<div class="fmt-container">
+  <label>Paste Code</label>
+  <textarea id="fmtInput" placeholder="Paste your code here..."></textarea>
+
+  <button id="fmtBtn" class="tb-btn-primary">Format</button>
+
+  <label>Formatted Output</label>
+  <textarea id="fmtOutput" readonly></textarea>
+</div>
+
+<script>
+  const fmtInput = document.getElementById('fmtInput');
+  const fmtOutput = document.getElementById('fmtOutput');
+  const fmtBtn = document.getElementById('fmtBtn');
+
+  fmtBtn.addEventListener('click', () => {
+    const lines = fmtInput.value.split(/\\r?\\n/);
+    let indent = 0;
+    let result = [];
+
+    lines.forEach(line => {
+      let trimmed = line.trim();
+
+      if (trimmed.startsWith('}') || trimmed.startsWith('</')) {
+        indent = Math.max(indent - 1, 0);
+      }
+
+      result.push('  '.repeat(indent) + trimmed);
+
+      if (trimmed.endsWith('{') || trimmed.startsWith('<') && !trimmed.startsWith('</') && trimmed.endsWith('>')) {
+        indent++;
+      }
+    });
+
+    fmtOutput.value = result.join('\\n');
+  });
+</script>
+`,
+
+code9: `
+<div class="pw-container">
+  <label>Password Length</label>
+  <input id="pwLength" type="number" min="4" max="40" value="12">
+
+  <label><input type="checkbox" id="pwUpper" checked> Uppercase</label>
+  <label><input type="checkbox" id="pwNums" checked> Numbers</label>
+  <label><input type="checkbox" id="pwSyms" checked> Symbols</label>
+
+  <button id="pwGen" class="tb-btn-primary">Generate</button>
+
+  <label>Output</label>
+  <input id="pwOut" readonly>
+</div>
+
+<script>
+  const pwLen = document.getElementById('pwLength');
+  const pwUpper = document.getElementById('pwUpper');
+  const pwNums = document.getElementById('pwNums');
+  const pwSyms = document.getElementById('pwSyms');
+  const pwOut = document.getElementById('pwOut');
+  const pwGen = document.getElementById('pwGen');
+
+  const lower = "abcdefghijklmnopqrstuvwxyz";
+  const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const nums = "0123456789";
+  const syms = "!
+ code10: `
+<div class="tm-container">
+  <label>Minutes</label>
+  <input id="tmMinutes" type="number" min="1" max="120" value="25">
+
+  <div id="tmDisplay" class="tm-display">25:00</div>
+
+  <button id="tmStart" class="tb-btn-primary">Start</button>
+  <button id="tmPause" class="tb-btn-secondary">Pause</button>
+  <button id="tmReset" class="tb-btn-secondary">Reset</button>
+</div>
+
+<style>
+  .tm-display {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 16px 0;
+    text-align: center;
+  }
+</style>
+
+<script>
+  const tmMin = document.getElementById('tmMinutes');
+  const tmDisplay = document.getElementById('tmDisplay');
+  const tmStart = document.getElementById('tmStart');
+  const tmPause = document.getElementById('tmPause');
+  const tmReset = document.getElementById('tmReset');
+
+  let interval = null;
+  let remaining = tmMin.value * 60;
+
+  function updateDisplay() {
+    const m = Math.floor(remaining / 60).toString().padStart(2, '0');
+    const s = (remaining % 60).toString().padStart(2, '0');
+    tmDisplay.textContent = \`\${m}:\${s}\`;
+  }
+
+  tmStart.addEventListener('click', () => {
+    if (interval) return;
+    interval = setInterval(() => {
+      remaining--;
+      updateDisplay();
+      if (remaining <= 0) {
+        clearInterval(interval);
+        interval = null;
+        alert("Time's up!");
+      }
+    }, 1000);
+  });
+
+  tmPause.addEventListener('click', () => {
+    clearInterval(interval);
+    interval = null;
+  });
+
+  tmReset.addEventListener('click', () => {
+    clearInterval(interval);
+    interval = null;
+    remaining = tmMin.value * 60;
+    updateDisplay();
+  });
+
+  updateDisplay();
+</script>
+`,
+
+code11: `
+<div class="nt-container">
+  <textarea id="ntInput" placeholder="Write a note..."></textarea>
+  <button id="ntSave" class="tb-btn-primary">Save Note</button>
+  <div id="ntList" class="nt-list"></div>
+</div>
+
+<style>
+  .nt-list {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .nt-item {
+    background: var(--tb-card-bg);
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: var(--tb-shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style>
+
+<script>
+  const ntInput = document.getElementById('ntInput');
+  const ntSave = document.getElementById('ntSave');
+  const ntList = document.getElementById('ntList');
+
+  let notes = JSON.parse(localStorage.getItem('tb-notes') || '[]');
+
+  function renderNotes() {
+    ntList.innerHTML = '';
+    notes.forEach((note, i) => {
+      const div = document.createElement('div');
+      div.className = 'nt-item';
+      div.innerHTML = \`
+        <span>\${note}</span>
+        <button data-i="\${i}" class="tb-btn-secondary">Delete</button>
+      \`;
+      ntList.appendChild(div);
+    });
+  }
+
+  ntSave.addEventListener('click', () => {
+    const text = ntInput.value.trim();
+    if (!text) return;
+    notes.push(text);
+    localStorage.setItem('tb-notes', JSON.stringify(notes));
+    ntInput.value = '';
+    renderNotes();
+  });
+
+  ntList.addEventListener('click', e => {
+    if (e.target.tagName === 'BUTTON') {
+      const i = e.target.getAttribute('data-i');
+      notes.splice(i, 1);
+      localStorage.setItem('tb-notes', JSON.stringify(notes));
+      renderNotes();
+    }
+  });
+
+  renderNotes();
+</script>
+`,
+
+code12: `
+<div class="th-container">
+  <label>Select Theme</label>
+  <select id="thSelect">
+    <option value="light">Light</option>
+    <option value="dark">Dark</option>
+    <option value="gold">Gold</option>
+  </select>
+</div>
+
+<script>
+  const thSelect = document.getElementById('thSelect');
+
+  const themes = {
+    light: {
+      '--tb-bg': '#f5f5f5',
+      '--tb-text': '#111827',
+      '--tb-card-bg': '#ffffff'
+    },
+    dark: {
+      '--tb-bg': '#0b0b0f',
+      '--tb-text': '#f5f5f5',
+      '--tb-card-bg': '#111'
+    },
+    gold: {
+      '--tb-bg': '#fff8dc',
+      '--tb-text': '#5a4500',
+      '--tb-card-bg': '#fff3b0'
+    }
+  };
+
+  function applyTheme(name) {
+    const vars = themes[name];
+    for (let key in vars) {
+      document.documentElement.style.setProperty(key, vars[key]);
+    }
+    localStorage.setItem('tb-theme-adv', name);
+  }
+
+  thSelect.addEventListener('change', () => {
+    applyTheme(thSelect.value);
+  });
+
+  const saved = localStorage.getItem('tb-theme-adv') || 'light';
+  thSelect.value = saved;
+  applyTheme(saved);
+</script>
+`,
+
+code13: `
+<div class="api-container">
+  <label>API URL</label>
+  <input id="apiUrl" type="text" placeholder="https://api.example.com/data">
+
+  <button id="apiSend" class="tb-btn-primary">Send Request</button>
+
+  <label>Response</label>
+  <textarea id="apiOutput" readonly></textarea>
+</div>
+
+<script>
+  const apiUrl = document.getElementById('apiUrl');
+  const apiSend = document.getElementById('apiSend');
+  const apiOutput = document.getElementById('apiOutput');
+
+  apiSend.addEventListener('click', async () => {
+    const url = apiUrl.value.trim();
+    if (!url) {
+      apiOutput.value = "Please enter a valid URL.";
+      return;
+    }
+
+    apiOutput.value = "Loading...";
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      apiOutput.value = JSON.stringify(data, null, 2);
+    } catch (err) {
+      apiOutput.value = "Error: " + err.message;
+    }
+  });
+</script>
+`,
+
+code14: `
+<div class="json-container">
+  <label>JSON Input</label>
+  <textarea id="jsonInput" placeholder='{"name":"Alae"}'></textarea>
+
+  <button id="jsonValidate" class="tb-btn-primary">Validate</button>
+
+  <label>Output</label>
+  <textarea id="jsonOutput" readonly></textarea>
+</div>
+
+<script>
+  const jsonInput = document.getElementById('jsonInput');
+  const jsonOutput = document.getElementById('jsonOutput');
+  const jsonValidate = document.getElementById('jsonValidate');
+
+  jsonValidate.addEventListener('click', () => {
+    try {
+      const parsed = JSON.parse(jsonInput.value);
+      jsonOutput.value = JSON.stringify(parsed, null, 2);
+    } catch (err) {
+      jsonOutput.value = "Invalid JSON: " + err.message;
+    }
+  });
+</script>
+`,
+
+code15: `
+<div class="se-container">
+  <label>Search</label>
+  <input id="seInput" type="text" placeholder="Type to filter...">
+
+  <ul id="seList" class="se-list"></ul>
+</div>
+
+<style>
+  .se-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 12px;
+  }
+  .se-list li {
+    padding: 8px 12px;
+    background: var(--tb-card-bg);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    box-shadow: var(--tb-shadow);
+  }
+</style>
+
+<script>
+  const seInput = document.getElementById('seInput');
+  const seList = document.getElementById('seList');
+
+  const items = [
+    "JavaScript",
+    "HTML",
+    "CSS",
+    "React",
+    "Node.js",
+    "APIs",
+    "Design",
+    "Tools",
+    "Animations"
+  ];
+
+  function renderList(filter = "") {
+    seList.innerHTML = "";
+    items
+      .filter(i => i.toLowerCase().includes(filter.toLowerCase()))
+      .forEach(i => {
+        const li = document.createElement('li');
+        li.textContent = i;
+        seList.appendChild(li);
+      });
+  }
+
+  seInput.addEventListener('input', () => {
+    renderList(seInput.value);
+  });
+
+  renderList();
+</script>
+`,
+
+code16: `
+<div class="db-grid" id="dbGrid"></div>
+
+<style>
+  .db-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .db-card {
+    background: var(--tb-card-bg);
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: var(--tb-shadow);
+    cursor: pointer;
+    transition: transform .15s ease;
+  }
+  .db-card:hover {
+    transform: translateY(-4px);
+  }
+  .db-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+</style>
+
+<script>
+  const dbGrid = document.getElementById('dbGrid');
+
+  const tools = [
+    { name: "Prompt Builder", id: 5 },
+    { name: "Color Palette", id: 6 },
+    { name: "Gradient Generator", id: 7 },
+    { name: "Code Formatter", id: 8 },
+    { name: "Password Generator", id: 9 },
+    { name: "Focus Timer", id: 10 },
+    { name: "Notes App", id: 11 },
+    { name: "API Tester", id: 13 },
+    { name: "JSON Viewer", id: 14 },
+    { name: "Search Engine", id: 15 }
+  ];
+
+  tools.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 'db-card';
+    card.innerHTML = \`
+      <div class="db-title">\${t.name}</div>
+      <small>Open tool</small>
+    \`;
+    card.addEventListener('click', () => {
+      alert("Load tool " + t.id + " here (Level 20 will implement this)");
+    });
+    dbGrid.appendChild(card);
+  });
+</script>
+`,
+
+code17: `
+<div class="dd-container">
+  <div class="dd-box" draggable="true">Box 1</div>
+  <div class="dd-box" draggable="true">Box 2</div>
+  <div class="dd-box" draggable="true">Box 3</div>
+</div>
+
+<style>
+  .dd-container {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .dd-box {
+    background: var(--tb-card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    cursor: grab;
+    box-shadow: var(--tb-shadow);
+  }
+  .dd-box:active {
+    cursor: grabbing;
+  }
+</style>
+
+<script>
+  const boxes = document.querySelectorAll('.dd-box');
+  let dragItem = null;
+
+  boxes.forEach(box => {
+    box.addEventListener('dragstart', () => {
+      dragItem = box;
+      setTimeout(() => box.style.opacity = "0.5", 0);
+    });
+
+    box.addEventListener('dragend', () => {
+      dragItem = null;
+      box.style.opacity = "1";
+    });
+  });
+
+  const container = document.querySelector('.dd-container');
+
+  container.addEventListener('dragover', e => {
+    e.preventDefault();
+    const after = [...container.children].find(child => {
+      const rect = child.getBoundingClientRect();
+      return e.clientX < rect.left + rect.width / 2;
+    });
+    if (after == null) {
+      container.appendChild(dragItem);
+    } else {
+      container.insertBefore(dragItem, after);
+    }
+  });
+</script>
+`,
+
+code18: `
+<div class="st-container">
+  <label><input type="checkbox" id="stAnim"> Enable Animations</label>
+  <label><input type="checkbox" id="stCompact"> Compact Mode</label>
+  <label><input type="checkbox" id="stRound"> Rounded UI</label>
+</div>
+
+<script>
+  const stAnim = document.getElementById('stAnim');
+  const stCompact = document.getElementById('stCompact');
+  const stRound = document.getElementById('stRound');
+
+  const settings = JSON.parse(localStorage.getItem('tb-settings') || '{}');
+
+  function applySettings() {
+    document.body.classList.toggle('no-anim', !settings.anim);
+    document.body.classList.toggle('compact', settings.compact);
+    document.body.classList.toggle('rounded', settings.round);
+  }
+
+  function save() {
+    localStorage.setItem('tb-settings', JSON.stringify(settings));
+    applySettings();
+  }
+
+  stAnim.addEventListener('change', () => {
+    settings.anim = stAnim.checked;
+    save();
+  });
+
+  stCompact.addEventListener('change', () => {
+    settings.compact = stCompact.checked;
+    save();
+  });
+
+  stRound.addEventListener('change', () => {
+    settings.round = stRound.checked;
+    save();
+  });
+
+  stAnim.checked = settings.anim ?? true;
+  stCompact.checked = settings.compact ?? false;
+  stRound.checked = settings.round ?? true;
+
+  applySettings();
+</script>
+
+<style>
+  body.no-anim * {
+    transition: none !important;
+  }
+  body.compact .tb-tool-card {
+    padding: 10px !important;
+  }
+  body.rounded .tb-tool-card {
+    border-radius: 20px !important;
+  }
+</style>
+`,
+
+ code19: `
+<div class="ex-container">
+  <label>Content to Export</label>
+  <textarea id="exInput" placeholder="Write or paste content here..."></textarea>
+
+  <label>Export Format</label>
+  <select id="exFormat">
+    <option value="txt">Text (.txt)</option>
+    <option value="json">JSON (.json)</option>
+  </select>
+
+  <div class="ex-buttons">
+    <button id="exExport" class="tb-btn-primary">Export File</button>
+    <button id="exCopy" class="tb-btn-secondary">Copy</button>
+    <button id="exClear" class="tb-btn-secondary">Clear</button>
+  </div>
+
+  <div id="exStatus" class="ex-status"></div>
+</div>
+
+<style>
+  .ex-container textarea {
+    width: 100%;
+    height: 140px;
+    border-radius: 10px;
+    padding: 12px;
+    resize: vertical;
+  }
+  .ex-buttons {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+  }
+  .ex-status {
+    margin-top: 12px;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+</style>
+
+<script>
+  const exInput = document.getElementById('exInput');
+  const exFormat = document.getElementById('exFormat');
+  const exExport = document.getElementById('exExport');
+  const exCopy = document.getElementById('exCopy');
+  const exClear = document.getElementById('exClear');
+  const exStatus = document.getElementById('exStatus');
+
+  function showStatus(msg, type = "normal") {
+    exStatus.style.color = type === "error" ? "#dc2626" : "inherit";
+    exStatus.textContent = msg;
+  }
+
+  function downloadFile(filename, content) {
+    const blob = new Blob([content], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+
+    URL.revokeObjectURL(url);
+  }
+
+  exExport.addEventListener('click', () => {
+    const text = exInput.value.trim();
+    const format = exFormat.value;
+
+    if (!text) {
+      showStatus("Nothing to export.", "error");
+      return;
+    }
+
+    if (format === "json") {
+      try {
+        const parsed = JSON.parse(text);
+        const pretty = JSON.stringify(parsed, null, 2);
+        downloadFile("export.json", pretty);
+        showStatus("JSON exported successfully.");
+      } catch (err) {
+        showStatus("Invalid JSON: " + err.message, "error");
+      }
+    } else {
+      downloadFile("export.txt", text);
+      showStatus("Text exported successfully.");
+    }
+  });
+
+  exCopy.addEventListener('click', async () => {
+    const text = exInput.value.trim();
+    if (!text) {
+      showStatus("Nothing to copy.", "error");
+      return;
+    }
+    await navigator.clipboard.writeText(text);
+    showStatus("Copied to clipboard.");
+  });
+
+  exClear.addEventListener('click', () => {
+    exInput.value = "";
+    showStatus("Cleared.");
+  });
+</script>
+`,
+
+code20: `
+<div class="mt-app">
+  <aside class="mt-sidebar">
+    <h3 class="mt-logo">Tool Builder</h3>
+    <ul id="mtToolList" class="mt-tool-list"></ul>
+  </aside>
+
+  <section class="mt-main">
+    <header class="mt-main-header">
+      <h2 id="mtTitle">Select a tool</h2>
+      <p id="mtSubtitle" class="mt-subtitle">Choose a tool from the left to load it here.</p>
+    </header>
+    <div id="mtWorkspace" class="mt-workspace">
+      <p class="mt-placeholder">Your tools will appear here. This shell can load any tool dynamically.</p>
+    </div>
+  </section>
+</div>
+
+<style>
+  .mt-app {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    min-height: 420px;
+  }
+  .mt-sidebar {
+    background: rgba(15,23,42,0.95);
+    color: #f9fafb;
+    padding: 16px 14px;
+    border-radius: 14px 0 0 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .mt-logo {
+    margin: 0 0 10px;
+    font-size: 18px;
+  }
+  .mt-tool-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .mt-tool-list li {
+    padding: 8px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    background: rgba(15,23,42,0.7);
+    transition: background 0.18s ease, transform 0.18s ease;
+  }
+  .mt-tool-list li:hover {
+    background: rgba(248,250,252,0.08);
+    transform: translateY(-1px);
+  }
+  .mt-tool-list li.mt-active {
+    background: #facc15;
+    color: #111827;
+  }
+  .mt-main {
+    background: var(--tb-card-bg);
+    border-radius: 0 14px 14px 0;
+    box-shadow: var(--tb-shadow);
+    padding: 16px 18px;
+  }
+  .mt-main-header {
+    margin-bottom: 10px;
+  }
+  .mt-subtitle {
+    margin: 4px 0 0;
+    font-size: 13px;
+    opacity: 0.8;
+  }
+  .mt-workspace {
+    margin-top: 10px;
+    min-height: 260px;
+  }
+  .mt-placeholder {
+    opacity: 0.7;
+    font-size: 14px;
+  }
+</style>
+
+<script>
+  // Registry of tools for the shell (you can map to your real tools)
+  const mtTools = [
+    { id: 5,  name: "Prompt Builder",      desc: "Generate structured prompts from topic + tone." },
+    { id: 6,  name: "Color Palette",       desc: "Create random color palettes and copy hex codes." },
+    { id: 7,  name: "Gradient Generator",  desc: "Design smooth CSS gradients with live preview." },
+    { id: 8,  name: "Code Formatter",      desc: "Beautify HTML, CSS, and JS snippets." },
+    { id: 9,  name: "Password Generator",  desc: "Generate secure random passwords." },
+    { id: 10, name: "Focus Timer",         desc: "Stay focused with a simple countdown timer." },
+    { id: 11, name: "Notes App",           desc: "Write and store notes using localStorage." },
+    { id: 13, name: "API Tester",          desc: "Send GET requests and inspect JSON responses." },
+    { id: 14, name: "JSON Viewer",         desc: "Validate and format JSON data." },
+    { id: 15, name: "Search Engine",       desc: "Filter items in real time on the client side." },
+    { id: 19, name: "Export Tool",         desc: "Export text/JSON to files or clipboard." }
+  ];
+
+  const mtToolList = document.getElementById('mtToolList');
+  const mtWorkspace = document.getElementById('mtWorkspace');
+  const mtTitle = document.getElementById('mtTitle');
+  const mtSubtitle = document.getElementById('mtSubtitle');
+
+  function renderToolList() {
+    mtToolList.innerHTML = "";
+    mtTools.forEach(tool => {
+      const li = document.createElement('li');
+      li.textContent = tool.name;
+      li.dataset.id = tool.id;
+      li.title = tool.desc;
+      li.addEventListener('click', () => loadTool(tool, li));
+      mtToolList.appendChild(li);
+    });
+  }
+
+  function setActive(li) {
+    [...mtToolList.children].forEach(item => item.classList.remove('mt-active'));
+    li.classList.add('mt-active');
+  }
+
+  function loadTool(tool, li) {
+    setActive(li);
+    mtTitle.textContent = tool.name;
+    mtSubtitle.textContent = tool.desc;
+
+    // In a real app, you could map tool.id -> real HTML from your tools.
+    // For this tutorial shell, we just show a placeholder block:
+    mtWorkspace.innerHTML = \`
+      <div class="mt-tool-preview">
+        <p><strong>\${tool.name}</strong></p>
+        <p style="font-size:14px;opacity:0.8;">This is where the full tool UI would be rendered in the real app.</p>
+        <p style="font-size:13px;opacity:0.7;">In your project, you can inject the actual HTML from the corresponding tutorial level or load it from a separate file.</p>
+      </div>
+    \`;
+  }
+
+  renderToolList();
+</script>
+`,
+
 };
 
     const body = document.body;

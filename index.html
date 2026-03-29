@@ -5,1315 +5,2386 @@
   <title>ALAEAI — Build. Learn. Create.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Google Ads script -->
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6065282700750014" crossorigin="anonymous"></script>
 
-  <!-- Aptos Black -->
-  <link href="https://fonts.cdnfonts.com/css/aptos" rel="stylesheet">
-
-  <!-- Aharoni -->
-  <link href="https://fonts.cdnfonts.com/css/aharoni" rel="stylesheet">
-
   <style>
-  :root{
-    --bg-main:#f7efe4;
-    --bg-soft:#f1e4d4;
-    --bg-card:#ffffff;
-    --bg-card-soft:#f8eee2;
-    --bg-elevated:#ffffff;
-
-    --text-main:#1b120b;
-    --text-sub:#6b5744;
-
-    --accent:#f2b45f;
-    --accent-strong:#ff9f4f;
-    --accent-soft:rgba(242,180,95,0.25);
-
-    --border-soft:rgba(0,0,0,0.06);
-    --border-strong:rgba(0,0,0,0.12);
-
-    --shadow-soft:0 14px 40px rgba(0,0,0,0.08);
-    --shadow-strong:0 22px 60px rgba(0,0,0,0.12);
-
-    --radius-card:18px;
-    --radius-lg:22px;
-
-    --transition-fast:0.16s ease-out;
-    --transition-med:0.22s ease-out;
-  }
-
-  body.theme-dark{
-    --bg-main:#050304;
-    --bg-soft:#0b0705;
-    --bg-card:#140c09;
-    --bg-card-soft:#1a0f0b;
-    --bg-elevated:#1b100b;
-
-    --text-main:#fff7ea;
-    --text-sub:#c9b7a0;
-
-    --accent:#f2c26b;
-    --accent-strong:#ffb45c;
-    --accent-soft:rgba(242,194,107,0.25);
-
-    --border-soft:rgba(255,255,255,0.06);
-    --border-strong:rgba(255,255,255,0.16);
-
-    --shadow-soft:0 14px 40px rgba(0,0,0,0.7);
-    --shadow-strong:0 22px 60px rgba(0,0,0,0.9);
-  }
-
-  *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-  }
-
-  html,body{
-    height:100%;
-  }
-
-  body{
-    background:var(--bg-main);
-    color:var(--text-main);
-    font-family:'Aharoni',sans-serif;
-    overflow-x:hidden;
-    transition:background 0.25s ease,color 0.25s ease;
-  }
-
-  img{
-    max-width:100%;
-    display:block;
-  }
-
-  a{
-    color:inherit;
-    text-decoration:none;
-  }
-
-  button{
-    font-family:inherit;
-  }
-
-  .max-width{
-    max-width:1120px;
-    margin:0 auto;
-    padding:0 20px;
-  }
-
-  /* =========================
-     BANNER — TOP
-     ========================= */
-  .banner{
-    position:relative;
-    width:100%;
-    min-height:420px;
-    background:
-      radial-gradient(circle at top left,rgba(242,180,95,0.35),transparent 60%),
-      radial-gradient(circle at top right,rgba(255,180,140,0.35),transparent 60%),
-      radial-gradient(circle at bottom,rgba(255,255,255,0.9),transparent 70%),
-      #f7efe4;
-    overflow:hidden;
-  }
-
-  body.theme-dark .banner{
-    background:
-      radial-gradient(circle at top left,rgba(242,194,107,0.25),transparent 60%),
-      radial-gradient(circle at top right,rgba(255,140,90,0.25),transparent 60%),
-      radial-gradient(circle at bottom,rgba(80,120,255,0.25),transparent 60%),
-      #050304;
-  }
-
-  .banner-noise{
-    position:absolute;
-    inset:0;
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
-    mix-blend-mode:soft-light;
-    opacity:0.6;
-    pointer-events:none;
-  }
-
-  .banner-inner{
-    position:relative;
-    z-index:2;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:40px;
-    padding:32px 20px 32px;
-  }
-
-  .banner-left{
-    max-width:520px;
-  }
-
-  .banner-kicker{
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    color:var(--text-sub);
-    margin-bottom:8px;
-  }
-
-  .banner-title{
-    font-family:'Aptos Black',sans-serif;
-    font-size:36px;
-    line-height:1.15;
-    letter-spacing:0.03em;
-    text-transform:uppercase;
-    margin-bottom:8px;
-    color:var(--text-main);
-  }
-
-  .banner-title span{
-    background:linear-gradient(120deg,#f2b45f,#ff9f4f,#ff7f5f);
-    -webkit-background-clip:text;
-    color:transparent;
-  }
-
-  body.theme-dark .banner-title span{
-    background:linear-gradient(120deg,#ffd27f,#f2c26b,#ff9f6b);
-    -webkit-background-clip:text;
-    color:transparent;
-  }
-
-  .banner-sub{
-    font-family:'Aharoni',sans-serif;
-    font-size:14px;
-    color:var(--text-sub);
-    line-height:1.7;
-    margin-bottom:16px;
-  }
-
-  .banner-tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-bottom:16px;
-  }
-
-  .banner-tag{
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    padding:4px 10px;
-    border-radius:999px;
-    background:rgba(255,255,255,0.9);
-    border:1px solid var(--border-soft);
-    color:var(--text-sub);
-  }
-
-  body.theme-dark .banner-tag{
-    background:rgba(12,7,5,0.9);
-    border-color:rgba(255,255,255,0.12);
-  }
-
-  .banner-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:14px;
-  }
-
-  .btn-main{
-    padding:9px 20px;
-    border-radius:999px;
-    background:linear-gradient(135deg,#f2b45f,#ff9f4f);
-    color:#1b120b;
-    font-family:'Aptos Black',sans-serif;
-    font-size:13px;
-    cursor:pointer;
-    border:none;
-    box-shadow:0 16px 40px rgba(0,0,0,0.18);
-    transition:transform var(--transition-fast),box-shadow var(--transition-fast),filter var(--transition-fast);
-  }
-
-  .btn-main:hover{
-    transform:translateY(-2px) scale(1.02);
-    box-shadow:0 22px 60px rgba(0,0,0,0.22);
-    filter:brightness(1.05);
-  }
-
-  .btn-ghost{
-    padding:9px 18px;
-    border-radius:999px;
-    border:1px solid var(--accent);
-    background:rgba(255,255,255,0.9);
-    color:var(--accent-strong);
-    font-family:'Aptos Black',sans-serif;
-    font-size:12px;
-    cursor:pointer;
-    transition:var(--transition-fast);
-  }
-
-  .btn-ghost:hover{
-    background:rgba(242,180,95,0.12);
-    transform:translateY(-2px);
-  }
-
-  body.theme-dark .btn-ghost{
-    background:rgba(12,7,5,0.9);
-    color:var(--accent);
-  }
-
-  .banner-meta{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-    font-family:'Aharoni',sans-serif;
-    font-size:12px;
-    color:var(--text-sub);
-  }
-
-  .banner-meta-item{
-    display:flex;
-    gap:8px;
-  }
-
-  .banner-meta-dot{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:var(--accent);
-    margin-top:5px;
-    box-shadow:0 0 10px rgba(242,180,95,0.9);
-  }
-
-  .banner-ad{
-    margin-top:16px;
-    padding:10px;
-    border-radius:14px;
-    background:rgba(255,255,255,0.9);
-    border:1px dashed rgba(242,180,95,0.6);
-    max-width:360px;
-  }
-
-  body.theme-dark .banner-ad{
-    background:rgba(12,7,5,0.96);
-    border-color:rgba(242,194,107,0.4);
-  }
-
-  .banner-ad-label{
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:0.16em;
-    color:var(--text-sub);
-    margin-bottom:4px;
-  }
-
-  .banner-ad-inner{
-    background:rgba(0,0,0,0.02);
-    border-radius:10px;
-    padding:4px;
-  }
-
-  body.theme-dark .banner-ad-inner{
-    background:rgba(0,0,0,0.4);
-  }
-
-  .banner-right{
-    position:relative;
-    flex:1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    min-height:260px;
-  }
-
-  .logo-orbit{
-    position:absolute;
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    background:radial-gradient(circle at 30% 0%,rgba(242,180,95,0.4),transparent 60%);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 0 30px rgba(242,180,95,0.7);
-    animation:pulseOrbit 3.2s infinite ease-in-out;
-  }
-
-  body.theme-dark .logo-orbit{
-    background:radial-gradient(circle at 30% 0%,rgba(242,194,107,0.4),transparent 60%);
-    box-shadow:0 0 40px rgba(242,194,107,0.9);
-  }
-
-  .logo-img{
-    width:70%;
-    height:70%;
-    border-radius:20%;
-    overflow:hidden;
-    background:#f5e6d4;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 0 20px rgba(0,0,0,0.18);
-  }
-
-  body.theme-dark .logo-img{
-    background:#120b07;
-    box-shadow:0 0 26px rgba(0,0,0,0.8);
-  }
-
-  .logo-img img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-  }
-
-  .banner-card-wrapper{
-    position:relative;
-    z-index:3;
-  }
-
-  .banner-card{
-    width:300px;
-    max-width:90vw;
-    border-radius:var(--radius-lg);
-    padding:14px 14px 16px;
-    background:linear-gradient(135deg,#ffffff,#f7efe4);
-    border:1px solid rgba(0,0,0,0.06);
-    box-shadow:0 18px 50px rgba(0,0,0,0.16);
-    position:relative;
-    overflow:hidden;
-    transition:transform var(--transition-fast),box-shadow var(--transition-fast),border-color var(--transition-fast),background 0.25s ease;
-  }
-
-  body.theme-dark .banner-card{
-    background:linear-gradient(135deg,rgba(20,12,9,0.96),rgba(10,6,4,0.96));
-    border-color:rgba(255,255,255,0.12);
-    box-shadow:0 26px 70px rgba(0,0,0,0.95);
-  }
-
-  .banner-card::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:var(--radius-lg);
-    background:radial-gradient(circle at top,rgba(242,180,95,0.22),transparent 60%);
-    opacity:0.4;
-    pointer-events:none;
-  }
-
-  body.theme-dark .banner-card::after{
-    background:radial-gradient(circle at top,rgba(242,194,107,0.22),transparent 60%);
-  }
-
-  .banner-card.hovered{
-    box-shadow:0 24px 70px rgba(0,0,0,0.22);
-    border-color:var(--accent-strong);
-  }
-
-  body.theme-dark .banner-card.hovered{
-    box-shadow:0 32px 80px rgba(0,0,0,1);
-  }
-
-  .banner-card-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:6px;
-  }
-
-  .banner-card-pill{
-    font-family:'Aharoni',sans-serif;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:0.16em;
-    color:var(--text-sub);
-  }
-
-  .banner-card-status{
-    font-family:'Aptos Black',sans-serif;
-    font-size:11px;
-    padding:3px 8px;
-    border-radius:999px;
-    background:rgba(242,180,95,0.16);
-    border:1px solid var(--accent);
-    color:var(--text-main);
-  }
-
-  body.theme-dark .banner-card-status{
-    background:rgba(242,194,107,0.16);
-    color:var(--text-main);
-  }
-
-  .banner-card-title{
-    font-family:'Aptos Black',sans-serif;
-    font-size:15px;
-    margin-bottom:3px;
-  }
-
-  .banner-card-sub{
-    font-family:'Aharoni',sans-serif;
-    font-size:12px;
-    color:var(--text-sub);
-    margin-bottom:8px;
-  }
-
-  .banner-card-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:8px;
-  }
-
-  .banner-card-metrics{
-    display:flex;
-    flex-direction:column;
-    gap:3px;
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    color:var(--text-sub);
-  }
-
-  .banner-card-metric strong{
-    color:var(--accent-strong);
-  }
-
-  .banner-card-chip{
-    padding:5px 9px;
-    border-radius:999px;
-    background:#1b120b;
-    color:#f7efe4;
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    box-shadow:0 10px 26px rgba(0,0,0,0.3);
-  }
-
-  body.theme-dark .banner-card-chip{
-    background:#ffffff;
-    color:#140c09;
-  }
-
-  @keyframes pulseOrbit{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.05);}
-    100%{transform:scale(1);}
-  }
-
-  /* =========================
-     NAVBAR
-     ========================= */
-  .nav-shell{
-    background:var(--bg-soft);
-    border-bottom:1px solid var(--border-soft);
-  }
-
-  .nav{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:10px 0 8px;
-  }
-
-  .nav-left{
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-
-  .nav-logo{
-    width:30px;
-    height:30px;
-    border-radius:12px;
-    background:radial-gradient(circle at 30% 0%,#f2b45f,#c88b3a 40%,#1b120b 100%);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#1b120b;
-    font-family:'Aptos Black',sans-serif;
-    font-size:16px;
-    box-shadow:0 0 18px rgba(242,180,95,0.8);
-  }
-
-  body.theme-dark .nav-logo{
-    background:radial-gradient(circle at 30% 0%,#f2c26b,#c88b3a 40%,#120b07 100%);
-    color:#120b07;
-    box-shadow:0 0 22px rgba(242,194,107,0.9);
-  }
-
-  .nav-title-block{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-  }
-
-  .nav-title-main{
-    font-family:'Aptos Black',sans-serif;
-    font-size:14px;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-  }
-
-  .nav-title-sub{
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    color:var(--text-sub);
-  }
-
-  .nav-right{
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-
-  .nav-toggle{
-    padding:7px 12px;
-    border-radius:999px;
-    border:1px solid var(--border-strong);
-    background:rgba(255,255,255,0.9);
-    color:var(--text-sub);
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    cursor:pointer;
-    transition:var(--transition-fast);
-  }
-
-  body.theme-dark .nav-toggle{
-    background:rgba(12,7,5,0.9);
-    color:var(--text-sub);
-  }
-
-  .nav-toggle:hover{
-    border-color:var(--accent);
-    color:var(--accent-strong);
-  }
-
-  .nav-cta{
-    padding:7px 14px;
-    border-radius:999px;
-    border:1px solid var(--accent);
-    background:rgba(242,180,95,0.12);
-    color:var(--accent-strong);
-    font-family:'Aptos Black',sans-serif;
-    font-size:12px;
-    cursor:pointer;
-    transition:var(--transition-fast);
-  }
-
-  body.theme-dark .nav-cta{
-    background:rgba(242,194,107,0.12);
-    color:var(--accent);
-  }
-
-  .nav-cta:hover{
-    transform:translateY(-1px);
-  }
-
-  /* =========================
-     MAIN SHELL + CATEGORY SWITCHER
-     ========================= */
-  .main-shell{
-    background:var(--bg-soft);
-    padding:20px 0 40px;
-  }
-
-  .category-bar{
-    margin-top:14px;
-    margin-bottom:18px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-  }
-
-  .category-pill{
-    padding:7px 14px;
-    border-radius:999px;
-    border:1px solid var(--border-soft);
-    background:rgba(255,255,255,0.9);
-    color:var(--text-sub);
-    font-family:'Aharoni',sans-serif;
-    font-size:12px;
-    cursor:pointer;
-    transition:var(--transition-fast);
-  }
-
-  body.theme-dark .category-pill{
-    background:rgba(12,7,5,0.9);
-    border-color:rgba(255,255,255,0.08);
-  }
-
-  .category-pill:hover{
-    border-color:var(--accent);
-    color:var(--accent-strong);
-  }
-
-  .category-pill.active{
-    background:linear-gradient(135deg,#f2b45f,#ff9f4f);
-    color:#1b120b;
-    border-color:transparent;
-  }
-
-  body.theme-dark .category-pill.active{
-    background:linear-gradient(135deg,#f2c26b,#ff9f6b);
-    color:#120b07;
-  }
-
-  .mid-ad-shell{
-    margin-bottom:18px;
-  }
-
-  .mid-ad{
-    padding:10px 12px;
-    border-radius:14px;
-    background:rgba(255,255,255,0.9);
-    border:1px dashed rgba(242,180,95,0.6);
-  }
-
-  body.theme-dark .mid-ad{
-    background:rgba(12,7,5,0.96);
-    border-color:rgba(242,194,107,0.4);
-  }
-
-  .mid-ad-label{
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:0.16em;
-    color:var(--text-sub);
-    margin-bottom:4px;
-  }
-
-  .mid-ad-inner{
-    background:rgba(0,0,0,0.02);
-    border-radius:10px;
-    padding:4px;
-  }
-
-  body.theme-dark .mid-ad-inner{
-    background:rgba(0,0,0,0.4);
-  }
-
-  .content-shell{
-    background:var(--bg-card-soft);
-    border-radius:var(--radius-card);
-    border:1px solid var(--border-soft);
-    box-shadow:var(--shadow-soft);
-    padding:16px 16px 18px;
-  }
-
-  body.theme-dark .content-shell{
-    background:var(--bg-card);
-    box-shadow:var(--shadow-strong);
-  }
-
-  .section-panel{
-    display:none;
-    opacity:0;
-    transform:translateY(6px);
-    transition:opacity 0.25s ease,transform 0.25s ease;
-  }
-
-  .section-panel.active{
-    display:block;
-    opacity:1;
-    transform:translateY(0);
-  }
-
-  .section-header{
-    margin-bottom:14px;
-  }
-
-  .section-kicker{
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--text-sub);
-    margin-bottom:4px;
-  }
-
-  .section-title{
-    font-family:'Aptos Black',sans-serif;
-    font-size:20px;
-    margin-bottom:4px;
-  }
-
-  .section-sub{
-    font-family:'Aharoni',sans-serif;
-    font-size:13px;
-    color:var(--text-sub);
-  }
-
-  .card-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:12px;
-  }
-
-  .simple-card{
-    background:var(--bg-elevated);
-    border-radius:var(--radius-card);
-    border:1px solid var(--border-soft);
-    padding:10px 11px 11px;
-    min-height:90px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    gap:4px;
-    transition:transform var(--transition-med),box-shadow var(--transition-med),border-color var(--transition-med),background 0.25s ease;
-    cursor:pointer;
-    position:relative;
-    overflow:hidden;
-  }
-
-  .simple-card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:radial-gradient(circle at top,rgba(242,180,95,0.12),transparent 60%);
-    opacity:0;
-    transition:opacity 0.25s ease;
-    pointer-events:none;
-  }
-
-  .simple-card:hover::before{
-    opacity:1;
-  }
-
-  .simple-card:hover{
-    transform:translateY(-3px);
-    box-shadow:var(--shadow-soft);
-    border-color:var(--accent-soft);
-  }
-
-  body.theme-dark .simple-card:hover{
-    box-shadow:var(--shadow-strong);
-  }
-
-  .simple-card-pill{
-    font-family:'Aharoni',sans-serif;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:0.16em;
-    color:var(--text-sub);
-  }
-
-  .simple-card-title{
-    font-family:'Aptos Black',sans-serif;
-    font-size:14px;
-  }
-
-  .simple-card-text{
-    font-family:'Aharoni',sans-serif;
-    font-size:12px;
-    color:var(--text-sub);
-  }
-
-  .simple-card-meta{
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    color:var(--accent-strong);
-  }
-
-  footer{
-    margin-top:20px;
-    font-family:'Aharoni',sans-serif;
-    font-size:11px;
-    color:var(--text-sub);
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-  }
-
-  .footer-ad{
-    padding:8px 10px;
-    border-radius:12px;
-    background:rgba(255,255,255,0.9);
-    border:1px dashed rgba(242,180,95,0.6);
-  }
-
-  body.theme-dark .footer-ad{
-    background:rgba(12,7,5,0.96);
-    border-color:rgba(242,194,107,0.4);
-  }
-
-  .footer-ad-label{
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:0.16em;
-    color:var(--text-sub);
-    margin-bottom:4px;
-  }
-
-  .footer-ad-inner{
-    background:rgba(0,0,0,0.02);
-    border-radius:10px;
-    padding:4px;
-  }
-
-  body.theme-dark .footer-ad-inner{
-    background:rgba(0,0,0,0.4);
-  }
-
-  /* RESPONSIVE */
-  @media(max-width:960px){
-    .banner-inner{
-      flex-direction:column;
-      align-items:flex-start;
+    :root {
+      --bg: #f7f1e8;
+      --bg-soft: #f0e4d4;
+      --bg-softer: #f9f3ea;
+      --card-bg: #ffffff;
+      --card-bg-soft: #fdf8f1;
+      --text: #2b2116;
+      --text-soft: #6b5a45;
+      --accent: #c89a4b;
+      --accent-soft: rgba(200, 154, 75, 0.16);
+      --accent-strong: #b27f2f;
+      --border-subtle: rgba(0, 0, 0, 0.06);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.08);
+      --shadow-subtle: 0 10px 30px rgba(0, 0, 0, 0.06);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.25s ease-out;
+      --blur-soft: 18px;
+      --nav-height: 76px;
+      --content-max-width: 1180px;
+      --gold-gradient: linear-gradient(135deg, #f7e0b8, #f0c777, #e0a94f);
+      --gold-glow: 0 0 0 1px rgba(255, 255, 255, 0.3), 0 18px 40px rgba(191, 140, 60, 0.55);
     }
-    .banner-right{
-      align-self:center;
-    }
-  }
 
-  @media(max-width:720px){
-    .nav-title-sub{display:none;}
-  }
+    body.dark {
+      --bg: #0f0c09;
+      --bg-soft: #17110b;
+      --bg-softer: #1d150d;
+      --card-bg: #18110a;
+      --card-bg-soft: #21160b;
+      --text: #f7eee2;
+      --text-soft: #b9a48a;
+      --accent: #e0b15f;
+      --accent-soft: rgba(224, 177, 95, 0.18);
+      --accent-strong: #f0c777;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --shadow-soft: 0 22px 55px rgba(0, 0, 0, 0.85);
+      --shadow-subtle: 0 14px 40px rgba(0, 0, 0, 0.75);
+      --gold-gradient: linear-gradient(135deg, #f0c777, #e0b15f, #f7e0b8);
+      --gold-glow: 0 0 0 1px rgba(255, 255, 255, 0.18), 0 20px 50px rgba(0, 0, 0, 0.9);
+    }
 
-  @media(max-width:520px){
-    .banner-title{
-      font-size:30px;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    .content-shell{
-      padding:14px 12px 16px;
+
+    html,
+    body {
+      height: 100%;
     }
-  }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.25), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(200, 154, 75, 0.12), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      transition: background 0.35s ease-out, color 0.35s ease-out;
+    }
+
+    main {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 18px 14px 40px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Top banner / hero + top ad */
+    .top-row {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(260px, 1.4fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 960px) {
+      .top-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero {
+      position: relative;
+      border-radius: 26px;
+      padding: 20px 22px 18px;
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.45), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(200, 154, 75, 0.18), transparent 55%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(247, 236, 219, 0.95));
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    body.dark .hero {
+      background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(200, 154, 75, 0.16), transparent 55%),
+        linear-gradient(135deg, rgba(24, 17, 10, 0.98), rgba(18, 11, 6, 0.98));
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.55), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(200, 154, 75, 0.35), transparent 55%);
+      mix-blend-mode: soft-light;
+      opacity: 0.9;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .hero-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 30% 0%, #fff7e6, #f0c777 45%, #b27f2f 100%);
+      box-shadow: var(--gold-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #3b2a12;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .brand-subtitle {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-soft);
+    }
+
+    .hero-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pill {
+      border-radius: var(--radius-pill);
+      padding: 6px 12px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(12px);
+    }
+
+    body.dark .pill {
+      background: rgba(24, 17, 10, 0.9);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #2ecc71;
+      box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.25);
+    }
+
+    .dark-toggle {
+      position: relative;
+      border-radius: 999px;
+      padding: 4px;
+      width: 70px;
+      height: 32px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+      cursor: pointer;
+      backdrop-filter: blur(14px);
+      transition: background var(--transition-med), border-color var(--transition-med), box-shadow var(--transition-med), transform var(--transition-fast);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    body.dark .dark-toggle {
+      background: rgba(18, 11, 6, 0.96);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.85);
+    }
+
+    .dark-toggle:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .dark-toggle-label {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+      opacity: 0.7;
+      transition: opacity var(--transition-med), color var(--transition-med);
+      z-index: 1;
+    }
+
+    .dark-toggle-thumb {
+      position: absolute;
+      top: 3px;
+      bottom: 3px;
+      width: 32px;
+      border-radius: 999px;
+      background: var(--gold-gradient);
+      box-shadow: var(--gold-glow);
+      transition: transform var(--transition-med);
+    }
+
+    body:not(.dark) .dark-toggle-thumb {
+      transform: translateX(3px);
+    }
+
+    body.dark .dark-toggle-thumb {
+      transform: translateX(35px);
+    }
+
+    body:not(.dark) .dark-toggle-label.light-label {
+      opacity: 1;
+      color: var(--text);
+    }
+
+    body.dark .dark-toggle-label.dark-label {
+      opacity: 1;
+      color: var(--text);
+    }
+
+    .hero-main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.6fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      .hero-main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--text-soft);
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 3vw, 30px);
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+
+    .hero-title span {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-soft);
+      max-width: 420px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .hero-btn-primary {
+      border-radius: var(--radius-pill);
+      padding: 9px 18px;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: none;
+      background: var(--gold-gradient);
+      color: #3b2a12;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: var(--gold-glow);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .hero-btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 22px 55px rgba(191, 140, 60, 0.75);
+    }
+
+    .hero-btn-secondary {
+      border-radius: var(--radius-pill);
+      padding: 9px 16px;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    body.dark .hero-btn-secondary {
+      background: rgba(24, 17, 10, 0.96);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-btn-secondary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.98);
+    }
+
+    body.dark .hero-btn-secondary:hover {
+      background: rgba(18, 11, 6, 0.98);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .hero-meta-item {
+      border-radius: var(--radius-pill);
+      padding: 6px 10px;
+      font-size: 11px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(12px);
+    }
+
+    body.dark .hero-meta-item {
+      background: rgba(24, 17, 10, 0.96);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-meta-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .hero-visual {
+      position: relative;
+      border-radius: 22px;
+      padding: 14px;
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.55), transparent 60%),
+                  radial-gradient(circle at bottom right, rgba(200, 154, 75, 0.25), transparent 60%),
+                  linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(247, 236, 219, 0.98));
+      box-shadow: var(--shadow-subtle);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      overflow: hidden;
+      min-height: 150px;
+    }
+
+    body.dark .hero-visual {
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 60%),
+                  radial-gradient(circle at bottom right, rgba(200, 154, 75, 0.22), transparent 60%),
+                  linear-gradient(145deg, rgba(24, 17, 10, 0.98), rgba(18, 11, 6, 0.98));
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-orbit {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .hero-orbit::before,
+    .hero-orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      border: 1px dashed rgba(0, 0, 0, 0.08);
+    }
+
+    .hero-orbit::before {
+      inset: 18px 10px;
+    }
+
+    .hero-orbit::after {
+      inset: 32px 40px;
+    }
+
+    body.dark .hero-orbit::before,
+    body.dark .hero-orbit::after {
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-floating-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), rgba(247, 236, 219, 0.98));
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transform: perspective(900px) rotateX(10deg) rotateY(-12deg);
+      transition: transform 0.35s ease-out, box-shadow 0.35s ease-out;
+    }
+
+    body.dark .hero-floating-card {
+      background: radial-gradient(circle at top left, rgba(24, 17, 10, 0.98), rgba(18, 11, 6, 0.98));
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-floating-inner {
+      position: relative;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-floating-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .hero-floating-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .hero-floating-badge {
+      border-radius: var(--radius-pill);
+      padding: 4px 10px;
+      font-size: 11px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(10px);
+    }
+
+    body.dark .hero-floating-badge {
+      background: rgba(24, 17, 10, 0.96);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-floating-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .hero-floating-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 480px) {
+      .hero-floating-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-floating-column {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hero-mini-card {
+      border-radius: 14px;
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    body.dark .hero-mini-card {
+      background: rgba(24, 17, 10, 0.98);
+      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.85);
+    }
+
+    .hero-mini-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+    }
+
+    .hero-mini-value {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .hero-mini-progress {
+      position: relative;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+    }
+
+    body.dark .hero-mini-progress {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-mini-progress-fill {
+      position: absolute;
+      inset: 0;
+      width: 72%;
+      border-radius: 999px;
+      background: var(--gold-gradient);
+    }
+
+    .hero-mini-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .hero-mini-tag {
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 10px;
+      background: rgba(0, 0, 0, 0.03);
+      color: var(--text-soft);
+    }
+
+    body.dark .hero-mini-tag {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-floating-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .hero-floating-avatars {
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      background: var(--gold-gradient);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+      margin-left: -7px;
+    }
+
+    .hero-avatar:first-child {
+      margin-left: 0;
+    }
+
+    body.dark .hero-avatar {
+      border-color: rgba(24, 17, 10, 0.98);
+    }
+
+    .hero-floating-caption {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .hero-floating-pill {
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    body.dark .hero-floating-pill {
+      background: rgba(24, 17, 10, 0.96);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-floating-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #2ecc71;
+    }
+
+    /* Top ad card (banner) */
+    .top-ad-card {
+      border-radius: 22px;
+      padding: 14px 14px 10px;
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), rgba(247, 236, 219, 0.98));
+      box-shadow: var(--shadow-subtle);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 150px;
+    }
+
+    body.dark .top-ad-card {
+      background: radial-gradient(circle at top left, rgba(24, 17, 10, 0.98), rgba(18, 11, 6, 0.98));
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .top-ad-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .top-ad-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .top-ad-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .top-ad-pill {
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    body.dark .top-ad-pill {
+      background: rgba(24, 17, 10, 0.96);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .top-ad-body {
+      border-radius: 16px;
+      padding: 8px;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px dashed rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 90px;
+    }
+
+    body.dark .top-ad-body {
+      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .top-ad-body ins.adsbygoogle {
+      display: block;
+      width: 100%;
+      height: 90px;
+    }
+
+    /* Category bar */
+    .category-bar {
+      margin-top: 4px;
+      border-radius: 20px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+    }
+
+    body.dark .category-bar {
+      background: rgba(18, 11, 6, 0.96);
+      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
+    }
+
+    .category-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .category-btn {
+      position: relative;
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: color var(--transition-med), border-color var(--transition-med), box-shadow var(--transition-med), background var(--transition-med), transform var(--transition-fast);
+    }
+
+    body.dark .category-btn {
+      background: rgba(24, 17, 10, 0.96);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .category-btn span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.12);
+      transition: background var(--transition-med);
+    }
+
+    body.dark .category-btn span.dot {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .category-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--gold-gradient);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      z-index: 0;
+    }
+
+    .category-btn span.label {
+      position: relative;
+      z-index: 1;
+    }
+
+    .category-btn.active {
+      color: #3b2a12;
+      border-color: transparent;
+      box-shadow: var(--gold-glow);
+      transform: translateY(-1px);
+    }
+
+    .category-btn.active::before {
+      opacity: 1;
+    }
+
+    .category-btn.active span.dot {
+      background: #3b2a12;
+    }
+
+    .category-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .category-meta-pill {
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    body.dark .category-meta-pill {
+      background: rgba(24, 17, 10, 0.96);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .category-meta-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    @media (max-width: 720px) {
+      .category-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .category-meta {
+        justify-content: space-between;
+      }
+    }
+
+    /* Layout: content + side ad */
+    .content-row {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 3.1fr) minmax(260px, 1.3fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 1024px) {
+      .content-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Cards grid */
+    .cards-panel {
+      border-radius: 22px;
+      padding: 16px 14px 14px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(18px);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    body.dark .cards-panel {
+      background: rgba(18, 11, 6, 0.96);
+      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.9);
+    }
+
+    .cards-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .cards-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cards-title-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .cards-filters {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .cards-filters-pill {
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    body.dark .cards-filters-pill {
+      background: rgba(24, 17, 10, 0.96);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    @media (max-width: 980px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .cards-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      position: relative;
+      border-radius: 18px;
+      padding: 12px 12px 11px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transform-origin: center;
+      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med), opacity 0.25s ease-out, filter 0.25s ease-out;
+    }
+
+    body.dark .card {
+      background: var(--card-bg);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.35), transparent 55%);
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+
+    body.dark .card:hover {
+      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.95);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .card-tag {
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .card-level {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .card-description {
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--text-soft);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .card-meta-pill {
+      border-radius: 999px;
+      padding: 3px 8px;
+      background: rgba(0, 0, 0, 0.03);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    body.dark .card-meta-pill {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .card-meta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .card-cta {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-strong);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-cta-arrow {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    body.dark .card-cta-arrow {
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .card-progress {
+      position: relative;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    body.dark .card-progress {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .card-progress-fill {
+      position: absolute;
+      inset: 0;
+      width: 0;
+      border-radius: 999px;
+      background: var(--gold-gradient);
+      transition: width 0.6s ease-out;
+    }
+
+    .card.visible .card-progress-fill {
+      width: var(--progress, 70%);
+    }
+
+    .card.hidden-by-category {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px) scale(0.98);
+      filter: blur(1px);
+    }
+
+    /* Inline ad between cards */
+    .inline-ad-card {
+      grid-column: 1 / -1;
+      border-radius: 18px;
+      padding: 10px 10px 8px;
+      background: var(--card-bg-soft);
+      border: 1px dashed var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .inline-ad-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+    }
+
+    .inline-ad-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .inline-ad-body {
+      border-radius: 14px;
+      padding: 6px;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px dashed rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 70px;
+    }
+
+    body.dark .inline-ad-body {
+      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .inline-ad-body ins.adsbygoogle {
+      display: block;
+      width: 100%;
+      height: 70px;
+    }
+
+    /* Side ad panel */
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .side-ad-card {
+      border-radius: 22px;
+      padding: 14px 14px 10px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(18px);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    body.dark .side-ad-card {
+      background: rgba(18, 11, 6, 0.96);
+      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.9);
+    }
+
+    .side-ad-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-soft);
+    }
+
+    .side-ad-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .side-ad-body {
+      border-radius: 16px;
+      padding: 8px;
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px dashed rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px;
+    }
+
+    body.dark .side-ad-body {
+      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .side-ad-body ins.adsbygoogle {
+      display: block;
+      width: 100%;
+      height: 250px;
+    }
+
+    .side-meta-card {
+      border-radius: 18px;
+      padding: 10px 11px;
+      background: var(--card-bg-soft);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .side-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .side-meta-pill {
+      border-radius: 999px;
+      padding: 4px 9px;
+      background: rgba(0, 0, 0, 0.03);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    body.dark .side-meta-pill {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .side-meta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 18px;
+      border-radius: 20px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(18px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    body.dark footer {
+      background: rgba(18, 11, 6, 0.96);
+      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .footer-link {
+      border-radius: 999px;
+      padding: 4px 9px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    body.dark .footer-link {
+      background: rgba(24, 17, 10, 0.96);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    @media (max-width: 720px) {
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* Simple fade-in animation */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    }
+
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
-
 <body>
+  <main>
+    <div class="shell">
+      <!-- HERO + TOP AD -->
+      <section class="top-row fade-in-up">
+        <div class="hero">
+          <div class="hero-glow"></div>
+          <div class="hero-inner">
+            <div class="hero-header">
+              <div class="brand">
+                <div class="brand-logo">A</div>
+                <div class="brand-text">
+                  <div class="brand-title">ALAEAI</div>
+                  <div class="brand-subtitle">Build • Learn • Create</div>
+                </div>
+              </div>
+              <div class="hero-controls">
+                <div class="pill">
+                  <span class="pill-dot"></span>
+                  Live Studio
+                </div>
+                <button class="dark-toggle" id="darkToggle" type="button" aria-label="Toggle dark mode">
+                  <div class="dark-toggle-thumb"></div>
+                  <div class="dark-toggle-label light-label">Light</div>
+                  <div class="dark-toggle-label dark-label">Dark</div>
+                </button>
+              </div>
+            </div>
 
-  <!-- BANNER AT VERY TOP -->
-  <section class="banner">
-    <div class="banner-noise"></div>
-    <div class="banner-inner max-width">
-      <div class="banner-left">
-        <div class="banner-kicker">Warm AI Portfolio • ALAEAI</div>
-        <h1 class="banner-title">ALAEAI — <span>Build. Learn. Create.</span></h1>
-        <p class="banner-sub">
-          A simple, bright, and organized interface where you can switch between tutorials, news, tools, about, and contact —
-          with smooth animations and a calm, interactive feel.
-        </p>
+            <div class="hero-main">
+              <div class="hero-copy">
+                <div class="hero-eyebrow">Premium learning space</div>
+                <h1 class="hero-title">
+                  A bright, clean studio for <span>tutorials, tools, and news</span> that actually feel pro.
+                </h1>
+                <p class="hero-subtitle">
+                  Curated cards, smooth animations, and a layout that stays organized—no matter which category you explore.
+                </p>
+                <div class="hero-actions">
+                  <button class="hero-btn-primary" type="button" data-category-target="tutorials">
+                    Explore Tutorials
+                    <span>↗</span>
+                  </button>
+                  <button class="hero-btn-secondary" type="button" data-category-target="tools">
+                    Browse Tools
+                  </button>
+                </div>
+                <div class="hero-meta">
+                  <div class="hero-meta-item">
+                    <span class="hero-meta-dot"></span>
+                    <span>20+ curated cards</span>
+                  </div>
+                  <div class="hero-meta-item">
+                    <span class="hero-meta-dot"></span>
+                    <span>Dark mode that remembers</span>
+                  </div>
+                </div>
+              </div>
 
-        <div class="banner-tags">
-          <span class="banner-tag">Bright main theme</span>
-          <span class="banner-tag">Persistent dark mode</span>
-          <span class="banner-tag">Category switcher</span>
-        </div>
-
-        <div class="banner-actions">
-          <button class="btn-main" onclick="scrollToMain()">Start Exploring</button>
-          <button class="btn-ghost" onclick="scrollToMain()">View Categories</button>
-        </div>
-
-        <div class="banner-meta">
-          <div class="banner-meta-item">
-            <span class="banner-meta-dot"></span>
-            <span>Simple, attractive, and organized layout.</span>
+              <div class="hero-visual">
+                <div class="hero-orbit"></div>
+                <div class="hero-floating-card" id="followCard">
+                  <div class="hero-floating-inner">
+                    <div class="hero-floating-header">
+                      <div class="hero-floating-title">AlaeAI Studio</div>
+                      <div class="hero-floating-badge">
+                        <span class="hero-floating-badge-dot"></span>
+                        Clean • Bright • Focused
+                      </div>
+                    </div>
+                    <div class="hero-floating-grid">
+                      <div class="hero-floating-column">
+                        <div class="hero-mini-card">
+                          <div class="hero-mini-label">Active category</div>
+                          <div class="hero-mini-value" id="activeCategoryLabel">All content</div>
+                          <div class="hero-mini-progress">
+                            <div class="hero-mini-progress-fill"></div>
+                          </div>
+                        </div>
+                        <div class="hero-mini-card">
+                          <div class="hero-mini-label">Dark mode</div>
+                          <div class="hero-mini-value" id="darkModeLabel">Auto</div>
+                          <div class="hero-mini-tags">
+                            <span class="hero-mini-tag">Remembers</span>
+                            <span class="hero-mini-tag">Smooth</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="hero-floating-column">
+                        <div class="hero-mini-card">
+                          <div class="hero-mini-label">Today’s focus</div>
+                          <div class="hero-mini-value">Build. Learn. Create.</div>
+                          <div class="hero-mini-tags">
+                            <span class="hero-mini-tag">Tutorials</span>
+                            <span class="hero-mini-tag">News</span>
+                            <span class="hero-mini-tag">Tools</span>
+                          </div>
+                        </div>
+                        <div class="hero-mini-card">
+                          <div class="hero-mini-label">Layout quality</div>
+                          <div class="hero-mini-value">Premium & organized</div>
+                          <div class="hero-mini-progress">
+                            <div class="hero-mini-progress-fill" style="width: 88%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="hero-floating-footer">
+                      <div class="hero-floating-avatars">
+                        <div class="hero-avatar"></div>
+                        <div class="hero-avatar"></div>
+                        <div class="hero-avatar"></div>
+                      </div>
+                      <div class="hero-floating-caption">
+                        Cards stay aligned, ads stay subtle, and everything feels intentional.
+                      </div>
+                      <div class="hero-floating-pill">
+                        <span class="hero-floating-pill-dot"></span>
+                        Studio ready
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="banner-meta-item">
-            <span class="banner-meta-dot"></span>
-            <span>Dark mode remembers your choice across categories.</span>
-          </div>
         </div>
 
-        <!-- HERO AD (ID: 4678697983) -->
-        <div class="banner-ad">
-          <div class="banner-ad-label">Sponsored • Hero</div>
-          <div class="banner-ad-inner">
+        <!-- TOP BANNER AD (ID: 4678697983) -->
+        <aside class="top-ad-card">
+          <div class="top-ad-header">
+            <div class="top-ad-label">
+              <span class="top-ad-dot"></span>
+              Sponsored banner
+            </div>
+            <div class="top-ad-pill">
+              <span>Ad • Subtle placement</span>
+            </div>
+          </div>
+          <div class="top-ad-body">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-6065282700750014"
                  data-ad-slot="4678697983"
-                 data-ad-format="auto"
+                 data-ad-format="horizontal"
                  data-full-width-responsive="true"></ins>
           </div>
-        </div>
-      </div>
+        </aside>
+      </section>
 
-      <div class="banner-right">
-        <div class="logo-orbit">
-          <div class="logo-img">
-            <!-- Replace with your logo if you want -->
-            <span style="font-family:'Aptos Black';font-size:22px;color:#1b120b;">AL</span>
+      <!-- CATEGORY BAR -->
+      <section class="category-bar fade-in-up">
+        <div class="category-buttons">
+          <button class="category-btn active" data-category="all" type="button">
+            <span class="dot"></span>
+            <span class="label">All</span>
+          </button>
+          <button class="category-btn" data-category="tutorials" type="button">
+            <span class="dot"></span>
+            <span class="label">Tutorials</span>
+          </button>
+          <button class="category-btn" data-category="news" type="button">
+            <span class="dot"></span>
+            <span class="label">News</span>
+          </button>
+          <button class="category-btn" data-category="tools" type="button">
+            <span class="dot"></span>
+            <span class="label">Tools</span>
+          </button>
+          <button class="category-btn" data-category="about" type="button">
+            <span class="dot"></span>
+            <span class="label">About</span>
+          </button>
+          <button class="category-btn" data-category="contact" type="button">
+            <span class="dot"></span>
+            <span class="label">Contact</span>
+          </button>
+        </div>
+        <div class="category-meta">
+          <div class="category-meta-pill">
+            <span class="category-meta-dot"></span>
+            <span id="categoryCountLabel">All cards visible</span>
           </div>
         </div>
+      </section>
 
-        <!-- 2D FOLLOW-CURSOR CARD -->
-        <div class="banner-card-wrapper">
-          <div class="banner-card" id="bannerCard">
-            <div class="banner-card-header">
-              <div class="banner-card-pill">Live Interface Preview</div>
-              <div class="banner-card-status">Active • v1.2</div>
+      <!-- MAIN CONTENT + SIDE ADS -->
+      <section class="content-row fade-in-up">
+        <!-- CARDS PANEL -->
+        <section class="cards-panel">
+          <header class="cards-header">
+            <div class="cards-title">
+              <span class="cards-title-dot"></span>
+              Curated cards
             </div>
-            <div class="banner-card-title">Simple Category Workspace</div>
-            <div class="banner-card-sub">
-              Switch between Tutorials, News, Tools, About, and Contact — with smooth animations and a persistent theme.
-            </div>
-            <div class="banner-card-row">
-              <div class="banner-card-metrics">
-                <div class="banner-card-metric"><strong>Bright</strong> • Main theme</div>
-                <div class="banner-card-metric"><strong>Dark</strong> • Toggle &amp; save</div>
-                <div class="banner-card-metric"><strong>Simple</strong> • Clean layout</div>
+            <div class="cards-filters">
+              <div class="cards-filters-pill">
+                <span>Organized • Animated • Clean</span>
               </div>
-              <div class="banner-card-chip">2D follow cursor</div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+          </header>
 
-  <!-- NAVBAR -->
-  <div class="nav-shell">
-    <div class="nav max-width">
-      <div class="nav-left">
-        <div class="nav-logo">A</div>
-        <div class="nav-title-block">
-          <div class="nav-title-main">ALAEAI</div>
-          <div class="nav-title-sub">Warm Portfolio • Build. Learn. Create.</div>
-        </div>
-      </div>
-      <div class="nav-right">
-        <button class="nav-cta" onclick="scrollToMain()">Open Workspace</button>
-        <button class="nav-toggle" id="themeToggle">Dark Mode</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MAIN CONTENT -->
-  <main class="main-shell" id="mainShell">
-    <div class="max-width">
-
-      <!-- CATEGORY SWITCHER -->
-      <div class="category-bar">
-        <button class="category-pill active" data-section="tutorials">Tutorials</button>
-        <button class="category-pill" data-section="news">News</button>
-        <button class="category-pill" data-section="tools">Tools</button>
-        <button class="category-pill" data-section="about">About</button>
-        <button class="category-pill" data-section="contact">Contact</button>
-      </div>
-
-      <!-- MID-CONTENT AD (ID: 4826976992) -->
-      <div class="mid-ad-shell">
-        <div class="mid-ad">
-          <div class="mid-ad-label">Sponsored • Workspace</div>
-          <div class="mid-ad-inner">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-6065282700750014"
-                 data-ad-slot="4826976992"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-          </div>
-        </div>
-      </div>
-
-      <div class="content-shell">
-
-        <!-- TUTORIALS PANEL -->
-        <section class="section-panel active" id="panel-tutorials">
-          <div class="section-header">
-            <div class="section-kicker">Tutorials</div>
-            <div class="section-title">Learn step by step.</div>
-            <div class="section-sub">
-              Short, clear, level‑based tutorials — foundations, builder mode, and advanced topics.
-            </div>
-          </div>
-
-          <div class="card-grid">
-            <article class="simple-card">
-              <div class="simple-card-pill">Level 1</div>
-              <div class="simple-card-title">Foundations</div>
-              <div class="simple-card-text">Start with the basics — simple, clean, and practical.</div>
-              <div class="simple-card-meta">Begin here</div>
-            </article>
-
-            <article class="simple-card">
-              <div class="simple-card-pill">Level 2</div>
-              <div class="simple-card-title">Builder Mode</div>
-              <div class="simple-card-text">Build small real projects with confidence.</div>
-              <div class="simple-card-meta">Hands‑on</div>
-            </article>
-
-            <article class="simple-card">
-              <div class="simple-card-pill">Level 3</div>
-              <div class="simple-card-title">Advanced</div>
-              <div class="simple-card-text">Deep dives into more complex topics.</div>
-              <div class="simple-card-meta">Next level</div>
-            </article>
-
-            <article class="simple-card">
-              <div class="simple-card-pill">More</div>
-              <div class="simple-card-title">Coming Soon</div>
-              <div class="simple-card-text">More levels and interactive lessons.</div>
-              <div class="simple-card-meta">Expanding</div>
-            </article>
-          </div>
-        </section>
-
-        <!-- NEWS PANEL -->
-        <section class="section-panel" id="panel-news">
-          <div class="section-header">
-            <div class="section-kicker">News</div>
-            <div class="section-title">Calm, meaningful updates.</div>
-            <div class="section-sub">
-              AI, science, and tech — summarized in a calm, focused way.
-            </div>
-          </div>
-
-          <div class="card-grid">
-            <article class="simple-card">
-              <div class="simple-card-pill">AI</div>
-              <div class="simple-card-title">Latest AI Trends</div>
-              <div class="simple-card-text">Daily curated updates without noise.</div>
-              <div class="simple-card-meta">Curated</div>
-            </article>
-
-            <article class="simple-card">
-              <div class="simple-card-pill">Science</div>
-              <div class="simple-card-title">Breakthroughs</div>
-              <div class="simple-card-text">Important discoveries simplified.</div>
-              <div class="simple-card-meta">Clear</div>
-            </article>
-
-            <article class="simple-card">
-              <div class="simple-card-pill">Tech</div>
-              <div class="simple-card-title">Industry News</div>
-              <div class="simple-card-text">Calm, focused summaries.</div>
-              <div class="simple-card-meta">Focused</div>
-            </article>
-
-            <article class="simple-card">
-              <div class="simple-card-pill">More</div>
-              <div class="simple-card-title">Coming Soon</div>
-              <div class="simple-card-text">Live API integration in the future.</div>
-              <div class="simple-card-meta">Planned</div>
-            </article>
-          </div>
-        </section>
-
-        <!-- TOOLS PANEL -->
-        <section class="section-panel" id="panel-tools">
-          <div class="section-header">
-            <div class="section-kicker">Tools</div>
-            <div class="section-title">Build smarter.</div>
-            <div class="section-sub">
-              Practical utilities to support your projects.
-            </div>
-          </div>
-
-          <div class="card-grid">
-            <article class="simple-card">
-              <div class="simple-card-pill">Tool</div>
-              <div class="simple-card-title">Text Cleaner</div>
-              <div class="simple-card-text">Remove noise from text instantly.</div>
-              <div class="simple-card-meta">Utility</div>
-            </article>
-
-            <article class="simple-card">
-              <div class="simple-card-pill">Tool</div>
-              <div class="simple-card-title">JSON Formatter</div>
-              <div class="simple-card-text">Clean and format JSON easily.</div>
-              <div class="simple-card-meta">Developer</div>
-            </article>
-
-            <article class="simple-card">
-              <div class="simple-card-pill">Tool</div>
-              <div class="simple-card-title">Color Picker</div>
-              <div class="simple-card-text">Pick and copy colors quickly.</div>
-              <div class="simple-card-meta">Design</div>
-            </article>
-
-            <article class="simple-card">
-              <div class="simple-card-pill">More</div>
-              <div class="simple-card-title">Coming Soon</div>
-              <div class="simple-card-text">More utilities on the way.</div>
-              <div class="simple-card-meta">Growing</div>
-            </article>
-          </div>
-        </section>
-
-        <!-- ABOUT PANEL -->
-        <section class="section-panel" id="panel-about">
-          <div class="section-header">
-            <div class="section-kicker">About</div>
-            <div class="section-title">The ALAEAI Story.</div>
-            <div class="section-sub">
-              Warm, human, and intentional — a calm creative studio.
-            </div>
-          </div>
-
-          <div class="card-grid">
-            <article class="simple-card">
-              <div class="simple-card-pill">Why</div>
-              <div class="simple-card-title">Why ALAEAI?</div>
-              <div class="simple-card-text">
-                A calm, warm space built to help you grow — tutorials, tools, news, and portfolio in harmony.
+          <div class="cards-grid" id="cardsGrid">
+            <!-- TUTORIALS -->
+            <article class="card" data-category="tutorials" style="--progress: 82%;">
+              <div class="card-header">
+                <div class="card-tag">
+                  <span class="card-tag-dot"></span>
+                  Tutorial
+                </div>
+                <div class="card-level">Level 01 • HTML</div>
               </div>
-              <div class="simple-card-meta">Purpose</div>
-            </article>
-
-            <article class="simple-card">
-              <div class="simple-card-pill">Vision</div>
-              <div class="simple-card-title">Vision</div>
-              <div class="simple-card-text">
-                Evolve into a full creative environment with dashboards, stats, and personalized flows.
+              <h2 class="card-title">Build a clean landing page with golden highlights</h2>
+              <p class="card-description">
+                Learn how to structure a bright, minimal layout with cards, spacing, and a premium hero section.
+              </p>
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>15 min</span>
+                  </div>
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Beginner</span>
+                  </div>
+                </div>
+                <div class="card-cta">
+                  Start
+                  <span class="card-cta-arrow">↗</span>
+                </div>
               </div>
-              <div class="simple-card-meta">Future</div>
+              <div class="card-progress">
+                <div class="card-progress-fill"></div>
+              </div>
+            </article>
+
+            <article class="card" data-category="tutorials" style="--progress: 64%;">
+              <div class="card-header">
+                <div class="card-tag">
+                  <span class="card-tag-dot"></span>
+                  Tutorial
+                </div>
+                <div class="card-level">Level 02 • CSS</div>
+              </div>
+              <h2 class="card-title">Smooth hover animations without breaking layout</h2>
+              <p class="card-description">
+                Add subtle motion to cards and buttons using transforms, shadows, and transitions that stay professional.
+              </p>
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>18 min</span>
+                  </div>
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Intermediate</span>
+                  </div>
+                </div>
+                <div class="card-cta">
+                  Learn
+                  <span class="card-cta-arrow">↗</span>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="card-progress-fill"></div>
+              </div>
+            </article>
+
+            <article class="card" data-category="tutorials" style="--progress: 76%;">
+              <div class="card-header">
+                <div class="card-tag">
+                  <span class="card-tag-dot"></span>
+                  Tutorial
+                </div>
+                <div class="card-level">Level 03 • JS</div>
+              </div>
+              <h2 class="card-title">Category filters with zero layout jumps</h2>
+              <p class="card-description">
+                Implement category buttons that filter cards smoothly, keeping the grid aligned and transitions clean.
+              </p>
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>20 min</span>
+                  </div>
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Intermediate</span>
+                  </div>
+                </div>
+                <div class="card-cta">
+                  Code
+                  <span class="card-cta-arrow">↗</span>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="card-progress-fill"></div>
+              </div>
+            </article>
+
+            <!-- INLINE AD (ID: 4826976992) -->
+            <aside class="inline-ad-card">
+              <div class="inline-ad-header">
+                <div>
+                  <span class="inline-ad-dot"></span>
+                  <span>Sponsored • Inline</span>
+                </div>
+                <span>Placed between cards to keep the grid balanced</span>
+              </div>
+              <div class="inline-ad-body">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-6065282700750014"
+                     data-ad-slot="4826976992"
+                     data-ad-format="horizontal"
+                     data-full-width-responsive="true"></ins>
+              </div>
+            </aside>
+
+            <!-- NEWS -->
+            <article class="card" data-category="news" style="--progress: 58%;">
+              <div class="card-header">
+                <div class="card-tag">
+                  <span class="card-tag-dot"></span>
+                  News
+                </div>
+                <div class="card-level">Update • UI</div>
+              </div>
+              <h2 class="card-title">New layout presets for bright portfolios</h2>
+              <p class="card-description">
+                Discover fresh layout ideas that keep your portfolio simple, golden, and visually consistent across sections.
+              </p>
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Design</span>
+                  </div>
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Today</span>
+                  </div>
+                </div>
+                <div class="card-cta">
+                  Read
+                  <span class="card-cta-arrow">↗</span>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="card-progress-fill"></div>
+              </div>
+            </article>
+
+            <article class="card" data-category="news" style="--progress: 72%;">
+              <div class="card-header">
+                <div class="card-tag">
+                  <span class="card-tag-dot"></span>
+                  News
+                </div>
+                <div class="card-level">Update • Performance</div>
+              </div>
+              <h2 class="card-title">Faster animations with minimal JavaScript</h2>
+              <p class="card-description">
+                A new approach to micro-animations that keeps your page smooth, even with many cards on screen.
+              </p>
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Performance</span>
+                  </div>
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>This week</span>
+                  </div>
+                </div>
+                <div class="card-cta">
+                  View
+                  <span class="card-cta-arrow">↗</span>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="card-progress-fill"></div>
+              </div>
+            </article>
+
+            <article class="card" data-category="news" style="--progress: 66%;">
+              <div class="card-header">
+                <div class="card-tag">
+                  <span class="card-tag-dot"></span>
+                  News
+                </div>
+                <div class="card-level">Update • Dark mode</div>
+              </div>
+              <h2 class="card-title">Dark mode that remembers your choice</h2>
+              <p class="card-description">
+                The theme toggle now persists across sessions and category changes, keeping your preferred mood locked in.
+              </p>
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>UX</span>
+                  </div>
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Stable</span>
+                  </div>
+                </div>
+                <div class="card-cta">
+                  Details
+                  <span class="card-cta-arrow">↗</span>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="card-progress-fill"></div>
+              </div>
+            </article>
+
+            <!-- TOOLS -->
+            <article class="card" data-category="tools" style="--progress: 78%;">
+              <div class="card-header">
+                <div class="card-tag">
+                  <span class="card-tag-dot"></span>
+                  Tool
+                </div>
+                <div class="card-level">Utility • Layout</div>
+              </div>
+              <h2 class="card-title">Card spacing & alignment helper</h2>
+              <p class="card-description">
+                A small utility that keeps card heights visually balanced, even when descriptions have different lengths.
+              </p>
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Grid</span>
+                  </div>
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Auto</span>
+                  </div>
+                </div>
+                <div class="card-cta">
+                  Open
+                  <span class="card-cta-arrow">↗</span>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="card-progress-fill"></div>
+              </div>
+            </article>
+
+            <article class="card" data-category="tools" style="--progress: 61%;">
+              <div class="card-header">
+                <div class="card-tag">
+                  <span class="card-tag-dot"></span>
+                  Tool
+                </div>
+                <div class="card-level">Utility • Theme</div>
+              </div>
+              <h2 class="card-title">Theme memory inspector</h2>
+              <p class="card-description">
+                Quickly check which theme is stored in localStorage and how it syncs with the UI state.
+              </p>
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Theme</span>
+                  </div>
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Debug</span>
+                  </div>
+                </div>
+                <div class="card-cta">
+                  Inspect
+                  <span class="card-cta-arrow">↗</span>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="card-progress-fill"></div>
+              </div>
+            </article>
+
+            <article class="card" data-category="tools" style="--progress: 69%;">
+              <div class="card-header">
+                <div class="card-tag">
+                  <span class="card-tag-dot"></span>
+                  Tool
+                </div>
+                <div class="card-level">Utility • Ads</div>
+              </div>
+              <h2 class="card-title">Ad placement visual checker</h2>
+              <p class="card-description">
+                Preview how ads sit inside your layout to keep them subtle, aligned, and non-intrusive.
+              </p>
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Ads</span>
+                  </div>
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Preview</span>
+                  </div>
+                </div>
+                <div class="card-cta">
+                  Preview
+                  <span class="card-cta-arrow">↗</span>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="card-progress-fill"></div>
+              </div>
+            </article>
+
+            <!-- ABOUT -->
+            <article class="card" data-category="about" style="--progress: 90%;">
+              <div class="card-header">
+                <div class="card-tag">
+                  <span class="card-tag-dot"></span>
+                  About
+                </div>
+                <div class="card-level">Studio • Identity</div>
+              </div>
+              <h2 class="card-title">AlaeAI — a bright, focused learning space</h2>
+              <p class="card-description">
+                A portfolio that feels like a studio: clean, golden, and built to grow with every new idea.
+              </p>
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Creator</span>
+                  </div>
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Vision</span>
+                  </div>
+                </div>
+                <div class="card-cta">
+                  Story
+                  <span class="card-cta-arrow">↗</span>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="card-progress-fill"></div>
+              </div>
+            </article>
+
+            <article class="card" data-category="about" style="--progress: 74%;">
+              <div class="card-header">
+                <div class="card-tag">
+                  <span class="card-tag-dot"></span>
+                  About
+                </div>
+                <div class="card-level">Studio • Style</div>
+              </div>
+              <h2 class="card-title">Why the golden bright theme works</h2>
+              <p class="card-description">
+                A breakdown of the color system, spacing, and typography that keeps this page clean and premium.
+              </p>
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Design</span>
+                  </div>
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>System</span>
+                  </div>
+                </div>
+                <div class="card-cta">
+                  Explore
+                  <span class="card-cta-arrow">↗</span>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="card-progress-fill"></div>
+              </div>
+            </article>
+
+            <!-- CONTACT -->
+            <article class="card" data-category="contact" style="--progress: 52%;">
+              <div class="card-header">
+                <div class="card-tag">
+                  <span class="card-tag-dot"></span>
+                  Contact
+                </div>
+                <div class="card-level">Reach • Email</div>
+              </div>
+              <h2 class="card-title">Get in touch for collaborations</h2>
+              <p class="card-description">
+                A simple, focused contact flow for people who want to build, learn, or create something together.
+              </p>
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Reply within 24h</span>
+                  </div>
+                </div>
+                <div class="card-cta">
+                  Contact
+                  <span class="card-cta-arrow">↗</span>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="card-progress-fill"></div>
+              </div>
+            </article>
+
+            <article class="card" data-category="contact" style="--progress: 60%;">
+              <div class="card-header">
+                <div class="card-tag">
+                  <span class="card-tag-dot"></span>
+                  Contact
+                </div>
+                <div class="card-level">Reach • Social</div>
+              </div>
+              <h2 class="card-title">Follow the build in real time</h2>
+              <p class="card-description">
+                Stay updated on new tutorials, tools, and experiments as the studio evolves.
+              </p>
+              <div class="card-footer">
+                <div class="card-meta">
+                  <div class="card-meta-pill">
+                    <span class="card-meta-dot"></span>
+                    <span>Social</span>
+                  </div>
+                </div>
+                <div class="card-cta">
+                  Follow
+                  <span class="card-cta-arrow">↗</span>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="card-progress-fill"></div>
+              </div>
             </article>
           </div>
         </section>
 
-        <!-- CONTACT PANEL -->
-        <section class="section-panel" id="panel-contact">
-          <div class="section-header">
-            <div class="section-kicker">Contact</div>
-            <div class="section-title">Let’s connect.</div>
-            <div class="section-sub">
-              Reach out anytime — simple and direct.
-            </div>
-          </div>
-
-          <div class="card-grid">
-            <article class="simple-card">
-              <div class="simple-card-pill">Email</div>
-              <div class="simple-card-title">Get in touch</div>
-              <div class="simple-card-text">contact@alaeai.com</div>
-              <div class="simple-card-meta">Primary</div>
-            </article>
-
-            <article class="simple-card">
-              <div class="simple-card-pill">Social</div>
-              <div class="simple-card-title">Instagram</div>
-              <div class="simple-card-text">@alaeai</div>
-              <div class="simple-card-meta">Updates</div>
-            </article>
-
-            <article class="simple-card">
-              <div class="simple-card-pill">Social</div>
-              <div class="simple-card-title">GitHub</div>
-              <div class="simple-card-text">github.com/alaeai</div>
-              <div class="simple-card-meta">Code</div>
-            </article>
-
-            <article class="simple-card">
-              <div class="simple-card-pill">More</div>
-              <div class="simple-card-title">Coming Soon</div>
-              <div class="simple-card-text">More ways to connect.</div>
-              <div class="simple-card-meta">Expanding</div>
-            </article>
-          </div>
-        </section>
-
-        <!-- FOOTER -->
-        <footer>
-          © 2026 ALAEAI — Warm Portfolio • Build. Learn. Create.
-          <!-- FOOTER AD (ID: 6794664785) -->
-          <div class="footer-ad">
-            <div class="footer-ad-label">Sponsored • Footer</div>
-            <div class="footer-ad-inner">
+        <!-- SIDE PANEL WITH AD (ID: 6794664785) -->
+        <aside class="side-panel">
+          <section class="side-ad-card">
+            <header class="side-ad-header">
+              <div>
+                <span class="side-ad-dot"></span>
+                <span>Sponsored • Side</span>
+              </div>
+              <span>Subtle, right-aligned placement</span>
+            </header>
+            <div class="side-ad-body">
               <ins class="adsbygoogle"
                    style="display:block"
                    data-ad-client="ca-pub-6065282700750014"
                    data-ad-slot="6794664785"
-                   data-ad-format="auto"
+                   data-ad-format="vertical"
                    data-full-width-responsive="true"></ins>
             </div>
-          </div>
-        </footer>
+          </section>
 
-      </div>
+          <section class="side-meta-card">
+            <div class="side-meta-row">
+              <span>Layout status</span>
+              <div class="side-meta-pill">
+                <span class="side-meta-dot"></span>
+                <span>Stable</span>
+              </div>
+            </div>
+            <div class="side-meta-row">
+              <span>Cards visible</span>
+              <span id="sideCardCount">All</span>
+            </div>
+            <div class="side-meta-row">
+              <span>Theme</span>
+              <span id="sideThemeLabel">Auto</span>
+            </div>
+          </section>
+        </aside>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="fade-in-up">
+        <div class="footer-left">
+          <span class="footer-dot"></span>
+          <span>ALAEAI Studio • Built for clarity, focus, and growth.</span>
+        </div>
+        <div class="footer-links">
+          <button class="footer-link" type="button" data-category-target="tutorials">
+            <span>Go to Tutorials</span>
+          </button>
+          <button class="footer-link" type="button" data-category-target="news">
+            <span>Latest News</span>
+          </button>
+          <button class="footer-link" type="button" data-category-target="tools">
+            <span>Explore Tools</span>
+          </button>
+        </div>
+      </footer>
     </div>
   </main>
 
   <script>
-  // Smooth scroll to main
-  function scrollToMain(){
-    const el = document.getElementById("mainShell");
-    if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
-  }
+    (function () {
+      const STORAGE_THEME_KEY = "alaeai-theme";
+      const STORAGE_CATEGORY_KEY = "alaeai-category";
 
-  // THEME PERSISTENCE
-  const bodyEl = document.body;
-  const themeToggleBtn = document.getElementById("themeToggle");
-  const THEME_KEY = "alaeai-theme";
+      const body = document.body;
+      const darkToggle = document.getElementById("darkToggle");
+      const activeCategoryLabel = document.getElementById("activeCategoryLabel");
+      const darkModeLabel = document.getElementById("darkModeLabel");
+      const sideThemeLabel = document.getElementById("sideThemeLabel");
+      const categoryCountLabel = document.getElementById("categoryCountLabel");
+      const sideCardCount = document.getElementById("sideCardCount");
+      const cardsGrid = document.getElementById("cardsGrid");
+      const categoryButtons = Array.from(document.querySelectorAll(".category-btn"));
+      const footerLinks = Array.from(document.querySelectorAll("[data-category-target]"));
+      const cards = Array.from(document.querySelectorAll(".card"));
+      const fadeInSections = Array.from(document.querySelectorAll(".fade-in-up"));
+      const followCard = document.getElementById("followCard");
 
-  function applyTheme(theme){
-    if(theme === "dark"){
-      bodyEl.classList.add("theme-dark");
-      if(themeToggleBtn) themeToggleBtn.textContent = "Light Mode";
-    }else{
-      bodyEl.classList.remove("theme-dark");
-      if(themeToggleBtn) themeToggleBtn.textContent = "Dark Mode";
-    }
-  }
-
-  (function initTheme(){
-    const saved = localStorage.getItem(THEME_KEY);
-    if(saved === "dark" || saved === "light"){
-      applyTheme(saved);
-    }else{
-      applyTheme("light");
-    }
-  })();
-
-  if(themeToggleBtn){
-    themeToggleBtn.addEventListener("click", () => {
-      const isDark = bodyEl.classList.contains("theme-dark");
-      const next = isDark ? "light" : "dark";
-      applyTheme(next);
-      localStorage.setItem(THEME_KEY, next);
-    });
-  }
-
-  // CATEGORY SWITCHING
-  const pills = document.querySelectorAll(".category-pill");
-  const panels = document.querySelectorAll(".section-panel");
-
-  function showPanel(name){
-    panels.forEach(p => {
-      if(p.id === "panel-" + name){
-        p.classList.add("active");
-      }else{
-        p.classList.remove("active");
+      /* THEME HANDLING */
+      function applyTheme(theme) {
+        if (theme === "dark") {
+          body.classList.add("dark");
+          darkModeLabel.textContent = "Dark mode";
+          sideThemeLabel.textContent = "Dark";
+        } else {
+          body.classList.remove("dark");
+          darkModeLabel.textContent = "Light mode";
+          sideThemeLabel.textContent = "Light";
+        }
       }
-    });
-  }
 
-  pills.forEach(pill => {
-    pill.addEventListener("click", () => {
-      const section = pill.getAttribute("data-section");
-      pills.forEach(p => p.classList.remove("active"));
-      pill.classList.add("active");
-      showPanel(section);
-    });
-  });
+      function loadTheme() {
+        const stored = localStorage.getItem(STORAGE_THEME_KEY);
+        if (stored === "dark" || stored === "light") {
+          applyTheme(stored);
+        } else {
+          applyTheme("light");
+        }
+      }
 
-  // 2D FOLLOW-CURSOR CARD
-  const bannerCard = document.getElementById("bannerCard");
-  if(bannerCard){
-    bannerCard.addEventListener("mousemove", (e) => {
-      const rect = bannerCard.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-      const moveX = (x - 0.5) * 20;
-      const moveY = (y - 0.5) * 20;
-      bannerCard.style.transform = `translate(${moveX}px, ${moveY}px)`;
-      bannerCard.classList.add("hovered");
-    });
+      function toggleTheme() {
+        const isDark = body.classList.contains("dark");
+        const next = isDark ? "light" : "dark";
+        applyTheme(next);
+        localStorage.setItem(STORAGE_THEME_KEY, next);
+      }
 
-    bannerCard.addEventListener("mouseleave", () => {
-      bannerCard.style.transform = "translate(0, 0)";
-      bannerCard.classList.remove("hovered");
-    });
-  }
+      /* CATEGORY HANDLING */
+      function updateCategoryUI(category) {
+        categoryButtons.forEach((btn) => {
+          const btnCategory = btn.getAttribute("data-category");
+          btn.classList.toggle("active", btnCategory === category);
+        });
 
-  // ADS INITIALIZATION
-  window.addEventListener("load", () => {
-    try{
-      const adSlots = document.querySelectorAll("ins.adsbygoogle");
-      adSlots.forEach(() => {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      });
-    }catch(e){
-      console.warn("Ads init error:", e);
-    }
-  });
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const cardCategory = card.getAttribute("data-category");
+          const shouldShow = category === "all" || cardCategory === category;
+          if (shouldShow) {
+            card.classList.remove("hidden-by-category");
+            visibleCount++;
+          } else {
+            card.classList.add("hidden-by-category");
+          }
+        });
+
+        const labelMap = {
+          all: "All content",
+          tutorials: "Tutorials",
+          news: "News",
+          tools: "Tools",
+          about: "About",
+          contact: "Contact"
+        };
+
+        activeCategoryLabel.textContent = labelMap[category] || "All content";
+
+        if (category === "all") {
+          categoryCountLabel.textContent = "All cards visible";
+          sideCardCount.textContent = "All";
+        } else {
+          categoryCountLabel.textContent = visibleCount + " card" + (visibleCount === 1 ? "" : "s") + " visible";
+          sideCardCount.textContent = visibleCount;
+        }
+      }
+
+      function setCategory(category) {
+        updateCategoryUI(category);
+        localStorage.setItem(STORAGE_CATEGORY_KEY, category);
+      }
+
+      function loadCategory() {
+        const stored = localStorage.getItem(STORAGE_CATEGORY_KEY);
+        const valid = ["all", "tutorials", "news", "tools", "about", "contact"];
+        const category = valid.includes(stored) ? stored : "all";
+        updateCategoryUI(category);
+      }
+
+      /* FOLLOW CARD PARALLAX */
+      function setupFollowCard() {
+        if (!followCard) return;
+        let rect = followCard.getBoundingClientRect();
+
+        function updateRect() {
+          rect = followCard.getBoundingClientRect();
+        }
+
+        window.addEventListener("resize", updateRect);
+
+        followCard.addEventListener("mousemove", (e) => {
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -6;
+          const rotateY = ((x - centerX) / centerX) * 6;
+          followCard.style.transform =
+            "perspective(900px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
+        });
+
+        followCard.addEventListener("mouseleave", () => {
+          followCard.style.transform = "perspective(900px) rotateX(10deg) rotateY(-12deg)";
+        });
+      }
+
+      /* INTERSECTION OBSERVER FOR FADE-IN + PROGRESS */
+      function setupIntersection() {
+        if (!("IntersectionObserver" in window)) {
+          fadeInSections.forEach((el) => el.classList.add("visible"));
+          cards.forEach((card) => card.classList.add("visible"));
+          return;
+        }
+
+        const sectionObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                sectionObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+
+        fadeInSections.forEach((el) => sectionObserver.observe(el));
+
+        const cardObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                cardObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.25 }
+        );
+
+        cards.forEach((card) => cardObserver.observe(card));
+      }
+
+      /* EVENT BINDINGS */
+      function bindEvents() {
+        if (darkToggle) {
+          darkToggle.addEventListener("click", toggleTheme);
+        }
+
+        categoryButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const category = btn.getAttribute("data-category") || "all";
+            setCategory(category);
+          });
+        });
+
+        footerLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            const category = link.getAttribute("data-category-target") || "all";
+            setCategory(category);
+            window.scrollTo({
+              top: cardsGrid.getBoundingClientRect().top + window.scrollY - 80,
+              behavior: "smooth"
+            });
+          });
+        });
+
+        const heroButtons = Array.from(document.querySelectorAll(".hero-btn-primary, .hero-btn-secondary"));
+        heroButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const target = btn.getAttribute("data-category-target");
+            if (target) {
+              setCategory(target);
+              window.scrollTo({
+                top: cardsGrid.getBoundingClientRect().top + window.scrollY - 80,
+                behavior: "smooth"
+              });
+            }
+          });
+        });
+      }
+
+      /* ADS INIT */
+      function initAds() {
+        try {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+          (adsbygoogle = window.adsbygoogle || []).push({});
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+          // Fail silently if ads are blocked
+        }
+      }
+
+      /* INIT */
+      function init() {
+        loadTheme();
+        loadCategory();
+        setupFollowCard();
+        setupIntersection();
+        bindEvents();
+        initAds();
+      }
+
+      document.addEventListener("DOMContentLoaded", init);
+    })();
   </script>
 </body>
 </html>
-

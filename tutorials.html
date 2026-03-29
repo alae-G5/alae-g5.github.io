@@ -7,34 +7,38 @@
 
   <style>
     :root {
-      --bg: #e9edf5;
-      --bg-alt: rgba(255, 255, 255, 0.18);
-      --glass-border: rgba(255, 255, 255, 0.45);
-      --glass-border-soft: rgba(255, 255, 255, 0.25);
-      --text: #0f172a;
+      /* LIGHT THEME (portfolio style) */
+      --bg: #f5f5f5;
+      --bg-soft: #f0f0f0;
+      --card-bg: #ffffff;
+      --card-border: #e5e5e5;
+      --text: #111827;
       --muted: #6b7280;
       --accent: #facc15;
-      --accent-soft: rgba(250, 204, 21, 0.18);
-      --accent-strong: rgba(250, 204, 21, 0.9);
-      --card-shadow: 0 18px 45px rgba(15, 23, 42, 0.35);
-      --radius-lg: 22px;
-      --radius-md: 16px;
+      --accent-soft: #fef9c3;
+      --accent-strong: #eab308;
+      --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --shadow-strong: 0 18px 45px rgba(15, 23, 42, 0.16);
+      --radius-lg: 20px;
+      --radius-md: 14px;
       --radius-sm: 10px;
       --transition-fast: 0.18s ease-out;
       --transition-med: 0.28s ease-out;
     }
 
     body.dark {
+      /* DARK THEME (deeper, glowing) */
       --bg: radial-gradient(circle at top, rgba(250, 204, 21, 0.08), #020617);
-      --bg-alt: rgba(15, 23, 42, 0.7);
-      --glass-border: rgba(148, 163, 184, 0.6);
-      --glass-border-soft: rgba(30, 64, 175, 0.5);
+      --bg-soft: #020617;
+      --card-bg: #0b1120;
+      --card-border: #1f2937;
       --text: #e5e7eb;
       --muted: #9ca3af;
       --accent: #facc15;
-      --accent-soft: rgba(250, 204, 21, 0.18);
-      --accent-strong: rgba(250, 204, 21, 0.95);
-      --card-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+      --accent-soft: rgba(250, 204, 21, 0.12);
+      --accent-strong: #facc15;
+      --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.7);
+      --shadow-strong: 0 22px 60px rgba(0, 0, 0, 0.9);
     }
 
     * {
@@ -44,16 +48,11 @@
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Poppins", sans-serif;
-      background: radial-gradient(circle at top, rgba(250, 204, 21, 0.12), #e5e7eb);
+      background: var(--bg);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
-      animation: bodyFade 0.6s ease-out;
-    }
-
-    @keyframes bodyFade {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      transition: background var(--transition-med), color var(--transition-med);
     }
 
     a {
@@ -73,12 +72,16 @@
       top: 0;
       z-index: 30;
       padding: 14px 18px 16px;
-      backdrop-filter: blur(18px);
-      background:
-        radial-gradient(circle at top left, rgba(250, 204, 21, 0.18), transparent 55%),
-        linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.96));
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.75);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(245, 245, 245, 0.96);
+      border-bottom: 1px solid #e5e7eb;
+      backdrop-filter: blur(14px);
+      transition: background var(--transition-med), border-color var(--transition-med), box-shadow var(--transition-med);
+    }
+
+    body.dark header {
+      background: rgba(15, 23, 42, 0.96);
+      border-color: #111827;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
     }
 
     .header-inner {
@@ -97,23 +100,18 @@
     }
 
     .brand-logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background:
-        radial-gradient(circle at 20% 20%, #fefce8, #facc15),
-        radial-gradient(circle at 80% 80%, #0f172a, #020617);
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 20% 20%, #fefce8, #facc15);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
       font-size: 18px;
       letter-spacing: 0.6px;
-      color: #020617;
-      box-shadow:
-        0 0 18px rgba(250, 204, 21, 0.9),
-        0 0 40px rgba(250, 204, 21, 0.45),
-        0 14px 32px rgba(0, 0, 0, 0.85);
+      color: #111827;
+      box-shadow: 0 10px 24px rgba(250, 204, 21, 0.6);
       transform: translateY(0);
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
     }
@@ -121,24 +119,20 @@
     .brand-logo:hover {
       transform: translateY(-2px);
       filter: brightness(1.05);
-      box-shadow:
-        0 0 24px rgba(250, 204, 21, 1),
-        0 0 55px rgba(250, 204, 21, 0.7),
-        0 18px 40px rgba(0, 0, 0, 0.95);
+      box-shadow: 0 14px 32px rgba(250, 204, 21, 0.9);
     }
 
     .brand-text-main {
       font-size: 20px;
       font-weight: 700;
       letter-spacing: 0.9px;
-      color: #f9fafb;
     }
 
     .brand-text-sub {
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 1.6px;
-      color: rgba(209, 213, 219, 0.9);
+      color: var(--muted);
     }
 
     .header-right {
@@ -155,16 +149,22 @@
       font-size: 11px;
       letter-spacing: 1px;
       text-transform: uppercase;
-      background: rgba(15, 23, 42, 0.8);
-      color: rgba(249, 250, 251, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: #111827;
+      color: #f9fafb;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.4);
+    }
+
+    body.dark .pill {
+      background: #020617;
+      border-color: #374151;
     }
 
     .cta-small {
       padding: 8px 16px;
       border-radius: 999px;
-      border: 1px solid rgba(248, 250, 252, 0.9);
-      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid #111827;
+      background: #111827;
       color: #f9fafb;
       font-size: 13px;
       font-weight: 600;
@@ -172,7 +172,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.35);
       transform: translateY(0);
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
     }
@@ -184,42 +184,70 @@
     .cta-small:hover {
       transform: translateY(-2px);
       background: #f9fafb;
-      color: #020617;
+      color: #111827;
       border-color: transparent;
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.45);
+    }
+
+    body.dark .cta-small {
+      border-color: #e5e7eb;
+      background: #f9fafb;
+      color: #020617;
+    }
+
+    body.dark .cta-small:hover {
+      background: #111827;
+      color: #f9fafb;
+      border-color: #facc15;
       box-shadow: 0 14px 34px rgba(0, 0, 0, 0.9);
     }
 
     .dark-toggle {
       padding: 7px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(250, 204, 21, 0.7);
-      background: rgba(15, 23, 42, 0.7);
-      color: #fefce8;
+      border: 1px solid rgba(17, 24, 39, 0.8);
+      background: #f9fafb;
+      color: #111827;
       font-size: 12px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow:
-        0 0 14px rgba(250, 204, 21, 0.7),
-        0 10px 26px rgba(0, 0, 0, 0.85);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
       transform: translateY(0);
       transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
     }
 
     .dark-toggle:hover {
       transform: translateY(-2px);
-      background: rgba(250, 204, 21, 0.16);
-      color: #fefce8;
+      background: #111827;
+      color: #f9fafb;
+      border-color: #111827;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.35);
+    }
+
+    body.dark .dark-toggle {
+      background: #020617;
+      color: #f9fafb;
+      border-color: #facc15;
       box-shadow:
-        0 0 20px rgba(250, 204, 21, 1),
-        0 14px 34px rgba(0, 0, 0, 0.95);
+        0 0 16px rgba(250, 204, 21, 0.7),
+        0 14px 34px rgba(0, 0, 0, 0.9);
+    }
+
+    body.dark .dark-toggle:hover {
+      background: #111827;
+      box-shadow:
+        0 0 22px rgba(250, 204, 21, 1),
+        0 18px 40px rgba(0, 0, 0, 1);
     }
 
     /* MAIN */
     main {
       flex: 1;
       padding: 24px 18px 40px;
+      background: var(--bg);
+      transition: background var(--transition-med);
     }
 
     .main-inner {
@@ -244,7 +272,7 @@
       max-width: 640px;
     }
 
-    /* CATEGORY BAR (Foundations / Core / Advanced / Builder) */
+    /* CATEGORY CHIPS */
     .categories-bar {
       display: flex;
       flex-wrap: wrap;
@@ -258,15 +286,14 @@
       font-size: 11px;
       letter-spacing: 0.6px;
       text-transform: uppercase;
-      border: 1px solid var(--glass-border-soft);
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.08));
-      backdrop-filter: blur(14px);
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
       color: var(--muted);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
       transform: translateY(0);
       transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
     }
@@ -277,26 +304,30 @@
 
     .cat-chip:hover {
       transform: translateY(-2px);
-      border-color: rgba(250, 204, 21, 0.7);
-      color: var(--text);
-      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.3);
+      border-color: var(--accent);
+      color: #111827;
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.16);
     }
 
     .cat-chip.active {
-      background:
-        radial-gradient(circle at top left, rgba(250, 204, 21, 0.35), transparent 55%),
-        linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.96));
+      background: #111827;
       color: #fefce8;
-      border-color: rgba(250, 204, 21, 0.9);
+      border-color: var(--accent);
       box-shadow:
-        0 0 18px rgba(250, 204, 21, 0.9),
-        0 16px 40px rgba(15, 23, 42, 0.9);
+        0 0 14px rgba(250, 204, 21, 0.7),
+        0 14px 32px rgba(15, 23, 42, 0.6);
     }
 
-    /* LAYOUT: SIDEBAR + CONTENT */
+    body.dark .cat-chip {
+      background: #020617;
+      border-color: #1f2937;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.7);
+    }
+
+    /* LAYOUT */
     .layout {
       display: grid;
-      grid-template-columns: 290px minmax(0, 1fr);
+      grid-template-columns: 280px minmax(0, 1fr);
       gap: 20px;
       align-items: flex-start;
     }
@@ -307,17 +338,16 @@
       }
     }
 
-    /* SIDEBAR (glass) */
+    /* SIDEBAR */
     .sidebar {
       position: sticky;
       top: 96px;
       border-radius: var(--radius-lg);
-      background:
-        linear-gradient(145deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.06));
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--card-shadow);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-soft);
       padding: 16px 14px 18px;
-      backdrop-filter: blur(22px);
+      transition: background var(--transition-med), border-color var(--transition-med), box-shadow var(--transition-med), color var(--transition-med);
     }
 
     .sidebar-title {
@@ -348,17 +378,13 @@
       width: 100%;
       height: 9px;
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.18));
+      background: #e5e7eb;
       overflow: hidden;
       position: relative;
     }
 
-    .progress-track-glow {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 0% 50%, rgba(250, 204, 21, 0.25), transparent 60%);
-      opacity: 0.7;
-      pointer-events: none;
+    body.dark .progress-bar {
+      background: #020617;
     }
 
     .progress-fill {
@@ -391,12 +417,11 @@
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.12));
-      border: 1px solid var(--glass-border-soft);
-      backdrop-filter: blur(16px);
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
       color: var(--text);
       transform: translateY(0);
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
       transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
     }
 
@@ -411,23 +436,27 @@
 
     .tutorial-item:hover {
       transform: translateY(-2px);
-      border-color: rgba(250, 204, 21, 0.7);
-      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.3);
+      border-color: var(--accent);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.14);
     }
 
     .tutorial-item.active {
-      background:
-        radial-gradient(circle at left, rgba(250, 204, 21, 0.4), transparent 60%),
-        linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+      background: #111827;
       color: #fefce8;
-      border-color: rgba(250, 204, 21, 0.95);
+      border-color: var(--accent);
       box-shadow:
-        0 0 18px rgba(250, 204, 21, 0.9),
-        0 16px 40px rgba(15, 23, 42, 0.95);
+        0 0 16px rgba(250, 204, 21, 0.7),
+        0 14px 32px rgba(15, 23, 42, 0.7);
     }
 
     .tutorial-item.active .diff-label {
       color: #fef9c3;
+    }
+
+    body.dark .tutorial-item {
+      background: #020617;
+      border-color: #1f2937;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.7);
     }
 
     /* CONTENT */
@@ -448,26 +477,15 @@
     .tutorial-block {
       position: relative;
       border-radius: var(--radius-lg);
-      background:
-        linear-gradient(145deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.06));
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--card-shadow);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-strong);
       padding: 18px 18px 20px;
-      backdrop-filter: blur(22px);
       overflow: hidden;
       opacity: 0;
       transform: translateY(18px) scale(0.99);
-      animation: blockIn 0.7s var(--transition-med) forwards;
-    }
-
-    .tutorial-block::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(250, 204, 21, 0.22), transparent 55%);
-      opacity: 0.9;
-      pointer-events: none;
+      animation: blockIn 0.6s var(--transition-med) forwards;
+      transition: background var(--transition-med), border-color var(--transition-med), box-shadow var(--transition-med), color var(--transition-med);
     }
 
     @keyframes blockIn {
@@ -499,15 +517,19 @@
     .tag-pill {
       padding: 4px 8px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.04);
+      background: #f9fafb;
       color: var(--muted);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      backdrop-filter: blur(10px);
+      border: 1px solid #e5e7eb;
     }
 
     .tag-pill.diff-easy { border-color: rgba(34, 197, 94, 0.6); }
     .tag-pill.diff-med { border-color: rgba(234, 179, 8, 0.7); }
     .tag-pill.diff-hard { border-color: rgba(239, 68, 68, 0.7); }
+
+    body.dark .tag-pill {
+      background: #020617;
+      border-color: #1f2937;
+    }
 
     .tutorial-description {
       font-size: 13px;
@@ -516,58 +538,6 @@
       max-width: 760px;
     }
 
-    .tutorial-steps {
-      margin-bottom: 12px;
-      font-size: 13px;
-    }
-
-    .tutorial-steps ol {
-      padding-left: 18px;
-      margin: 0;
-    }
-
-    .tutorial-steps li {
-      margin-bottom: 4px;
-    }
-
-    .code-block {
-      margin-top: 10px;
-      border-radius: var(--radius-md);
-      background: #020617;
-      color: #e5e7eb;
-      padding: 12px 12px 14px;
-      font-family: "Fira Code", "Consolas", monospace;
-      font-size: 12px;
-      overflow-x: auto;
-      position: relative;
-      box-shadow:
-        0 0 18px rgba(15, 23, 42, 0.95),
-        0 0 26px rgba(250, 204, 21, 0.35);
-    }
-
-    .code-label {
-      position: absolute;
-      top: 6px;
-      right: 10px;
-      font-size: 10px;
-      color: #facc15;
-      opacity: 0.85;
-    }
-
-    pre {
-      margin: 0;
-      white-space: pre;
-    }
-
-    .tip {
-      margin-top: 10px;
-      font-size: 12px;
-      color: var(--muted);
-      border-left: 3px solid rgba(250, 204, 21, 0.8);
-      padding-left: 10px;
-    }
-
-    /* PLACEHOLDER STATE FOR EMPTY TUTORIALS */
     .placeholder {
       font-size: 12px;
       color: var(--muted);
@@ -579,6 +549,13 @@
       font-size: 11px;
       color: var(--muted);
       text-align: center;
+      background: var(--bg-soft);
+      border-top: 1px solid #e5e7eb;
+      transition: background var(--transition-med), border-color var(--transition-med), color var(--transition-med);
+    }
+
+    body.dark footer {
+      border-color: #111827;
     }
 
     footer span {
@@ -612,11 +589,11 @@
           <div class="brand-logo">A</div>
           <div>
             <div class="brand-text-main">ALAEAI</div>
-            <div class="brand-text-sub">Tool Builder · 20 Levels</div>
+            <div class="brand-text-sub">Tool Builder · Tutorials</div>
           </div>
         </div>
         <div class="header-right">
-          <div class="pill">Glass · Dark · Tutorials</div>
+          <div class="pill">AI · Tools · Tutorials</div>
           <button class="cta-small" onclick="window.location.href='index.html'">
             Back home
             <span>↩</span>
@@ -632,9 +609,9 @@
     <main>
       <div class="main-inner">
         <div class="page-heading">
-          <div class="page-title">Tool Builder — Step-by-step path</div>
+          <div class="page-title">Tool Builder — 20-level path</div>
           <div class="page-sub">
-            20 evolving levels. You start with structure and end with a full multi-tool web app builder — all inside this page.
+            From clean structure to a full multi-tool web app. Follow each level and watch your skills stack.
           </div>
         </div>
 
@@ -670,7 +647,6 @@
                 <span id="progressPercent">5%</span>
               </div>
               <div class="progress-bar">
-                <div class="progress-track-glow"></div>
                 <div class="progress-fill" id="progressFill"></div>
               </div>
             </div>
@@ -768,9 +744,7 @@
           <section class="content" id="contentArea">
             <div class="section-hint">Level content</div>
 
-            <!-- TUTORIAL 1–20 BLOCKS WILL LIVE HERE -->
-            <!-- Message 2..11 will fill these <article> blocks with 1000+ lines each -->
-
+            <!-- TUTORIAL 1–20 BLOCKS (placeholders for now) -->
             <article class="tutorial-block" id="t1">
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 1 — HTML structure for the Tool Builder</div>
@@ -785,13 +759,13 @@
                 main area, and a flexible zone where future tools will live. No CSS or JS yet — just the semantic base.
               </div>
               <div class="placeholder">
-                In the next message, this block will be replaced with a full 1000+ line tutorial (HTML only) that you can copy directly.
+                This block will later be replaced with a full 100+ line tutorial and working code.
               </div>
             </article>
 
             <article class="tutorial-block" id="t2">
               <div class="tutorial-header-row">
-                <div class="tutorial-main-title">Level 2 — CSS framework & glass theme</div>
+                <div class="tutorial-main-title">Level 2 — CSS framework & portfolio theme</div>
                 <div class="tutorial-meta-tags">
                   <span class="tag-pill diff-easy">Difficulty: Easy</span>
                   <span class="tag-pill">Focus: CSS system</span>
@@ -800,14 +774,14 @@
               </div>
               <div class="tutorial-description">
                 Here you’ll build a small CSS framework for your Tool Builder: spacing, typography, cards, buttons,
-                and the glassmorphism look. This will be the visual foundation for all future tools.
+                and the bright portfolio look that matches your main site.
               </div>
               <div class="placeholder">
-                In the next message, this block will be replaced with a full 1000+ line tutorial (CSS-heavy) that you can copy directly.
+                This block will later be replaced with a full 100+ line tutorial and working code.
               </div>
             </article>
 
-            <!-- Empty shells for 3–20 so scrolling + progress still work -->
+            <!-- 3–20 placeholders -->
             <article class="tutorial-block" id="t3">
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 3 — Component system (cards, panels, buttons)</div>
@@ -821,7 +795,7 @@
                 You’ll define reusable HTML/CSS patterns for cards, panels, and buttons that every tool can use.
               </div>
               <div class="placeholder">
-                This will be filled in a later message with a full, long tutorial.
+                This will be filled later with a full tutorial and code.
               </div>
             </article>
 
@@ -838,11 +812,11 @@
                 You’ll add hover effects, depth, and subtle transitions to make the Tool Builder feel premium.
               </div>
               <div class="placeholder">
-                This will be filled in a later message with a full, long tutorial.
+                This will be filled later with a full tutorial and code.
               </div>
             </article>
 
-            <!-- 5–20 placeholders -->
+            <!-- Core tools -->
             <article class="tutorial-block" id="t5">
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 5 — Prompt builder tool</div>
@@ -868,7 +842,7 @@
                 </div>
               </div>
               <div class="tutorial-description">
-                A tool that generates color palettes and shows them in your glass UI.
+                A tool that generates color palettes and shows them in your portfolio UI.
               </div>
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
@@ -933,6 +907,7 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
+            <!-- Advanced -->
             <article class="tutorial-block" id="t11">
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 11 — Notes app with LocalStorage</div>
@@ -1008,6 +983,7 @@
               <div class="placeholder">Will be replaced with full code later.</div>
             </article>
 
+            <!-- Builder mode -->
             <article class="tutorial-block" id="t16">
               <div class="tutorial-header-row">
                 <div class="tutorial-main-title">Level 16 — Tool dashboard</div>
@@ -1095,7 +1071,7 @@
   </div>
 
   <script>
-    // DARK MODE TOGGLE (shared with your site logic style)
+    // THEME TOGGLE
     const body = document.body;
     const toggleBtn = document.getElementById('darkToggle');
     const icon = document.getElementById('darkIcon');
@@ -1113,7 +1089,7 @@
       }
     }
 
-    const savedTheme = localStorage.getItem('alaeai-theme') || 'dark';
+    const savedTheme = localStorage.getItem('alaeai-theme') || 'light';
     applyTheme(savedTheme);
 
     toggleBtn.addEventListener('click', () => {
@@ -1153,7 +1129,7 @@
       });
     });
 
-    // CATEGORY FILTER (just scroll to first level in that range)
+    // CATEGORY FILTER (scroll to first level in that range)
     const catChips = document.querySelectorAll('.cat-chip');
 
     catChips.forEach(chip => {
@@ -1178,4 +1154,3 @@
   </script>
 </body>
 </html>
-

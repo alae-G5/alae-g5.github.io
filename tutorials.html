@@ -17,92 +17,181 @@
 </script>
 
 <style>
+/* ROOT THEME TOKENS */
 :root {
   --bg: #f5f5f7;
   --bg-alt: #ffffff;
   --bg-soft: #f0f0f4;
+  --bg-soft-strong: #e6e6f0;
+  --bg-elevated: #ffffff;
+  --bg-chip: #f7f3e6;
+
+  --border-subtle: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+
   --text: #111119;
+  --text-soft: #2a2a3a;
   --muted: #6b6b80;
+  --muted-soft: #8a8aa0;
+
   --accent: #f5c451;
-  --accent-glow: rgba(245,196,81,0.55);
+  --accent-strong: #f0b52a;
   --accent-soft: rgba(245,196,81,0.18);
+  --accent-soft-strong: rgba(245,196,81,0.28);
+  --accent-glow: rgba(245,196,81,0.55);
+
+  --accent-blue: #6f8cff;
+  --accent-blue-soft: rgba(111,140,255,0.18);
+  --accent-purple: #b38cff;
+  --accent-purple-soft: rgba(179,140,255,0.18);
+  --accent-green: #4fd1a5;
+  --accent-green-soft: rgba(79,209,165,0.18);
+
+  --radius-xl: 26px;
   --radius-lg: 20px;
   --radius-md: 16px;
   --radius-sm: 10px;
+  --radius-xs: 999px;
+
   --shadow-soft: 0 14px 40px rgba(15,15,35,0.12);
-  --shadow-strong: 0 18px 60px rgba(0,0,0,0.45);
+  --shadow-soft-strong: 0 18px 60px rgba(0,0,0,0.18);
+  --shadow-card: 0 16px 40px rgba(0,0,0,0.16);
+  --shadow-header: 0 18px 40px rgba(0,0,0,0.85);
+  --shadow-floating: 0 22px 70px rgba(0,0,0,0.9);
+
   --transition: 0.25s ease;
   --transition-fast: 0.18s ease-out;
+  --transition-slow: 0.35s ease;
+
+  --blur-strong: 18px;
 }
 
 html.dark body {
   --bg: #050509;
   --bg-alt: #101018;
   --bg-soft: #141421;
+  --bg-soft-strong: #181828;
+  --bg-elevated: #101018;
+  --bg-chip: #1b160c;
+
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-strong: rgba(255,255,255,0.16);
+
   --text: #f7f7ff;
+  --text-soft: #e0e0ff;
   --muted: #9a9ab5;
+  --muted-soft: #b0b0d0;
+
   --shadow-soft: 0 18px 60px rgba(0,0,0,0.75);
+  --shadow-soft-strong: 0 22px 80px rgba(0,0,0,0.9);
+  --shadow-card: 0 20px 60px rgba(0,0,0,0.9);
+  --shadow-header: 0 22px 60px rgba(0,0,0,0.95);
+  --shadow-floating: 0 26px 90px rgba(0,0,0,1);
 }
 
+/* GLOBAL RESET */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
-  font-family: system-ui, Poppins, sans-serif;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
   background:
     radial-gradient(circle at top left, rgba(245,196,81,0.12), transparent 55%),
     radial-gradient(circle at bottom right, rgba(120,120,255,0.16), transparent 55%),
     var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
-  transition: background var(--transition), color var(--transition);
+  text-rendering: optimizeLegibility;
+  transition:
+    background var(--transition),
+    color var(--transition);
   animation: bgDrift 18s ease-in-out infinite alternate;
 }
 
+/* BACKGROUND ANIMATION */
 @keyframes bgDrift {
-  0% { background-position: 0% 0%, 100% 100%, 50% 50%; }
-  100% { background-position: 20% 10%, 80% 90%, 50% 50%; }
+  0% {
+    background-position: 0% 0%, 100% 100%, 50% 50%;
+  }
+  100% {
+    background-position: 20% 10%, 80% 90%, 50% 50%;
+  }
 }
 
-a { color: inherit; text-decoration: none; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(120,120,150,0.45);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120,120,150,0.7);
+}
 
 /* HEADER */
 header {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(10,10,25,0.98));
-  backdrop-filter: blur(18px);
+  background:
+    linear-gradient(135deg, rgba(0,0,0,0.96), rgba(10,10,25,0.98));
+  backdrop-filter: blur(var(--blur-strong));
   border-bottom: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.85);
+  box-shadow: var(--shadow-header);
   animation: headerSlide 0.7s ease-out forwards;
 }
+
 @keyframes headerSlide {
-  from { transform: translateY(-40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
+
 .header-inner {
-  max-width: 1120px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 14px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
+/* BRAND */
 .brand {
   display: flex;
   align-items: center;
   gap: 12px;
 }
+
 .brand-logo {
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
-  background: radial-gradient(circle at 20% 20%, #fdfdfd, #b9b9c5 55%, #444 100%);
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 20% 20%, #fdfdfd, #b9b9c5 55%, #444 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,10 +204,22 @@ header {
     0 10px 26px rgba(0,0,0,0.85);
   animation: logoPulse 3s ease-in-out infinite;
 }
+
 @keyframes logoPulse {
-  0%,100% { box-shadow: 0 0 14px var(--accent-glow),0 0 40px rgba(245,196,81,0.45),0 10px 26px rgba(0,0,0,0.85); }
-  50% { box-shadow: 0 0 22px var(--accent-glow),0 0 60px rgba(245,196,81,0.7),0 14px 34px rgba(0,0,0,0.95); }
+  0%, 100% {
+    box-shadow:
+      0 0 14px var(--accent-glow),
+      0 0 40px rgba(245,196,81,0.45),
+      0 10px 26px rgba(0,0,0,0.85);
+  }
+  50% {
+    box-shadow:
+      0 0 22px var(--accent-glow),
+      0 0 60px rgba(245,196,81,0.7),
+      0 14px 34px rgba(0,0,0,0.95);
+  }
 }
+
 .brand-text-main {
   font-size: 20px;
   font-weight: 700;
@@ -126,6 +227,7 @@ header {
   text-transform: uppercase;
   color: #fdfdfd;
 }
+
 .brand-text-sub {
   font-size: 11px;
   opacity: 0.8;
@@ -133,11 +235,34 @@ header {
   letter-spacing: 0.16em;
   color: #d6d6f0;
 }
+
+/* HEADER RIGHT */
 .header-right {
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
+.header-chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(10,10,25,0.9);
+  color: #fdfdfd;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.85;
+}
+
+.header-chip span {
+  font-size: 13px;
+}
+
+/* THEME TOGGLE */
 .dark-toggle {
   padding: 7px 16px;
   border-radius: 999px;
@@ -151,38 +276,61 @@ header {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
   box-shadow: 0 10px 26px rgba(0,0,0,0.7);
 }
-.dark-toggle span { font-size: 15px; }
+
+.dark-toggle span {
+  font-size: 15px;
+}
+
 .dark-toggle:hover {
   transform: translateY(-1px);
   box-shadow: 0 14px 34px rgba(0,0,0,0.85);
   border-color: rgba(245,196,81,1);
+  background:
+    radial-gradient(circle at top left, rgba(245,196,81,0.32), transparent 55%),
+    rgba(10,10,25,0.95);
 }
 
-/* MAIN */
+/* MAIN LAYOUT */
 main {
-  max-width: 1120px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 26px 18px 60px;
   animation: mainFade 0.7s ease-out forwards;
 }
+
 @keyframes mainFade {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* PAGE HEADER */
+/* PAGE HEADER CARD */
 .page-header {
   position: relative;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
   padding: 18px 18px 20px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at top left, rgba(245,196,81,0.18), transparent 55%),
+    linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
   box-shadow: var(--shadow-soft);
   overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
 }
+
 .page-header::before {
   content: "TUTORIALS";
   position: absolute;
@@ -195,7 +343,23 @@ main {
   text-transform: uppercase;
   pointer-events: none;
 }
-html.dark body .page-header::before { color: rgba(255,255,255,0.03); }
+
+html.dark body .page-header::before {
+  color: rgba(255,255,255,0.03);
+}
+
+.page-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+/* TITLE */
+.page-title-wrap {
+  flex: 1;
+}
+
 .page-title {
   font-size: 26px;
   font-weight: 700;
@@ -204,14 +368,38 @@ html.dark body .page-header::before { color: rgba(255,255,255,0.03); }
   text-shadow: 0 0 12px var(--accent-glow);
   animation: titleGlow 3s ease-in-out infinite alternate;
 }
+
 @keyframes titleGlow {
-  0% { text-shadow: 0 0 10px var(--accent-glow); }
-  100% { text-shadow: 0 0 18px var(--accent-glow); }
+  0% {
+    text-shadow: 0 0 10px var(--accent-glow);
+  }
+  100% {
+    text-shadow: 0 0 18px var(--accent-glow);
+  }
 }
+
 .page-subtitle {
   margin: 0;
   font-size: 14px;
   color: var(--muted);
+}
+
+/* HEADER BADGE */
+.page-header-badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.06);
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+html.dark body .page-header-badge {
+  background: rgba(255,255,255,0.06);
 }
 
 /* PROGRESS */
@@ -221,6 +409,7 @@ html.dark body .page-header::before { color: rgba(255,255,255,0.03); }
   align-items: center;
   gap: 10px;
 }
+
 .progress-bar {
   flex: 1;
   height: 6px;
@@ -229,7 +418,11 @@ html.dark body .page-header::before { color: rgba(255,255,255,0.03); }
   overflow: hidden;
   position: relative;
 }
-html.dark body .progress-bar { background: rgba(255,255,255,0.06); }
+
+html.dark body .progress-bar {
+  background: rgba(255,255,255,0.06);
+}
+
 .progress-fill {
   height: 100%;
   width: 0%;
@@ -238,6 +431,7 @@ html.dark body .progress-bar { background: rgba(255,255,255,0.06); }
   box-shadow: 0 0 12px var(--accent-glow);
   transition: width 0.4s ease-out;
 }
+
 .progress-bar::after {
   content: "";
   position: absolute;
@@ -246,10 +440,16 @@ html.dark body .progress-bar { background: rgba(255,255,255,0.06); }
   transform: translateX(-100%);
   animation: progressShine 3.5s linear infinite;
 }
+
 @keyframes progressShine {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
+
 .progress-label {
   font-size: 12px;
   color: var(--muted);
@@ -268,14 +468,30 @@ html.dark body .progress-bar { background: rgba(255,255,255,0.06); }
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+  transition:
+    background var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition),
+    border-color var(--transition);
   animation: highlightPulse 4s ease-in-out infinite;
+  border: 1px solid var(--border-subtle);
 }
+
 @keyframes highlightPulse {
-  0%,100% { box-shadow: var(--shadow-soft); transform: translateY(0); }
-  50% { box-shadow: 0 18px 50px rgba(0,0,0,0.35); transform: translateY(-2px); }
+  0%, 100% {
+    box-shadow: var(--shadow-soft);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow: 0 18px 50px rgba(0,0,0,0.35);
+    transform: translateY(-2px);
+  }
 }
-.category-highlight-main { flex: 1; }
+
+.category-highlight-main {
+  flex: 1;
+}
+
 .category-highlight-label {
   font-size: 11px;
   text-transform: uppercase;
@@ -283,6 +499,7 @@ html.dark body .progress-bar { background: rgba(255,255,255,0.06); }
   color: var(--muted);
   margin-bottom: 4px;
 }
+
 .category-highlight-title {
   font-size: 18px;
   font-weight: 700;
@@ -290,10 +507,12 @@ html.dark body .progress-bar { background: rgba(255,255,255,0.06); }
   text-shadow: 0 0 12px var(--accent-glow);
   margin-bottom: 4px;
 }
+
 .category-highlight-desc {
   font-size: 13px;
   color: var(--muted);
 }
+
 .category-highlight-pill {
   padding: 6px 12px;
   border-radius: 999px;
@@ -304,7 +523,10 @@ html.dark body .progress-bar { background: rgba(255,255,255,0.06); }
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
-html.dark body .category-highlight-pill { color: #fbe9b8; }
+
+html.dark body .category-highlight-pill {
+  color: #fbe9b8;
+}
 
 /* CATEGORY BUTTONS */
 .category-buttons {
@@ -313,31 +535,44 @@ html.dark body .category-highlight-pill { color: #fbe9b8; }
   flex-wrap: wrap;
   gap: 8px;
 }
+
 .category-btn {
   padding: 6px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(0,0,0,0.06);
+  border: 1px solid var(--border-subtle);
   background: rgba(255,255,255,0.7);
   color: #222;
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    opacity var(--transition-fast);
 }
+
 html.dark body .category-btn {
   background: rgba(10,10,20,0.9);
   color: #f5f5ff;
   border-color: rgba(255,255,255,0.08);
 }
-.category-btn span { font-size: 10px; }
+
+.category-btn span {
+  font-size: 10px;
+}
+
 .category-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 24px rgba(0,0,0,0.35);
 }
+
 .category-btn.active {
   background: linear-gradient(135deg, var(--accent), #ffe9a3);
   color: #111;
@@ -356,9 +591,11 @@ html.dark body .category-btn {
 /* CARD */
 .tutorial-card {
   position: relative;
-  background: linear-gradient(145deg, var(--bg-alt), var(--bg-soft));
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-soft);
+  background:
+    radial-gradient(circle at top left, rgba(245,196,81,0.08), transparent 55%),
+    linear-gradient(145deg, var(--bg-alt), var(--bg-soft));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
   cursor: pointer;
   transform: translateY(0) scale(1);
@@ -367,22 +604,29 @@ html.dark body .category-btn {
     box-shadow var(--transition),
     background var(--transition),
     border-color var(--transition),
-    outline var(--transition);
-  border: 1px solid rgba(255,255,255,0.06);
+    outline var(--transition),
+    opacity var(--transition);
+  border: 1px solid var(--border-subtle);
   opacity: 0;
 }
-html.dark body .tutorial-card { border-color: rgba(255,255,255,0.04); }
 
+html.dark body .tutorial-card {
+  border-color: rgba(255,255,255,0.04);
+}
+
+/* REVEAL */
 .reveal {
   opacity: 0;
   transform: translateY(12px) scale(0.98);
 }
+
 .reveal.visible {
   opacity: 1;
   transform: translateY(0) scale(1);
   transition: opacity 0.45s ease-out, transform 0.45s ease-out;
 }
 
+/* CARD HOVER GLOW */
 .tutorial-card::before {
   content: "";
   position: absolute;
@@ -392,6 +636,7 @@ html.dark body .tutorial-card { border-color: rgba(255,255,255,0.04); }
   transition: opacity var(--transition-fast), transform var(--transition-fast);
   pointer-events: none;
 }
+
 .tutorial-card::after {
   content: "";
   position: absolute;
@@ -401,43 +646,58 @@ html.dark body .tutorial-card { border-color: rgba(255,255,255,0.04); }
   transform: translateX(-100%);
   transition: opacity var(--transition-fast);
 }
+
 .tutorial-card:hover::before {
   opacity: 1;
   transform: translate3d(0,0,0);
 }
+
 .tutorial-card:hover::after {
   opacity: 1;
   animation: cardShine 1.4s ease-out;
 }
+
 @keyframes cardShine {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
+
 .tutorial-card:hover {
   box-shadow:
     0 0 18px var(--accent-glow),
     0 18px 40px rgba(0,0,0,0.85);
   background:
     radial-gradient(circle at top left, rgba(245,196,81,0.16), transparent 55%),
-    linear-gradient(145deg, var(--bg-alt), var(--bg-soft));
+    linear-gradient(145deg, var(--bg-alt), var(--bg-soft-strong));
 }
 
+/* CARD IMAGE */
 .tutorial-img {
   width: 100%;
   height: 150px;
   object-fit: cover;
   display: block;
   filter: saturate(1.05);
-  transition: transform var(--transition), filter var(--transition), opacity var(--transition);
+  transition:
+    transform var(--transition),
+    filter var(--transition),
+    opacity var(--transition);
 }
+
 .tutorial-card:hover .tutorial-img {
   transform: scale(1.05);
   filter: saturate(1.15);
 }
 
+/* CARD CONTENT */
 .tutorial-info {
   padding: 14px 14px 16px;
 }
+
 .category-pill {
   display: inline-flex;
   align-items: center;
@@ -452,8 +712,14 @@ html.dark body .tutorial-card { border-color: rgba(255,255,255,0.04); }
   letter-spacing: 0.12em;
   margin-bottom: 8px;
 }
-html.dark body .category-pill { color: #fbe9b8; }
-.category-pill span { font-size: 9px; }
+
+html.dark body .category-pill {
+  color: #fbe9b8;
+}
+
+.category-pill span {
+  font-size: 9px;
+}
 
 /* TITLES */
 .tutorial-title {
@@ -469,25 +735,33 @@ html.dark body .category-pill { color: #fbe9b8; }
   align-items: center;
   animation: titlePulse 4s ease-in-out infinite alternate;
 }
+
 @keyframes titlePulse {
-  0% { text-shadow: 0 0 10px var(--accent-glow); }
-  100% { text-shadow: 0 0 18px var(--accent-glow); }
+  0% {
+    text-shadow: 0 0 10px var(--accent-glow);
+  }
+  100% {
+    text-shadow: 0 0 18px var(--accent-glow);
+  }
 }
+
 html.dark body .tutorial-title {
   text-shadow:
     0 0 10px var(--accent-glow),
     0 0 18px rgba(245,196,81,0.75);
 }
+
 .tutorial-desc {
   font-size: 13px;
   color: var(--muted);
 }
+
 .tutorial-desc .keyword {
   color: var(--accent);
   text-shadow: 0 0 8px var(--accent-glow);
 }
 
-/* MODAL */
+/* MODAL OVERLAY */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -501,10 +775,13 @@ html.dark body .tutorial-title {
   pointer-events: none;
   transition: opacity var(--transition);
 }
+
 .modal-overlay.active {
   opacity: 1;
   pointer-events: auto;
 }
+
+/* MODAL BOX */
 .modal {
   width: 92%;
   max-width: 900px;
@@ -514,7 +791,7 @@ html.dark body .tutorial-title {
     var(--bg-alt);
   border-radius: 22px;
   box-shadow:
-    0 22px 70px rgba(0,0,0,0.9),
+    var(--shadow-floating),
     0 0 0 1px rgba(255,255,255,0.04);
   display: flex;
   flex-direction: column;
@@ -528,10 +805,12 @@ html.dark body .tutorial-title {
     background var(--transition);
   overflow: hidden;
 }
+
 .modal.active {
   transform: translateY(0) scale(1);
   opacity: 1;
 }
+
 .modal.fullscreen {
   width: 100%;
   height: 100vh;
@@ -556,17 +835,20 @@ html.dark body .tutorial-title {
   color: #fdfdfd;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
+
 .modal-title-wrap {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
+
 .modal-label {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   opacity: 0.7;
 }
+
 .modal-title {
   font-family: "Aharoni", system-ui, sans-serif;
   font-size: 20px;
@@ -577,14 +859,21 @@ html.dark body .tutorial-title {
     0 0 22px rgba(245,196,81,0.8);
   animation: modalTitleGlow 3s ease-in-out infinite alternate;
 }
+
 @keyframes modalTitleGlow {
-  0% { text-shadow: 0 0 12px var(--accent-glow); }
-  100% { text-shadow: 0 0 22px rgba(245,196,81,0.9); }
+  0% {
+    text-shadow: 0 0 12px var(--accent-glow);
+  }
+  100% {
+    text-shadow: 0 0 22px rgba(245,196,81,0.9);
+  }
 }
+
 .modal-buttons {
   display: flex;
   gap: 8px;
 }
+
 .modal-btn {
   padding: 6px 11px;
   border-radius: 999px;
@@ -596,9 +885,18 @@ html.dark body .tutorial-title {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
 }
-.modal-btn span { font-size: 14px; }
+
+.modal-btn span {
+  font-size: 14px;
+}
+
 .modal-btn:hover {
   background: rgba(245,196,81,0.16);
   border-color: rgba(245,196,81,0.8);
@@ -614,12 +912,22 @@ html.dark body .tutorial-title {
   line-height: 1.7;
   color: var(--text);
 }
-.modal-body-text { margin-bottom: 18px; }
+
+.modal-body-text {
+  margin-bottom: 18px;
+}
+
+.modal-body-text p {
+  margin: 0 0 10px;
+}
+
+/* MODAL IMAGES */
 .modal-images {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 12px;
 }
+
 .modal-images img {
   width: 100%;
   border-radius: 14px;
@@ -627,9 +935,14 @@ html.dark body .tutorial-title {
   box-shadow: 0 12px 30px rgba(0,0,0,0.45);
   animation: imageFloat 4s ease-in-out infinite;
 }
+
 @keyframes imageFloat {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
 }
 
 /* FOOTER */
@@ -640,19 +953,46 @@ footer {
   color: var(--muted);
   animation: footerFade 0.7s ease-out forwards;
 }
+
 @keyframes footerFade {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* RESPONSIVE */
+@media (max-width: 840px) {
+  .page-header-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 @media (max-width: 640px) {
-  .header-inner { padding-inline: 14px; }
-  .page-header { padding: 14px 14px 18px; }
-  .page-header::before { font-size: 46px; bottom: -26px; }
-  .modal { width: 96%; }
-  .modal-header { padding-inline: 14px; }
-  .modal-content { padding-inline: 14px; }
+  .header-inner {
+    padding-inline: 14px;
+  }
+  .page-header {
+    padding: 14px 14px 18px;
+  }
+  .page-header::before {
+    font-size: 46px;
+    bottom: -26px;
+  }
+  .modal {
+    width: 96%;
+  }
+  .modal-header {
+    padding-inline: 14px;
+  }
+  .modal-content {
+    padding-inline: 14px;
+  }
 }
 </style>
 </head>
@@ -668,6 +1008,9 @@ footer {
       </div>
     </div>
     <div class="header-right">
+      <div class="header-chip">
+        <span>★</span><span>20 Premium Lessons</span>
+      </div>
       <button class="dark-toggle" id="themeToggle">
         <span>☾</span><span>Theme</span>
       </button>
@@ -677,10 +1020,17 @@ footer {
 
 <main>
   <section class="page-header">
-    <h1 class="page-title">Tutorials</h1>
-    <p class="page-subtitle">
-      Explore 20 structured lessons designed to help you build real tools step by step.
-    </p>
+    <div class="page-header-top">
+      <div class="page-title-wrap">
+        <h1 class="page-title">Tutorials</h1>
+        <p class="page-subtitle">
+          Explore 20 structured lessons designed to help you build real tools step by step.
+        </p>
+      </div>
+      <div class="page-header-badge">
+        <span>◎</span><span>Front‑End Tools Path</span>
+      </div>
+    </div>
 
     <div class="progress-wrap">
       <div class="progress-bar">
@@ -715,9 +1065,9 @@ footer {
   </section>
 
   <section class="tutorials-grid" id="tutorialGrid">
-    <!-- 20 CARDS -->
+    <!-- 20 CARDS, ALL UNIQUE IMAGES -->
     <article class="tutorial-card reveal" data-lesson="1" data-category="structure">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=675&q=80" alt="HTML Basics code editor">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=1200&h=675&q=80" alt="HTML code editor on laptop">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>Structure</div>
         <div class="tutorial-title">HTML Basics</div>
@@ -728,7 +1078,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="2" data-category="styling">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&h=675&q=80" alt="CSS code on dark editor">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=675&q=80" alt="CSS code on dark editor">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>Styling</div>
         <div class="tutorial-title">CSS Foundations</div>
@@ -739,7 +1089,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="3" data-category="layout">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1200&h=675&q=80" alt="Layout wireframes and boxes">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1200&h=675&q=80" alt="Layout wireframes and boxes on desk">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>Layout</div>
         <div class="tutorial-title">Layout & Boxes</div>
@@ -750,7 +1100,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="4" data-category="layout">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&h=675&q=80" alt="Flexbox layout on dark UI">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&h=675&q=80" alt="Flexbox layout on modern dashboard">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>Layout</div>
         <div class="tutorial-title">Flexbox Essentials</div>
@@ -761,7 +1111,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="5" data-category="styling">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=675&q=80" alt="Typography and layout grid">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=675&q=80" alt="Typography and layout grid on paper">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>Styling</div>
         <div class="tutorial-title">Typography & Rhythm</div>
@@ -772,7 +1122,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="6" data-category="styling">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1200&h=675&q=80&sat=-50" alt="Color palette and UI theme">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1200&h=675&q=80&sat=-40" alt="Color palette and theme board">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>Theme</div>
         <div class="tutorial-title">Colors & Themes</div>
@@ -783,7 +1133,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="7" data-category="ui">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&h=675&q=80&sat=50" alt="UI components and cards on dark dashboard">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&h=675&q=80&sat=40" alt="UI components and cards on dashboard">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>UI</div>
         <div class="tutorial-title">Components & Cards</div>
@@ -816,7 +1166,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="10" data-category="logic">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=675&q=80&sat=-30" alt="DOM inspection in browser devtools">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&h=675&q=80" alt="DOM inspection in browser devtools">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>Logic</div>
         <div class="tutorial-title">DOM Basics</div>
@@ -838,7 +1188,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="12" data-category="logic">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=675&q=80&sat=40" alt="Dark mode toggle and switches">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&h=675&q=80&sat=-40" alt="Dark mode toggle and switches">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>Logic</div>
         <div class="tutorial-title">State & Toggles</div>
@@ -849,7 +1199,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="13" data-category="ui">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&h=675&q=80&blur=1" alt="Modal and overlay UI mockup">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1604079628040-94301bb21b11?auto=format&fit=crop&w=1200&h=675&q=80" alt="Modal and overlay UI mockup">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>UI</div>
         <div class="tutorial-title">Modals & Overlays</div>
@@ -871,7 +1221,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="15" data-category="motion">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&h=675&q=80&sat=60" alt="Animated UI on dark screen">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&h=675&q=80&sat=40" alt="Animated UI on dark screen">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>Motion</div>
         <div class="tutorial-title">Animations & Motion</div>
@@ -893,7 +1243,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="17" data-category="ui">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&h=675&q=80&sat=30" alt="Data tables and cards on dark UI">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&h=675&q=80&sat=25" alt="Data tables and cards on dark UI">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>UI</div>
         <div class="tutorial-title">Data Display</div>
@@ -904,7 +1254,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="18" data-category="structure">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&h=675&q=80&sat=-10" alt="Architecture diagram and system planning">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1200&h=675&q=80&sat=-15" alt="Architecture diagram and system planning">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>System</div>
         <div class="tutorial-title">Tool Architecture</div>
@@ -915,7 +1265,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="19" data-category="ux">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1200&h=675&q=80&sat=-20" alt="UX wireframes and prototype on dark UI">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1604079628040-94301bb21b11?auto=format&fit=crop&w=1200&h=675&q=80&sat=-20" alt="UX wireframes and prototype on dark UI">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>UX</div>
         <div class="tutorial-title">Polishing & UX</div>
@@ -926,7 +1276,7 @@ footer {
     </article>
 
     <article class="tutorial-card reveal" data-lesson="20" data-category="launch">
-      <img class="tutorial-img" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&h=675&q=80&sat=40" alt="Deployment and monitoring dashboard">
+      <img class="tutorial-img" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&h=675&q=80&sat=45" alt="Deployment and monitoring dashboard">
       <div class="tutorial-info">
         <div class="category-pill"><span>●</span>Launch</div>
         <div class="tutorial-title">Shipping Your Tool</div>
@@ -967,61 +1317,131 @@ const lessons = {
   1: {
     label: "HTML Basics",
     category: "structure",
-    text: `HTML is the structural language of the web. In this lesson, you focus on building clean, semantic layouts that describe meaning, not just appearance. You learn how to choose the right tags for headers, sections, navigation, and content blocks so your pages are easier to maintain, more accessible, and ready for styling and interaction. Instead of throwing random divs everywhere, you start thinking about the purpose of each piece of content and how it fits into the bigger picture of the page. You also explore how attributes, alt text, and proper nesting improve both accessibility and SEO. By the end of this lesson, you can look at a page and immediately see how to break it into logical, semantic sections that feel solid and professional.`,
+    text: `
+      <p>
+        HTML is the structural language of the web, and in this lesson you treat it like the foundation of a real tool, not just a way to throw elements on a page. You start by understanding how semantic tags like <strong>&lt;header&gt;</strong>, <strong>&lt;main&gt;</strong>, <strong>&lt;section&gt;</strong>, and <strong>&lt;article&gt;</strong> describe meaning instead of appearance. That shift in thinking makes every layout easier to maintain, easier to style, and easier to navigate with assistive technologies.
+      </p>
+      <p>
+        You also explore how to group related content into logical blocks, how to use headings to create a clear hierarchy, and how attributes like <strong>alt</strong>, <strong>aria-label</strong>, and <strong>title</strong> improve accessibility and SEO. Instead of relying on endless nested divs, you learn to choose the right element for each piece of content so the structure feels clean and intentional.
+      </p>
+      <p>
+        By the end of this lesson, you can look at any interface and break it down into semantic regions that map directly to HTML. That skill makes every future decision—styling, layout, and interaction—simpler and more powerful, because the skeleton of your page is already solid and meaningful.
+      </p>
+    `,
     images: [
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&h=900&q=80",
-      "https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1600&h=900&q=80"
+      "https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=1600&h=900&q=80",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&h=900&q=80&sat=-20"
     ]
   },
   2: {
     label: "CSS Foundations",
     category: "styling",
-    text: `CSS controls the visual language of your interface. In this lesson, you explore how to manage color, spacing, and typography using a consistent system instead of random values. You learn how the cascade, inheritance, and specificity work together so your styles stay predictable and easy to debug. You also experiment with variables to centralize your design tokens, making it simple to adjust themes or tweak the entire look of your site from a few lines of code. The focus is on building a foundation that feels stable and scalable, not just making something look good once. By the end, you understand how to structure your CSS so it supports growth, keeps your UI consistent, and avoids the chaos of conflicting rules.`,
+    text: `
+      <p>
+        CSS controls the visual language of your interface, and this lesson is about turning that language into a system instead of a collection of random rules. You begin by understanding the cascade, inheritance, and specificity so you can predict how styles will behave before you even refresh the page. That clarity helps you avoid the classic “why is this not applying?” frustration and keeps your stylesheets from becoming a mess of overrides.
+      </p>
+      <p>
+        You then build a small design token system using CSS variables for colors, spacing, and typography. With those tokens in place, changing the mood of your entire site becomes as simple as adjusting a few values. You also learn how to structure your CSS into logical sections—base styles, layout, components, and utilities—so everything has a clear place.
+      </p>
+      <p>
+        By the end of this lesson, you can read and write CSS that feels stable, predictable, and scalable. Instead of fighting your styles, you use them as a flexible toolkit that supports every layout and component you build later in the path.
+      </p>
+    `,
     images: [
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600&h=900&q=80",
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&h=900&q=80"
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&h=900&q=80",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600&h=900&q=80"
     ]
   },
   3: {
     label: "Layout & Boxes",
     category: "layout",
-    text: `Every element on the page is a box, and understanding that is the key to precise layout control. In this lesson, you dive into the box model—content, padding, border, and margin—and see how each layer affects spacing and alignment. You experiment with different display values, like block, inline, and inline-block, to understand how they change the flow of elements. You also learn how collapsing margins, overflow, and box-sizing can impact your designs in subtle but important ways. Instead of guessing why something is misaligned, you start reading the layout like a system of boxes interacting with each other. By the end, you can debug spacing issues quickly and design layouts that feel intentional, balanced, and easy to adjust.`,
+    text: `
+      <p>
+        Every element on the page is a box, and understanding that simple idea unlocks precise control over your layouts. In this lesson, you dive deep into the box model—content, padding, border, and margin—and see how each layer affects spacing and alignment. You experiment with different <strong>display</strong> values like block, inline, inline-block, and inline-flex to understand how they change the flow of elements.
+      </p>
+      <p>
+        You also explore how properties like <strong>box-sizing</strong>, <strong>overflow</strong>, and <strong>position</strong> influence the way boxes interact with each other. Instead of guessing why something is misaligned, you learn to inspect the box model in devtools and read the layout like a diagram. That skill makes debugging spacing issues much faster and less stressful.
+      </p>
+      <p>
+        By the end of this lesson, you can design sections that feel balanced and intentional, with consistent padding, clean margins, and no mysterious gaps. Your layouts stop feeling fragile and start feeling like a solid grid of boxes that you control with confidence.
+      </p>
+    `,
     images: [
       "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1600&h=900&q=80",
-      "https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1600&h=900&q=80&sat=-30"
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&h=900&q=80&sat=-30"
     ]
   },
   4: {
     label: "Flexbox Essentials",
     category: "layout",
-    text: `Flexbox gives you powerful tools for aligning and distributing elements in one dimension. In this lesson, you learn how to build responsive rows, columns, and centered layouts with minimal code. You explore properties like justify-content, align-items, and flex-wrap to control how items behave when space is tight or wide. You also see how flex-grow, flex-shrink, and flex-basis let you create flexible components that adapt naturally to different screen sizes. Instead of relying on hacks or fixed widths, you start thinking in terms of flexible relationships between elements. By the end, you can build navigation bars, card grids, and balanced sections that feel stable and fluid at the same time.`,
+    text: `
+      <p>
+        Flexbox gives you a powerful way to align and distribute elements along a single axis, and this lesson is about mastering it for real interfaces. You start by building simple rows and columns, then move into more advanced patterns like centered layouts, equal-height cards, and responsive navigation bars. Properties like <strong>justify-content</strong>, <strong>align-items</strong>, and <strong>flex-wrap</strong> become tools you can combine instead of rules you memorize.
+      </p>
+      <p>
+        You also learn how <strong>flex-grow</strong>, <strong>flex-shrink</strong>, and <strong>flex-basis</strong> control how items share space when the container grows or shrinks. That understanding lets you design components that adapt naturally to different screen sizes without relying on fixed widths. You see how flexbox can replace many old layout hacks and make your CSS simpler and more readable.
+      </p>
+      <p>
+        By the end of this lesson, you can design flexible sections that feel stable and fluid at the same time. Your layouts respond gracefully to changes in content and viewport size, and you start to see flexbox as a core part of your layout toolkit.
+      </p>
+    `,
     images: [
       "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&h=900&q=80",
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&h=900&q=80"
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&h=900&q=80&sat=20"
     ]
   },
   5: {
     label: "Typography & Rhythm",
     category: "styling",
-    text: `Typography shapes how users read and understand your content. In this lesson, you work with font sizes, line heights, and spacing to create a clear hierarchy that guides the eye. You explore typographic scales and learn how to choose a small set of sizes that can be reused across headings, body text, and labels. You also pay attention to line length, contrast, and white space so your text feels comfortable to read on any device. Instead of randomly adjusting font sizes until something looks okay, you start designing with a rhythm that repeats across the page. By the end, your interfaces feel calmer, more professional, and easier to scan, even when there is a lot of information on screen.`,
+    text: `
+      <p>
+        Typography shapes how users read and understand your content, and in this lesson you treat it as a system instead of decoration. You start by choosing a small set of font sizes and line heights that form a clear hierarchy across headings, body text, and labels. That hierarchy guides the eye through the page, making it obvious what is primary, secondary, and supporting information.
+      </p>
+      <p>
+        You also explore concepts like line length, vertical rhythm, and white space. By controlling these details, you make long paragraphs feel comfortable to read and dense sections feel less overwhelming. You learn how to use letter-spacing, font-weight, and color to add emphasis without shouting at the user.
+      </p>
+      <p>
+        By the end of this lesson, your interfaces feel calmer and more professional. Even when there is a lot of information on screen, the text remains readable, scannable, and visually consistent from one page to the next.
+      </p>
+    `,
     images: [
       "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&h=900&q=80",
-      "https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1600&h=900&q=80&sat=20"
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&h=900&q=80&sat=-10"
     ]
   },
   6: {
     label: "Colors & Themes",
     category: "styling",
-    text: `A strong color system gives your interface personality and clarity. In this lesson, you define primary, secondary, and neutral colors, then apply them to build light and dark themes. You learn how to use contrast ratios to keep text readable and how to avoid relying on color alone to communicate meaning. You also experiment with subtle gradients and shadows to add depth without making the design feel heavy. By centralizing your colors in variables, you make it easy to adjust the entire mood of your tool with a few changes. By the end, your themes feel intentional, balanced, and consistent across every page and component.`,
+    text: `
+      <p>
+        A strong color system gives your interface personality and clarity, and this lesson is about designing that system with intention. You define primary, secondary, and neutral colors, then map them to roles like background, surface, text, and accent. That mapping helps you avoid random color choices and keeps your UI consistent across pages and components.
+      </p>
+      <p>
+        You also learn how to build both light and dark themes using the same set of tokens. By paying attention to contrast ratios and accessibility guidelines, you make sure your text remains readable and your interface works for more people. You experiment with subtle gradients, shadows, and overlays to add depth without making the design feel heavy or noisy.
+      </p>
+      <p>
+        By the end of this lesson, you can switch the entire mood of your tool—from bright and energetic to deep and focused—by adjusting a handful of variables. Your themes feel balanced, intentional, and ready to support the rest of your design decisions.
+      </p>
+    `,
     images: [
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1600&h=900&q=80&sat=-20",
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&h=900&q=80&sat=-40"
+      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1600&h=900&q=80&sat=-40",
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&h=900&q=80&sat=-60"
     ]
   },
   7: {
     label: "Components & Cards",
     category: "ui",
-    text: `Components are reusable building blocks that keep your interface consistent and easier to maintain. In this lesson, you design cards with consistent spacing, corners, and shadows so they feel like part of a unified system. You think about how each card can adapt to different content while still following the same visual rules. You also explore how to separate structure, style, and behavior so components can be reused across pages without duplication. Instead of designing each section from scratch, you start assembling interfaces from a small set of well-crafted pieces. By the end, your UI feels more coherent, and making changes becomes faster and less risky.`,
+    text: `
+      <p>
+        Components are reusable building blocks that keep your interface consistent and easier to maintain. In this lesson, you focus on designing cards as a core pattern for displaying information. You define consistent padding, corner radius, shadows, and typography so every card feels like part of the same family, even when the content changes.
+      </p>
+      <p>
+        You also explore how to separate structure, style, and behavior. The HTML defines the skeleton, the CSS defines the visual language, and the JavaScript adds interaction. That separation makes it easier to reuse the same card pattern across different pages without duplicating code or introducing subtle inconsistencies.
+      </p>
+      <p>
+        By the end of this lesson, you can assemble entire sections of your interface from a small set of well-crafted components. Your UI feels more coherent, and making changes becomes faster and less risky because you are updating shared patterns instead of one-off designs.
+      </p>
+    `,
     images: [
       "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&h=900&q=80&sat=40",
       "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&h=900&q=80&sat=10"
@@ -1030,34 +1450,74 @@ const lessons = {
   8: {
     label: "Responsive Design",
     category: "layout",
-    text: `Responsive design ensures your layouts work on phones, tablets, and desktops without needing separate versions. In this lesson, you use flexible units, media queries, and adaptive grids to keep content readable and balanced at every size. You learn how to prioritize content for smaller screens and how to avoid hiding important features behind awkward interactions. You also explore techniques like mobile-first design, where you start with the smallest layout and scale up. Instead of treating responsiveness as an afterthought, you build it into your process from the beginning. By the end, your pages feel natural on any device, and users never have to pinch, zoom, or fight the layout.`,
+    text: `
+      <p>
+        Responsive design ensures your layouts work on phones, tablets, and desktops without needing separate versions. In this lesson, you learn to think in flexible units like percentages, viewport widths, and rems instead of fixed pixels. You combine those units with media queries to adjust layout, typography, and spacing at key breakpoints.
+      </p>
+      <p>
+        You also explore the idea of mobile‑first design, where you start with the smallest layout and progressively enhance it for larger screens. That approach forces you to prioritize content and interactions, making sure the most important elements are always accessible. You test your layouts across different device sizes and orientations, refining them until they feel natural everywhere.
+      </p>
+      <p>
+        By the end of this lesson, your pages no longer break or feel cramped when the viewport changes. Instead, they adapt smoothly, keeping content readable and interactions comfortable whether the user is on a phone, tablet, or large monitor.
+      </p>
+    `,
     images: [
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&h=900&q=80&sat=-10",
-      "https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1600&h=900&q=80&sat=50"
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&h=900&q=80",
+      "https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1600&h=900&q=80&sat=40"
     ]
   },
   9: {
     label: "Intro to JavaScript",
     category: "logic",
-    text: `JavaScript brings your pages to life by adding logic and interaction. In this lesson, you learn about variables, functions, and basic control flow, then connect them to real elements on the page. You see how to respond to user actions, update text, and change styles dynamically. You also explore the difference between data and presentation, keeping your logic focused on behavior instead of mixing it with layout. Instead of copying snippets without understanding, you start writing small, clear functions that do one thing well. By the end, you can read simple JavaScript code with confidence and use it to make your interfaces feel responsive and alive.`,
+    text: `
+      <p>
+        JavaScript brings your pages to life by adding logic and interaction. In this lesson, you start with the core building blocks: variables, data types, functions, and control flow. You write small snippets that respond to user actions, perform calculations, and update the interface in real time.
+      </p>
+      <p>
+        You also learn how to keep your code organized by breaking it into small, focused functions that each do one thing well. Instead of copying random snippets from the internet, you understand what each line does and why it belongs in your project. You connect your JavaScript to real elements on the page, making buttons, toggles, and inputs feel responsive and alive.
+      </p>
+      <p>
+        By the end of this lesson, you can read and write simple JavaScript with confidence. You see it not as a mysterious layer on top of HTML and CSS, but as a natural extension that lets your tools react intelligently to the user.
+      </p>
+    `,
     images: [
       "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&h=900&q=80",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&h=900&q=80&sat=10"
+      "https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=1600&h=900&q=80&sat=-20"
     ]
   },
   10: {
     label: "DOM Basics",
     category: "logic",
-    text: `The DOM is the live structure of your page that JavaScript can read and modify. In this lesson, you practice selecting elements, changing content, and updating styles using DOM APIs. You learn how to traverse the tree, create new nodes, and remove elements when they are no longer needed. You also explore how to keep your code organized by targeting specific components instead of the entire page. Instead of treating the DOM as a mysterious black box, you start seeing it as a clear hierarchy you can navigate and control. By the end, you can confidently connect your logic to the right parts of the interface and keep your updates efficient and predictable.`,
+    text: `
+      <p>
+        The DOM is the live structure of your page that JavaScript can read and modify. In this lesson, you practice selecting elements with methods like <strong>querySelector</strong> and <strong>querySelectorAll</strong>, then changing their content, attributes, and styles. You see how every visible part of your interface maps to a node in the DOM tree.
+      </p>
+      <p>
+        You also learn how to create new elements, insert them into the page, and remove them when they are no longer needed. That ability lets you build dynamic lists, notifications, and interactive components that respond to user actions and data changes. You pay attention to performance and avoid unnecessary DOM operations that can slow down the experience.
+      </p>
+      <p>
+        By the end of this lesson, the DOM no longer feels like a black box. You can navigate it, manipulate it, and keep it in sync with your application’s state, making your interfaces feel truly dynamic.
+      </p>
+    `,
     images: [
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&h=900&q=80&sat=-20",
-      "https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1600&h=900&q=80&sat=-40"
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600&h=900&q=80",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&h=900&q=80&sat=20"
     ]
   },
   11: {
     label: "Events & Interaction",
     category: "interaction",
-    text: `Events are how your interface listens to the user. In this lesson, you attach handlers for clicks, hovers, key presses, and more, then design responses that feel smooth and intuitive. You learn how to avoid overloading the page with too many listeners and how to keep your logic focused on what the user is trying to do. You also explore patterns like event delegation, which help you manage complex interfaces without losing control. Instead of reacting randomly to every possible action, you design a clear interaction model that supports the main flows of your tool. By the end, your UI feels responsive, intentional, and respectful of the user’s attention.`,
+    text: `
+      <p>
+        Events are how your interface listens to the user, and this lesson is about designing those interactions with intention. You attach handlers for clicks, hovers, key presses, and input changes, then decide how the UI should respond in each case. Instead of reacting to everything, you focus on the actions that matter most for your tool.
+      </p>
+      <p>
+        You also explore patterns like event delegation, where a single listener on a parent element can handle events from many children. That pattern keeps your code lighter and easier to maintain, especially in dynamic lists and grids. You pay attention to performance and avoid attaching unnecessary listeners that could slow down the page.
+      </p>
+      <p>
+        By the end of this lesson, your interface feels responsive and intentional. Every interaction has a clear purpose, and users get immediate feedback that makes the tool feel alive and trustworthy.
+      </p>
+    `,
     images: [
       "https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1600&h=900&q=80",
       "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&h=900&q=80&sat=30"
@@ -1066,79 +1526,169 @@ const lessons = {
   12: {
     label: "State & Toggles",
     category: "logic",
-    text: `State represents what is currently true in your interface—like whether dark mode is on, a modal is open, or a card is expanded. In this lesson, you learn how to store and update state in a way that stays in sync with the UI. You explore simple patterns for toggling classes, switching themes, and remembering user preferences across sessions. You also see how messy things can get when state is scattered or duplicated, and how to avoid that by centralizing key decisions. Instead of guessing why something is out of sync, you start tracing changes through a clear state model. By the end, your components feel consistent, predictable, and easier to reason about.`,
+    text: `
+      <p>
+        State represents what is currently true in your interface—whether dark mode is on, a modal is open, or a card is expanded. In this lesson, you learn how to store that state in variables and keep it in sync with the DOM. You build simple toggles for themes, menus, and overlays, making sure each one updates both the data and the visuals.
+      </p>
+      <p>
+        You also explore how to persist state across sessions using <strong>localStorage</strong>, so user preferences like theme choice are remembered. You see how messy things can get when state is duplicated or scattered, and you practice centralizing key decisions in one place. That discipline makes your code easier to reason about and debug.
+      </p>
+      <p>
+        By the end of this lesson, you can trace how a single user action flows through state changes and DOM updates. Your components feel consistent and predictable, and your tools start to behave more like real applications than static pages.
+      </p>
+    `,
     images: [
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&h=900&q=80&sat=50",
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&h=900&q=80&sat=-50"
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&h=900&q=80&sat=-40",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&h=900&q=80&blur=1"
     ]
   },
   13: {
     label: "Modals & Overlays",
     category: "ui",
-    text: `Modals let you focus the user’s attention on important content without leaving the current page. In this lesson, you build a modal with a blurred overlay, smooth animations, and clear actions. You learn how to trap focus inside the modal, handle escape key closing, and avoid blocking the user unnecessarily. You also explore when not to use modals, choosing inline patterns or dedicated pages instead. The goal is to make modals feel like a natural part of the flow, not a disruptive interruption. By the end, you can design overlays that feel polished, accessible, and respectful of the user’s time.`,
+    text: `
+      <p>
+        Modals let you focus the user’s attention on important content without leaving the current page. In this lesson, you build a modal system with a blurred overlay, smooth animations, and clear actions. You design the open, close, and fullscreen flows so they feel natural and reversible at any moment.
+      </p>
+      <p>
+        You also learn how to handle keyboard interactions like the Escape key and how to keep focus inside the modal for accessibility. You think carefully about when to use modals and when a dedicated page or inline pattern would be better. The goal is to support the user’s flow, not interrupt it.
+      </p>
+      <p>
+        By the end of this lesson, your modals feel like a polished part of the interface instead of a rough add‑on. They appear and disappear smoothly, respect the user’s context, and make complex tasks feel more manageable.
+      </p>
+    `,
     images: [
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&h=900&q=80&blur=2",
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&h=900&q=80&blur=1"
+      "https://images.unsplash.com/photo-1604079628040-94301bb21b11?auto=format&fit=crop&w=1600&h=900&q=80",
+      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&h=900&q=80&blur=2"
     ]
   },
   14: {
     label: "Grids & Dashboards",
     category: "layout",
-    text: `Dashboards often require complex layouts with many panels, charts, and controls. In this lesson, you use CSS Grid to arrange these elements in a way that stays organized and flexible. You learn how to define template areas, repeat patterns, and responsive tracks that adapt to different screen sizes. You also explore how to combine Grid with Flexbox, using each where it is strongest. Instead of stacking everything in a single column or forcing rigid layouts, you design dashboards that feel structured but not cramped. By the end, you can build multi-section pages that remain readable and balanced even as content changes.`,
+    text: `
+      <p>
+        Dashboards often require complex layouts with many panels, charts, and controls. In this lesson, you use CSS Grid to arrange those elements in a way that stays organized and flexible. You define template areas, repeat patterns, and responsive tracks that adapt to different screen sizes without breaking.
+      </p>
+      <p>
+        You also explore how to combine Grid with Flexbox, using each where it is strongest. Grid handles the overall structure, while Flexbox fine‑tunes alignment inside components. You pay attention to how content reflows at different breakpoints, making sure important information stays visible and easy to scan.
+      </p>
+      <p>
+        By the end of this lesson, you can design dashboards that feel structured but not cramped. Your layouts remain readable and balanced even as data changes, and you have a clear mental model of how each panel fits into the grid.
+      </p>
+    `,
     images: [
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&h=900&q=80&sat=-10",
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&h=900&q=80&sat=-30"
+      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&h=900&q=80&sat=-20",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&h=900&q=80&sat=-10"
     ]
   },
   15: {
     label: "Animations & Motion",
     category: "motion",
-    text: `Motion adds life to your interface when used with intention. In this lesson, you apply transitions and keyframes to create subtle animations that guide attention without distracting from the content. You learn how easing curves affect the feel of movement and how to keep durations short enough to stay responsive. You also explore micro-interactions, like button presses and hover states, that give users feedback at the right moment. Instead of animating everything just because you can, you choose a few key moments where motion adds clarity or delight. By the end, your UI feels more polished, responsive, and satisfying to use.`,
+    text: `
+      <p>
+        Motion adds life to your interface when used with intention. In this lesson, you apply transitions and keyframe animations to create subtle effects that guide attention without overwhelming the user. You experiment with easing curves and durations to find a balance between responsiveness and smoothness.
+      </p>
+      <p>
+        You also explore micro‑interactions like button presses, hover states, and card reveals. These small details give users feedback at exactly the right moment, making the interface feel responsive and alive. You avoid animating everything and instead choose a few key moments where motion adds clarity or delight.
+      </p>
+      <p>
+        By the end of this lesson, your UI feels more polished and satisfying to use. Animations support the content and interactions instead of distracting from them, and your tools feel closer to premium products than simple prototypes.
+      </p>
+    `,
     images: [
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&h=900&q=80&sat=40",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&h=900&q=80&blur=1"
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&h=900&q=80&sat=40",
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&h=900&q=80&blur=1"
     ]
   },
   16: {
     label: "Forms & Inputs",
     category: "ux",
-    text: `Forms are where users share information with your tool, so every detail matters. In this lesson, you design inputs, labels, and validation states that are clear and forgiving. You learn how to group related fields, provide helpful hints, and show errors in a way that feels supportive instead of punishing. You also explore how to reduce friction by minimizing required fields, using smart defaults, and respecting the user’s time. Instead of treating forms as a boring necessity, you see them as a critical part of the experience that can build trust. By the end, your forms feel smoother, more human, and more likely to be completed.`,
+    text: `
+      <p>
+        Forms are where users share information with your tool, so every detail matters. In this lesson, you design inputs, labels, and validation states that are clear and forgiving. You focus on grouping related fields, using helpful placeholders, and writing error messages that guide instead of blame.
+      </p>
+      <p>
+        You also explore how to reduce friction by minimizing required fields, using smart defaults, and respecting the user’s time. You pay attention to keyboard navigation, focus states, and mobile input types so forms feel smooth on every device. Empty states and success messages are treated as part of the experience, not afterthoughts.
+      </p>
+      <p>
+        By the end of this lesson, your forms feel more human and more likely to be completed. Users understand what is being asked, what went wrong when errors appear, and what happens after they submit.
+      </p>
+    `,
     images: [
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&h=900&q=80&sat=20",
+      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&h=900&q=80&sat=10",
       "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&h=900&q=80&blur=1"
     ]
   },
   17: {
     label: "Data Display",
     category: "ui",
-    text: `Good data display makes information easy to understand at a glance. In this lesson, you work with lists, tables, and cards, using hierarchy and spacing to highlight what matters most. You learn how to group related items, use alignment to create visual order, and apply subtle emphasis to key values. You also explore how to handle empty states and loading states so the interface never feels broken or confusing. Instead of dumping raw data onto the screen, you design views that tell a clear story. By the end, your users can scan, compare, and act on information without feeling overwhelmed.`,
+    text: `
+      <p>
+        Good data display makes information easy to understand at a glance. In this lesson, you work with lists, tables, and cards, using hierarchy and spacing to highlight what matters most. You design layouts that support scanning, comparison, and quick decision‑making.
+      </p>
+      <p>
+        You also explore how to handle empty states, loading states, and error states so the interface never feels broken or confusing. You use alignment, color, and typography to create visual order without adding unnecessary decoration. When data is dense, you rely on grouping and subtle emphasis instead of overwhelming the user with bold styles.
+      </p>
+      <p>
+        By the end of this lesson, your data views tell a clear story. Users can see patterns, spot outliers, and act on information without feeling lost in a wall of numbers or text.
+      </p>
+    `,
     images: [
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&h=900&q=80&sat=35",
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&h=900&q=80&sat=25"
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&h=900&q=80&sat=25",
+      "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1600&h=900&q=80&sat=35"
     ]
   },
   18: {
     label: "Tool Architecture",
     category: "structure",
-    text: `Architecture is about how everything fits together over time. In this lesson, you think in pages, flows, and reusable components, organizing your files and logic so the project stays understandable as it grows. You map out the main user journeys and identify which parts of the interface are shared across them. You also explore how to separate concerns between layout, state, and data, so changes in one area don’t break everything else. Instead of building features in isolation, you design a system that can evolve without collapsing under its own weight. By the end, your tool feels coherent from the first screen to the last, and you have a clear mental model of how it all works.`,
+    text: `
+      <p>
+        Architecture is about how everything fits together over time. In this lesson, you zoom out from individual components and think in pages, flows, and reusable patterns. You map out the main user journeys and identify which parts of the interface are shared across them, like headers, navigation, and key panels.
+      </p>
+      <p>
+        You also explore how to separate concerns between layout, state, and data. That separation makes it easier to change one layer without breaking the others. You organize your files and folders so that related pieces live together, and you avoid giant scripts or stylesheets that try to handle everything at once.
+      </p>
+      <p>
+        By the end of this lesson, your tool feels coherent from the first screen to the last. You have a clear mental model of how each part connects, and you can plan new features without fearing that the whole structure will collapse.
+      </p>
+    `,
     images: [
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&h=900&q=80&sat=-15",
-      "https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1600&h=900&q=80&blur=2"
+      "https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1600&h=900&q=80&sat=-15",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&h=900&q=80&blur=2"
     ]
   },
   19: {
     label: "Polishing & UX",
     category: "ux",
-    text: `Polish is where your interface becomes truly premium. In this lesson, you refine spacing, contrast, and micro-interactions so everything feels intentional. You look at edge cases, like long text, slow connections, and unusual inputs, and make sure the experience still feels solid. You also pay attention to details like focus states, error messages, and empty screens, which are often ignored but heavily felt by users. Instead of stopping when things are “good enough,” you push a little further to remove friction and confusion. By the end, your tool feels smoother, more trustworthy, and more enjoyable to use, even in less-than-perfect conditions.`,
+    text: `
+      <p>
+        Polishing is where your interface becomes truly premium. In this lesson, you refine spacing, contrast, and micro‑interactions so everything feels intentional. You look at edge cases like long text, slow connections, and unusual inputs, making sure the experience still feels solid and respectful.
+      </p>
+      <p>
+        You also pay attention to details that are often ignored: focus outlines, error messages, empty screens, and loading indicators. These moments shape how users feel about your tool, especially when things go wrong. You design them with care so the interface feels supportive instead of fragile.
+      </p>
+      <p>
+        By the end of this lesson, your tool feels smoother and more trustworthy. Users may not notice every detail you refined, but they feel the difference in how easy and pleasant it is to use.
+      </p>
+    `,
     images: [
-      "https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1600&h=900&q=80&sat=-10",
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&h=900&q=80&blur=2"
+      "https://images.unsplash.com/photo-1604079628040-94301bb21b11?auto=format&fit=crop&w=1600&h=900&q=80&sat=-20",
+      "https://images.unsplash.com/photo-1523475472560-d2df97ec485c?auto=format&fit=crop&w=1600&h=900&q=80&blur=1"
     ]
   },
   20: {
     label: "Shipping Your Tool",
     category: "launch",
-    text: `Shipping turns your work into something real that people can use. In this lesson, you test, optimize, and deploy your tool so it feels ready for others. You check performance, fix obvious bugs, and make sure critical flows are smooth from start to finish. You also think about how to collect feedback, track issues, and plan future improvements without getting stuck in endless polishing. Instead of waiting for perfection, you learn how to ship confidently, knowing you can iterate. By the end, you understand that launch is not the end of the journey but the beginning of real learning from real users.`,
+    text: `
+      <p>
+        Shipping turns your work into something real that people can use. In this lesson, you prepare your tool for deployment by testing critical flows, fixing obvious bugs, and checking performance. You make sure the experience feels solid from the first load to the final interaction.
+      </p>
+      <p>
+        You also think about how to collect feedback and track issues after launch. Instead of waiting for perfection, you learn to ship confidently, knowing you can iterate based on real usage. You set up a simple process for updating your tool without breaking existing users, treating launch as the beginning of a new phase, not the end.
+      </p>
+      <p>
+        By the end of this lesson, you understand that a shipped tool—even if it is not perfect—is more valuable than a perfect idea that never leaves your editor. You build the habit of delivering, learning, and improving over time.
+      </p>
+    `,
     images: [
       "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&h=900&q=80&sat=45",
       "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&h=900&q=80&sat=-35"
@@ -1248,7 +1798,9 @@ cards.forEach(card => {
     modalTitle.textContent = data.label;
     modalLabel.textContent = `Lesson ${id}`;
     modalContent.innerHTML = `
-      <div class="modal-body-text">${data.text}</div>
+      <div class="modal-body-text">
+        ${data.text}
+      </div>
       <div class="modal-images">
         <img src="${data.images[0]}" alt="${data.label} image 1">
         <img src="${data.images[1]}" alt="${data.label} image 2">

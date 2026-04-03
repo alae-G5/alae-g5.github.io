@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Articles — ALAEAI</title>
 
-    <!-- Optional global CSS -->
-    <link rel="stylesheet" href="style.css" />
-
     <style>
         :root {
             --page-bg: #050509;
@@ -132,8 +129,14 @@
         }
 
         .articles-title-block h1 {
-            font-size: 2.3rem;
-            letter-spacing: 0.04em;
+            font-size: 2.4rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: linear-gradient(120deg, #f5c451, #fff4c2, #f5c451);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 18px rgba(245, 196, 81, 0.7);
+            animation: glowPulse 2.4s ease-in-out infinite alternate;
         }
 
         .articles-title-block p {
@@ -291,6 +294,10 @@
         .article-title {
             font-size: 1.05rem;
             margin: 4px 0 6px;
+            background: linear-gradient(120deg, #f5c451, #fff4c2, #f5c451);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 12px rgba(245, 196, 81, 0.6);
         }
 
         .article-excerpt {
@@ -305,20 +312,52 @@
             align-items: center;
             margin-top: 10px;
             font-size: 0.8rem;
-            opacity: 0.85;
+            opacity: 0.9;
+            gap: 8px;
         }
 
-        .article-read {
+        .article-footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .article-footer-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .article-read,
+        .article-fullscreen-btn {
             display: inline-flex;
             align-items: center;
             gap: 6px;
             color: var(--accent);
             font-weight: 500;
+            border-radius: 999px;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 196, 81, 0.4);
+            background: rgba(245, 196, 81, 0.08);
+            cursor: pointer;
+            transition: background var(--transition-fast), transform var(--transition-fast),
+                box-shadow var(--transition-fast), border-color var(--transition-fast);
         }
 
         .article-read-arrow {
             font-size: 1rem;
             transform: translateY(1px);
+        }
+
+        .article-fullscreen-btn span.icon {
+            font-size: 0.9rem;
+        }
+
+        .article-read:hover,
+        .article-fullscreen-btn:hover {
+            background: rgba(245, 196, 81, 0.2);
+            border-color: rgba(245, 196, 81, 0.8);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+            transform: translateY(-1px);
         }
 
         /* KEYWORD */
@@ -389,7 +428,7 @@
         }
 
         .article-card.expanded .article-full {
-            max-height: 900px; /* enough for content */
+            max-height: 900px;
             opacity: 1;
         }
 
@@ -397,6 +436,107 @@
             font-size: 0.8rem;
             opacity: 0.75;
             margin-bottom: 6px;
+        }
+
+        /* FULLSCREEN OVERLAY */
+        .fullscreen-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.86);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            backdrop-filter: blur(12px);
+        }
+
+        .fullscreen-article {
+            width: min(900px, 96vw);
+            max-height: 92vh;
+            background: #050509;
+            border-radius: 20px;
+            border: 1px solid rgba(245, 196, 81, 0.5);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95);
+            padding: 18px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transform: translateY(18px) scale(0.96);
+            opacity: 0;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .fullscreen-article.open {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .fullscreen-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .fullscreen-title {
+            font-size: 1.3rem;
+            background: linear-gradient(120deg, #f5c451, #fff4c2, #f5c451);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 14px rgba(245, 196, 81, 0.7);
+        }
+
+        .fullscreen-tag {
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-size: 0.75rem;
+        }
+
+        .fullscreen-close {
+            border: none;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 999px;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #fff;
+            transition: background var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .fullscreen-close:hover {
+            background: rgba(255, 79, 106, 0.9);
+            transform: translateY(-1px);
+        }
+
+        .fullscreen-meta {
+            font-size: 0.8rem;
+            opacity: 0.75;
+        }
+
+        .fullscreen-body {
+            overflow-y: auto;
+            padding-right: 4px;
+            margin-top: 6px;
+        }
+
+        .fullscreen-body img {
+            width: 100%;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            object-fit: cover;
+            max-height: 320px;
+        }
+
+        .fullscreen-body p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.9;
+            margin-bottom: 10px;
         }
 
         /* LIGHT MODE */
@@ -415,6 +555,10 @@
         }
 
         body.light-mode .article-card {
+            background: #ffffff;
+        }
+
+        body.light-mode .fullscreen-article {
             background: #ffffff;
         }
 
@@ -450,6 +594,15 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes glowPulse {
+            from {
+                text-shadow: 0 0 10px rgba(245, 196, 81, 0.5);
+            }
+            to {
+                text-shadow: 0 0 22px rgba(245, 196, 81, 0.9);
             }
         }
     </style>
@@ -502,7 +655,7 @@
                 </div>
 
                 <h1>Articles</h1>
-                <p>Curated, clean articles about AI, technology companies, and the tools shaping the future.</p>
+                <p>Premium, readable articles about AI, companies, and tools — fully visible for visitors and AdSense.</p>
             </div>
 
             <!-- DARK MODE BUTTON -->
@@ -518,7 +671,7 @@
         <div class="articles-grid">
 
             <!-- ARTICLE 1 — OPENAI -->
-            <article class="article-card">
+            <article class="article-card" data-tag="AI Company" data-meta="OpenAI • Platform strategy • 4 min read">
                 <img src="https://images.unsplash.com/photo-1581091870627-3b5c7f3c1c36?auto=format&fit=crop&w=800&q=80" class="article-thumb" alt="OpenAI Lab">
                 <div class="article-meta">
                     <span class="article-tag">AI Company</span>
@@ -538,10 +691,17 @@
                 </p>
 
                 <div class="article-footer">
-                    <div>Updated this week</div>
-                    <div class="article-read">
-                        <span>Read article</span>
-                        <span class="article-read-arrow">↕</span>
+                    <div class="article-footer-left">
+                        <div>Updated this week</div>
+                    </div>
+                    <div class="article-footer-actions">
+                        <div class="article-read">
+                            <span>Read article</span>
+                            <span class="article-read-arrow">↕</span>
+                        </div>
+                        <button class="article-fullscreen-btn" type="button">
+                            <span class="icon">⤢</span><span>Full screen</span>
+                        </button>
                     </div>
                 </div>
 
@@ -558,7 +718,7 @@
             </article>
 
             <!-- ARTICLE 2 — NVIDIA -->
-            <article class="article-card">
+            <article class="article-card" data-tag="Hardware" data-meta="NVIDIA • GPUs • 5 min read">
                 <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" class="article-thumb" alt="NVIDIA GPUs">
                 <div class="article-meta">
                     <span class="article-tag">Hardware</span>
@@ -578,10 +738,17 @@
                 </p>
 
                 <div class="article-footer">
-                    <div>Industry spotlight</div>
-                    <div class="article-read">
-                        <span>Read article</span>
-                        <span class="article-read-arrow">↕</span>
+                    <div class="article-footer-left">
+                        <div>Industry spotlight</div>
+                    </div>
+                    <div class="article-footer-actions">
+                        <div class="article-read">
+                            <span>Read article</span>
+                            <span class="article-read-arrow">↕</span>
+                        </div>
+                        <button class="article-fullscreen-btn" type="button">
+                            <span class="icon">⤢</span><span>Full screen</span>
+                        </button>
                     </div>
                 </div>
 
@@ -598,7 +765,7 @@
             </article>
 
             <!-- ARTICLE 3 — DEEPMIND -->
-            <article class="article-card">
+            <article class="article-card" data-tag="Research" data-meta="Google DeepMind • Research • 4 min read">
                 <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80" class="article-thumb" alt="DeepMind Research">
                 <div class="article-meta">
                     <span class="article-tag">Research</span>
@@ -618,10 +785,17 @@
                 </p>
 
                 <div class="article-footer">
-                    <div>Research focus</div>
-                    <div class="article-read">
-                        <span>Read article</span>
-                        <span class="article-read-arrow">↕</span>
+                    <div class="article-footer-left">
+                        <div>Research focus</div>
+                    </div>
+                    <div class="article-footer-actions">
+                        <div class="article-read">
+                            <span>Read article</span>
+                            <span class="article-read-arrow">↕</span>
+                        </div>
+                        <button class="article-fullscreen-btn" type="button">
+                            <span class="icon">⤢</span><span>Full screen</span>
+                        </button>
                     </div>
                 </div>
 
@@ -638,7 +812,7 @@
             </article>
 
             <!-- ARTICLE 4 — ANTHROPIC -->
-            <article class="article-card">
+            <article class="article-card" data-tag="Safety" data-meta="Anthropic • Safety & alignment • 3 min read">
                 <img src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72?auto=format&fit=crop&w=800&q=80" class="article-thumb" alt="Anthropic Team">
                 <div class="article-meta">
                     <span class="article-tag">Safety</span>
@@ -658,10 +832,17 @@
                 </p>
 
                 <div class="article-footer">
-                    <div>Safety & alignment</div>
-                    <div class="article-read">
-                        <span>Read article</span>
-                        <span class="article-read-arrow">↕</span>
+                    <div class="article-footer-left">
+                        <div>Safety & alignment</div>
+                    </div>
+                    <div class="article-footer-actions">
+                        <div class="article-read">
+                            <span>Read article</span>
+                            <span class="article-read-arrow">↕</span>
+                        </div>
+                        <button class="article-fullscreen-btn" type="button">
+                            <span class="icon">⤢</span><span>Full screen</span>
+                        </button>
                     </div>
                 </div>
 
@@ -678,7 +859,7 @@
             </article>
 
             <!-- ARTICLE 5 — AI STARTUPS -->
-            <article class="article-card">
+            <article class="article-card" data-tag="Startups" data-meta="AI Startups • Product thinking • 4 min read">
                 <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c3f1c3?auto=format&fit=crop&w=800&q=80" class="article-thumb" alt="AI Startup">
                 <div class="article-meta">
                     <span class="article-tag">Startups</span>
@@ -698,10 +879,17 @@
                 </p>
 
                 <div class="article-footer">
-                    <div>Product thinking</div>
-                    <div class="article-read">
-                        <span>Read article</span>
-                        <span class="article-read-arrow">↕</span>
+                    <div class="article-footer-left">
+                        <div>Product thinking</div>
+                    </div>
+                    <div class="article-footer-actions">
+                        <div class="article-read">
+                            <span>Read article</span>
+                            <span class="article-read-arrow">↕</span>
+                        </div>
+                        <button class="article-fullscreen-btn" type="button">
+                            <span class="icon">⤢</span><span>Full screen</span>
+                        </button>
                     </div>
                 </div>
 
@@ -718,8 +906,8 @@
             </article>
 
             <!-- ARTICLE 6 — CLOUD / MICROSOFT -->
-            <article class="article-card">
-                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" class="article-thumb" alt="Cloud Datacenter">
+            <article class="article-card" data-tag="Cloud" data-meta="Cloud platforms • Integration • 4 min read">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" class="article-thumb" alt="Cloud Datacenter">
                 <div class="article-meta">
                     <span class="article-tag">Cloud</span>
                     <span>4 min read</span>
@@ -738,17 +926,24 @@
                 </p>
 
                 <div class="article-footer">
-                    <div>Cloud ecosystem</div>
-                    <div class="article-read">
-                        <span>Read article</span>
-                        <span class="article-read-arrow">↕</span>
+                    <div class="article-footer-left">
+                        <div>Cloud ecosystem</div>
+                    </div>
+                    <div class="article-footer-actions">
+                        <div class="article-read">
+                            <span>Read article</span>
+                            <span class="article-read-arrow">↕</span>
+                        </div>
+                        <button class="article-fullscreen-btn" type="button">
+                            <span class="icon">⤢</span><span>Full screen</span>
+                        </button>
                     </div>
                 </div>
 
                 <div class="article-full">
                     <div class="article-full-inner">
                         <div class="article-meta-inline">Cloud platforms • Integration • 4 min read</div>
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Cloud Datacenter full">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Cloud Datacenter full">
                         <p>Cloud platforms make AI accessible by wrapping complex models in simple APIs. Instead of managing infrastructure, teams can call a single endpoint to analyze text, classify images, or generate content.</p>
                         <p>This abstraction lets product teams focus on user experience instead of low-level hardware decisions. A small group of developers can ship features that would have required a research lab a few years ago.</p>
                         <p>Integration with existing tools—documents, spreadsheets, chat, and dashboards—turns AI from a separate demo into something that quietly improves daily workflows.</p>
@@ -758,8 +953,8 @@
             </article>
 
             <!-- ARTICLE 7 — OPEN SOURCE MODELS -->
-            <article class="article-card">
-                <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80" class="article-thumb" alt="Open Source Code">
+            <article class="article-card" data-tag="Open Source" data-meta="Open source • Community • 5 min read">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" class="article-thumb" alt="Open Source Code">
                 <div class="article-meta">
                     <span class="article-tag">Open Source</span>
                     <span>5 min read</span>
@@ -778,17 +973,24 @@
                 </p>
 
                 <div class="article-footer">
-                    <div>Community impact</div>
-                    <div class="article-read">
-                        <span>Read article</span>
-                        <span class="article-read-arrow">↕</span>
+                    <div class="article-footer-left">
+                        <div>Community impact</div>
+                    </div>
+                    <div class="article-footer-actions">
+                        <div class="article-read">
+                            <span>Read article</span>
+                            <span class="article-read-arrow">↕</span>
+                        </div>
+                        <button class="article-fullscreen-btn" type="button">
+                            <span class="icon">⤢</span><span>Full screen</span>
+                        </button>
                     </div>
                 </div>
 
                 <div class="article-full">
                     <div class="article-full-inner">
                         <div class="article-meta-inline">Open source • Community • 5 min read</div>
-                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80" alt="Open Source Code full">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" alt="Open Source Code full">
                         <p>Open-source models give developers direct access to the weights and architecture of powerful systems. Instead of treating the model as a black box, teams can inspect, modify, and fine-tune it for their own use cases.</p>
                         <p>This openness encourages experimentation. Researchers can test new training recipes, add capabilities, or adapt models to languages and domains that are under-served by commercial offerings.</p>
                         <p>For startups and independent developers, open-source checkpoints reduce the cost of entry. They can build serious products without paying for every token or training run.</p>
@@ -798,8 +1000,8 @@
             </article>
 
             <!-- ARTICLE 8 — AI IN EDUCATION -->
-            <article class="article-card">
-                <img src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72?auto=format&fit=crop&w=800&q=80" class="article-thumb" alt="AI in Education">
+            <article class="article-card" data-tag="Education" data-meta="Education • Learning tools • 3 min read">
+                <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=800&q=80" class="article-thumb" alt="AI in Education">
                 <div class="article-meta">
                     <span class="article-tag">Education</span>
                     <span>3 min read</span>
@@ -818,17 +1020,24 @@
                 </p>
 
                 <div class="article-footer">
-                    <div>Learning future</div>
-                    <div class="article-read">
-                        <span>Read article</span>
-                        <span class="article-read-arrow">↕</span>
+                    <div class="article-footer-left">
+                        <div>Learning future</div>
+                    </div>
+                    <div class="article-footer-actions">
+                        <div class="article-read">
+                            <span>Read article</span>
+                            <span class="article-read-arrow">↕</span>
+                        </div>
+                        <button class="article-fullscreen-btn" type="button">
+                            <span class="icon">⤢</span><span>Full screen</span>
+                        </button>
                     </div>
                 </div>
 
                 <div class="article-full">
                     <div class="article-full-inner">
                         <div class="article-meta-inline">Education • Learning tools • 3 min read</div>
-                        <img src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72?auto=format&fit=crop&w=800&q=80" alt="AI in Education full">
+                        <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=800&q=80" alt="AI in Education full">
                         <p>AI tools in education range from simple quiz generators to adaptive tutoring systems that respond to each learner’s pace.</p>
                         <p>Instead of replacing teachers, the most useful tools act like assistants: they prepare materials, suggest explanations, and highlight where students are struggling.</p>
                         <p>For learners, AI can provide instant feedback on writing, code, or problem-solving steps. That shortens the loop between trying something and understanding what went wrong.</p>
@@ -837,6 +1046,21 @@
                 </div>
             </article>
 
+        </div>
+    </div>
+
+    <!-- FULLSCREEN OVERLAY -->
+    <div class="fullscreen-backdrop" id="fullscreenBackdrop">
+        <div class="fullscreen-article" id="fullscreenArticle">
+            <div class="fullscreen-header">
+                <div>
+                    <div class="fullscreen-tag" id="fullscreenTag"></div>
+                    <div class="fullscreen-title" id="fullscreenTitle"></div>
+                </div>
+                <button class="fullscreen-close" id="fullscreenClose" type="button">✕</button>
+            </div>
+            <div class="fullscreen-meta" id="fullscreenMeta"></div>
+            <div class="fullscreen-body" id="fullscreenBody"></div>
         </div>
     </div>
 
@@ -859,21 +1083,83 @@
         const articleCards = document.querySelectorAll(".article-card");
 
         articleCards.forEach((card) => {
-            card.addEventListener("click", (e) => {
-                // avoid double toggling if clicking inside full content
-                const isFull = e.target.closest(".article-full");
-                if (isFull) return;
-
+            const readBtn = card.querySelector(".article-read");
+            readBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
                 const isExpanded = card.classList.contains("expanded");
-
-                // collapse others
                 articleCards.forEach((c) => c.classList.remove("expanded"));
-
-                // toggle this one
                 if (!isExpanded) {
                     card.classList.add("expanded");
                 }
             });
+
+            // also allow clicking anywhere on card except fullscreen button
+            card.addEventListener("click", (e) => {
+                if (e.target.closest(".article-fullscreen-btn") || e.target.closest(".article-full")) return;
+                const isExpanded = card.classList.contains("expanded");
+                articleCards.forEach((c) => c.classList.remove("expanded"));
+                if (!isExpanded) {
+                    card.classList.add("expanded");
+                }
+            });
+        });
+
+        // FULLSCREEN OVERLAY
+        const fullscreenBackdrop = document.getElementById("fullscreenBackdrop");
+        const fullscreenArticle = document.getElementById("fullscreenArticle");
+        const fullscreenTag = document.getElementById("fullscreenTag");
+        const fullscreenTitle = document.getElementById("fullscreenTitle");
+        const fullscreenMeta = document.getElementById("fullscreenMeta");
+        const fullscreenBody = document.getElementById("fullscreenBody");
+        const fullscreenClose = document.getElementById("fullscreenClose");
+
+        function openFullscreenFromCard(card) {
+            const tag = card.getAttribute("data-tag") || "";
+            const meta = card.getAttribute("data-meta") || "";
+            const title = card.querySelector(".article-title")?.textContent || "";
+
+            fullscreenTag.textContent = tag;
+            fullscreenTitle.textContent = title;
+            fullscreenMeta.textContent = meta;
+
+            const fullInner = card.querySelector(".article-full-inner");
+            fullscreenBody.innerHTML = fullInner ? fullInner.innerHTML : "";
+
+            fullscreenBackdrop.style.display = "flex";
+            requestAnimationFrame(() => {
+                fullscreenArticle.classList.add("open");
+            });
+        }
+
+        function closeFullscreen() {
+            fullscreenArticle.classList.remove("open");
+            setTimeout(() => {
+                fullscreenBackdrop.style.display = "none";
+                fullscreenBody.innerHTML = "";
+            }, 200);
+        }
+
+        document.querySelectorAll(".article-fullscreen-btn").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const card = e.target.closest(".article-card");
+                if (!card) return;
+                openFullscreenFromCard(card);
+            });
+        });
+
+        fullscreenClose.addEventListener("click", closeFullscreen);
+
+        fullscreenBackdrop.addEventListener("click", (e) => {
+            if (e.target === fullscreenBackdrop) {
+                closeFullscreen();
+            }
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                closeFullscreen();
+            }
         });
     </script>
 
